@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\OrderModel;
+use App\OrderItem;
 use Illuminate\Http\Request;
 
-class OrderModelController extends Controller
+class OrderItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class OrderModelController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\OrderModel  $orderModel
+     * @param  \App\OrderItemModel  $orderItemModel
      * @return \Illuminate\Http\Response
      */
-    public function show(OrderModel $orderModel)
+    public function show(OrderItemModel $orderItemModel)
     {
         //
     }
@@ -52,10 +52,10 @@ class OrderModelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\OrderModel  $orderModel
+     * @param  \App\OrderItemModel  $orderItemModel
      * @return \Illuminate\Http\Response
      */
-    public function edit(OrderModel $orderModel)
+    public function edit(OrderItemModel $orderItemModel)
     {
         //
     }
@@ -64,10 +64,10 @@ class OrderModelController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\OrderModel  $orderModel
+     * @param  \App\OrderItemModel  $orderItemModel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrderModel $orderModel)
+    public function update(Request $request, OrderItemModel $orderItemModel)
     {
         //
     }
@@ -75,10 +75,10 @@ class OrderModelController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\OrderModel  $orderModel
+     * @param  \App\OrderItemModel  $orderItemModel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrderModel $orderModel)
+    public function destroy(OrderItemModel $orderItemModel)
     {
         //
     }
