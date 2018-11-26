@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AddressController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the address.
      *
      * @return \Illuminate\Http\Response
      */
