@@ -1,5 +1,6 @@
 # Order management
 
+Models
 1. Order
 an order belongs to an creator
 an order belongs to an customer
@@ -7,6 +8,7 @@ an order has many items
 
 2. Order Item 
 an order item belongs to an order
+an order item hasOne product
 
 3. Customer
 a customer has many Address
@@ -14,5 +16,7 @@ a customer has many order
 
 4. Customer Address
 A customer address belongs to a customer
+
+5. Product
 
 
