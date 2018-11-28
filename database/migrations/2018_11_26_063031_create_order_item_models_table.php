@@ -15,6 +15,12 @@ class CreateOrderItemModelsTable extends Migration
     {
         Schema::create('order_item_models', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('order_id');
+            $table->integer('product_id');
+            $table->integer('quantity');
+            $table->decimal('unit_price_cny');
+            $table->decimal('purchase_pric_aud');
+            $table->decimal('exchange_rate');
             $table->timestamps();
         });
     }
