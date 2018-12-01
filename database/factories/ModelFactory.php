@@ -31,7 +31,7 @@ $factory->define(App\Customer::class, function(Faker $faker){
         'name' => $name,
         'name_py' => $name,
         'mobile' => $faker->phoneNumber,
-        'id_no' => $faker->randomNumber(18,true),
+        'id_no' => $faker->creditCardNumber,
     ];
 });
 
@@ -48,7 +48,7 @@ $factory->define(App\Address::class, function(Faker $faker){
 
 });
 
-$factory->define(App\Product::class, function(){
+$factory->define(App\Product::class, function(Faker $faker){
     return [
         'name' => $faker->name,
         'ref_price_aud' => mt_rand(100,1000)/100,
@@ -69,12 +69,13 @@ $factory->define(App\Order::class, function(Faker $faker){
 
 });
 
-$factory->define(App\OrderItems::class , function (Faker $faker){
+$factory->define(App\OrderItem::class , function (Faker $faker){
     return [
         'order_id' => factory('App\Order')->create()->id,
         'product_id' => factory('App\Product')->create()->id,
         'unit_price_cny' => mt_rand(30, 300),
         'purchase_price_aud' => mt_rand(7,50),
-        'exchange_rate' => 5
+        'exchange_rate' => 5,
+        'quantity' => mt_rand(1,10)
     ];
 });
