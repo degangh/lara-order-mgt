@@ -34,5 +34,33 @@ class RelationshipTest extends TestCase
         $order_item = factory('App\OrderItem')->create();
         $this->assertInstanceOf('App\Product', $order_item->product);
     }
+
+    /** @test */
+    public function an_order_has_items()
+    {
+        $order = factory('App\Order')->create();
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $order->items);
+    }
+
+    /** @test */
+    public function an_user_creates_many_orders()
+    {
+        $user = factory('App\User')->create();
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $user->orders);
+    }
+
+    /** @test */
+    public function a_customer_has_many_orders()
+    {
+        $customer = factory('App\Customer')->create();
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $customer->orders);
+    }
+
+    /** @test */
+    public function a_customer_has_many_addresses()
+    {
+        $customer = factory('App\Customer')->create();
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $customer->addresses);
+    }
     
 }
