@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Order;
+use App\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,12 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::get('orders', function(){
+    return Order::all();
+});
+
+Route::get('products', function(){
+    return Product::all();
 });
