@@ -44,7 +44,7 @@ class OrderItemController extends Controller
      * @param  \App\OrderItemModel  $orderItemModel
      * @return \Illuminate\Http\Response
      */
-    public function show(OrderItemModel $orderItemModel)
+    public function show(OrderItem $orderItem)
     {
         //
     }
@@ -55,7 +55,7 @@ class OrderItemController extends Controller
      * @param  \App\OrderItemModel  $orderItemModel
      * @return \Illuminate\Http\Response
      */
-    public function edit(OrderItemModel $orderItemModel)
+    public function edit(OrderItem $orderItem)
     {
         //
     }
@@ -67,7 +67,7 @@ class OrderItemController extends Controller
      * @param  \App\OrderItemModel  $orderItemModel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrderItemModel $orderItemModel)
+    public function update(Request $request, OrderItem $orderItem)
     {
         //
     }
@@ -78,7 +78,7 @@ class OrderItemController extends Controller
      * @param  \App\OrderItemModel  $orderItemModel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrderItemModel $orderItemModel)
+    public function destroy(OrderItem $orderItem)
     {
         //
     }
