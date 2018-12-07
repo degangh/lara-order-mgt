@@ -26,3 +26,5 @@ Route::get('orders', function(){
 Route::get('products', function(){
     return Product::all();
 });
+
+Route::post('login', 'PassportController@login');
