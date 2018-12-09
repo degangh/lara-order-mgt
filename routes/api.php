@@ -19,12 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('orders', function(){
-    return Order::all();
-})->middleware('auth:api');
+Route::get('orders', 'OrderController@index')->middleware('auth:api');
 
-Route::get('products', function(){
-    return Product::all();
-});
+Route::get('products', 'ProductController@index')->middleware('auth:api');
 
 Route::post('login', 'PassportController@login');
