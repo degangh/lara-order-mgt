@@ -8,20 +8,27 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class RoutingTest extends TestCase
 {
     
+    public function setup()
+    {
+        parent::setup();
+        $this->user = factory(\App\User::class)->create();
+    }
+    
+    
     /** @test */
     function get_order_list()
     {
-        $user = factory(\App\User::class)->create();
-        $this->actingAs($user, 'api');
-
-        $this->json('get', '/api/orders')->assertStatus(200);
+        
+        $this->actingAs($this->user, 'api');
+        $this->json('get', '/api/orders')
+        ->assertStatus(200);
     }
 
     /** @test */
     function get_product_list()
     {   
-        $user = factory(\App\User::class)->create();
-        $this->actingAs($user, 'api');
+        
+        $this->actingAs($this->user, 'api');
 
         $this->json('get', '/api/products')->assertStatus(200);
     }
@@ -37,5 +44,7 @@ class RoutingTest extends TestCase
     {
         $this->json('get', '/api/orders')->assertStatus(401);
     }
+
+
 
 }
