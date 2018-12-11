@@ -35,7 +35,14 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $order = Order::create([
+            'user_id' => $request->user_id,
+            'customer_id' => $request->customer_id
+        ]);
+
+        $order->save();
+
+        return response()->json($order->toArray());
     }
 
     /**
