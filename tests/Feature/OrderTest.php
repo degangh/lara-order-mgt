@@ -28,7 +28,9 @@ class OrderTest extends TestCase
             'user_id' => $this->user->id,
             'customer_id' => $this->customer->id
             ]
-        );;
+        );
+
+        //the order should be visible in the database
         $this->json('post', '/api/order', $order->toArray())
         ->assertStatus(200)
         ->assertJsonStructure([
@@ -37,11 +39,11 @@ class OrderTest extends TestCase
 
 
 
-        //the order should be visible in the database
+        
     }
 
     /** @test */
-    public function an_authenticated_user_may_add_order_itme()
+    public function an_authenticated_user_may_add_order_item()
     {
         //given an authenticated user
         //and a existing order
