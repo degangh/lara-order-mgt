@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\OrderItem;
+use App\Order;
 use Illuminate\Http\Request;
 
 class OrderItemController extends Controller
@@ -33,9 +34,16 @@ class OrderItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Order $order)
     {
-        //
+        $order->items()->create([
+            'order_id' => $order->id,
+            'product_id' => $request->product_id,
+            'quantity' => $request->quantity,
+            'unit_price_cny' => $request->unit_price_cny,
+            'purchase_price_aud' => $request->purchase_price_aud,
+            'exchange_rate' => $request->exchange_rate
+        ]);
     }
 
     /**

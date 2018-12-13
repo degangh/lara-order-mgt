@@ -26,3 +26,4 @@ Route::get('products', 'ProductController@index')->middleware('auth:api');
 Route::post('login', 'PassportController@login');
 
 Route::post('order', 'OrderController@store');
+Route::post('order/{order}/items' , 'OrderItemController@store');
