@@ -44,8 +44,20 @@ class OrderTest extends TestCase
     public function an_authenticated_user_may_add_order_item()
     {
         //given an authenticated user
+        $this->actingAs($this->user, 'api');
         //and a existing order
+        $order = factory(\App\Order::class)->create();
         //when the user adds order items to the order
+        $order_item = factory(\App\OrderItem::class)->make(
+            [
+                'order_id' => $order->id
+            ]
+            );
+        $this->json('post' , '/api/order/' . $order->id . '/items', $order_item->toArray())->assertStatus(200);
+        
+        $this->assertDatabaseHas('order_items', [
+            'order_id'=>$order->id
+        ]);
         //the order items should be in the database
     }
 }
