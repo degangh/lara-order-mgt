@@ -13,7 +13,7 @@ class CustomerTest extends TestCase
     {
         parent::setup();
         $this->user = factory(\App\User::class)->create();
-        $this->customer = factory(\App\Customer::class)->create();
+        $this->customer = factory(\App\Customer::class)->make();
     }
     
     /** @test */
@@ -24,6 +24,10 @@ class CustomerTest extends TestCase
         //when user create a customer record
         $this->json('post', '/api/customer', $this->customer->toArray())->assertStatus(200)
         ->assertJsonStructure(['id', 'name', 'name_py', 'mobile', 'id_no']);
+        $this->assertDatabaseHas('customers', [
+            'name' => $this->customer->name,
+            'mobile' => $this->customer->mobile
+        ]);
         //the new customer record can be returned from server in json format
         //and the new record can be seen in the database
     }
@@ -36,7 +40,7 @@ class CustomerTest extends TestCase
         //when user is trying to create a customer record
         $customer = factory(\App\Customer::class)->make();
 
-        $this->json('post', '/api/customer' , $customer->toArray())->assertStatus(403);
+        $this->json('post', '/api/customer' , $customer->toArray())->assertStatus(401);
         //a 403 error should be returned
     }
 
