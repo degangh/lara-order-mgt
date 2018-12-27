@@ -6,6 +6,8 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+use App\Customer;
+
 class CustomerTest extends TestCase
 {
     
@@ -48,8 +50,11 @@ class CustomerTest extends TestCase
     function an_authenticated_user_can_get_customer_list()
     {
         //given an authenticated user
+        $this->actingAs($this->user, 'api');
         //when user request customer list
+        $this->json('get', '/api/customer')->assertStatus(200);
         //an collection of customer should be returned
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', Customer::class);
     }
 
 }
