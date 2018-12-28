@@ -52,9 +52,14 @@ class CustomerTest extends TestCase
         //given an authenticated user
         $this->actingAs($this->user, 'api');
         //when user request customer list
-        $this->json('get', '/api/customer')->assertStatus(200);
         //an collection of customer should be returned
-        $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', Customer::class);
+        $this->json('get', '/api/customer')->assertStatus(200)->assertJsonStructure([
+            '*' => [
+                'id' , 'name' , 'name_py'
+            ]
+        ]); 
+        
+        
     }
 
 }
