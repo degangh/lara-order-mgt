@@ -76,4 +76,14 @@ class OrderTest extends TestCase
             ]
         ]);
     }
+
+    /** @test */
+    public function an_user_may_list_items_of_an_order()
+    {
+        //given an authenticated usr
+
+        //when user request an order
+
+        //a collection of order items should be returned in json format
+    }
 }
