@@ -26,12 +26,13 @@ class CustomerTest extends TestCase
         //when user create a customer record
         $this->json('post', '/api/customer', $this->customer->toArray())->assertStatus(200)
         ->assertJsonStructure(['id', 'name', 'name_py', 'mobile', 'id_no']);
+        
+        //the new customer record can be returned from server in json format
+        //and the new record can be seen in the database
         $this->assertDatabaseHas('customers', [
             'name' => $this->customer->name,
             'mobile' => $this->customer->mobile
         ]);
-        //the new customer record can be returned from server in json format
-        //and the new record can be seen in the database
     }
 
     /** @test */
