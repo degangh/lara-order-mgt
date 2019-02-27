@@ -39,42 +39,43 @@
     </template>
 
     <script>
-        export default {
-            data(){
-                return {
-                    email : "",
-                    password : ""
-                }
-            },
-            methods : {
-                handleSubmit(e){
-                    e.preventDefault()
+export default {
+  data() {
+    return {
+      email: "",
+      password: ""
+    };
+  },
+  methods: {
+    handleSubmit(e) {
+      e.preventDefault();
 
-                    if (this.password.length > 0) {
-                        axios.post('api/login', {
-                            email: this.email,
-                            password: this.password
-                          })
-                          .then(response => {
-                            localStorage.setItem('user',response.data.success.name)
-                            localStorage.setItem('jwt',response.data.success.token)
+      if (this.password.length > 0) {
+        axios
+          .post("api/login", {
+            email: this.email,
+            password: this.password
+          })
+          .then(response => {
+            //localStorage.setItem("user", response.data.success.name);
+            localStorage.setItem("jwt", response.data.success.token);
 
-                            if (localStorage.getItem('jwt') != null){
-                                this.$router.go('/board')
-                            }
-                          })
-                          .catch(function (error) {
-                            console.error(error);
-                          });
-                    }
-                }
-            },
-            beforeRouteEnter (to, from, next) { 
-                if (localStorage.getItem('jwt')) {
-                    return next('board');
-                }
-
-                next();
+            if (localStorage.getItem("jwt") != null) {
+              this.$router.go("/customer");
             }
-        }
-    </script>
+          })
+          .catch(function(error) {
+            console.error(error);
+          });
+      }
+    }
+  },
+  beforeRouteEnter(to, from, next) {
+    if (localStorage.getItem("jwt")) {
+      return next("customer");
+    }
+
+    next();
+  }
+};
+</script>

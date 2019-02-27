@@ -12,7 +12,7 @@
                         <ul class="navbar-nav mr-auto"></ul>
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-link"> Hi, There</li>
+                            <li class="nav-link"> Hi, There !</li>
                         </ul>
                     </div>
                 </div>
