@@ -445,7 +445,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         component: __WEBPACK_IMPORTED_MODULE_4__components_Login___default.a
     }, {
         path: "/customer",
-        name: "login",
+        name: "customer",
         component: __WEBPACK_IMPORTED_MODULE_5__components_Customer___default.a
     }]
 });
@@ -15415,7 +15415,7 @@ var staticRenderFns = [
         _c("ul", { staticClass: "navbar-nav mr-auto" }),
         _vm._v(" "),
         _c("ul", { staticClass: "navbar-nav ml-auto" }, [
-          _c("li", { staticClass: "nav-link" }, [_vm._v(" Hi, There")])
+          _c("li", { staticClass: "nav-link" }, [_vm._v(" Hi, There !")])
         ])
       ]
     )
@@ -15497,6 +15497,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({});
 
@@ -15515,14 +15517,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "flex-center position-ref full-height" }, [
-      _c("div", { staticClass: "content" }, [
-        _c("div", { staticClass: "m-b-md" }, [
-          _c("h2", { staticClass: "title m-b-md" }, [
-            _vm._v("\n                Welcome\n            ")
-          ]),
-          _vm._v(" "),
-          _c("h3")
+    return _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "flex-center position-ref full-height" }, [
+        _c("div", { staticClass: "content" }, [
+          _c("div", { staticClass: "m-b-md" }, [
+            _c("h2", { staticClass: "title m-b-md" }, [
+              _vm._v(
+                "\r\n                        Welcome\r\n                    "
+              )
+            ]),
+            _vm._v(" "),
+            _c("h3")
+          ])
         ])
       ])
     ])
@@ -15632,43 +15638,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            email: "",
-            password: ""
-        };
-    },
+  data: function data() {
+    return {
+      email: "",
+      password: ""
+    };
+  },
 
-    methods: {
-        handleSubmit: function handleSubmit(e) {
-            var _this = this;
+  methods: {
+    handleSubmit: function handleSubmit(e) {
+      var _this = this;
 
-            e.preventDefault();
+      e.preventDefault();
 
-            if (this.password.length > 0) {
-                axios.post('api/login', {
-                    email: this.email,
-                    password: this.password
-                }).then(function (response) {
-                    localStorage.setItem('user', response.data.success.name);
-                    localStorage.setItem('jwt', response.data.success.token);
+      if (this.password.length > 0) {
+        axios.post("api/login", {
+          email: this.email,
+          password: this.password
+        }).then(function (response) {
+          //localStorage.setItem("user", response.data.success.name);
+          localStorage.setItem("jwt", response.data.success.token);
 
-                    if (localStorage.getItem('jwt') != null) {
-                        _this.$router.go('/board');
-                    }
-                }).catch(function (error) {
-                    console.error(error);
-                });
-            }
-        }
-    },
-    beforeRouteEnter: function beforeRouteEnter(to, from, next) {
-        if (localStorage.getItem('jwt')) {
-            return next('board');
-        }
-
-        next();
+          if (localStorage.getItem("jwt") != null) {
+            _this.$router.go("/customer");
+          }
+        }).catch(function (error) {
+          console.error(error);
+        });
+      }
     }
+  },
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    if (localStorage.getItem("jwt")) {
+      return next("customer");
+    }
+
+    next();
+  }
 });
 
 /***/ }),
@@ -15803,7 +15809,7 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(59)
 /* template */
 var __vue_template__ = __webpack_require__(29)
 /* template functional */
@@ -15851,9 +15857,68 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\r\nCustomer page\r\n")])
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "flex-center position-ref full-height" }, [
+      _c("div", { staticClass: "content" }, [
+        _c("div", { staticClass: "m-b-md" }, [
+          _c("table", { staticClass: "table table-striped" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "tbody",
+              _vm._l(_vm.customers, function(customer, index) {
+                return _c("tr", { key: index }, [
+                  _c("td", [_vm._v(_vm._s(customer.name))]),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(customer.mobile))]),
+                  _vm._v(" "),
+                  _c("td"),
+                  _vm._v(" "),
+                  _c("td", [_vm._v(_vm._s(customer.id_no))])
+                ])
+              }),
+              0
+            )
+          ]),
+          _vm._v(" "),
+          _c("h3")
+        ])
+      ])
+    ])
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("tr", [
+      _c("th", [
+        _vm._v(
+          "\r\n                            Name\r\n                            "
+        )
+      ]),
+      _vm._v(" "),
+      _c("th", [
+        _vm._v(
+          "\r\n                            Mobile\r\n                            "
+        )
+      ]),
+      _vm._v(" "),
+      _c("th", [
+        _vm._v(
+          "\r\n                            Address\r\n                            "
+        )
+      ]),
+      _vm._v(" "),
+      _c("th", [
+        _vm._v(
+          "\r\n                            ID No\r\n                            "
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -15868,6 +15933,109 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 31 */,
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      customers: []
+    };
+  },
+  mounted: function mounted() {
+    var token = localStorage.getItem('jwt');
+
+    axios.defaults.headers.common['Content-Type'] = 'application/json';
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+    this.requestCustomerData();
+  },
+
+
+  methods: {
+    requestCustomerData: function requestCustomerData() {
+      console.log("ok");
+      axios.get('./api/customer').then(this.handleResponse);
+    },
+    handleResponse: function handleResponse(res) {
+      this.customers = res.data;
+    }
+  }
+});
 
 /***/ })
 /******/ ]);
