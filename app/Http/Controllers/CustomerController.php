@@ -35,7 +35,18 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $customer = Customer::create([
+            'name' => $request->name,
+            'name_py' => $request->name_py,
+            'mobile' => $request->mobile,
+            'id_no' => $request->id_no
+        ]);
+
+        $customer->save();
+
+        return response()->json($customer->toArray());
+
+
     }
 
     /**

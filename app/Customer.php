@@ -6,6 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
+    protected $fillable = [
+        'name',
+        'name_py',
+        'mobile',
+        'id_no'
+    ];
+    
     //
     public function addresses()
     {

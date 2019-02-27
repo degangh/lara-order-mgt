@@ -60,4 +60,30 @@ class OrderTest extends TestCase
         ]);
         //the order items should be in the database
     }
+
+    /** @test */
+    public function an_authenticated_user_may_get_list_of_order()
+    {
+        //given an authenticate user
+        $this->actingAs($this->user, 'api');
+
+        //when user requests a list of order
+        //a collection of orders should be returned in json format
+
+        $this->json('get','api/orders')->assertStatus(200)->assertJsonStructure([
+            '*' => [
+                'id' , 'user_id' , 'customer_id'
+            ]
+        ]);
+    }
+
+    /** @test */
+    public function an_user_may_list_items_of_an_order()
+    {
+        //given an authenticated usr
+
+        //when user request an order
+
+        //a collection of order items should be returned in json format
+    }
 }
