@@ -23,7 +23,7 @@ const router = new VueRouter({
         },
         {
             path: "/customer",
-            name: "login",
+            name: "customer",
             component: Customer
         }
     ]
