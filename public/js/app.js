@@ -15861,7 +15861,7 @@ var render = function() {
     _c("div", { staticClass: "flex-center position-ref full-height" }, [
       _c("div", { staticClass: "content" }, [
         _c("div", { staticClass: "m-b-md" }, [
-          _c("table", { staticClass: "table table-striped" }, [
+          _c("table", { staticClass: "table table-striped table-responsive" }, [
             _vm._m(0),
             _vm._v(" "),
             _c(
@@ -15872,7 +15872,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(customer.mobile))]),
                   _vm._v(" "),
-                  _c("td"),
+                  _c("td", [_vm._v("dad")]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(customer.id_no))])
                 ])
