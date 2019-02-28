@@ -77,4 +77,16 @@ class CustomerTest extends TestCase
         
     }
 
+    /** @test */
+    function an_login_user_can_add_address_to_exsiting_customer()
+    {
+        //give an authenticated user
+
+        //and an existing customer
+
+        //user is able to add another address to this customer
+    }
+
+    
+
 }
