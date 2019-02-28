@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Customer;
+use App\Address;
 
 class CustomerTest extends TestCase
 {
@@ -16,6 +17,8 @@ class CustomerTest extends TestCase
         parent::setup();
         $this->user = factory(\App\User::class)->create();
         $this->customer = factory(\App\Customer::class)->make();
+        $this->address = factory(\App\Address::class)->make(['mobile'=>$this->customer->mobile]);
+
     }
     
     /** @test */
@@ -24,15 +27,26 @@ class CustomerTest extends TestCase
         //given an authenticated user
         $this->actingAs($this->user, 'api');
         //when user create a customer record
-        $this->json('post', '/api/customer', $this->customer->toArray())->assertStatus(200)
+        $response = $this->json('post', '/api/customer', array_merge($this->customer->toArray(),$this->address->toArray()))->assertStatus(200)
         ->assertJsonStructure(['id', 'name', 'name_py', 'mobile', 'id_no']);
         
+        $customer = json_decode($response->getContent());
+
         //the new customer record can be returned from server in json format
-        //and the new record can be seen in the database
+        //and the new record can be seen in the database 
         $this->assertDatabaseHas('customers', [
             'name' => $this->customer->name,
             'mobile' => $this->customer->mobile
         ]);
+
+        $this->assertDatabaseHas('addresses', [
+            'customer_id' => $customer->id,
+            'mobile' => $this->customer->mobile,
+            'address' => $this->address->address
+        ]);
+
+        
+
     }
 
     /** @test */

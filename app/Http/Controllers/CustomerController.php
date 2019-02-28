@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\Address;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -43,6 +44,15 @@ class CustomerController extends Controller
         ]);
 
         $customer->save();
+
+        $address = Address::create([
+            "customer_id" => $customer->id,
+            "address" => $request->address,
+            "postcode" => $request->postcode,
+            "mobile" => $request->mobile
+        ]);
+
+        $address->save();
 
         return response()->json($customer->toArray());
 
