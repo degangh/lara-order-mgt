@@ -3,7 +3,7 @@
         <div class="flex-center position-ref full-height">
             <div class="content">
                 <div  class="m-b-md">
-                    <table class="table table-striped">
+                    <table class="table table-striped table-responsive">
                         <tr>
                             <th>
                             Name
@@ -22,7 +22,7 @@
                         <tr v-for = "(customer, index) of customers" :key="index">
                             <td>{{customer.name}}</td>
                             <td>{{customer.mobile}}</td>
-                            <td></td>
+                            <td>dad</td>
                             <td>{{customer.id_no}}</td>
                         </tr>
 
