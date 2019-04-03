@@ -15,7 +15,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return Customer::all();
+        return Customer::with('addresses')->get();
     }
 
     /**

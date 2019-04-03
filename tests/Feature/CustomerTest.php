@@ -70,7 +70,7 @@ class CustomerTest extends TestCase
         //an collection of customer should be returned
         $this->json('get', '/api/customer')->assertStatus(200)->assertJsonStructure([
             '*' => [
-                'id' , 'name' , 'name_py'
+                'id' , 'name' , 'name_py', 'addresses'
             ]
         ]); 
         
