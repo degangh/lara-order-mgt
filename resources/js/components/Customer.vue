@@ -1,9 +1,9 @@
 <template>
-<div class="container">
+<div class="container-fluid">
         <div class="flex-center position-ref full-height">
             <div class="content">
                 <div  class="m-b-md">
-                    <table class="table table-striped table-responsive">
+                    <table class="table table-striped">
                         <tr>
                             <th>
                             Name
@@ -22,7 +22,8 @@
                         <tr v-for = "(customer, index) of customers" :key="index">
                             <td>{{customer.name}}</td>
                             <td>{{customer.mobile}}</td>
-                            <td>dad</td>
+                            <td v-if = "customer.addresses.length > 0">{{customer.addresses[0].address}}</td>
+                            <td v-else>N/A</td>
                             <td>{{customer.id_no}}</td>
                         </tr>
 
