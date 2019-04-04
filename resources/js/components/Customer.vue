@@ -59,7 +59,6 @@ export default {
 
   methods: {
       requestCustomerData () {
-          console.log("ok")
           axios.get('./api/customer')
           .then(this.handleResponse)
       },
