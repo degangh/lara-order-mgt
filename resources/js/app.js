@@ -7,6 +7,7 @@ import App from "./components/App";
 import Welcome from "./components/Welcome";
 import Login from "./components/Login";
 import Customer from "./components/Customer";
+import Order from "./components/Order";
 
 const router = new VueRouter({
     mode: "history",
@@ -22,9 +23,14 @@ const router = new VueRouter({
             component: Login
         },
         {
-            path: "/customer",
+            path: "/customers",
             name: "customer",
             component: Customer
+        },
+        {
+            path: "/orders",
+            name: "orders",
+            component: Order
         }
     ]
 });
