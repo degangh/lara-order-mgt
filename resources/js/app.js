@@ -1,7 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(VueRouter);
+Vue.use(Vuetify)
 
 import App from "./components/App";
 import Welcome from "./components/Welcome";
