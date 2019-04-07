@@ -5,7 +5,7 @@
       :clipped="$vuetify.breakpoint.mdAndUp"
       app
       v-model="drawer"
-      :width='200'
+      :width='260'
     >
       <v-list dense>
         <template v-for="item in items">
@@ -33,7 +33,7 @@
           >
             <v-list-tile slot="activator">
               <v-list-tile-content>
-                <router-link to="item.path">
+                <router-link to="item.path" class="tile-link">
                 <v-list-tile-title>
                   {{ item.text }}
                 </v-list-tile-title>
@@ -55,7 +55,7 @@
               </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
-          <v-list-tile v-else @click="" :key="item.text">
+          <v-list-tile v-else @click="" :key="item.text" :to="item.path" class="tile-link">
             <v-list-tile-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-tile-action>
@@ -199,3 +199,9 @@ export default {
       }
 };
 </script>
+
+<style>
+.tile-link a {
+    text-decoration: none;
+    }
+</style>
