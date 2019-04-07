@@ -3,7 +3,7 @@
         <div class="flex-center position-ref full-height">
             <div class="content">
                 <div  class="m-b-md">
-                    <table class="table table-striped">
+                    <table class="table table-striped table-responsive">
                         <tr>
                             <th>
                             Name
@@ -20,7 +20,8 @@
                         </tr>
                         <tbody>
                         <tr v-for = "(order, index) of orders" :key="index">
-                            <td>{{order.customer.name}}12</td>
+                            <td v-if="order.customer">{{order.customer.name}}</td>
+                            <td v-else>N/A</td>
                             <td>{{order.customer.mobile}}</td>
                             <td>{{order.created_at}}</td>
                         </tr>
