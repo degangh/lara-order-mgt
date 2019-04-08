@@ -11,6 +11,7 @@ import Welcome from "./components/Welcome";
 import Login from "./components/Login";
 import Customer from "./components/Customer";
 import Order from "./components/Order";
+import NotFound from "./components/NotFound"
 
 const router = new VueRouter({
     mode: "history",
@@ -34,6 +35,11 @@ const router = new VueRouter({
             path: "/orders",
             name: "orders",
             component: Order
+        },
+        {
+            path: "*",
+            name: "NotFound",
+            component: NotFound
         }
     ]
 });
