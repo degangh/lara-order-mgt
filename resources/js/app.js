@@ -28,6 +28,11 @@ const router = new VueRouter({
         },
         {
             path: "/customers",
+            name: "customers",
+            component: Customer
+        },
+        {
+            path: "/customers/p:page",
             name: "customer",
             component: Customer
         },
