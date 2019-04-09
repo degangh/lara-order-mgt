@@ -189,8 +189,8 @@ export default {
         dialog: false,
         drawer: null,
         items: [
-          { icon: 'contacts', text: 'Customers' , path: 'customers'},
-          { icon: 'history', text: 'Orders', path: 'orders' },
+          { icon: 'contacts', text: 'Customers' , path: '/customers'},
+          { icon: 'history', text: 'Orders', path: '/orders' },
           
         ]
       }),
