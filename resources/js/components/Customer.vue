@@ -3,6 +3,15 @@
         <div class="flex-center position-ref full-height">
             <div class="content">
                 <div  class="m-b-md">
+                    <div class="pagination-container">
+                        <v-pagination
+                        v-model="page"
+                        :length="totalPage"
+                        :total-visible = "7"
+                        @input="onPageChange"
+                        circle
+                        ></v-pagination>
+                    </div>
                     <table class="table table-striped">
                         <tr>
                             <th>
@@ -33,8 +42,16 @@
 
 
                     </table>
-                    <h3>
-                    </h3>
+                    <div class="pagination-container">
+                        <v-pagination
+                        v-model="page"
+                        :length="totalPage"
+                        :total-visible = "7"
+                        @input="onPageChange"
+                        circle
+                        ></v-pagination>
+                    </div>
+          
                 </div>
             </div>
         </div>
@@ -45,12 +62,18 @@
 export default {
   data () {
     return {
-      customers: []
+      customers: [], 
+      page: 1,
+      totalPage: null
+
     }
   },
 
+
   mounted () {
     let token = localStorage.getItem('jwt')
+
+    this.page = this.$route.params.page * 1
 
     axios.defaults.headers.common['Content-Type'] = 'application/json'
     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
@@ -59,14 +82,33 @@ export default {
 
   methods: {
       requestCustomerData () {
-          axios.get('./api/customer')
+          axios.get('/api/customer', {
+              params: {
+                  page: this.page
+              }
+          })
           .then(this.handleResponse)
       },
 
       handleResponse(res) {
-          this.customers = res.data
+          console.log(this.$route.params.page)
+          this.customers = res.data.data
+          this.page = res.data.current_page
+          this.totalPage = res.data.last_page
+      }, 
+
+      onPageChange () {
+          this.$router.push('/customers/p' + this.page)
+          this.requestCustomerData();
       }
 
   }
 };
 </script>
+
+<style scoped>
+.pagination-container {
+    float: right;
+    padding: 0.3rem 1rem
+}
+</style>

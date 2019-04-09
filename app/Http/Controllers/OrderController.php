@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return Order::with('customer')->get();
+        return Order::with('customer')->paginate(20);
     }
 
     /**

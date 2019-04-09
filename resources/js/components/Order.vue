@@ -22,7 +22,8 @@
                         <tr v-for = "(order, index) of orders" :key="index">
                             <td v-if="order.customer">{{order.customer.name}}</td>
                             <td v-else>N/A</td>
-                            <td>{{order.customer.mobile}}</td>
+                            <td v-if="order.customer">{{order.customer.mobile}}</td>
+                            <td v-else>N/A</td>
                             <td>{{order.created_at}}</td>
                         </tr>
 
@@ -63,7 +64,7 @@ export default {
         },
 
         handleOrderData (res) {
-            this.orders = res.data
+            this.orders = res.data.data
         }
     }
 

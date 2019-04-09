@@ -15,7 +15,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return Customer::with('addresses')->get();
+        return Customer::with('addresses')->paginate(20);
     }
 
     /**
