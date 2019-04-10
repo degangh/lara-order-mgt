@@ -105,7 +105,11 @@
     <v-content>
       <router-view></router-view>
     </v-content>
-    <v-btn
+
+
+    <floating-button></floating-button>
+
+    <!--v-btn
       fab
       bottom
       right
@@ -115,7 +119,7 @@
       @click.stop="dialog = !dialog"
     >
       <v-icon>add</v-icon>
-    </v-btn>
+    </v-btn-->
     <v-dialog v-model="dialog" width="800px">
       <v-card>
         <v-card-title
@@ -179,11 +183,13 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    
 </v-app>
 
 </template>
 
 <script>
+import FloatingButton from './FAB'
 export default {
      data: () => ({
         dialog: false,
@@ -192,11 +198,34 @@ export default {
           { icon: 'contacts', text: 'Customers' , path: '/customers'},
           { icon: 'history', text: 'Orders', path: '/orders' },
           
-        ]
+        ],
+        direction: 'top',
+            fab: false,
+            fling: false,
+            hover: false,
+            tabs: null,
+            top: false,
+            right: true,
+            bottom: true,
+            left: false,
+            transition: 'slide-y-reverse-transition'
       }),
       props: {
         source: String
+      },
+      components: {
+        FloatingButton
+      },
+      computed: {
+      activeFab () {
+        switch (this.tabs) {
+          case 'one': return { 'class': 'purple', icon: 'account_circle' }
+          case 'two': return { 'class': 'red', icon: 'edit' }
+          case 'three': return { 'class': 'green', icon: 'keyboard_arrow_up' }
+          default: return {}
+        }
       }
+    }
 };
 </script>
 

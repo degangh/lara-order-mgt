@@ -42513,6 +42513,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'FloatingButton',
@@ -42579,7 +42593,7 @@ var render = function() {
       _c(
         "v-btn",
         {
-          attrs: { slot: "activator", color: "primary", fab: "", small: "" },
+          attrs: { slot: "activator", color: "blue", fab: "", dark: "" },
           slot: "activator",
           model: {
             value: _vm.fab,
@@ -42591,9 +42605,7 @@ var render = function() {
         },
         [
           _c("v-icon", [
-            _vm._v(
-              "\r\n                        settings\r\n                    "
-            )
+            _vm._v("\r\n                        add\r\n                    ")
           ]),
           _vm._v(" "),
           _c("v-icon", [_vm._v("close")])
@@ -42603,12 +42615,21 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-btn",
-        { attrs: { fab: "", small: "", color: "green" } },
+        { attrs: { fab: "", small: "", color: "green", dark: "" } },
         [
           _c("v-icon", [
-            _vm._v(
-              "\r\n                        power_settings_new\r\n                    "
-            )
+            _vm._v("\r\n                    account_circle\r\n                ")
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        { attrs: { fab: "", small: "", color: "indigo", dark: "" } },
+        [
+          _c("v-icon", [
+            _vm._v("\r\n                    attach_money\r\n                ")
           ])
         ],
         1
