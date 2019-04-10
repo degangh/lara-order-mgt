@@ -82,7 +82,7 @@ export default {
 
   methods: {
       requestCustomerData () {
-          axios.get('/api/customer', {
+          axios.get('/api/customers', {
               params: {
                   page: this.page
               }
