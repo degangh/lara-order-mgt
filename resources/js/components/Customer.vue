@@ -91,7 +91,6 @@ export default {
       },
 
       handleResponse(res) {
-          console.log(this.$route.params.page)
           this.customers = res.data.data
           this.page = res.data.current_page
           this.totalPage = res.data.last_page

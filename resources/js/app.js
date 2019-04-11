@@ -42,6 +42,11 @@ const router = new VueRouter({
             component: Order
         },
         {
+            path: "/orders/p:page",
+            name: "orders",
+            component: Order
+        },
+        {
             path: "*",
             name: "NotFound",
             component: NotFound

@@ -3,7 +3,17 @@
         <div class="flex-center position-ref full-height">
             <div class="content">
                 <div  class="m-b-md">
-                    <table class="table table-striped table-responsive">
+                    <div class="pagination-container">
+                        <v-pagination
+                        v-model="page"
+                        :length="totalPage"
+                        :total-visible = "7"
+                        @input="onPageChange"
+                        circle
+                        ></v-pagination>
+                    </div>
+                    <div class="table-responsive">
+                    <table class="table table-striped">
                         <tr>
                             <th>
                             Name
@@ -33,8 +43,17 @@
 
 
                     </table>
-                    <h3>
-                    </h3>
+                    </div>
+                    <div class="pagination-container">
+                        <v-pagination
+                        v-model="page"
+                        :length="totalPage"
+                        :total-visible = "7"
+                        @input="onPageChange"
+                        circle
+                        ></v-pagination>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -45,7 +64,9 @@ export default {
 
     data () {
         return {
-            orders: []
+            orders: [],
+            page: 1,
+            totalPage: null
         }
     },
 
@@ -59,16 +80,32 @@ export default {
 
     methods: {
         requestOrderData () {
-            axios.get('./api/orders')
+            axios.get('/api/orders',{
+                params: {
+                  page: this.page
+              }
+            })
             .then(this.handleOrderData)
         },
 
         handleOrderData (res) {
             this.orders = res.data.data
-        }
+            this.page = res.data.current_page
+            this.totalPage = res.data.last_page
+
+        },
+
+        onPageChange () {
+          this.$router.push('/orders/p' + this.page)
+          this.requestOrderData();
+      }
     }
 
 }
 </script>
-<style>
+<style scoped>
+.pagination-container {
+    float: right;
+    padding: 0.3rem 1rem
+}
 </style>
