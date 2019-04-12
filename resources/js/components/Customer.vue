@@ -12,6 +12,7 @@
                         circle
                         ></v-pagination>
                     </div>
+                    <div class="table-responsive">
                     <table class="table table-striped">
                         <tr>
                             <th>
@@ -42,6 +43,7 @@
 
 
                     </table>
+                    </div>
                     <div class="pagination-container">
                         <v-pagination
                         v-model="page"
