@@ -14,7 +14,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return Order::with('customer')->paginate(20);
+        return Order::with('customer')->withCount(['items as items_sum' => function($query) {
+            $query->select(\DB::raw('sum(quantity*unit_price_cny)'));
+        }])->paginate(20);
     }
 
     /**
