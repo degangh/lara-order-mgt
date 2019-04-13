@@ -43707,6 +43707,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -43783,26 +43785,30 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("table", { staticClass: "table table-striped" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c(
-              "tbody",
-              _vm._l(_vm.customers, function(customer, index) {
-                return _c("tr", { key: index }, [
-                  _c("td", [_vm._v(_vm._s(customer.name))]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(customer.mobile))]),
-                  _vm._v(" "),
-                  customer.addresses.length > 0
-                    ? _c("td", [_vm._v(_vm._s(customer.addresses[0].address))])
-                    : _c("td", [_vm._v("N/A")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(customer.id_no))])
-                ])
-              }),
-              0
-            )
+          _c("div", { staticClass: "table-responsive" }, [
+            _c("table", { staticClass: "table table-striped" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.customers, function(customer, index) {
+                  return _c("tr", { key: index }, [
+                    _c("td", [_vm._v(_vm._s(customer.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(customer.mobile))]),
+                    _vm._v(" "),
+                    customer.addresses.length > 0
+                      ? _c("td", [
+                          _vm._v(_vm._s(customer.addresses[0].address))
+                        ])
+                      : _c("td", [_vm._v("N/A")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(customer.id_no))])
+                  ])
+                }),
+                0
+              )
+            ])
           ]),
           _vm._v(" "),
           _c(
@@ -44031,6 +44037,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -44121,6 +44132,14 @@ var render = function() {
                       ? _c("td", [_vm._v(_vm._s(order.customer.mobile))])
                       : _c("td", [_vm._v("N/A")]),
                     _vm._v(" "),
+                    order.sum
+                      ? _c("td", { staticClass: "text-right" }, [
+                          _vm._v(_vm._s(order.sum))
+                        ])
+                      : _c("td", { staticClass: "text-right" }, [
+                          _vm._v("0.00")
+                        ]),
+                    _vm._v(" "),
                     _c("td", [_vm._v(_vm._s(order.created_at))])
                   ])
                 }),
@@ -44171,6 +44190,12 @@ var staticRenderFns = [
       _c("th", [
         _vm._v(
           "\n                            Mobile\n                            "
+        )
+      ]),
+      _vm._v(" "),
+      _c("th", [
+        _vm._v(
+          "\n                            Order Sum\n                            "
         )
       ]),
       _vm._v(" "),
