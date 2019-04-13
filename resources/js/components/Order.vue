@@ -22,6 +22,9 @@
                             Mobile
                             </th>
                             <th>
+                            Order Sum
+                            </th>
+                            <th>
                             Order Date
                             </th>
                             <th>
@@ -34,6 +37,8 @@
                             <td v-else>N/A</td>
                             <td v-if="order.customer">{{order.customer.mobile}}</td>
                             <td v-else>N/A</td>
+                            <td v-if="order.sum" class="text-right">{{order.sum}}</td>
+                            <td v-else class="text-right">0.00</td>
                             <td>{{order.created_at}}</td>
                         </tr>
 
