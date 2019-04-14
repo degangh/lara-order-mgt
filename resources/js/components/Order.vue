@@ -12,13 +12,14 @@
                         circle
                         ></v-pagination>
                     </div>
+                    <div v-if="loading" class="loading-wrapper"> <v-progress-linear :indeterminate="true"></v-progress-linear></div>
                     <div class="table-responsive">
                     <table class="table table-striped">
                         <tr>
-                            <th>
+                            <th class="col1">
                             Name
                             </th>
-                            <th>
+                            <th class="col2">
                             Mobile
                             </th>
                             <th>
@@ -71,7 +72,8 @@ export default {
         return {
             orders: [],
             page: 1,
-            totalPage: null
+            totalPage: null,
+            loading: true
         }
     },
 
@@ -97,10 +99,12 @@ export default {
             this.orders = res.data.data
             this.page = res.data.current_page
             this.totalPage = res.data.last_page
+            this.loading = false
 
         },
 
         onPageChange () {
+          this.loading = true
           this.$router.push('/orders/p' + this.page)
           this.requestOrderData();
       }
@@ -112,5 +116,14 @@ export default {
 .pagination-container {
     float: right;
     padding: 0.3rem 1rem
+}
+.loading-wrapper{
+    height: 2.4rem
+}
+.col1 {
+    width: 20%
+}
+.col2 {
+    width: 20%
 }
 </style>

@@ -43636,7 +43636,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.pagination-container[data-v-4fd97649] {\n    float: right;\n    padding: 0.3rem 1rem\n}\n", ""]);
+exports.push([module.i, "\n.pagination-container[data-v-4fd97649] {\n    float: right;\n    padding: 0.3rem 1rem\n}\n.loading-wrapper[data-v-4fd97649]{\n    height: 2.4rem\n}\n.col1[data-v-4fd97649] {\n    width: 20%\n}\n.col2[data-v-4fd97649] {\n    width: 20%\n}\n", ""]);
 
 // exports
 
@@ -43709,13 +43709,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             customers: [],
             page: 1,
-            totalPage: null
+            totalPage: null,
+            loading: true
 
         };
     },
@@ -43742,8 +43745,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.customers = res.data.data;
             this.page = res.data.current_page;
             this.totalPage = res.data.last_page;
+            this.loading = false;
         },
         onPageChange: function onPageChange() {
+            this.loading = true;
             this.$router.push('/customers/p' + this.page);
             this.requestCustomerData();
         }
@@ -43784,6 +43789,15 @@ var render = function() {
             ],
             1
           ),
+          _vm._v(" "),
+          _vm.loading
+            ? _c(
+                "div",
+                { staticClass: "loading-wrapper" },
+                [_c("v-progress-linear", { attrs: { indeterminate: true } })],
+                1
+              )
+            : _vm._e(),
           _vm._v(" "),
           _c("div", { staticClass: "table-responsive" }, [
             _c("table", { staticClass: "table table-striped" }, [
@@ -43844,13 +43858,13 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("tr", [
-      _c("th", [
+      _c("th", { staticClass: "col1" }, [
         _vm._v(
           "\n                            Name\n                            "
         )
       ]),
       _vm._v(" "),
-      _c("th", [
+      _c("th", { staticClass: "col2" }, [
         _vm._v(
           "\n                            Mobile\n                            "
         )
@@ -43965,7 +43979,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.pagination-container[data-v-8a00ae1a] {\n    float: right;\n    padding: 0.3rem 1rem\n}\n", ""]);
+exports.push([module.i, "\n.pagination-container[data-v-8a00ae1a] {\n    float: right;\n    padding: 0.3rem 1rem\n}\n.loading-wrapper[data-v-8a00ae1a]{\n    height: 2.4rem\n}\n.col1[data-v-8a00ae1a] {\n    width: 20%\n}\n.col2[data-v-8a00ae1a] {\n    width: 20%\n}\n", ""]);
 
 // exports
 
@@ -44042,13 +44056,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             orders: [],
             page: 1,
-            totalPage: null
+            totalPage: null,
+            loading: true
         };
     },
     mounted: function mounted() {
@@ -44072,8 +44088,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.orders = res.data.data;
             this.page = res.data.current_page;
             this.totalPage = res.data.last_page;
+            this.loading = false;
         },
         onPageChange: function onPageChange() {
+            this.loading = true;
             this.$router.push('/orders/p' + this.page);
             this.requestOrderData();
         }
@@ -44115,6 +44133,15 @@ var render = function() {
             ],
             1
           ),
+          _vm._v(" "),
+          _vm.loading
+            ? _c(
+                "div",
+                { staticClass: "loading-wrapper" },
+                [_c("v-progress-linear", { attrs: { indeterminate: true } })],
+                1
+              )
+            : _vm._e(),
           _vm._v(" "),
           _c("div", { staticClass: "table-responsive" }, [
             _c("table", { staticClass: "table table-striped" }, [
@@ -44181,13 +44208,13 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("tr", [
-      _c("th", [
+      _c("th", { staticClass: "col1" }, [
         _vm._v(
           "\n                            Name\n                            "
         )
       ]),
       _vm._v(" "),
-      _c("th", [
+      _c("th", { staticClass: "col2" }, [
         _vm._v(
           "\n                            Mobile\n                            "
         )
