@@ -27,6 +27,7 @@
                        small
                        color="green"
                        dark
+                       @click="clickCreateContact"
                 >
                 <v-icon >
                     account_circle
@@ -80,6 +81,12 @@ export default {
         }
       }
     },
+
+    methods: {
+        clickCreateContact () {
+            console.log('oops')
+        }
+    }
 }
 </script>
 
