@@ -11,7 +11,8 @@ import Welcome from "./components/Welcome";
 import Login from "./components/Login";
 import Customer from "./components/Customer";
 import Order from "./components/Order";
-import NotFound from "./components/NotFound"
+import NotFound from "./components/NotFound";
+
 
 const router = new VueRouter({
     mode: "history",
