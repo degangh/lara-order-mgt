@@ -791,7 +791,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         component: __WEBPACK_IMPORTED_MODULE_8__components_Order___default.a
     }, {
         path: "/orders/p:page",
-        name: "orders",
+        name: "ordersPage",
         component: __WEBPACK_IMPORTED_MODULE_8__components_Order___default.a
     }, {
         path: "*",
@@ -42510,6 +42510,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'FloatingButton',
@@ -42541,6 +42542,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 default:
                     return {};
             }
+        }
+    },
+
+    methods: {
+        clickCreateContact: function clickCreateContact() {
+            console.log('oops');
         }
     }
 });
@@ -42598,7 +42605,10 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-btn",
-        { attrs: { fab: "", small: "", color: "green", dark: "" } },
+        {
+          attrs: { fab: "", small: "", color: "green", dark: "" },
+          on: { click: _vm.clickCreateContact }
+        },
         [
           _c("v-icon", [
             _vm._v("\n                    account_circle\n                ")
@@ -44199,6 +44209,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
 
+    watch: {
+        '$route': function $route(to, from) {
+
+            console.log(this.$router.currentRoute.path);
+            if (this.$router.currentRoute.path == '/orders') this.page = 1;
+            this.loading = true;
+            this.$router.push(this.$router.currentRoute.path);
+            this.requestOrderData();
+        }
+    },
+
     methods: {
         requestOrderData: function requestOrderData() {
             axios.get('/api/orders', {
@@ -44209,14 +44230,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         handleOrderData: function handleOrderData(res) {
             this.orders = res.data.data;
-            this.page = res.data.current_page;
+            //this.page = res.data.current_page
             this.totalPage = res.data.last_page;
             this.loading = false;
         },
         onPageChange: function onPageChange() {
             this.loading = true;
             this.$router.push('/orders/p' + this.page);
-            this.requestOrderData();
+            //this.requestOrderData();
         }
     }
 
