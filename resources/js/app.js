@@ -44,7 +44,7 @@ const router = new VueRouter({
         },
         {
             path: "/orders/p:page",
-            name: "orders",
+            name: "ordersPage",
             component: Order
         },
         {

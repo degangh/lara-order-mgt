@@ -80,10 +80,22 @@ export default {
     mounted () {
         let token = localStorage.getItem('jwt')
 
+
         axios.defaults.headers.common['Content-Type'] = 'application/json'
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
         this.requestOrderData();
     }, 
+
+    watch: {
+        '$route' (to, from){
+
+            console.log(this.$router.currentRoute.path)
+            if (this.$router.currentRoute.path == '/orders') this.page =1
+            this.loading = true
+            this.$router.push(this.$router.currentRoute.path)
+            this.requestOrderData();
+        }
+    },
 
     methods: {
         requestOrderData () {
@@ -97,7 +109,7 @@ export default {
 
         handleOrderData (res) {
             this.orders = res.data.data
-            this.page = res.data.current_page
+            //this.page = res.data.current_page
             this.totalPage = res.data.last_page
             this.loading = false
 
@@ -106,7 +118,7 @@ export default {
         onPageChange () {
           this.loading = true
           this.$router.push('/orders/p' + this.page)
-          this.requestOrderData();
+          //this.requestOrderData();
       }
     }
 
