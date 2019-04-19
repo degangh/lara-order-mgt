@@ -85,6 +85,17 @@ export default {
     this.requestCustomerData();
   },
 
+  watch: {
+        '$route' (to, from){
+
+            console.log(this.$router.currentRoute.path)
+            if (this.$router.currentRoute.path == '/customers') this.page =1
+            this.loading = true
+            this.$router.push(this.$router.currentRoute.path)
+            this.requestCustomerData();
+        }
+    },
+
   methods: {
       requestCustomerData () {
           axios.get('/api/customers', {
@@ -105,7 +116,6 @@ export default {
       onPageChange () {
           this.loading = true
           this.$router.push('/customers/p' + this.page)
-          this.requestCustomerData();
       }
 
   }

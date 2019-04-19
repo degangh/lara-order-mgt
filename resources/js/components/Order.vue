@@ -118,7 +118,6 @@ export default {
         onPageChange () {
           this.loading = true
           this.$router.push('/orders/p' + this.page)
-          //this.requestOrderData();
       }
     }
 
