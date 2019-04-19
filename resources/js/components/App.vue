@@ -6,6 +6,7 @@
       app
       v-model="drawer"
       :width='260'
+      v-if = "isLogin"
     >
       <v-list dense>
         <template v-for="item in items">
@@ -164,6 +165,10 @@ export default {
           case 'three': return { 'class': 'green', icon: 'keyboard_arrow_up' }
           default: return {}
         }
+      },
+
+      isLogin () {
+        return localStorage.getItem("jwt") != null
       }
     }
 };
