@@ -94,14 +94,26 @@
       <v-btn icon>
         <v-icon>notifications</v-icon>
       </v-btn>
-      <v-btn icon large>
-        <v-avatar size="32px" tile>
-          <img
-            src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
-            alt="Vuetify"
-          >
-        </v-avatar>
-      </v-btn>
+      <v-menu offset-y>
+        <template v-slot:activator="{ on }">
+          <v-btn icon large v-on="on">
+            <v-avatar size="32px" tile>
+              <img
+                src="https://cdn.vuetifyjs.com/images/logos/logo.svg"
+                alt="Vuetify"
+              >
+            </v-avatar>
+          </v-btn>
+        </template>
+      <v-list>
+        <v-list-tile
+        v-for="(item, index) in userItems"
+        :key="index"
+        >
+        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+      </v-menu>
     </v-toolbar>
     <v-content>
       <router-view></router-view>
@@ -138,6 +150,10 @@ export default {
           { icon: 'contacts', text: 'Customers' , path: '/customers'},
           { icon: 'history', text: 'Orders', path: '/orders' },
           
+        ],
+        userItems: [
+          {title: 'Logout'},
+          {title: 'Help'}
         ],
         direction: 'top',
             fab: false,

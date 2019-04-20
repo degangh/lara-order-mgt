@@ -42360,6 +42360,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -42369,6 +42381,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       dialog: false,
       drawer: null,
       items: [{ icon: 'contacts', text: 'Customers', path: '/customers' }, { icon: 'history', text: 'Orders', path: '/orders' }],
+      userItems: [{ title: 'Logout' }, { title: 'Help' }],
       direction: 'top',
       fab: false,
       fling: false,
@@ -43288,17 +43301,54 @@ var render = function() {
           ),
           _vm._v(" "),
           _c(
-            "v-btn",
-            { attrs: { icon: "", large: "" } },
-            [
-              _c("v-avatar", { attrs: { size: "32px", tile: "" } }, [
-                _c("img", {
-                  attrs: {
-                    src: "https://cdn.vuetifyjs.com/images/logos/logo.svg",
-                    alt: "Vuetify"
+            "v-menu",
+            {
+              attrs: { "offset-y": "" },
+              scopedSlots: _vm._u([
+                {
+                  key: "activator",
+                  fn: function(ref) {
+                    var on = ref.on
+                    return [
+                      _c(
+                        "v-btn",
+                        _vm._g({ attrs: { icon: "", large: "" } }, on),
+                        [
+                          _c(
+                            "v-avatar",
+                            { attrs: { size: "32px", tile: "" } },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src:
+                                    "https://cdn.vuetifyjs.com/images/logos/logo.svg",
+                                  alt: "Vuetify"
+                                }
+                              })
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ]
                   }
-                })
+                }
               ])
+            },
+            [
+              _vm._v(" "),
+              _c(
+                "v-list",
+                _vm._l(_vm.userItems, function(item, index) {
+                  return _c(
+                    "v-list-tile",
+                    { key: index },
+                    [_c("v-list-tile-title", [_vm._v(_vm._s(item.title))])],
+                    1
+                  )
+                }),
+                1
+              )
             ],
             1
           )
