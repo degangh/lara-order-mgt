@@ -109,6 +109,7 @@
         <v-list-tile
         v-for="(item, index) in userItems"
         :key="index"
+        @click="apply_func(item.func)"
         >
         <v-list-tile-title>{{ item.title }}</v-list-tile-title>
         </v-list-tile>
@@ -152,19 +153,19 @@ export default {
           
         ],
         userItems: [
-          {title: 'Logout'},
-          {title: 'Help'}
+          {title: 'Logout', func: 'logout'},
+          {title: 'Help', func: ''}
         ],
         direction: 'top',
-            fab: false,
-            fling: false,
-            hover: false,
-            tabs: null,
-            top: false,
-            right: true,
-            bottom: true,
-            left: false,
-            transition: 'slide-y-reverse-transition'
+        fab: false,
+        fling: false,
+        hover: false,
+        tabs: null,
+        top: false,
+        right: true,
+        bottom: true,
+        left: false,
+        transition: 'slide-y-reverse-transition'
       }),
       props: {
         source: String
@@ -185,6 +186,17 @@ export default {
 
       isLogin () {
         return localStorage.getItem("jwt") != null
+      }
+    },
+    methods: {
+      logout () {
+        console.log('logout clicked')
+        localStorage.removeItem('jwt');
+        this.$router.push("/login");
+        console.log(localStorage.getItem("jwt"))
+      },
+      apply_func(func_name) {
+        if (func_name) this[func_name]()
       }
     }
 };

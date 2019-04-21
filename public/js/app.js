@@ -42372,6 +42372,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -42381,7 +42382,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       dialog: false,
       drawer: null,
       items: [{ icon: 'contacts', text: 'Customers', path: '/customers' }, { icon: 'history', text: 'Orders', path: '/orders' }],
-      userItems: [{ title: 'Logout' }, { title: 'Help' }],
+      userItems: [{ title: 'Logout', func: 'logout' }, { title: 'Help', func: '' }],
       direction: 'top',
       fab: false,
       fling: false,
@@ -42416,6 +42417,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     isLogin: function isLogin() {
       return localStorage.getItem("jwt") != null;
+    }
+  },
+  methods: {
+    logout: function logout() {
+      console.log('logout clicked');
+      localStorage.removeItem('jwt');
+      this.$router.push("/login");
+      console.log(localStorage.getItem("jwt"));
+    },
+    apply_func: function apply_func(func_name) {
+      if (func_name) this[func_name]();
     }
   }
 });
@@ -43342,7 +43354,14 @@ var render = function() {
                 _vm._l(_vm.userItems, function(item, index) {
                   return _c(
                     "v-list-tile",
-                    { key: index },
+                    {
+                      key: index,
+                      on: {
+                        click: function($event) {
+                          return _vm.apply_func(item.func)
+                        }
+                      }
+                    },
                     [_c("v-list-tile-title", [_vm._v(_vm._s(item.title))])],
                     1
                   )
