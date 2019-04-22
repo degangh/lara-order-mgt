@@ -6,7 +6,7 @@
       app
       v-model="drawer"
       :width='260'
-      v-if = "isLogin"
+      v-if = "isLogin()"
     >
       <v-list dense>
         <template v-for="item in items">
@@ -69,6 +69,7 @@
         </template>
       </v-list>
     </v-navigation-drawer>
+
     <v-toolbar
       color="blue darken-3"
       dark
@@ -86,15 +87,17 @@
         prepend-icon="search"
         label="Search"
         class="hidden-sm-and-down"
+        v-if = "isLogin()"
       ></v-text-field>
       <v-spacer></v-spacer>
-      <v-btn icon>
+      
+      <v-btn icon v-if = "isLogin()">
         <v-icon>apps</v-icon>
       </v-btn>
-      <v-btn icon>
+      <v-btn icon v-if = "isLogin()">
         <v-icon>notifications</v-icon>
       </v-btn>
-      <v-menu offset-y>
+      <v-menu offset-y v-if = "isLogin()">
         <template v-slot:activator="{ on }">
           <v-btn icon large v-on="on">
             <v-avatar size="32px" tile>
@@ -182,18 +185,21 @@ export default {
           case 'three': return { 'class': 'green', icon: 'keyboard_arrow_up' }
           default: return {}
         }
-      },
-
-      isLogin () {
-        return localStorage.getItem("jwt") != null
       }
     },
     methods: {
+
+      isLogin () {
+        return localStorage.getItem("jwt") != null
+      },
+      
       logout () {
         console.log('logout clicked')
         localStorage.removeItem('jwt');
+        this.$forceUpdate();
         this.$router.push("/login");
         console.log(localStorage.getItem("jwt"))
+        
       },
       apply_func(func_name) {
         if (func_name) this[func_name]()

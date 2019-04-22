@@ -42373,6 +42373,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -42414,15 +42417,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         default:
           return {};
       }
-    },
-    isLogin: function isLogin() {
-      return localStorage.getItem("jwt") != null;
     }
   },
   methods: {
+    isLogin: function isLogin() {
+      return localStorage.getItem("jwt") != null;
+    },
     logout: function logout() {
       console.log('logout clicked');
       localStorage.removeItem('jwt');
+      this.$forceUpdate();
       this.$router.push("/login");
       console.log(localStorage.getItem("jwt"));
     },
@@ -43049,7 +43053,7 @@ var render = function() {
     "v-app",
     { attrs: { id: "inspire" } },
     [
-      _vm.isLogin
+      _vm.isLogin()
         ? _c(
             "v-navigation-drawer",
             {
@@ -43286,91 +43290,104 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("v-text-field", {
-            staticClass: "hidden-sm-and-down",
-            attrs: {
-              flat: "",
-              "solo-inverted": "",
-              "prepend-icon": "search",
-              label: "Search"
-            }
-          }),
+          _vm.isLogin()
+            ? _c("v-text-field", {
+                staticClass: "hidden-sm-and-down",
+                attrs: {
+                  flat: "",
+                  "solo-inverted": "",
+                  "prepend-icon": "search",
+                  label: "Search"
+                }
+              })
+            : _vm._e(),
           _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
-          _c(
-            "v-btn",
-            { attrs: { icon: "" } },
-            [_c("v-icon", [_vm._v("apps")])],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            { attrs: { icon: "" } },
-            [_c("v-icon", [_vm._v("notifications")])],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-menu",
-            {
-              attrs: { "offset-y": "" },
-              scopedSlots: _vm._u([
-                {
-                  key: "activator",
-                  fn: function(ref) {
-                    var on = ref.on
-                    return [
-                      _c(
-                        "v-btn",
-                        _vm._g({ attrs: { icon: "", large: "" } }, on),
-                        [
-                          _c(
-                            "v-avatar",
-                            { attrs: { size: "32px", tile: "" } },
-                            [
-                              _c("img", {
-                                attrs: {
-                                  src:
-                                    "https://cdn.vuetifyjs.com/images/logos/logo.svg",
-                                  alt: "Vuetify"
-                                }
-                              })
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ]
-                  }
-                }
-              ])
-            },
-            [
-              _vm._v(" "),
-              _c(
-                "v-list",
-                _vm._l(_vm.userItems, function(item, index) {
-                  return _c(
-                    "v-list-tile",
-                    {
-                      key: index,
-                      on: {
-                        click: function($event) {
-                          return _vm.apply_func(item.func)
-                        }
-                      }
-                    },
-                    [_c("v-list-tile-title", [_vm._v(_vm._s(item.title))])],
-                    1
-                  )
-                }),
+          _vm.isLogin()
+            ? _c(
+                "v-btn",
+                { attrs: { icon: "" } },
+                [_c("v-icon", [_vm._v("apps")])],
                 1
               )
-            ],
-            1
-          )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.isLogin()
+            ? _c(
+                "v-btn",
+                { attrs: { icon: "" } },
+                [_c("v-icon", [_vm._v("notifications")])],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.isLogin()
+            ? _c(
+                "v-menu",
+                {
+                  attrs: { "offset-y": "" },
+                  scopedSlots: _vm._u(
+                    [
+                      {
+                        key: "activator",
+                        fn: function(ref) {
+                          var on = ref.on
+                          return [
+                            _c(
+                              "v-btn",
+                              _vm._g({ attrs: { icon: "", large: "" } }, on),
+                              [
+                                _c(
+                                  "v-avatar",
+                                  { attrs: { size: "32px", tile: "" } },
+                                  [
+                                    _c("img", {
+                                      attrs: {
+                                        src:
+                                          "https://cdn.vuetifyjs.com/images/logos/logo.svg",
+                                        alt: "Vuetify"
+                                      }
+                                    })
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ]
+                        }
+                      }
+                    ],
+                    null,
+                    false,
+                    2927933866
+                  )
+                },
+                [
+                  _vm._v(" "),
+                  _c(
+                    "v-list",
+                    _vm._l(_vm.userItems, function(item, index) {
+                      return _c(
+                        "v-list-tile",
+                        {
+                          key: index,
+                          on: {
+                            click: function($event) {
+                              return _vm.apply_func(item.func)
+                            }
+                          }
+                        },
+                        [_c("v-list-tile-title", [_vm._v(_vm._s(item.title))])],
+                        1
+                      )
+                    }),
+                    1
+                  )
+                ],
+                1
+              )
+            : _vm._e()
         ],
         1
       ),
