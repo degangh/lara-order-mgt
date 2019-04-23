@@ -6,6 +6,7 @@
                         <div class="card-header">Login</div>
 
                         <div class="card-body">
+                          <div class="alert alert-danger" v-if="errorMsg">{{ errorMsg }}</div>
                             <form method="POST" action="/login">
                                 <div class="form-group row">
                                     <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail Address</label>
@@ -43,7 +44,8 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      errorMsg: false
     };
   },
   methods: {
@@ -58,14 +60,14 @@ export default {
           })
           .then(response => {
             //localStorage.setItem("user", response.data.success.name);
-            localStorage.setItem("jwt", response.data.success.token);
+            if (response.data.success.token) localStorage.setItem("jwt", response.data.success.token);
 
             if (localStorage.getItem("jwt") != null) {
               this.$router.go("/customers");
             }
           })
-          .catch(function(error) {
-            console.error(error);
+          .catch(error => {
+            this.errorMsg = "Login Failed"
           });
       }
     }
