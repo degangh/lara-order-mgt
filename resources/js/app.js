@@ -1,10 +1,12 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Vuetify from 'vuetify'
+import Vuex from 'vuex';
 import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(VueRouter);
 Vue.use(Vuetify)
+Vue.use(Vuex)
 
 import App from "./components/App";
 import Welcome from "./components/Welcome";
@@ -54,6 +56,17 @@ const router = new VueRouter({
         }
     ]
 });
+
+window.axios.interceptors.response.use(response => {
+    return response;
+ }, error => {
+   if (error.response.status === 401) {
+    //place your reentry code
+    //router.go("/login");
+    location.href="/login"
+   }
+   return error;
+ });
 
 const app = new Vue({
     el: "#app",

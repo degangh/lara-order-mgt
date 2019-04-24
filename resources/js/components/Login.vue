@@ -68,6 +68,7 @@ export default {
           })
           .catch(error => {
             this.errorMsg = "Login Failed"
+            delete localStorage.token
           });
       }
     }
