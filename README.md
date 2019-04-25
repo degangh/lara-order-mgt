@@ -13,7 +13,7 @@ These instructions will get you a copy of the project up and running on your loc
 * PHP 7.0.1 or later
 * MySQL
 * Laravel Framework
-* Vue.js (todo)
+* Vue.js + Vuetify + Vuex + VueRouter
 
 ### Installing
 
@@ -22,6 +22,8 @@ These instructions will get you a copy of the project up and running on your loc
 2 Run "composer install"
 3 Run "php artisan migrate" to initialize the database
 4 Run "php artisan db:seed" to seed initial data (for demo purpose)
+5 Run "php artisan passport:install"
+5 Run "npm install"
 5 Point your browser to your local server
 ```
 
@@ -45,13 +47,17 @@ Todo
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Example: Deploy with Jenkins
 
 ## Built With
 
 * [Laravel](https://laravel.com/) - The PHP Framework For Web Artisans
 * [comopser](https://getcomposer.org/) - A package manager for PHP
 * [Homestead](https://laravel.com/docs/5.0/homestead) - A development environment pre-packaged Vagrant "box"
+* [Vue.js](https://vuejs.org) - The Progressive JavaScript Framework
+* [Vuetify](https://vuetifyjs.com) - Material Design Component Framework
+* [Vuex](https://vuex.vuejs.org) - A state management pattern + library for Vue.js
+* [VueRouter](https://router.vuejs.org) - The official router for Vue.js
 * Composer
 * npm
 
@@ -73,3 +79,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 * Laravel Community
 * Laracast.com
+* Vuejs
