@@ -124,7 +124,7 @@
     </v-content>
 
 
-    <floating-button></floating-button>
+    <floating-button @popupContactForm="setContactDialog"></floating-button>
 
     <!--v-btn
       fab
@@ -137,7 +137,7 @@
     >
       <v-icon>add</v-icon>
     </v-btn-->
-    <contact-form :dialog="dialog"></contact-form>
+    <contact-form :dialog="dialog" @closeContactDialog="closeContactDialog"></contact-form>
     
 </v-app>
 
@@ -203,6 +203,12 @@ export default {
       },
       apply_func(func_name) {
         if (func_name) this[func_name]()
+      },
+      setContactDialog () {
+        this.dialog = true
+      },
+      closeContactDialog () {
+        this.dialog = false
       }
     }
 };

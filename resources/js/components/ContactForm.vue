@@ -10,39 +10,37 @@
           <v-layout row wrap>
             <v-flex xs12 align-center justify-space-between>
               <v-layout align-center>
-                <v-avatar size="40px" class="mr-3">
-                  <img
-                    src="//ssl.gstatic.com/s2/oz/images/sge/grey_silhouette.png"
-                    alt=""
-                  >
-                </v-avatar>
+                
+                <v-flex xs9>
                 <v-text-field
                   placeholder="Name"
+                  prepend-icon="contacts"
                 ></v-text-field>
+                </v-flex>
+                <v-flex xs3>
+                  <v-text-field
+                  placeholder="Initial"
+                ></v-text-field>
+                </v-flex>
               </v-layout>
             </v-flex>
-            <v-flex xs6>
-              <v-text-field
+            <v-text-field
                 prepend-icon="business"
-                placeholder="Company"
+                placeholder="Address"
               ></v-text-field>
-            </v-flex>
-            <v-flex xs6>
-              <v-text-field
-                placeholder="Job title"
-              ></v-text-field>
-            </v-flex>
+            
+            
             <v-flex xs12>
               <v-text-field
-                prepend-icon="mail"
-                placeholder="Email"
+                prepend-icon="picture_in_picture"
+                placeholder="ID No#"
               ></v-text-field>
             </v-flex>
             <v-flex xs12>
               <v-text-field
                 type="tel"
-                prepend-icon="phone"
-                placeholder="(000) 000 - 0000"
+                prepend-icon="phonelink_ring"
+                placeholder="13888888888"
                 mask="phone"
               ></v-text-field>
             </v-flex>
@@ -55,10 +53,10 @@
           </v-layout>
         </v-container>
         <v-card-actions>
-          <v-btn flat color="primary">More</v-btn>
+          <!--v-btn flat color="primary">More</v-btn-->
           <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="dialog = false">Cancel</v-btn>
-          <v-btn flat @click="dialog = false">Save</v-btn>
+          <v-btn flat color="primary" @click="emitCloseDialog">Cancel</v-btn>
+          <v-btn flat @click="emitCloseDialog">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -70,6 +68,12 @@ export default {
 
     props: {
         dialog: Boolean
+    },
+
+    methods : {
+      emitCloseDialog () {
+        this.$emit("closeContactDialog")
+      }
     }
 }
 </script>

@@ -43422,6 +43422,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     apply_func: function apply_func(func_name) {
       if (func_name) this[func_name]();
+    },
+    setContactDialog: function setContactDialog() {
+      this.dialog = true;
+    },
+    closeContactDialog: function closeContactDialog() {
+      this.dialog = false;
     }
   }
 });
@@ -43571,6 +43577,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         clickCreateContact: function clickCreateContact() {
             console.log('oops');
+            this.$emit('popupContactForm');
         }
     }
 });
@@ -43750,7 +43757,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -43825,14 +43832,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "ContactForm",
 
     props: {
         dialog: Boolean
+    },
+
+    methods: {
+        emitCloseDialog: function emitCloseDialog() {
+            this.$emit("closeContactDialog");
+        }
     }
 });
 
@@ -43887,20 +43898,29 @@ var render = function() {
                         { attrs: { "align-center": "" } },
                         [
                           _c(
-                            "v-avatar",
-                            { staticClass: "mr-3", attrs: { size: "40px" } },
+                            "v-flex",
+                            { attrs: { xs9: "" } },
                             [
-                              _c("img", {
+                              _c("v-text-field", {
                                 attrs: {
-                                  src:
-                                    "//ssl.gstatic.com/s2/oz/images/sge/grey_silhouette.png",
-                                  alt: ""
+                                  placeholder: "Name",
+                                  "prepend-icon": "contacts"
                                 }
                               })
-                            ]
+                            ],
+                            1
                           ),
                           _vm._v(" "),
-                          _c("v-text-field", { attrs: { placeholder: "Name" } })
+                          _c(
+                            "v-flex",
+                            { attrs: { xs3: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: { placeholder: "Initial" }
+                              })
+                            ],
+                            1
+                          )
                         ],
                         1
                       )
@@ -43908,37 +43928,22 @@ var render = function() {
                     1
                   ),
                   _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { attrs: { xs6: "" } },
-                    [
-                      _c("v-text-field", {
-                        attrs: {
-                          "prepend-icon": "business",
-                          placeholder: "Company"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-flex",
-                    { attrs: { xs6: "" } },
-                    [
-                      _c("v-text-field", {
-                        attrs: { placeholder: "Job title" }
-                      })
-                    ],
-                    1
-                  ),
+                  _c("v-text-field", {
+                    attrs: {
+                      "prepend-icon": "business",
+                      placeholder: "Address"
+                    }
+                  }),
                   _vm._v(" "),
                   _c(
                     "v-flex",
                     { attrs: { xs12: "" } },
                     [
                       _c("v-text-field", {
-                        attrs: { "prepend-icon": "mail", placeholder: "Email" }
+                        attrs: {
+                          "prepend-icon": "picture_in_picture",
+                          placeholder: "ID No#"
+                        }
                       })
                     ],
                     1
@@ -43951,8 +43956,8 @@ var render = function() {
                       _c("v-text-field", {
                         attrs: {
                           type: "tel",
-                          "prepend-icon": "phone",
-                          placeholder: "(000) 000 - 0000",
+                          "prepend-icon": "phonelink_ring",
+                          placeholder: "13888888888",
                           mask: "phone"
                         }
                       })
@@ -43980,35 +43985,20 @@ var render = function() {
           _c(
             "v-card-actions",
             [
-              _c("v-btn", { attrs: { flat: "", color: "primary" } }, [
-                _vm._v("More")
-              ]),
-              _vm._v(" "),
               _c("v-spacer"),
               _vm._v(" "),
               _c(
                 "v-btn",
                 {
                   attrs: { flat: "", color: "primary" },
-                  on: {
-                    click: function($event) {
-                      _vm.dialog = false
-                    }
-                  }
+                  on: { click: _vm.emitCloseDialog }
                 },
                 [_vm._v("Cancel")]
               ),
               _vm._v(" "),
               _c(
                 "v-btn",
-                {
-                  attrs: { flat: "" },
-                  on: {
-                    click: function($event) {
-                      _vm.dialog = false
-                    }
-                  }
-                },
+                { attrs: { flat: "" }, on: { click: _vm.emitCloseDialog } },
                 [_vm._v("Save")]
               )
             ],
@@ -44384,9 +44374,12 @@ var render = function() {
       _vm._v(" "),
       _c("v-content", [_c("router-view")], 1),
       _vm._v(" "),
-      _c("floating-button"),
+      _c("floating-button", { on: { popupContactForm: _vm.setContactDialog } }),
       _vm._v(" "),
-      _c("contact-form", { attrs: { dialog: _vm.dialog } })
+      _c("contact-form", {
+        attrs: { dialog: _vm.dialog },
+        on: { closeContactDialog: _vm.closeContactDialog }
+      })
     ],
     1
   )
