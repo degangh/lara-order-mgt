@@ -124,7 +124,7 @@
     </v-content>
 
 
-    <floating-button @popupContactForm="setContactDialog"></floating-button>
+    <floating-button @popupContactForm="setContactDialog" v-show="isLogin()"></floating-button>
 
     <!--v-btn
       fab
