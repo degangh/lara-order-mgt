@@ -28,6 +28,6 @@ Route::post('login', 'PassportController@login');
 
 Route::post('order', 'OrderController@store')->middleware('auth:api');
 
-Route::post('customer', 'CustomerController@store')->middleware('auth:api');
+Route::post('customers', 'CustomerController@store')->middleware('auth:api');
 Route::post('order', 'OrderController@store');
 Route::post('order/{order}/items' , 'OrderItemController@store');
