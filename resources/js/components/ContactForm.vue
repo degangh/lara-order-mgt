@@ -15,11 +15,13 @@
                 <v-text-field
                   placeholder="Name"
                   prepend-icon="contacts"
+                  v-model = "name"
                 ></v-text-field>
                 </v-flex>
                 <v-flex xs3>
                   <v-text-field
                   placeholder="Initial"
+                  v-model = "name_py"
                 ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -27,6 +29,7 @@
             <v-text-field
                 prepend-icon="business"
                 placeholder="Address"
+                v-model = "default_address"
               ></v-text-field>
             
             
@@ -34,6 +37,7 @@
               <v-text-field
                 prepend-icon="picture_in_picture"
                 placeholder="ID No#"
+                v-model = "id_no"
               ></v-text-field>
             </v-flex>
             <v-flex xs12>
@@ -41,7 +45,7 @@
                 type="tel"
                 prepend-icon="phonelink_ring"
                 placeholder="13888888888"
-                mask="phone"
+                v-model = "mobile"
               ></v-text-field>
             </v-flex>
             <v-flex xs12>
@@ -56,7 +60,7 @@
           <!--v-btn flat color="primary">More</v-btn-->
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="emitCloseDialog">Cancel</v-btn>
-          <v-btn flat @click="emitCloseDialog">Save</v-btn>
+          <v-btn flat @click="saveContact">Save</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -66,6 +70,16 @@
 export default {
     name: "ContactForm",
 
+    data() {
+      return {
+        name: '',
+        name_py: '',
+        mobile: '',
+        id_no: '',
+        default_address: ''
+      }
+    }, 
+
     props: {
         dialog: Boolean
     },
@@ -73,6 +87,32 @@ export default {
     methods : {
       emitCloseDialog () {
         this.$emit("closeContactDialog")
+      },
+
+      saveContact () {
+        console.log("save button clicked")
+        console.log(this.name, this.name_py, this.mobile, this.id_no, this.default_address)
+
+        let token = localStorage.getItem('jwt')
+        axios.defaults.headers.common['Content-Type'] = 'application/json'
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+
+        axios.post('/api/customers', {
+              params: {
+                  name: this.name,
+                  name_py: this.name_py,
+                  mobile: this.mobile,
+                  id_no: this.id_no,
+                  default_address: this.default_address
+              }
+          })
+          .then(this.handleResponse)
+
+
+      },
+
+      handleResponse (res) {
+        console.log (res)
       }
     }
 }
