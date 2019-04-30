@@ -109,13 +109,17 @@ export default {
      
           })
           .then(this.handleResponse)
+          .catch(function (err) {
+            alert (err)
+          })
 
 
       },
 
       handleResponse (res) {
         this.emitCloseDialog()
-        console.log (res)
+        if (res.data.id) this.$router.push("/customer/" + res.data.id);
+        console.log (res.data.id)
       }
     }
 }
