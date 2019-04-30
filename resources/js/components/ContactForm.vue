@@ -76,7 +76,8 @@ export default {
         name_py: '',
         mobile: '',
         id_no: '',
-        default_address: ''
+        default_address: '',
+        postcode: ''
       }
     }, 
 
@@ -98,13 +99,14 @@ export default {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
 
         axios.post('/api/customers', {
-              params: {
+     
                   name: this.name,
                   name_py: this.name_py,
                   mobile: this.mobile,
                   id_no: this.id_no,
-                  default_address: this.default_address
-              }
+                  address: this.default_address,
+                  postcode: this.postcode
+     
           })
           .then(this.handleResponse)
 
@@ -112,6 +114,7 @@ export default {
       },
 
       handleResponse (res) {
+        this.emitCloseDialog()
         console.log (res)
       }
     }
