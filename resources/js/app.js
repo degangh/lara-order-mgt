@@ -13,6 +13,7 @@ import Welcome from "./components/Welcome";
 import Login from "./components/Login";
 import Customer from "./components/Customer";
 import Order from "./components/Order";
+import CustomerInfo from "./components/CustomerInfo";
 import NotFound from "./components/NotFound";
 
 
@@ -33,6 +34,11 @@ const router = new VueRouter({
             path: "/customers",
             name: "customers",
             component: Customer
+        },
+        {
+            path: "/customer/:id",
+            name: "customerInfo",
+            component: CustomerInfo
         },
         {
             path: "/customers/p:page",
