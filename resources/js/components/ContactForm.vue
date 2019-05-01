@@ -1,11 +1,14 @@
 <template>
-<v-dialog v-model="dialog" width="800px">
+<v-dialog v-model="dialog" width="800px" persistent>
       <v-card>
-        <v-card-title
-          class="grey lighten-4 py-4 title"
-        >
-          Create contact
-        </v-card-title>
+        <v-toolbar dark color="primary">
+          
+          <v-toolbar-title>Create Contact</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn icon dark @click="emitCloseDialog">
+            <v-icon>close</v-icon>
+          </v-btn>
+        </v-toolbar>
         <v-container grid-list-sm class="pa-4">
           <v-layout row wrap>
             <v-flex xs12 align-center justify-space-between>
