@@ -1,5 +1,10 @@
 <template>
-<div>customer info</div>
+<div>
+    <v-tabs fix-tabs centered>
+        <v-tab> Profile </v-tab>
+        <v-tab> Order History </v-tab>
+    </v-tabs>
+</div>
 </template>
 
 <script>
