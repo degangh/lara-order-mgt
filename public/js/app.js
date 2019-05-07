@@ -45151,6 +45151,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         onPageChange: function onPageChange() {
             this.loading = true;
             this.$router.push('/customers/p' + this.page);
+        },
+        gotoCustomerPage: function gotoCustomerPage(id) {
+            this.$router.push('./customer/' + id);
         }
     }
 });
@@ -45206,19 +45209,30 @@ var render = function() {
               _c(
                 "tbody",
                 _vm._l(_vm.customers, function(customer, index) {
-                  return _c("tr", { key: index }, [
-                    _c("td", [_vm._v(_vm._s(customer.name))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(customer.mobile))]),
-                    _vm._v(" "),
-                    customer.addresses.length > 0
-                      ? _c("td", [
-                          _vm._v(_vm._s(customer.addresses[0].address))
-                        ])
-                      : _c("td", [_vm._v("N/A")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(customer.id_no))])
-                  ])
+                  return _c(
+                    "tr",
+                    {
+                      key: index,
+                      on: {
+                        click: function($event) {
+                          return _vm.gotoCustomerPage(customer.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("td", [_vm._v(_vm._s(customer.name))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(customer.mobile))]),
+                      _vm._v(" "),
+                      customer.addresses.length > 0
+                        ? _c("td", [
+                            _vm._v(_vm._s(customer.addresses[0].address))
+                          ])
+                        : _c("td", [_vm._v("N/A")]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(customer.id_no))])
+                    ]
+                  )
                 }),
                 0
               )

@@ -31,7 +31,7 @@
                             </th>
                         </tr>
                         <tbody>
-                        <tr v-for = "(customer, index) of customers" :key="index">
+                        <tr v-for = "(customer, index) of customers" :key="index" @click="gotoCustomerPage(customer.id)">
                             <td>{{customer.name}}</td>
                             <td>{{customer.mobile}}</td>
                             <td v-if = "customer.addresses.length > 0">{{customer.addresses[0].address}}</td>
@@ -116,6 +116,10 @@ export default {
       onPageChange () {
           this.loading = true
           this.$router.push('/customers/p' + this.page)
+      },
+
+      gotoCustomerPage (id) {
+          this.$router.push('./customer/'+id)
       }
 
   }
