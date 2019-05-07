@@ -9,6 +9,7 @@
             <v-icon>close</v-icon>
           </v-btn>
         </v-toolbar>
+        <v-form v-model="valid" ref="ContactForm">
         <v-container grid-list-sm class="pa-4">
           <v-layout row wrap>
             <v-flex xs12 align-center justify-space-between>
@@ -19,12 +20,14 @@
                   placeholder="Name"
                   prepend-icon="contacts"
                   v-model = "name"
+                  :rules="nameRules"
                 ></v-text-field>
                 </v-flex>
                 <v-flex xs3>
                   <v-text-field
                   placeholder="Initial"
                   v-model = "name_py"
+                  :rules = "pyRules"
                 ></v-text-field>
                 </v-flex>
               </v-layout>
@@ -33,6 +36,7 @@
                 prepend-icon="business"
                 placeholder="Address"
                 v-model = "default_address"
+                :rules = "addressRules"
               ></v-text-field>
             
             
@@ -49,6 +53,7 @@
                 prepend-icon="phonelink_ring"
                 placeholder="13888888888"
                 v-model = "mobile"
+                :rules = "mobileRules"
               ></v-text-field>
             </v-flex>
             <v-flex xs12>
@@ -59,6 +64,7 @@
             </v-flex>
           </v-layout>
         </v-container>
+        </v-form>
         <v-card-actions>
           <!--v-btn flat color="primary">More</v-btn-->
           <v-spacer></v-spacer>
@@ -75,12 +81,25 @@ export default {
 
     data() {
       return {
+        valid: false,
         name: '',
         name_py: '',
         mobile: '',
         id_no: '',
         default_address: '',
-        postcode: ''
+        postcode: '',
+        nameRules: [
+            v => !!v || 'Customer Name is required'
+        ], 
+        pyRules:[
+          v => !!v || 'Name Initial is required'
+        ],
+        addressRules:[
+          v => !!v || 'Address is required'
+        ],
+        mobileRules: [
+          v => !!v || 'Phone number is required'
+        ]
       }
     }, 
 
@@ -94,6 +113,7 @@ export default {
       },
 
       saveContact () {
+        if (!this.$refs.ContactForm.validate()) return
         console.log("save button clicked")
         console.log(this.name, this.name_py, this.mobile, this.id_no, this.default_address)
 
