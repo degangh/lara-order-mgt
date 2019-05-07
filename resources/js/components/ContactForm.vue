@@ -98,7 +98,8 @@ export default {
           v => !!v || 'Address is required'
         ],
         mobileRules: [
-          v => !!v || 'Phone number is required'
+          v => !!v || 'Phone number is required',
+          v => /^\d+$/.test(v) || 'Phone number must contain digit only'
         ]
       }
     }, 
