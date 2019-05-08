@@ -140,4 +140,13 @@ export default {
 .col2 {
     width: 20%
 }
+tr {
+    cursor: hand
+}
+tr:hover {
+
+    box-shadow: inset 0 -1px 0 0 rgba(100,121,143,0.122);
+    cursor: pointer;
+
+}
 </style>

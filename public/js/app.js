@@ -45026,7 +45026,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.pagination-container[data-v-4fd97649] {\r\n    float: right;\r\n    padding: 0.3rem 1rem\n}\n.loading-wrapper[data-v-4fd97649]{\r\n    height: 2.4rem\n}\n.col1[data-v-4fd97649] {\r\n    width: 20%\n}\n.col2[data-v-4fd97649] {\r\n    width: 20%\n}\r\n", ""]);
+exports.push([module.i, "\n.pagination-container[data-v-4fd97649] {\r\n    float: right;\r\n    padding: 0.3rem 1rem\n}\n.loading-wrapper[data-v-4fd97649]{\r\n    height: 2.4rem\n}\n.col1[data-v-4fd97649] {\r\n    width: 20%\n}\n.col2[data-v-4fd97649] {\r\n    width: 20%\n}\ntr[data-v-4fd97649] {\r\n    cursor: hand\n}\ntr[data-v-4fd97649]:hover {\r\n\r\n    -webkit-box-shadow: inset 0 -1px 0 0 rgba(100,121,143,0.122);\r\n\r\n            box-shadow: inset 0 -1px 0 0 rgba(100,121,143,0.122);\r\n    cursor: pointer;\n}\r\n", ""]);
 
 // exports
 
