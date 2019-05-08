@@ -1,4 +1,5 @@
 <template>
+<div>
 <v-dialog v-model="dialog" width="800px" :fullscreen="$vuetify.breakpoint.smAndDown" persistent>
       <v-card>
         <v-toolbar dark color="primary">
@@ -73,6 +74,10 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-snackbar v-model="snackbar">
+      {{snackbarText}}
+    </v-snackbar>
+    </div>
     </template>
 
 <script>
@@ -100,7 +105,9 @@ export default {
         mobileRules: [
           v => !!v || 'Phone number is required',
           v => /^\d+$/.test(v) || 'Phone number must contain digit only'
-        ]
+        ],
+        snackbar: false,
+        snackbarText: "Saving contact information"
       }
     }, 
 
@@ -114,6 +121,7 @@ export default {
       },
 
       saveContact () {
+        this.snackbar = true
         if (!this.$refs.ContactForm.validate()) return
         console.log("save button clicked")
         console.log(this.name, this.name_py, this.mobile, this.id_no, this.default_address)
@@ -141,6 +149,7 @@ export default {
       },
 
       handleResponse (res) {
+        this.snackbar = false
         this.emitCloseDialog()
         if (res.data.id) this.$router.push("/customer/" + res.data.id);
         console.log (res.data.id)

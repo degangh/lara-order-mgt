@@ -43764,7 +43764,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -43775,6 +43775,11 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -43879,7 +43884,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }, function (v) {
         return (/^\d+$/.test(v) || 'Phone number must contain digit only'
         );
-      }]
+      }],
+      snackbar: false,
+      snackbarText: "Saving contact information"
     };
   },
 
@@ -43893,6 +43900,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.$emit("closeContactDialog");
     },
     saveContact: function saveContact() {
+      this.snackbar = true;
       if (!this.$refs.ContactForm.validate()) return;
       console.log("save button clicked");
       console.log(this.name, this.name_py, this.mobile, this.id_no, this.default_address);
@@ -43915,6 +43923,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     handleResponse: function handleResponse(res) {
+      this.snackbar = false;
       this.emitCloseDialog();
       if (res.data.id) this.$router.push("/customer/" + res.data.id);
       console.log(res.data.id);
@@ -43931,199 +43940,205 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-dialog",
-    {
-      attrs: {
-        width: "800px",
-        fullscreen: _vm.$vuetify.breakpoint.smAndDown,
-        persistent: ""
-      },
-      model: {
-        value: _vm.dialog,
-        callback: function($$v) {
-          _vm.dialog = $$v
-        },
-        expression: "dialog"
-      }
-    },
+    "div",
     [
       _c(
-        "v-card",
+        "v-dialog",
+        {
+          attrs: {
+            width: "800px",
+            fullscreen: _vm.$vuetify.breakpoint.smAndDown,
+            persistent: ""
+          },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
+          }
+        },
         [
           _c(
-            "v-toolbar",
-            { attrs: { dark: "", color: "primary" } },
+            "v-card",
             [
-              _c("v-toolbar-title", [_vm._v("Create Contact")]),
-              _vm._v(" "),
-              _c("v-spacer"),
-              _vm._v(" "),
               _c(
-                "v-btn",
-                {
-                  attrs: { icon: "", dark: "" },
-                  on: { click: _vm.emitCloseDialog }
-                },
-                [_c("v-icon", [_vm._v("close")])],
+                "v-toolbar",
+                { attrs: { dark: "", color: "primary" } },
+                [
+                  _c("v-toolbar-title", [_vm._v("Create Contact")]),
+                  _vm._v(" "),
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { icon: "", dark: "" },
+                      on: { click: _vm.emitCloseDialog }
+                    },
+                    [_c("v-icon", [_vm._v("close")])],
+                    1
+                  )
+                ],
                 1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-form",
-            {
-              ref: "ContactForm",
-              model: {
-                value: _vm.valid,
-                callback: function($$v) {
-                  _vm.valid = $$v
-                },
-                expression: "valid"
-              }
-            },
-            [
+              ),
+              _vm._v(" "),
               _c(
-                "v-container",
-                { staticClass: "pa-4", attrs: { "grid-list-sm": "" } },
+                "v-form",
+                {
+                  ref: "ContactForm",
+                  model: {
+                    value: _vm.valid,
+                    callback: function($$v) {
+                      _vm.valid = $$v
+                    },
+                    expression: "valid"
+                  }
+                },
                 [
                   _c(
-                    "v-layout",
-                    { attrs: { row: "", wrap: "" } },
+                    "v-container",
+                    { staticClass: "pa-4", attrs: { "grid-list-sm": "" } },
                     [
                       _c(
-                        "v-flex",
-                        {
-                          attrs: {
-                            xs12: "",
-                            "align-center": "",
-                            "justify-space-between": ""
-                          }
-                        },
+                        "v-layout",
+                        { attrs: { row: "", wrap: "" } },
                         [
                           _c(
-                            "v-layout",
-                            { attrs: { "align-center": "" } },
+                            "v-flex",
+                            {
+                              attrs: {
+                                xs12: "",
+                                "align-center": "",
+                                "justify-space-between": ""
+                              }
+                            },
                             [
                               _c(
-                                "v-flex",
-                                { attrs: { xs9: "" } },
+                                "v-layout",
+                                { attrs: { "align-center": "" } },
                                 [
-                                  _c("v-text-field", {
-                                    attrs: {
-                                      placeholder: "Name",
-                                      "prepend-icon": "contacts",
-                                      rules: _vm.nameRules
-                                    },
-                                    model: {
-                                      value: _vm.name,
-                                      callback: function($$v) {
-                                        _vm.name = $$v
-                                      },
-                                      expression: "name"
-                                    }
-                                  })
-                                ],
-                                1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-flex",
-                                { attrs: { xs3: "" } },
-                                [
-                                  _c("v-text-field", {
-                                    attrs: {
-                                      placeholder: "Initial",
-                                      rules: _vm.pyRules
-                                    },
-                                    model: {
-                                      value: _vm.name_py,
-                                      callback: function($$v) {
-                                        _vm.name_py = $$v
-                                      },
-                                      expression: "name_py"
-                                    }
-                                  })
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs9: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          placeholder: "Name",
+                                          "prepend-icon": "contacts",
+                                          rules: _vm.nameRules
+                                        },
+                                        model: {
+                                          value: _vm.name,
+                                          callback: function($$v) {
+                                            _vm.name = $$v
+                                          },
+                                          expression: "name"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs3: "" } },
+                                    [
+                                      _c("v-text-field", {
+                                        attrs: {
+                                          placeholder: "Initial",
+                                          rules: _vm.pyRules
+                                        },
+                                        model: {
+                                          value: _vm.name_py,
+                                          callback: function($$v) {
+                                            _vm.name_py = $$v
+                                          },
+                                          expression: "name_py"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
                                 ],
                                 1
                               )
                             ],
                             1
+                          ),
+                          _vm._v(" "),
+                          _c("v-text-field", {
+                            attrs: {
+                              "prepend-icon": "business",
+                              placeholder: "Address",
+                              rules: _vm.addressRules
+                            },
+                            model: {
+                              value: _vm.default_address,
+                              callback: function($$v) {
+                                _vm.default_address = $$v
+                              },
+                              expression: "default_address"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  "prepend-icon": "picture_in_picture",
+                                  placeholder: "ID No#"
+                                },
+                                model: {
+                                  value: _vm.id_no,
+                                  callback: function($$v) {
+                                    _vm.id_no = $$v
+                                  },
+                                  expression: "id_no"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  type: "tel",
+                                  "prepend-icon": "phonelink_ring",
+                                  placeholder: "13888888888",
+                                  rules: _vm.mobileRules
+                                },
+                                model: {
+                                  value: _vm.mobile,
+                                  callback: function($$v) {
+                                    _vm.mobile = $$v
+                                  },
+                                  expression: "mobile"
+                                }
+                              })
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs12: "" } },
+                            [
+                              _c("v-text-field", {
+                                attrs: {
+                                  "prepend-icon": "notes",
+                                  placeholder: "Notes"
+                                }
+                              })
+                            ],
+                            1
                           )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("v-text-field", {
-                        attrs: {
-                          "prepend-icon": "business",
-                          placeholder: "Address",
-                          rules: _vm.addressRules
-                        },
-                        model: {
-                          value: _vm.default_address,
-                          callback: function($$v) {
-                            _vm.default_address = $$v
-                          },
-                          expression: "default_address"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: {
-                              "prepend-icon": "picture_in_picture",
-                              placeholder: "ID No#"
-                            },
-                            model: {
-                              value: _vm.id_no,
-                              callback: function($$v) {
-                                _vm.id_no = $$v
-                              },
-                              expression: "id_no"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: {
-                              type: "tel",
-                              "prepend-icon": "phonelink_ring",
-                              placeholder: "13888888888",
-                              rules: _vm.mobileRules
-                            },
-                            model: {
-                              value: _vm.mobile,
-                              callback: function($$v) {
-                                _vm.mobile = $$v
-                              },
-                              expression: "mobile"
-                            }
-                          })
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "" } },
-                        [
-                          _c("v-text-field", {
-                            attrs: {
-                              "prepend-icon": "notes",
-                              placeholder: "Notes"
-                            }
-                          })
                         ],
                         1
                       )
@@ -44132,35 +44147,49 @@ var render = function() {
                   )
                 ],
                 1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-card-actions",
-            [
-              _c("v-spacer"),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  attrs: { flat: "", color: "primary" },
-                  on: { click: _vm.emitCloseDialog }
-                },
-                [_vm._v("Cancel")]
               ),
               _vm._v(" "),
               _c(
-                "v-btn",
-                { attrs: { flat: "" }, on: { click: _vm.saveContact } },
-                [_vm._v("Save")]
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { flat: "", color: "primary" },
+                      on: { click: _vm.emitCloseDialog }
+                    },
+                    [_vm._v("Cancel")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    { attrs: { flat: "" }, on: { click: _vm.saveContact } },
+                    [_vm._v("Save")]
+                  )
+                ],
+                1
               )
             ],
             1
           )
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-snackbar",
+        {
+          model: {
+            value: _vm.snackbar,
+            callback: function($$v) {
+              _vm.snackbar = $$v
+            },
+            expression: "snackbar"
+          }
+        },
+        [_vm._v("\r\n      " + _vm._s(_vm.snackbarText) + "\r\n    ")]
       )
     ],
     1
