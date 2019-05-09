@@ -45183,7 +45183,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$router.push('/customers/p' + this.page);
         },
         gotoCustomerPage: function gotoCustomerPage(id) {
-            this.$router.push('./customer/' + id);
+            this.$router.push('/customer/' + id);
         }
     }
 });
@@ -45877,12 +45877,50 @@ module.exports = Component.exports
 
 /***/ }),
 /* 62 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        console.log(this.$route.params.id);
+    }
+});
 
 /***/ }),
 /* 63 */
@@ -45892,7 +45930,74 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v(" customer information ")])
+  return _c(
+    "v-container",
+    { staticClass: "pa-4", attrs: { "grid-list-sm": "" } },
+    [
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c(
+            "v-flex",
+            {
+              attrs: {
+                xs12: "",
+                "align-center": "",
+                "justify-space-between": ""
+              }
+            },
+            [
+              _c(
+                "v-layout",
+                { attrs: { "align-center": "" } },
+                [
+                  _c(
+                    "v-flex",
+                    { attrs: { xs9: "" } },
+                    [
+                      _c("v-icon", [_vm._v("contacts")]),
+                      _vm._v(
+                        "\r\n             \r\n                Jonh Doe\r\n                "
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("v-flex", { attrs: { xs3: "" } }, [
+                    _vm._v("\r\n                sss\r\n                ")
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [
+              _c("v-icon", [_vm._v("business")]),
+              _vm._v("\r\n            Address address address\r\n            ")
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [_c("v-icon", [_vm._v("picture_in_picture")])],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-flex", { attrs: { xs12: "" } })
+        ],
+        1
+      )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
