@@ -119,7 +119,7 @@ export default {
       },
 
       gotoCustomerPage (id) {
-          this.$router.push('./customer/'+id)
+          this.$router.push('/customer/'+id)
       }
 
   }
