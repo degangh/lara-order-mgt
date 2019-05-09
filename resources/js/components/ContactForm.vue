@@ -117,13 +117,14 @@ export default {
 
     methods : {
       emitCloseDialog () {
+        this.$refs.ContactForm.reset()
         this.$emit("closeContactDialog")
       },
 
       saveContact () {
-        this.snackbar = true
+        
         if (!this.$refs.ContactForm.validate()) return
-        console.log("save button clicked")
+        this.snackbar = true
         console.log(this.name, this.name_py, this.mobile, this.id_no, this.default_address)
 
         let token = localStorage.getItem('jwt')
