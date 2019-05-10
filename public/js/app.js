@@ -45915,11 +45915,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         console.log(this.$route.params.id);
+
+        var token = localStorage.getItem('jwt');
+
+        this.page = this.$route.params.page * 1;
+
+        axios.defaults.headers.common['Content-Type'] = 'application/json';
+        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+        this.requestCustomerInfo();
+    },
+
+
+    methods: {
+        requestCustomerInfo: function requestCustomerInfo() {
+            axios.get('/api/customers/' + this.$route.params.id).then(this.handleResponse);
+        },
+        handleResponse: function handleResponse(res) {
+            console.log(res);
+        }
     }
+
 });
 
 /***/ }),
@@ -45991,7 +46011,12 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("v-flex", { attrs: { xs12: "" } })
+          _c(
+            "v-flex",
+            { attrs: { xs12: "" } },
+            [_c("v-icon", [_vm._v("notes")])],
+            1
+          )
         ],
         1
       )
