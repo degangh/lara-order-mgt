@@ -1,29 +1,29 @@
 <template>
-<v-container grid-list-sm class="pa-4">
+<v-container grid-list-sm class="pa-4 title grey-text">
           <v-layout row wrap>
             <v-flex xs12 align-center justify-space-between>
               <v-layout align-center>
                 
-                <v-flex xs9>
-                <v-icon>contacts</v-icon>
+                <v-flex xs12>
+                
+                <v-icon class="mr-3">contacts</v-icon>
+                
              
                 Jonh Doe
                 </v-flex>
-                <v-flex xs3>
-                sss
-                </v-flex>
+                
               </v-layout>
             </v-flex>
             
             
             <v-flex xs12>
-            <v-icon>business</v-icon>
+            <v-icon class="mr-3">business</v-icon>
             Address address address
             </v-flex>
 
             <v-flex xs12>
-            <v-icon>picture_in_picture</v-icon>
-            
+            <v-icon class="mr-3">picture_in_picture</v-icon>
+            11011110124324312432
             </v-flex>
             
             <v-flex xs12>
