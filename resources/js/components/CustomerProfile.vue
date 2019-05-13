@@ -4,7 +4,7 @@
             <v-flex xs12 align-center justify-space-between>
               <v-layout align-center>
                 
-                <v-flex xs12>
+                <v-flex xs12 mb-3>
                 
                 <v-icon class="mr-3">contacts</v-icon>
                 
@@ -16,7 +16,7 @@
             </v-flex>
             
             
-            <v-flex xs12>
+            <v-flex xs12 mb-3>
             <v-icon class="mr-3">business</v-icon>
             Address address address
             </v-flex>
@@ -26,7 +26,7 @@
             11011110124324312432
             </v-flex>
             
-            <v-flex xs12>
+            <v-flex xs12 mb-3>
               <v-icon>notes</v-icon>
             </v-flex>
           </v-layout>
@@ -39,13 +39,6 @@ export default {
     mounted() {
         console.log(this.$route.params.id)
 
-
-        let token = localStorage.getItem('jwt')
-
-        this.page = this.$route.params.page * 1
-
-        axios.defaults.headers.common['Content-Type'] = 'application/json'
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
         this.requestCustomerInfo();
 
     },

@@ -76,12 +76,8 @@ export default {
 
 
   mounted () {
-    let token = localStorage.getItem('jwt')
 
     this.page = this.$route.params.page * 1
-
-    axios.defaults.headers.common['Content-Type'] = 'application/json'
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
     this.requestCustomerData();
   },
 

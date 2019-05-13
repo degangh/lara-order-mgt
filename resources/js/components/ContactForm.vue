@@ -125,11 +125,7 @@ export default {
         
         if (!this.$refs.ContactForm.validate()) return
         this.snackbar = true
-        console.log(this.name, this.name_py, this.mobile, this.id_no, this.default_address)
 
-        let token = localStorage.getItem('jwt')
-        axios.defaults.headers.common['Content-Type'] = 'application/json'
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
 
         axios.post('/api/customers', {
      
