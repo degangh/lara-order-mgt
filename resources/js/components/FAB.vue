@@ -84,7 +84,7 @@ export default {
 
     methods: {
         clickCreateContact () {
-            console.log('oops')
+
             this.$emit('popupContactForm')
         }
     }
