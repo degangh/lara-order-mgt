@@ -45910,6 +45910,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -45978,32 +46008,42 @@ var render = function() {
                     [
                       _c(
                         "v-flex",
-                        {
-                          attrs: {
-                            xs12: "",
-                            "align-center": "",
-                            "justify-space-between": ""
-                          }
-                        },
+                        { attrs: { xs12: "", "justify-space-between": "" } },
                         [
                           _c(
                             "v-layout",
-                            { attrs: { "align-center": "" } },
                             [
                               _c(
                                 "v-flex",
-                                { attrs: { xs12: "", "mb-4": "" } },
+                                {
+                                  attrs: {
+                                    xs1: "",
+                                    "mb-4": "",
+                                    "text-xs-right": "",
+                                    "pr-2": ""
+                                  }
+                                },
                                 [
-                                  _c("v-icon", { staticClass: "mr-3" }, [
-                                    _vm._v("contacts")
-                                  ]),
-                                  _vm._v(
-                                    "\r\n                " +
-                                      _vm._s(_vm.customer.name) +
-                                      "\r\n                "
+                                  _c(
+                                    "v-icon",
+                                    {
+                                      staticClass: "mr-3",
+                                      attrs: { "align-top": "" }
+                                    },
+                                    [_vm._v("contacts")]
                                   )
                                 ],
                                 1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs11: "", "mb-4": "" } },
+                                [
+                                  _c("span", [
+                                    _vm._v(_vm._s(_vm.customer.name))
+                                  ])
+                                ]
                               )
                             ],
                             1
@@ -46014,34 +46054,51 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "v-flex",
-                        { attrs: { xs12: "", "mb-4": "" } },
+                        { attrs: { xs12: "", "justify-space-between": "" } },
                         [
-                          _c("v-icon", { staticClass: "mr-3" }, [
-                            _vm._v("business")
-                          ]),
-                          _vm._v(" "),
-                          _vm.customer.addresses
-                            ? _c("span", [
-                                _vm._v(
-                                  _vm._s(_vm.customer.addresses[0].address)
-                                )
-                              ])
-                            : _c("span", [_vm._v("N/A")])
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs12: "", "mb-4": "" } },
-                        [
-                          _c("v-icon", { staticClass: "mr-3" }, [
-                            _vm._v("picture_in_picture")
-                          ]),
-                          _vm._v(
-                            "\r\n            " +
-                              _vm._s(_vm.customer.id_no) +
-                              "\r\n            "
+                          _c(
+                            "v-layout",
+                            [
+                              _c(
+                                "v-flex",
+                                {
+                                  attrs: {
+                                    xs1: "",
+                                    "mb-4": "",
+                                    "text-xs-right": "",
+                                    "pr-2": ""
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-icon",
+                                    {
+                                      staticClass: "mr-3",
+                                      attrs: { "align-top": "" }
+                                    },
+                                    [_vm._v("business")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs11: "", "mb-4": "" } },
+                                [
+                                  _vm.customer.addresses
+                                    ? _c("span", [
+                                        _vm._v(
+                                          _vm._s(
+                                            _vm.customer.addresses[0].address
+                                          )
+                                        )
+                                      ])
+                                    : _c("span", [_vm._v("N/A")])
+                                ]
+                              )
+                            ],
+                            1
                           )
                         ],
                         1
@@ -46049,15 +46106,91 @@ var render = function() {
                       _vm._v(" "),
                       _c(
                         "v-flex",
-                        { attrs: { xs12: "", "mb-4": "" } },
+                        { attrs: { xs12: "", "justify-space-between": "" } },
                         [
-                          _c("v-icon", { staticClass: "mr-3" }, [
-                            _vm._v("phonelink_ring")
-                          ]),
-                          _vm._v(
-                            "\r\n              " +
-                              _vm._s(_vm.customer.mobile) +
-                              "\r\n            "
+                          _c(
+                            "v-layout",
+                            [
+                              _c(
+                                "v-flex",
+                                {
+                                  attrs: {
+                                    xs1: "",
+                                    "mb-4": "",
+                                    "text-xs-right": "",
+                                    "pr-2": ""
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-icon",
+                                    {
+                                      staticClass: "mr-3",
+                                      attrs: { "align-top": "" }
+                                    },
+                                    [_vm._v("picture_in_picture")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs11: "", "mb-4": "" } },
+                                [
+                                  _c("span", [
+                                    _vm._v(_vm._s(_vm.customer.id_no))
+                                  ])
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "", "justify-space-between": "" } },
+                        [
+                          _c(
+                            "v-layout",
+                            [
+                              _c(
+                                "v-flex",
+                                {
+                                  attrs: {
+                                    xs1: "",
+                                    "mb-4": "",
+                                    "text-xs-center": "",
+                                    "pr-2": ""
+                                  }
+                                },
+                                [
+                                  _c(
+                                    "v-icon",
+                                    {
+                                      staticClass: "mr-3",
+                                      attrs: { "align-top": "" }
+                                    },
+                                    [_vm._v("phonelink_ring")]
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-flex",
+                                { attrs: { xs11: "", "mb-4": "" } },
+                                [
+                                  _c("span", [
+                                    _vm._v(_vm._s(_vm.customer.mobile))
+                                  ])
+                                ]
+                              )
+                            ],
+                            1
                           )
                         ],
                         1
