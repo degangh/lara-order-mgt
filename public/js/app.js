@@ -43583,7 +43583,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         clickCreateContact: function clickCreateContact() {
-            console.log('oops');
+
             this.$emit('popupContactForm');
         }
     }
@@ -45904,8 +45904,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            customer: {},
+            customerProfile: false,
+            loading: true
+
+        };
+    },
     mounted: function mounted() {
         console.log(this.$route.params.id);
 
@@ -45919,6 +45933,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         handleResponse: function handleResponse(res) {
             console.log(res);
+            this.customer = res.data[0];
+            this.loading = false;
+            this.customerProfile = true;
         }
     }
 
@@ -45933,36 +45950,117 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-container",
-    { staticClass: "pa-4 title grey-text", attrs: { "grid-list-sm": "" } },
+    "div",
     [
+      _vm.loading
+        ? _c(
+            "div",
+            { staticClass: "loading-wrapper" },
+            [_c("v-progress-linear", { attrs: { indeterminate: true } })],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
       _c(
-        "v-layout",
-        { attrs: { row: "", wrap: "" } },
+        "v-scroll-x-transition",
         [
-          _c(
-            "v-flex",
-            {
-              attrs: {
-                xs12: "",
-                "align-center": "",
-                "justify-space-between": ""
-              }
-            },
-            [
-              _c(
-                "v-layout",
-                { attrs: { "align-center": "" } },
+          _vm.customerProfile
+            ? _c(
+                "v-container",
+                {
+                  staticClass: "pa-4 title grey--text text-lighten-1",
+                  attrs: { "grid-list-sm": "" }
+                },
                 [
                   _c(
-                    "v-flex",
-                    { attrs: { xs12: "", "mb-3": "" } },
+                    "v-layout",
+                    { attrs: { row: "", wrap: "" } },
                     [
-                      _c("v-icon", { staticClass: "mr-3" }, [
-                        _vm._v("contacts")
-                      ]),
-                      _vm._v(
-                        "\r\n                \r\n             \r\n                Jonh Doe\r\n                "
+                      _c(
+                        "v-flex",
+                        {
+                          attrs: {
+                            xs12: "",
+                            "align-center": "",
+                            "justify-space-between": ""
+                          }
+                        },
+                        [
+                          _c(
+                            "v-layout",
+                            { attrs: { "align-center": "" } },
+                            [
+                              _c(
+                                "v-flex",
+                                { attrs: { xs12: "", "mb-4": "" } },
+                                [
+                                  _c("v-icon", { staticClass: "mr-3" }, [
+                                    _vm._v("contacts")
+                                  ]),
+                                  _vm._v(
+                                    "\r\n                " +
+                                      _vm._s(_vm.customer.name) +
+                                      "\r\n                "
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "", "mb-4": "" } },
+                        [
+                          _c("v-icon", { staticClass: "mr-3" }, [
+                            _vm._v("business")
+                          ]),
+                          _vm._v(" "),
+                          _vm.customer.addresses
+                            ? _c("span", [
+                                _vm._v(
+                                  _vm._s(_vm.customer.addresses[0].address)
+                                )
+                              ])
+                            : _c("span", [_vm._v("N/A")])
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "", "mb-4": "" } },
+                        [
+                          _c("v-icon", { staticClass: "mr-3" }, [
+                            _vm._v("picture_in_picture")
+                          ]),
+                          _vm._v(
+                            "\r\n            " +
+                              _vm._s(_vm.customer.id_no) +
+                              "\r\n            "
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "", "mb-4": "" } },
+                        [
+                          _c("v-icon", { staticClass: "mr-3" }, [
+                            _vm._v("phonelink_ring")
+                          ]),
+                          _vm._v(
+                            "\r\n              " +
+                              _vm._s(_vm.customer.mobile) +
+                              "\r\n            "
+                          )
+                        ],
+                        1
                       )
                     ],
                     1
@@ -45970,38 +46068,7 @@ var render = function() {
                 ],
                 1
               )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs12: "", "mb-3": "" } },
-            [
-              _c("v-icon", { staticClass: "mr-3" }, [_vm._v("business")]),
-              _vm._v("\r\n            Address address address\r\n            ")
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs12: "" } },
-            [
-              _c("v-icon", { staticClass: "mr-3" }, [
-                _vm._v("picture_in_picture")
-              ]),
-              _vm._v("\r\n            11011110124324312432\r\n            ")
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs12: "", "mb-3": "" } },
-            [_c("v-icon", [_vm._v("notes")])],
-            1
-          )
+            : _vm._e()
         ],
         1
       )
