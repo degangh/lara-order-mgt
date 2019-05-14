@@ -46017,9 +46017,11 @@ var render = function() {
                                 "v-flex",
                                 {
                                   attrs: {
-                                    xs1: "",
+                                    xs2: "",
+                                    sm1: "",
                                     "mb-4": "",
-                                    "text-xs-right": "",
+                                    "text-xs-left": "",
+                                    "text-sm-right": "",
                                     "pr-2": ""
                                   }
                                 },
@@ -46038,7 +46040,7 @@ var render = function() {
                               _vm._v(" "),
                               _c(
                                 "v-flex",
-                                { attrs: { xs11: "", "mb-4": "" } },
+                                { attrs: { xs10: "", sm11: "", "mb-4": "" } },
                                 [
                                   _c("span", [
                                     _vm._v(_vm._s(_vm.customer.name))
@@ -46063,9 +46065,11 @@ var render = function() {
                                 "v-flex",
                                 {
                                   attrs: {
-                                    xs1: "",
+                                    xs2: "",
+                                    sm1: "",
                                     "mb-4": "",
-                                    "text-xs-right": "",
+                                    "text-xs-left": "",
+                                    "text-sm-right": "",
                                     "pr-2": ""
                                   }
                                 },
@@ -46084,9 +46088,9 @@ var render = function() {
                               _vm._v(" "),
                               _c(
                                 "v-flex",
-                                { attrs: { xs11: "", "mb-4": "" } },
+                                { attrs: { xs10: "", sm11: "", "mb-4": "" } },
                                 [
-                                  _vm.customer.addresses
+                                  _vm.customer.addresses.length > 0
                                     ? _c("span", [
                                         _vm._v(
                                           _vm._s(
@@ -46115,9 +46119,11 @@ var render = function() {
                                 "v-flex",
                                 {
                                   attrs: {
-                                    xs1: "",
+                                    xs2: "",
+                                    sm1: "",
                                     "mb-4": "",
-                                    "text-xs-right": "",
+                                    "text-xs-left": "",
+                                    "text-sm-right": "",
                                     "pr-2": ""
                                   }
                                 },
@@ -46136,7 +46142,7 @@ var render = function() {
                               _vm._v(" "),
                               _c(
                                 "v-flex",
-                                { attrs: { xs11: "", "mb-4": "" } },
+                                { attrs: { xs10: "", sm11: "", "mb-4": "" } },
                                 [
                                   _c("span", [
                                     _vm._v(_vm._s(_vm.customer.id_no))
@@ -46161,9 +46167,11 @@ var render = function() {
                                 "v-flex",
                                 {
                                   attrs: {
-                                    xs1: "",
+                                    xs2: "",
+                                    sm1: "",
                                     "mb-4": "",
-                                    "text-xs-center": "",
+                                    "text-xs-left": "",
+                                    "text-sm-right": "",
                                     "pr-2": ""
                                   }
                                 },
@@ -46182,7 +46190,7 @@ var render = function() {
                               _vm._v(" "),
                               _c(
                                 "v-flex",
-                                { attrs: { xs11: "", "mb-4": "" } },
+                                { attrs: { xs10: "", sm11: "", "mb-4": "" } },
                                 [
                                   _c("span", [
                                     _vm._v(_vm._s(_vm.customer.mobile))

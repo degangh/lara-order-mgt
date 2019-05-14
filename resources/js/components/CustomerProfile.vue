@@ -8,11 +8,11 @@
             <v-flex xs12  justify-space-between>
               <v-layout>
                 
-                <v-flex xs1 mb-4 text-xs-right pr-2>
+                <v-flex xs2 sm1 mb-4 text-xs-left text-sm-right pr-2>
                 
                 <v-icon class="mr-3"  align-top>contacts</v-icon>
                 </v-flex>
-                <v-flex xs11 mb-4>
+                <v-flex xs10 sm11 mb-4>
                 <span>{{ customer.name }}</span>
                 </v-flex>
                 
@@ -22,12 +22,12 @@
             <v-flex xs12  justify-space-between>
               <v-layout>
                 
-                <v-flex xs1 mb-4 text-xs-right pr-2>
+                <v-flex xs2 sm1 mb-4 text-xs-left text-sm-right pr-2>
                 
                 <v-icon class="mr-3"  align-top>business</v-icon>
                 </v-flex>
-                <v-flex xs11 mb-4>
-                <span v-if="customer.addresses">{{ customer.addresses[0].address}}</span>
+                <v-flex xs10 sm11 mb-4>
+                <span v-if="customer.addresses.length > 0">{{ customer.addresses[0].address}}</span>
                 <span v-else>N/A</span>
                 </v-flex>
                 
@@ -37,11 +37,11 @@
             <v-flex xs12  justify-space-between>
               <v-layout>
                 
-                <v-flex xs1 mb-4 text-xs-right pr-2>
+                <v-flex xs2 sm1 mb-4 text-xs-left text-sm-right pr-2>
                 
                 <v-icon class="mr-3"  align-top>picture_in_picture</v-icon>
                 </v-flex>
-                <v-flex xs11 mb-4>
+                <v-flex xs10 sm11 mb-4>
                   <span>{{customer.id_no}}</span>
                 </v-flex>
                 
@@ -51,11 +51,11 @@
             <v-flex xs12  justify-space-between>
               <v-layout>
                 
-                <v-flex xs1 mb-4 text-xs-center pr-2>
+                <v-flex xs2 sm1 mb-4 text-xs-left text-sm-right pr-2>
                 
                 <v-icon class="mr-3"  align-top>phonelink_ring</v-icon>
                 </v-flex>
-                <v-flex xs11 mb-4>
+                <v-flex xs10 sm11 mb-4>
                   <span>{{customer.mobile}}</span>
                 </v-flex>
                 
