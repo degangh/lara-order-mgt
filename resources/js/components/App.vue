@@ -153,6 +153,7 @@ export default {
         items: [
           { icon: 'contacts', text: 'Customers' , path: '/customers'},
           { icon: 'history', text: 'Orders', path: '/orders' },
+          { icon: 'shopping_cart', text: 'Products', path: '/products' },
           
         ],
         userItems: [

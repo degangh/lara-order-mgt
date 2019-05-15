@@ -64,8 +64,7 @@
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */,
-/* 1 */
+/* 0 */
 /***/ (function(module, exports) {
 
 /* globals __VUE_SSR_CONTEXT__ */
@@ -174,6 +173,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
+/* 1 */,
 /* 2 */
 /***/ (function(module, exports) {
 
@@ -724,7 +724,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(16);
-module.exports = __webpack_require__(70);
+module.exports = __webpack_require__(72);
 
 
 /***/ }),
@@ -751,10 +751,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_Customer___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_Customer__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Order__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_Order___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_Order__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_CustomerInfo__ = __webpack_require__(57);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_CustomerInfo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_CustomerInfo__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_NotFound__ = __webpack_require__(68);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_NotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_NotFound__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_Product__ = __webpack_require__(57);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_Product___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_Product__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_CustomerInfo__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_CustomerInfo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_CustomerInfo__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_NotFound__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_NotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_NotFound__);
 
 
 
@@ -764,6 +766,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vuetify___default.a);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vuex__["a" /* default */]);
+
 
 
 
@@ -790,7 +793,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     }, {
         path: "/customer/:id",
         name: "customerInfo",
-        component: __WEBPACK_IMPORTED_MODULE_10__components_CustomerInfo___default.a
+        component: __WEBPACK_IMPORTED_MODULE_11__components_CustomerInfo___default.a
     }, {
         path: "/customers/p:page",
         name: "customer",
@@ -804,9 +807,17 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         name: "ordersPage",
         component: __WEBPACK_IMPORTED_MODULE_9__components_Order___default.a
     }, {
+        path: "/products/p:page",
+        name: "productsPage",
+        component: __WEBPACK_IMPORTED_MODULE_10__components_Product___default.a
+    }, {
+        path: "/products",
+        name: "productsPage",
+        component: __WEBPACK_IMPORTED_MODULE_10__components_Product___default.a
+    }, {
         path: "*",
         name: "NotFound",
-        component: __WEBPACK_IMPORTED_MODULE_11__components_NotFound___default.a
+        component: __WEBPACK_IMPORTED_MODULE_12__components_NotFound___default.a
     }]
 });
 
@@ -833,7 +844,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
- * Vue.js v2.6.7
+ * Vue.js v2.6.10
  * (c) 2014-2019 Evan You
  * Released under the MIT License.
  */
@@ -1311,7 +1322,7 @@ var config = ({
  * using https://www.w3.org/TR/html53/semantics-scripting.html#potentialcustomelementname
  * skipping \u10000-\uEFFFF due to it freezing up PhantomJS
  */
-var unicodeLetters = 'a-zA-Z\u00B7\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u037D\u037F-\u1FFF\u200C-\u200D\u203F-\u2040\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD';
+var unicodeRegExp = /a-zA-Z\u00B7\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u037D\u037F-\u1FFF\u200C-\u200D\u203F-\u2040\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD/;
 
 /**
  * Check if a string starts with $ or _
@@ -1336,7 +1347,7 @@ function def (obj, key, val, enumerable) {
 /**
  * Parse simple path.
  */
-var bailRE = new RegExp(("[^" + unicodeLetters + ".$_\\d]"));
+var bailRE = new RegExp(("[^" + (unicodeRegExp.source) + ".$_\\d]"));
 function parsePath (path) {
   if (bailRE.test(path)) {
     return
@@ -2240,7 +2251,7 @@ function checkComponents (options) {
 }
 
 function validateComponentName (name) {
-  if (!new RegExp(("^[a-zA-Z][\\-\\.0-9_" + unicodeLetters + "]*$")).test(name)) {
+  if (!new RegExp(("^[a-zA-Z][\\-\\.0-9_" + (unicodeRegExp.source) + "]*$")).test(name)) {
     warn(
       'Invalid component name: "' + name + '". Component names ' +
       'should conform to valid custom element name in html5 specification.'
@@ -2691,10 +2702,11 @@ function invokeWithErrorHandling (
   var res;
   try {
     res = args ? handler.apply(context, args) : handler.call(context);
-    if (res && !res._isVue && isPromise(res)) {
+    if (res && !res._isVue && isPromise(res) && !res._handled) {
+      res.catch(function (e) { return handleError(e, vm, info + " (Promise/async)"); });
       // issue #9511
-      // reassign to res to avoid catch triggering multiple times when nested calls
-      res = res.catch(function (e) { return handleError(e, vm, info + " (Promise/async)"); });
+      // avoid catch triggering multiple times when nested calls
+      res._handled = true;
     }
   } catch (e) {
     handleError(e, vm, info);
@@ -3377,7 +3389,8 @@ function normalizeScopedSlots (
   prevSlots
 ) {
   var res;
-  var isStable = slots ? !!slots.$stable : true;
+  var hasNormalSlots = Object.keys(normalSlots).length > 0;
+  var isStable = slots ? !!slots.$stable : !hasNormalSlots;
   var key = slots && slots.$key;
   if (!slots) {
     res = {};
@@ -3389,7 +3402,8 @@ function normalizeScopedSlots (
     prevSlots &&
     prevSlots !== emptyObject &&
     key === prevSlots.$key &&
-    Object.keys(normalSlots).length === 0
+    !hasNormalSlots &&
+    !prevSlots.$hasNormal
   ) {
     // fast path 2: stable scoped slots w/ no normal slots to proxy,
     // only need to normalize once
@@ -3415,6 +3429,7 @@ function normalizeScopedSlots (
   }
   def(res, '$stable', isStable);
   def(res, '$key', key);
+  def(res, '$hasNormal', hasNormalSlots);
   return res
 }
 
@@ -3424,8 +3439,10 @@ function normalizeScopedSlot(normalSlots, key, fn) {
     res = res && typeof res === 'object' && !Array.isArray(res)
       ? [res] // single vnode
       : normalizeChildren(res);
-    return res && res.length === 0
-      ? undefined
+    return res && (
+      res.length === 0 ||
+      (res.length === 1 && res[0].isComment) // #9658
+    ) ? undefined
       : res
   };
   // this is a slot using the new v-slot syntax without scope. although it is
@@ -3605,12 +3622,13 @@ function bindObjectProps (
             : data.attrs || (data.attrs = {});
         }
         var camelizedKey = camelize(key);
-        if (!(key in hash) && !(camelizedKey in hash)) {
+        var hyphenatedKey = hyphenate(key);
+        if (!(camelizedKey in hash) && !(hyphenatedKey in hash)) {
           hash[key] = value[key];
 
           if (isSync) {
             var on = data.on || (data.on = {});
-            on[("update:" + camelizedKey)] = function ($event) {
+            on[("update:" + key)] = function ($event) {
               value[key] = $event;
             };
           }
@@ -4444,17 +4462,23 @@ function resolveAsyncComponent (
     return factory.resolved
   }
 
+  var owner = currentRenderingInstance;
+  if (owner && isDef(factory.owners) && factory.owners.indexOf(owner) === -1) {
+    // already pending
+    factory.owners.push(owner);
+  }
+
   if (isTrue(factory.loading) && isDef(factory.loadingComp)) {
     return factory.loadingComp
   }
 
-  var owner = currentRenderingInstance;
-  if (isDef(factory.owners)) {
-    // already pending
-    factory.owners.push(owner);
-  } else {
+  if (owner && !isDef(factory.owners)) {
     var owners = factory.owners = [owner];
     var sync = true;
+    var timerLoading = null;
+    var timerTimeout = null
+
+    ;(owner).$on('hook:destroyed', function () { return remove(owners, owner); });
 
     var forceRender = function (renderCompleted) {
       for (var i = 0, l = owners.length; i < l; i++) {
@@ -4463,6 +4487,14 @@ function resolveAsyncComponent (
 
       if (renderCompleted) {
         owners.length = 0;
+        if (timerLoading !== null) {
+          clearTimeout(timerLoading);
+          timerLoading = null;
+        }
+        if (timerTimeout !== null) {
+          clearTimeout(timerTimeout);
+          timerTimeout = null;
+        }
       }
     };
 
@@ -4509,7 +4541,8 @@ function resolveAsyncComponent (
           if (res.delay === 0) {
             factory.loading = true;
           } else {
-            setTimeout(function () {
+            timerLoading = setTimeout(function () {
+              timerLoading = null;
               if (isUndef(factory.resolved) && isUndef(factory.error)) {
                 factory.loading = true;
                 forceRender(false);
@@ -4519,7 +4552,8 @@ function resolveAsyncComponent (
         }
 
         if (isDef(res.timeout)) {
-          setTimeout(function () {
+          timerTimeout = setTimeout(function () {
+            timerTimeout = null;
             if (isUndef(factory.resolved)) {
               reject(
                 "timeout (" + (res.timeout) + "ms)"
@@ -5065,11 +5099,21 @@ var getNow = Date.now;
 // timestamp can either be hi-res (relative to page load) or low-res
 // (relative to UNIX epoch), so in order to compare time we have to use the
 // same timestamp type when saving the flush timestamp.
-if (inBrowser && getNow() > document.createEvent('Event').timeStamp) {
-  // if the low-res timestamp which is bigger than the event timestamp
-  // (which is evaluated AFTER) it means the event is using a hi-res timestamp,
-  // and we need to use the hi-res version for event listeners as well.
-  getNow = function () { return performance.now(); };
+// All IE versions use low-res event timestamps, and have problematic clock
+// implementations (#9632)
+if (inBrowser && !isIE) {
+  var performance = window.performance;
+  if (
+    performance &&
+    typeof performance.now === 'function' &&
+    getNow() > document.createEvent('Event').timeStamp
+  ) {
+    // if the event timestamp, although evaluated AFTER the Date.now(), is
+    // smaller than it, it means the event is using a hi-res timestamp,
+    // and we need to use the hi-res version for event listener timestamps as
+    // well.
+    getNow = function () { return performance.now(); };
+  }
 }
 
 /**
@@ -6234,7 +6278,7 @@ Object.defineProperty(Vue, 'FunctionalRenderContext', {
   value: FunctionalRenderContext
 });
 
-Vue.version = '2.6.7';
+Vue.version = '2.6.10';
 
 /*  */
 
@@ -8326,8 +8370,10 @@ function add$1 (
         e.target === e.currentTarget ||
         // event is fired after handler attachment
         e.timeStamp >= attachedTimestamp ||
-        // #9462 bail for iOS 9 bug: event.timeStamp is 0 after history.pushState
-        e.timeStamp === 0 ||
+        // bail for environments that have buggy event.timeStamp implementations
+        // #9462 iOS 9 bug: event.timeStamp is 0 after history.pushState
+        // #9681 QtWebEngine event.timeStamp is negative value
+        e.timeStamp <= 0 ||
         // #9448 bail if event is fired in another document in a multi-page
         // electron/nw.js app, since event.timeStamp will be using a different
         // starting reference
@@ -8394,10 +8440,11 @@ function updateDOMProps (oldVnode, vnode) {
   }
 
   for (key in oldProps) {
-    if (isUndef(props[key])) {
+    if (!(key in props)) {
       elm[key] = '';
     }
   }
+
   for (key in props) {
     cur = props[key];
     // ignore children if the node has textContent or innerHTML,
@@ -8945,8 +8992,8 @@ function enter (vnode, toggleDisplay) {
   var context = activeInstance;
   var transitionNode = activeInstance.$vnode;
   while (transitionNode && transitionNode.parent) {
-    transitionNode = transitionNode.parent;
     context = transitionNode.context;
+    transitionNode = transitionNode.parent;
   }
 
   var isAppear = !context._isMounted || !vnode.isRootInsert;
@@ -10036,7 +10083,7 @@ var isNonPhrasingTag = makeMap(
 // Regular Expressions for parsing tags and attributes
 var attribute = /^\s*([^\s"'<>\/=]+)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/;
 var dynamicArgAttribute = /^\s*((?:v-[\w-]+:|@|:|#)\[[^=]+\][^\s"'<>\/=]*)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/;
-var ncname = "[a-zA-Z_][\\-\\.0-9_a-zA-Z" + unicodeLetters + "]*";
+var ncname = "[a-zA-Z_][\\-\\.0-9_a-zA-Z" + (unicodeRegExp.source) + "]*";
 var qnameCapture = "((?:" + ncname + "\\:)?" + ncname + ")";
 var startTagOpen = new RegExp(("^<" + qnameCapture));
 var startTagClose = /^\s*(\/?)>/;
@@ -10298,7 +10345,7 @@ function parseHTML (html, options) {
         ) {
           options.warn(
             ("tag <" + (stack[i].tag) + "> has no matching end tag."),
-            { start: stack[i].start }
+            { start: stack[i].start, end: stack[i].end }
           );
         }
         if (options.end) {
@@ -10335,7 +10382,7 @@ var dynamicArgRE = /^\[.*\]$/;
 
 var argRE = /:(.*)$/;
 var bindRE = /^:|^\.|^v-bind:/;
-var modifierRE = /\.[^.]+/g;
+var modifierRE = /\.[^.\]]+(?=[^\]]*$)/g;
 
 var slotRE = /^v-slot(:|$)|^#/;
 
@@ -10512,7 +10559,7 @@ function parse (
     shouldDecodeNewlinesForHref: options.shouldDecodeNewlinesForHref,
     shouldKeepComment: options.comments,
     outputSourceRange: options.outputSourceRange,
-    start: function start (tag, attrs, unary, start$1) {
+    start: function start (tag, attrs, unary, start$1, end) {
       // check namespace.
       // inherit parent ns if there is one
       var ns = (currentParent && currentParent.ns) || platformGetTagNamespace(tag);
@@ -10531,6 +10578,7 @@ function parse (
       {
         if (options.outputSourceRange) {
           element.start = start$1;
+          element.end = end;
           element.rawAttrsMap = element.attrsList.reduce(function (cumulated, attr) {
             cumulated[attr.name] = attr;
             return cumulated
@@ -10652,7 +10700,7 @@ function parse (
         text = preserveWhitespace ? ' ' : '';
       }
       if (text) {
-        if (whitespaceOption === 'condense') {
+        if (!inPre && whitespaceOption === 'condense') {
           // condense consecutive whitespaces into single space
           text = text.replace(whitespaceRE$1, ' ');
         }
@@ -11513,7 +11561,7 @@ function isDirectChildOfTemplateFor (node) {
 
 /*  */
 
-var fnExpRE = /^([\w$_]+|\([^)]*?\))\s*=>|^function\s*\(/;
+var fnExpRE = /^([\w$_]+|\([^)]*?\))\s*=>|^function\s*(?:[\w$]+)?\s*\(/;
 var fnInvokeRE = /\([^)]*?\);*$/;
 var simplePathRE = /^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*|\['[^']*?']|\["[^"]*?"]|\[\d+]|\[[A-Za-z_$][\w$]*])*$/;
 
@@ -12015,7 +12063,7 @@ function genScopedSlots (
   // components with only scoped slots to skip forced updates from parent.
   // but in some cases we have to bail-out of this optimization
   // for example if the slot contains dynamic names, has v-if or v-for on them...
-  var needsForceUpdate = Object.keys(slots).some(function (key) {
+  var needsForceUpdate = el.for || Object.keys(slots).some(function (key) {
     var slot = slots[key];
     return (
       slot.slotTargetDynamic ||
@@ -43103,7 +43151,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(28)
 }
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(31)
 /* template */
@@ -43156,7 +43204,7 @@ var content = __webpack_require__(29);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("49045985", content, false, {});
+var update = __webpack_require__(4)("35658a52", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -43180,7 +43228,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.tile-link a {\r\n    text-decoration: none;\n}\r\n", ""]);
+exports.push([module.i, "\n.tile-link a {\n    text-decoration: none;\n}\n", ""]);
 
 // exports
 
@@ -43381,7 +43429,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       dialog: false,
       drawer: null,
-      items: [{ icon: 'contacts', text: 'Customers', path: '/customers' }, { icon: 'history', text: 'Orders', path: '/orders' }],
+      items: [{ icon: 'contacts', text: 'Customers', path: '/customers' }, { icon: 'history', text: 'Orders', path: '/orders' }, { icon: 'shopping_cart', text: 'Products', path: '/products' }],
       userItems: [{ title: 'Logout', func: 'logout' }, { title: 'Help', func: '' }],
       direction: 'top',
       fab: false,
@@ -43444,7 +43492,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(33)
 /* template */
@@ -43632,7 +43680,7 @@ var render = function() {
         },
         [
           _c("v-icon", [
-            _vm._v("\r\n                        add\r\n                    ")
+            _vm._v("\n                        add\n                    ")
           ]),
           _vm._v(" "),
           _c("v-icon", [_vm._v("close")])
@@ -43648,7 +43696,7 @@ var render = function() {
         },
         [
           _c("v-icon", [
-            _vm._v("\r\n                    account_circle\r\n                ")
+            _vm._v("\n                    account_circle\n                ")
           ])
         ],
         1
@@ -43659,7 +43707,7 @@ var render = function() {
         { attrs: { fab: "", small: "", color: "indigo", dark: "" } },
         [
           _c("v-icon", [
-            _vm._v("\r\n                    attach_money\r\n                ")
+            _vm._v("\n                    attach_money\n                ")
           ])
         ],
         1
@@ -43687,7 +43735,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(36)
 }
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(38)
 /* template */
@@ -43740,7 +43788,7 @@ var content = __webpack_require__(37);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("1456fcca", content, false, {});
+var update = __webpack_require__(4)("fe5ad530", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -44185,7 +44233,7 @@ var render = function() {
             expression: "snackbar"
           }
         },
-        [_vm._v("\r\n      " + _vm._s(_vm.snackbarText) + "\r\n    ")]
+        [_vm._v("\n      " + _vm._s(_vm.snackbarText) + "\n    ")]
       )
     ],
     1
@@ -44253,9 +44301,9 @@ var render = function() {
                                   item.heading
                                     ? _c("v-subheader", [
                                         _vm._v(
-                                          "\r\n                " +
+                                          "\n                " +
                                             _vm._s(item.heading) +
-                                            "\r\n              "
+                                            "\n              "
                                         )
                                       ])
                                     : _vm._e()
@@ -44322,9 +44370,9 @@ var render = function() {
                                         [
                                           _c("v-list-tile-title", [
                                             _vm._v(
-                                              "\r\n                  " +
+                                              "\n                  " +
                                                 _vm._s(item.text) +
-                                                "\r\n                "
+                                                "\n                "
                                             )
                                           ])
                                         ],
@@ -44362,9 +44410,9 @@ var render = function() {
                                       [
                                         _c("v-list-tile-title", [
                                           _vm._v(
-                                            "\r\n                  " +
+                                            "\n                  " +
                                               _vm._s(child.text) +
-                                              "\r\n                "
+                                              "\n                "
                                           )
                                         ])
                                       ],
@@ -44397,9 +44445,9 @@ var render = function() {
                                 [
                                   _c("v-list-tile-title", [
                                     _vm._v(
-                                      "\r\n                " +
+                                      "\n                " +
                                         _vm._s(item.text) +
-                                        "\r\n              "
+                                        "\n              "
                                     )
                                   ])
                                 ],
@@ -44589,7 +44637,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(42)
 /* template */
@@ -44676,9 +44724,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "content" }, [
           _c("div", { staticClass: "m-b-md" }, [
             _c("h2", { staticClass: "title m-b-md" }, [
-              _vm._v(
-                "\r\n                        Welcome\r\n                    "
-              )
+              _vm._v("\n                        Welcome\n                    ")
             ]),
             _vm._v(" "),
             _c("h3")
@@ -44702,7 +44748,7 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(45)
 /* template */
@@ -44974,7 +45020,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(48)
 }
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(50)
 /* template */
@@ -45027,7 +45073,7 @@ var content = __webpack_require__(49);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("1d6ff25d", content, false, {});
+var update = __webpack_require__(4)("0c1e39b0", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -45051,7 +45097,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.pagination-container[data-v-4fd97649] {\r\n    float: right;\r\n    padding: 0.3rem 1rem\n}\n.loading-wrapper[data-v-4fd97649]{\r\n    height: 2.4rem\n}\n.col1[data-v-4fd97649] {\r\n    width: 20%\n}\n.col2[data-v-4fd97649] {\r\n    width: 20%\n}\ntr[data-v-4fd97649] {\r\n    cursor: hand\n}\ntr[data-v-4fd97649]:hover {\r\n\r\n    -webkit-box-shadow: inset 0 -1px 0 0 rgba(100,121,143,0.122);\r\n\r\n            box-shadow: inset 0 -1px 0 0 rgba(100,121,143,0.122);\r\n    cursor: pointer;\n}\r\n", ""]);
+exports.push([module.i, "\n.pagination-container[data-v-4fd97649] {\n    float: right;\n    padding: 0.3rem 1rem\n}\n.loading-wrapper[data-v-4fd97649]{\n    height: 2.4rem\n}\n.col1[data-v-4fd97649] {\n    width: 20%\n}\n.col2[data-v-4fd97649] {\n    width: 20%\n}\ntr[data-v-4fd97649] {\n    cursor: hand\n}\ntr[data-v-4fd97649]:hover {\n\n    -webkit-box-shadow: inset 0 -1px 0 0 rgba(100,121,143,0.122);\n\n            box-shadow: inset 0 -1px 0 0 rgba(100,121,143,0.122);\n    cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -45295,25 +45341,25 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", { staticClass: "col1" }, [
         _vm._v(
-          "\r\n                            Name\r\n                            "
+          "\n                            Name\n                            "
         )
       ]),
       _vm._v(" "),
       _c("th", { staticClass: "col2" }, [
         _vm._v(
-          "\r\n                            Mobile\r\n                            "
+          "\n                            Mobile\n                            "
         )
       ]),
       _vm._v(" "),
       _c("th", [
         _vm._v(
-          "\r\n                            Address\r\n                            "
+          "\n                            Address\n                            "
         )
       ]),
       _vm._v(" "),
       _c("th", [
         _vm._v(
-          "\r\n                            ID No\r\n                            "
+          "\n                            ID No\n                            "
         )
       ])
     ])
@@ -45337,7 +45383,7 @@ function injectStyle (ssrContext) {
   if (disposed) return
   __webpack_require__(53)
 }
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = __webpack_require__(55)
 /* template */
@@ -45390,7 +45436,7 @@ var content = __webpack_require__(54);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("50af689f", content, false, {});
+var update = __webpack_require__(4)("acf0cba8", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -45414,7 +45460,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.pagination-container[data-v-8a00ae1a] {\r\n    float: right;\r\n    padding: 0.3rem 1rem\n}\n.loading-wrapper[data-v-8a00ae1a]{\r\n    height: 2.4rem\n}\n.col1[data-v-8a00ae1a] {\r\n    width: 20%\n}\n.col2[data-v-8a00ae1a] {\r\n    width: 20%\n}\r\n", ""]);
+exports.push([module.i, "\n.pagination-container[data-v-8a00ae1a] {\n    float: right;\n    padding: 0.3rem 1rem\n}\n.loading-wrapper[data-v-8a00ae1a]{\n    height: 2.4rem\n}\n.col1[data-v-8a00ae1a] {\n    width: 20%\n}\n.col2[data-v-8a00ae1a] {\n    width: 20%\n}\n", ""]);
 
 // exports
 
@@ -45652,25 +45698,25 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", { staticClass: "col1" }, [
         _vm._v(
-          "\r\n                            Name\r\n                            "
+          "\n                            Name\n                            "
         )
       ]),
       _vm._v(" "),
       _c("th", { staticClass: "col2" }, [
         _vm._v(
-          "\r\n                            Mobile\r\n                            "
+          "\n                            Mobile\n                            "
         )
       ]),
       _vm._v(" "),
       _c("th", [
         _vm._v(
-          "\r\n                            Order Sum\r\n                            "
+          "\n                            Order Sum\n                            "
         )
       ]),
       _vm._v(" "),
       _c("th", [
         _vm._v(
-          "\r\n                            Order Date\r\n                            "
+          "\n                            Order Date\n                            "
         )
       ]),
       _vm._v(" "),
@@ -45692,15 +45738,82 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(58)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Product.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7e94e6d4", Component.options)
+  } else {
+    hotAPI.reload("data-v-7e94e6d4", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [_vm._v("product page")])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7e94e6d4", module.exports)
+  }
+}
+
+/***/ }),
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(58)
+  __webpack_require__(60)
 }
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(60)
+var __vue_script__ = __webpack_require__(62)
 /* template */
-var __vue_template__ = __webpack_require__(67)
+var __vue_template__ = __webpack_require__(69)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -45739,17 +45852,17 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 58 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(59);
+var content = __webpack_require__(61);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(4)("15e0119f", content, false, {});
+var update = __webpack_require__(4)("2ab7111c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -45765,7 +45878,7 @@ if(false) {
 }
 
 /***/ }),
-/* 59 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(3)(false);
@@ -45779,14 +45892,14 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 
 /***/ }),
-/* 60 */
+/* 62 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CustomerProfile__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CustomerProfile__ = __webpack_require__(63);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CustomerProfile___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__CustomerProfile__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CustomerOrder__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CustomerOrder__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__CustomerOrder___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__CustomerOrder__);
 //
 //
@@ -45817,15 +45930,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 61 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(62)
+var __vue_script__ = __webpack_require__(64)
 /* template */
-var __vue_template__ = __webpack_require__(63)
+var __vue_template__ = __webpack_require__(65)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -45864,7 +45977,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 62 */
+/* 64 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -45942,37 +46055,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            customer: {},
-            customerProfile: false,
-            loading: true
+  data: function data() {
+    return {
+      customer: {},
+      customerProfile: false,
+      loading: true
 
-        };
+    };
+  },
+  mounted: function mounted() {
+    console.log(this.$route.params.id);
+
+    this.requestCustomerInfo();
+  },
+
+
+  methods: {
+    requestCustomerInfo: function requestCustomerInfo() {
+      axios.get('/api/customers/' + this.$route.params.id).then(this.handleResponse);
     },
-    mounted: function mounted() {
-        console.log(this.$route.params.id);
-
-        this.requestCustomerInfo();
-    },
-
-
-    methods: {
-        requestCustomerInfo: function requestCustomerInfo() {
-            axios.get('/api/customers/' + this.$route.params.id).then(this.handleResponse);
-        },
-        handleResponse: function handleResponse(res) {
-            console.log(res);
-            this.customer = res.data[0];
-            this.loading = false;
-            this.customerProfile = true;
-        }
+    handleResponse: function handleResponse(res) {
+      console.log(res);
+      this.customer = res.data[0];
+      this.loading = false;
+      this.customerProfile = true;
     }
+  }
 
 });
 
 /***/ }),
-/* 63 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46228,15 +46341,15 @@ if (false) {
 }
 
 /***/ }),
-/* 64 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(0)
 /* script */
-var __vue_script__ = __webpack_require__(65)
+var __vue_script__ = __webpack_require__(67)
 /* template */
-var __vue_template__ = __webpack_require__(66)
+var __vue_template__ = __webpack_require__(68)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -46275,7 +46388,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 65 */
+/* 67 */
 /***/ (function(module, exports) {
 
 //
@@ -46284,7 +46397,7 @@ module.exports = Component.exports
 //
 
 /***/ }),
-/* 66 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46304,7 +46417,7 @@ if (false) {
 }
 
 /***/ }),
-/* 67 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46370,15 +46483,15 @@ if (false) {
 }
 
 /***/ }),
-/* 68 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(1)
+var normalizeComponent = __webpack_require__(0)
 /* script */
 var __vue_script__ = null
 /* template */
-var __vue_template__ = __webpack_require__(69)
+var __vue_template__ = __webpack_require__(71)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -46417,7 +46530,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 69 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -46460,7 +46573,7 @@ if (false) {
 }
 
 /***/ }),
-/* 70 */
+/* 72 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
