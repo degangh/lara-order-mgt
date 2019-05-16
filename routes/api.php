@@ -24,6 +24,7 @@ Route::get('customers', 'CustomerController@index')->middleware('auth:api');
 Route::get('customers/{customer}', 'CustomerController@show');
 
 Route::get('products', 'ProductController@index')->middleware('auth:api');
+Route::post('address', 'AddressController@store')->middleware('auth:api');
 
 Route::post('login', 'PassportController@login');
 

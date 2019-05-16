@@ -35,7 +35,16 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $address = Address::create([
+            "customer_id" => $request->customer_id,
+            "address" => $request->address,
+            "postcode" => $request->postcode,
+            "mobile" => $request->mobile
+        ]);
+
+        $address->save();
+        
+        return response()->json($address->toArray());
     }
 
     /**

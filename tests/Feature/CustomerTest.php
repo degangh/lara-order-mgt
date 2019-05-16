@@ -18,6 +18,7 @@ class CustomerTest extends TestCase
         $this->user = factory(\App\User::class)->create();
         $this->customer = factory(\App\Customer::class)->make();
         $this->address = factory(\App\Address::class)->make(['mobile'=>$this->customer->mobile]);
+        //$this->withoutExceptionHandling();
 
     }
     
@@ -78,13 +79,19 @@ class CustomerTest extends TestCase
     }
 
     /** @test */
-    function an_login_user_can_add_address_to_exsiting_customer()
+    function an_login_user_can_add_address_to_existing_customer()
     {
         //give an authenticated user
-
+        $this->actingAs($this->user, 'api');
         //and an existing customer
-
+        $customer = factory(\App\Customer::class)->create();
+        $address = factory(\App\Address::class)->make(['mobile'=>$customer->mobile ,'customer_id' => $customer->id]);
         //user is able to add another address to this customer
+        $this->json('post' , '/api/address', $address->toArray())->assertStatus(200)->assertJsonStructure([
+ 
+                'id', 'customer_id','address'
+
+        ]);
     }
 
     
