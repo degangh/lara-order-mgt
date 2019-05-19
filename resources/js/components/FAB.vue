@@ -37,6 +37,18 @@
                 <v-btn 
                        fab
                        small
+                       color="orange"
+                       dark
+                       @click="clickCreateProduct"
+                >
+                <v-icon >
+                    shopping_cart
+                </v-icon>
+                </v-btn>
+
+                <v-btn 
+                       fab
+                       small
                        color="indigo"
                        dark
                 >
@@ -86,7 +98,12 @@ export default {
         clickCreateContact () {
 
             this.$emit('popupContactForm')
+        },
+        clickCreateProduct () {
+
+            this.$emit('popupAddressForm')
         }
+
     }
 }
 </script>
