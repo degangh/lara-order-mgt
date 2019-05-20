@@ -126,7 +126,7 @@
 
     <floating-button 
     @popupContactForm="setContactDialog" 
-    @popupAddressForm="setAddressDialog" 
+    @popupProductForm="setProductDialog" 
     v-show="isLogin()"></floating-button>
 
     <!--v-btn
@@ -141,7 +141,7 @@
       <v-icon>add</v-icon>
     </v-btn-->
     <contact-form :dialog="dialog"  @closeContactDialog="closeContactDialog"></contact-form>
-    <address-form :dialog="addressDialog" @closeAddressDialog="closeAddressDialog"></address-form>
+    <product-form :dialog="productDialog" @closeProductDialog="closeProductDialog"></product-form>
 </v-app>
 
 </template>
@@ -149,11 +149,12 @@
 <script>
 import FloatingButton from './FAB'
 import ContactForm from "./ContactForm"
-import AddressForm from "./AddressForm"
+import ProductForm from "./ProductForm"
 export default {
      data: () => ({
         dialog: false,
         addressDialog: false,
+        productDialog: false,
         drawer: null,
         items: [
           { icon: 'contacts', text: 'Customers' , path: '/customers'},
@@ -182,7 +183,7 @@ export default {
       components: {
         FloatingButton,
         ContactForm,
-        AddressForm
+        ProductForm
       },
       computed: {
       activeFab () {
@@ -222,7 +223,14 @@ export default {
       },
       closeAddressDialog () {
         this.addressDialog = false
+      },
+      setProductDialog () {
+        this.productDialog = true
+      },
+      closeProductDialog () {
+        this.productDialog = false
       }
+
     }
 };
 </script>
