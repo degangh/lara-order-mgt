@@ -101,7 +101,7 @@ export default {
         },
         clickCreateProduct () {
 
-            this.$emit('popupAddressForm')
+            this.$emit('popupProductForm')
         }
 
     }
