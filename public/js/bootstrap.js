@@ -706,7 +706,7 @@ module.exports = defaults;
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* WEBPACK VAR INJECTION */(function(global) {/**!
  * @fileOverview Kickass library to create and place poppers near their reference elements.
- * @version 1.15.0
+ * @version 1.14.7
  * @license
  * Copyright (c) 2016 Federico Zivolo and contributors
  *
@@ -2310,14 +2310,7 @@ function flip(data, options) {
 
     // flip the variation if required
     var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;
-
-    // flips variation if reference element overflows boundaries
-    var flippedVariationByRef = !!options.flipVariations && (isVertical && variation === 'start' && overflowsLeft || isVertical && variation === 'end' && overflowsRight || !isVertical && variation === 'start' && overflowsTop || !isVertical && variation === 'end' && overflowsBottom);
-
-    // flips variation if popper content overflows boundaries
-    var flippedVariationByContent = !!options.flipVariationsByContent && (isVertical && variation === 'start' && overflowsRight || isVertical && variation === 'end' && overflowsLeft || !isVertical && variation === 'start' && overflowsBottom || !isVertical && variation === 'end' && overflowsTop);
-
-    var flippedVariation = flippedVariationByRef || flippedVariationByContent;
+    var flippedVariation = !!options.flipVariations && (isVertical && variation === 'start' && overflowsLeft || isVertical && variation === 'end' && overflowsRight || !isVertical && variation === 'start' && overflowsTop || !isVertical && variation === 'end' && overflowsBottom);
 
     if (overlapsRef || overflowsBoundaries || flippedVariation) {
       // this boolean to detect any flip loop
@@ -2924,23 +2917,7 @@ var modifiers = {
      * The popper will never be placed outside of the defined boundaries
      * (except if `keepTogether` is enabled)
      */
-    boundariesElement: 'viewport',
-    /**
-     * @prop {Boolean} flipVariations=false
-     * The popper will switch placement variation between `-start` and `-end` when
-     * the reference element overlaps its boundaries.
-     *
-     * The original placement should have a set variation.
-     */
-    flipVariations: false,
-    /**
-     * @prop {Boolean} flipVariationsByContent=false
-     * The popper will switch placement variation between `-start` and `-end` when
-     * the popper element overlaps its reference boundaries.
-     *
-     * The original placement should have a set variation.
-     */
-    flipVariationsByContent: false
+    boundariesElement: 'viewport'
   },
 
   /**
@@ -3157,8 +3134,8 @@ var Popper = function () {
   /**
    * Creates a new Popper.js instance.
    * @class Popper
-   * @param {Element|referenceObject} reference - The reference element used to position the popper
-   * @param {Element} popper - The HTML / XML element used as the popper
+   * @param {HTMLElement|referenceObject} reference - The reference element used to position the popper
+   * @param {HTMLElement} popper - The HTML element used as the popper
    * @param {Object} options - Your custom options to override the ones defined in [Defaults](#defaults)
    * @return {Object} instance - The generated Popper.js instance
    */
@@ -14035,10 +14012,10 @@ window._ = __webpack_require__(81);
  */
 
 try {
-  window.Popper = __webpack_require__(8).default;
-  window.$ = window.jQuery = __webpack_require__(9);
+    window.Popper = __webpack_require__(8).default;
+    window.$ = window.jQuery = __webpack_require__(9);
 
-  __webpack_require__(83);
+    __webpack_require__(83);
 } catch (e) {}
 
 /**
@@ -14054,8 +14031,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var jwt_token = localStorage.getItem('jwt');
 
 if (jwt_token) {
-  axios.defaults.headers.common['Content-Type'] = 'application/json';
-  axios.defaults.headers.common['Authorization'] = 'Bearer ' + jwt_token;
+    axios.defaults.headers.common['Content-Type'] = 'application/json';
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + jwt_token;
 }
 
 /**
@@ -14067,9 +14044,9 @@ if (jwt_token) {
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
 /**
