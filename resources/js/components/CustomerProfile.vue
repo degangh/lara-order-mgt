@@ -2,7 +2,7 @@
 <div>
   <div v-if="loading" class="loading-wrapper"> <v-progress-linear :indeterminate="true"></v-progress-linear></div>
   <v-scroll-x-transition>
-  <v-container grid-list-sm class="pa-4 title grey--text text-lighten-1" v-if="customerProfile">
+  <v-container grid-list-sm fluid class="pa-4 title grey--text text-lighten-1" v-if="customerProfile">
           <v-layout row wrap>
 
             <v-flex xs12  justify-space-between>

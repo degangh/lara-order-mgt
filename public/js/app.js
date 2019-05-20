@@ -46711,7 +46711,7 @@ var render = function() {
                 "v-container",
                 {
                   staticClass: "pa-4 title grey--text text-lighten-1",
-                  attrs: { "grid-list-sm": "" }
+                  attrs: { "grid-list-sm": "", fluid: "" }
                 },
                 [
                   _c(
