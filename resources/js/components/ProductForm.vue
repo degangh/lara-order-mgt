@@ -58,7 +58,6 @@ export default {
         return {
             name: '',
             ref_price_aud: '',
-            postcode: '',
             valid: false,
             snackbar: false,
             snackbarText: 'Saving Product ...',
@@ -79,6 +78,23 @@ export default {
         saveProduct () {
           if (!this.$refs.ProductForm.validate()) return
           this.snackbar = true
+          axios.post('/api/products', {
+     
+                  name: this.name,
+                  name_py: this.ref_price_aud
+     
+          })
+          .then(this.handleResponse)
+          .catch(function (err) {
+            alert (err)
+          })
+        },
+        handleResponse () {
+          this.snackbar = false
+          this.emitCloseDialog()
+          /*
+          if (res.data.id) this.$router.push("/customer/" + res.data.id);
+          console.log (res.data.id)*/
         }
     }
 }
