@@ -28,7 +28,7 @@ class CustomerTest extends TestCase
         //given an authenticated user
         $this->actingAs($this->user, 'api');
         //when user create a customer record
-        $response = $this->json('post', '/api/customer', array_merge($this->customer->toArray(),$this->address->toArray()))->assertStatus(200)
+        $response = $this->json('post', '/api/customers', array_merge($this->customer->toArray(),$this->address->toArray()))->assertStatus(200)
         ->assertJsonStructure(['id', 'name', 'name_py', 'mobile', 'id_no']);
         
         $customer = json_decode($response->getContent());
@@ -58,7 +58,7 @@ class CustomerTest extends TestCase
         //when user is trying to create a customer record
         $customer = factory(\App\Customer::class)->make();
 
-        $this->json('post', '/api/customer' , $customer->toArray())->assertStatus(401);
+        $this->json('post', '/api/customers' , $customer->toArray())->assertStatus(401);
         //a 403 error should be returned
     }
 
@@ -69,9 +69,9 @@ class CustomerTest extends TestCase
         $this->actingAs($this->user, 'api');
         //when user request customer list
         //an collection of customer should be returned
-        $this->json('get', '/api/customer')->assertStatus(200)->assertJsonStructure([
-            '*' => [
-                'id' , 'name' , 'name_py', 'addresses'
+        $this->json('get', '/api/customers')->assertStatus(200)->assertJsonStructure([
+            'data' => [
+                '*' =>['id' , 'name' , 'name_py', 'addresses']
             ]
         ]); 
         
@@ -104,7 +104,7 @@ class CustomerTest extends TestCase
         $addresses = factory(\App\Address::class, 3)->create(['mobile'=>$customer->mobile, 'customer_id' => $customer->id]);
         //user is able to specify one of the address as default
         $this->json('patch', '/api/address/default', [
-            'address_id'=>$address[0]->id,
+            'address_id'=>$addresses[0]->id,
             'customer_id' => $customer->id,
             'is_default' => 1
             ])->assertStatus(200);

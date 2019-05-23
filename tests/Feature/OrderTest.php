@@ -71,8 +71,10 @@ class OrderTest extends TestCase
         //a collection of orders should be returned in json format
 
         $this->json('get','api/orders')->assertStatus(200)->assertJsonStructure([
-            '*' => [
+            'data' =>[
+                '*' => [
                 'id' , 'user_id' , 'customer_id'
+                ]
             ]
         ]);
     }

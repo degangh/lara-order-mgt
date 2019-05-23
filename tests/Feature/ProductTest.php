@@ -19,8 +19,17 @@ class ProductTest extends TestCase
     public function an_authenticated_user_can_list_products()
     {
         //given an authenticated user
+        $this->actingAs($this->user, 'api');
         //when user send a get request 
         //the product list shall be returned in json format
+        $this->json('get', '/api/products')->assertStatus(200)->assertJsonStructure([
+            'data' => [
+                '*' =>[
+                    'id' , 'name', 'ref_price_aud'
+                ]
+                
+            ]
+        ]);
         //and contain list of product with id, ref_price_aud
     }
 
