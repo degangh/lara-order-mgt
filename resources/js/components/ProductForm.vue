@@ -81,7 +81,7 @@ export default {
           axios.post('/api/products', {
      
                   name: this.name,
-                  name_py: this.ref_price_aud
+                  ref_price_aud: this.ref_price_aud
      
           })
           .then(this.handleResponse)
