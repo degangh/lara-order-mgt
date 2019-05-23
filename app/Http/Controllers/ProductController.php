@@ -35,7 +35,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = Product::create([
+            'name' => $request->name,
+            'ref_price_aud' => $request->ref_price_aud
+        ]);
+
+        $product->save();
+
+        return response()->json($product->toArray());
     }
 
     /**
