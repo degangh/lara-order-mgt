@@ -92,6 +92,8 @@ export default {
         handleResponse () {
           this.snackbar = false
           this.emitCloseDialog()
+          this.snackbarText = "New Product Saved"
+          this.snackbar = true
           /*
           if (res.data.id) this.$router.push("/customer/" + res.data.id);
           console.log (res.data.id)*/
