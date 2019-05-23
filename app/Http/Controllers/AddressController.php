@@ -91,4 +91,12 @@ class AddressController extends Controller
     {
         //
     }
+
+    /**
+     * set an address as default address of the user
+     */
+    public function setDefault(Address $address)
+    {
+
+    }
 }
