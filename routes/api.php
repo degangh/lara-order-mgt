@@ -32,7 +32,7 @@ Route::patch('address/default' , 'AddressController@setDefault')->middleware('au
 
 Route::get('orders', 'OrderController@index')->middleware('auth:api');
 Route::post('order', 'OrderController@store')->middleware('auth:api');
-Route::post('order/{order}/items' , 'OrderItemController@store');
+Route::post('order/{order}/items' , 'OrderItemController@store')->middleware('auth:api');
 
 Route::post('login', 'PassportController@login');
 
