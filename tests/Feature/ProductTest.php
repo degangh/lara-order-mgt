@@ -13,6 +13,7 @@ class ProductTest extends TestCase
     {
         parent::setup();
         $this->user = factory(\App\User::class)->create();
+        $this->product = factory(\App\Product::class)->make();
     }
     
     /** @test */
@@ -47,7 +48,11 @@ class ProductTest extends TestCase
     public function an_authenticated_user_can_add_new_product()
     {
         //givn an authenticted user
+        $this->actingAs($this->user, 'api');
         //when user send a post request with product information
+        $this->json('post', '/api/products', $this->product->toArray())->assertStatus(200)->assertJsonStructure([
+            'id', 'name', 'ref_price_aud'
+        ]);
         //the product information should be in database
         //and product information shall be returned in json format
     }
