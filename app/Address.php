@@ -10,7 +10,8 @@ class Address extends Model
         'postcode',
         'mobile',
         'address',
-        'customer_id'
+        'customer_id',
+        'is_default'
     ];
     
     public function customer()

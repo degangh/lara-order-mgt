@@ -1,7 +1,7 @@
 <template>
-<div>
+<div v-if="ready">
   <div v-if="loading" class="loading-wrapper"> <v-progress-linear :indeterminate="true"></v-progress-linear></div>
-  <v-scroll-x-transition>
+
   <v-container grid-list-sm fluid class="pa-4 title grey--text text-lighten-1" v-if="customerProfile">
           <v-layout row wrap>
 
@@ -64,7 +64,49 @@
             
           </v-layout>
         </v-container>
-</v-scroll-x-transition>
+
+<v-divider :inset="$vuetify.breakpoint.mdAndUp"></v-divider>
+
+<v-subheader :inset="$vuetify.breakpoint.mdAndUp">Other Addresses</v-subheader>
+<v-container grid-list-sm fluid class="pa-4  grey--text text-lighten-1" v-if="addresses.length > 0">
+  <v-flex xs12  justify-space-between v-for = "(a, index) in addresses" :key="index">
+              <v-layout class="address-wrapper">
+                
+                <v-flex xs2 sm1 mb-4 text-xs-left text-sm-right pr-2>
+                
+                <v-icon v-if = "!Boolean(a.is_default*1)">check_box_outline_blank</v-icon>
+                <v-icon v-else  color="blue darken-2">check_box</v-icon>
+                </v-flex>
+                <v-flex xs10 sm11 mb-4 body-2>
+                {{a.address}} {{a.mobile}}
+                </v-flex>
+                
+              </v-layout>
+            </v-flex>
+</v-container>
+<v-container grid-list-sm fluid class="pa-4  grey--text text-lighten-1" v-if="addresses.length == 0">
+  <v-layout
+      row wrap inset
+    >
+      <v-flex
+        xs12
+        md4
+        justify-space-between
+      >
+      <v-layout>
+        <v-alert
+      :value="true"
+      color="error"
+      icon="warning"
+      outline
+      
+    >
+      There is no address available for this customer.
+    </v-alert>
+      </v-layout>
+      </v-flex>
+  </v-layout>
+</v-container>
 </div>
 </template>
 
@@ -76,7 +118,9 @@ export default {
       return {
         customer: {},
         customerProfile: false,
-        loading: true
+        loading: true,
+        addresses: [],
+        ready: false
         
 
       }
@@ -100,9 +144,19 @@ export default {
         this.customer = res.data[0]
         this.loading = false
         this.customerProfile = true
+        this.addresses = res.data[0].addresses
+        this.ready = true
       }
 
     }
 
 }
 </script>
+
+<style scoped>
+.address-wrapper {
+  vertical-align: bottom;
+  font-size: 1.3rem;
+  cursor: pointer
+}
+</style>
