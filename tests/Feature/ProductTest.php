@@ -50,11 +50,16 @@ class ProductTest extends TestCase
         //givn an authenticted user
         $this->actingAs($this->user, 'api');
         //when user send a post request with product information
+        //product information shall be returned in json format
         $this->json('post', '/api/products', $this->product->toArray())->assertStatus(200)->assertJsonStructure([
             'id', 'name', 'ref_price_aud'
         ]);
-        //the product information should be in database
-        //and product information shall be returned in json format
+        //and the product information should be in database
+        $this->assertDatabaseHas('products', [
+            'name' => $this->product->name,
+            'ref_price_aud' => $this->product->ref_price_aud
+        ]);
+        
     }
     
 }
