@@ -49,6 +49,19 @@
                 <v-btn 
                        fab
                        small
+                       color="blue-grey darken-2"
+                       dark
+                       @click="clickCreateProduct"
+                       v-if= "addressButton"
+                >
+                <v-icon >
+                    business
+                </v-icon>
+                </v-btn>
+
+                <v-btn 
+                       fab
+                       small
                        color="indigo"
                        dark
                 >
@@ -79,20 +92,21 @@ export default {
             right: true,
             bottom: true,
             left: false,
-            transition: 'slide-y-reverse-transition'
+            transition: 'slide-y-reverse-transition',
+            addressButton: false
         }
     },
 
-    computed: {
-      activeFab () {
-        switch (this.tabs) {
-          case 'one': return { 'class': 'purple', icon: 'account_circle' }
-          case 'two': return { 'class': 'red', icon: 'edit' }
-          case 'three': return { 'class': 'green', icon: 'keyboard_arrow_up' }
-          default: return {}
-        }
-      }
+    mounted () {
+        if (this.$router.currentRoute.name == "customerInfo") this.addressButton = true
+        else this.addressButton = false
     },
+
+   watch: {
+        '$route' (to, from){
+            if (this.$router.currentRoute.name == 'customerInfo') this.addressButton = true
+            else this.addressButton = false
+   }},
 
     methods: {
         clickCreateContact () {

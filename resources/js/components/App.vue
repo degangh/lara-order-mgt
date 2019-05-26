@@ -150,6 +150,7 @@
 import FloatingButton from './FAB'
 import ContactForm from "./ContactForm"
 import ProductForm from "./ProductForm"
+import AddressForm from "./AddressForm"
 export default {
      data: () => ({
         dialog: false,
@@ -183,18 +184,9 @@ export default {
       components: {
         FloatingButton,
         ContactForm,
-        ProductForm
+        ProductForm,
+        AddressForm
       },
-      computed: {
-      activeFab () {
-        switch (this.tabs) {
-          case 'one': return { 'class': 'purple', icon: 'account_circle' }
-          case 'two': return { 'class': 'red', icon: 'edit' }
-          case 'three': return { 'class': 'green', icon: 'keyboard_arrow_up' }
-          default: return {}
-        }
-      }
-    },
     methods: {
 
       isLogin () {
