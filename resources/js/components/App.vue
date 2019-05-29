@@ -204,24 +204,7 @@ export default {
       apply_func(func_name) {
         if (func_name) this[func_name]()
       },
-      setContactDialog () {
-        this.dialog = true
-      },
-      closeContactDialog () {
-        this.dialog = false
-      },
-      setAddressDialog () {
-        this.addressDialog = true
-      },
-      closeAddressDialog () {
-        this.addressDialog = false
-      },
-      setProductDialog () {
-        this.productDialog = true
-      },
-      closeProductDialog () {
-        this.productDialog = false
-      },
+      
       openFormDialog (form){
         this[form] = true
       },
