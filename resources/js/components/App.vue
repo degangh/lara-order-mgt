@@ -125,8 +125,7 @@
 
 
     <floating-button 
-    @popupContactForm="setContactDialog" 
-    @popupProductForm="setProductDialog" 
+    @popupFormDialog="openFormDialog"
     v-show="isLogin()"></floating-button>
 
     <!--v-btn
@@ -140,8 +139,9 @@
     >
       <v-icon>add</v-icon>
     </v-btn-->
-    <contact-form :dialog="dialog"  @closeContactDialog="closeContactDialog"></contact-form>
-    <product-form :dialog="productDialog" @closeProductDialog="closeProductDialog"></product-form>
+    <contact-form :dialog="contactDialog"  @closeDialog="closeFormDialog"></contact-form>
+    <product-form :dialog="productDialog" @closeDialog="closeFormDialog"></product-form>
+    <address-form :dialog="addressDialog" @closeDialog="closeFormDialog"></address-form>
 </v-app>
 
 </template>
@@ -153,7 +153,7 @@ import ProductForm from "./ProductForm"
 import AddressForm from "./AddressForm"
 export default {
      data: () => ({
-        dialog: false,
+        contactDialog: false,
         addressDialog: false,
         productDialog: false,
         drawer: null,
@@ -221,7 +221,14 @@ export default {
       },
       closeProductDialog () {
         this.productDialog = false
+      },
+      openFormDialog (form){
+        this[form] = true
+      },
+      closeFormDialog (form) {
+        this[form] = false
       }
+      
 
     }
 };

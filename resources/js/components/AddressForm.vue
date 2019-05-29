@@ -6,7 +6,7 @@
           
           <v-toolbar-title>Add Address</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn icon dark @click="emitCloseDialog">
+          <v-btn icon dark @click="emitCloseDialog('addressDialog')">
             <v-icon>close</v-icon>
           </v-btn>
         </v-toolbar>
@@ -34,7 +34,7 @@
         <v-card-actions>
           <!--v-btn flat color="primary">More</v-btn-->
           <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="emitCloseDialog">Cancel</v-btn>
+          <v-btn flat color="primary" @click="emitCloseDialog('addressDialog')">Cancel</v-btn>
           <v-btn flat @click="saveAddress">Save</v-btn>
         </v-card-actions>
         </v-card>
@@ -64,12 +64,12 @@ export default {
         }
     },
     methods: {
-        emitCloseDialog () {
+        emitCloseDialog (form) {
             this.$refs.AddressForm.reset()
-            this.$emit("closeAddressDialog")
+            this.$emit("closeDialog", form)
         },
         saveAddress () {
-
+          this.emitCloseDialog('addressDialog')
         }
     }
 }

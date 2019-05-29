@@ -27,7 +27,7 @@
                        small
                        color="green"
                        dark
-                       @click="clickCreateContact"
+                       @click="popupFormDialog('contactDialog')"
                 >
                 <v-icon >
                     account_circle
@@ -39,7 +39,7 @@
                        small
                        color="orange"
                        dark
-                       @click="clickCreateProduct"
+                       @click="popupFormDialog('productDialog')"
                 >
                 <v-icon >
                     shopping_cart
@@ -51,7 +51,7 @@
                        small
                        color="blue-grey darken-2"
                        dark
-                       @click="clickCreateProduct"
+                       @click="popupFormDialog('addressDialog')"
                        v-if= "addressButton"
                 >
                 <v-icon >
@@ -116,6 +116,9 @@ export default {
         clickCreateProduct () {
 
             this.$emit('popupProductForm')
+        },
+        popupFormDialog (form) {
+            this.$emit('popupFormDialog', form)
         }
 
     }

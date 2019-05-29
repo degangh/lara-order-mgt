@@ -6,7 +6,7 @@
           
           <v-toolbar-title>Create Contact</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn icon dark @click="emitCloseDialog">
+          <v-btn icon dark @click="emitCloseDialog('contactDialog')">
             <v-icon>close</v-icon>
           </v-btn>
         </v-toolbar>
@@ -69,7 +69,7 @@
         <v-card-actions>
           <!--v-btn flat color="primary">More</v-btn-->
           <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="emitCloseDialog">Cancel</v-btn>
+          <v-btn flat color="primary" @click="emitCloseDialog('contactDialog')">Cancel</v-btn>
           <v-btn flat @click="saveContact">Save</v-btn>
         </v-card-actions>
       </v-card>
@@ -116,9 +116,9 @@ export default {
     },
 
     methods : {
-      emitCloseDialog () {
+      emitCloseDialog (form) {
         this.$refs.ContactForm.reset()
-        this.$emit("closeContactDialog")
+        this.$emit("closeDialog", form)
       },
 
       saveContact () {
@@ -147,7 +147,7 @@ export default {
 
       handleResponse (res) {
         this.snackbar = false
-        this.emitCloseDialog()
+        this.emitCloseDialog('contactDialog')
         if (res.data.id) this.$router.push("/customer/" + res.data.id);
         console.log (res.data.id)
       }

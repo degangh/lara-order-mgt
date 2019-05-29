@@ -6,7 +6,7 @@
           
           <v-toolbar-title>Add Product</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn icon dark @click="emitCloseDialog">
+          <v-btn icon dark @click="emitCloseDialog('productDialog')">
             <v-icon>close</v-icon>
           </v-btn>
         </v-toolbar>
@@ -35,7 +35,7 @@
         <v-card-actions>
           <!--v-btn flat color="primary">More</v-btn-->
           <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="emitCloseDialog">Cancel</v-btn>
+          <v-btn flat color="primary" @click="emitCloseDialog('productDialog')">Cancel</v-btn>
           <v-btn flat @click="saveProduct">Save</v-btn>
         </v-card-actions>
         </v-card>
@@ -71,9 +71,9 @@ export default {
         }
     },
     methods: {
-        emitCloseDialog () {
+        emitCloseDialog (form) {
             this.$refs.ProductForm.reset()
-            this.$emit("closeProductDialog")
+            this.$emit("closeDialog", form)
         },
         saveProduct () {
           if (!this.$refs.ProductForm.validate()) return
@@ -91,7 +91,7 @@ export default {
         },
         handleResponse () {
           this.snackbar = false
-          this.emitCloseDialog()
+          this.emitCloseDialog('productDialog')
           this.snackbarText = "New Product Saved"
           this.snackbar = true
           /*
