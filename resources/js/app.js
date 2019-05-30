@@ -83,6 +83,11 @@ window.axios.interceptors.response.use(response => {
     //router.go("/login");
     location.href="/login"
    }
+   if (error.response.status === 404) {
+    //place your reentry code
+    //router.go("/login");
+    console.log('not found')
+   }
    return error;
  });
 

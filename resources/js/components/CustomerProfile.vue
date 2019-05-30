@@ -140,13 +140,15 @@ export default {
       },
 
       handleResponse (res) {
-        console.log(res)
-        this.customer = res.data[0]
-        this.loading = false
-        this.customerProfile = true
-        this.addresses = res.data[0].addresses
-        this.ready = true
-      }
+        if (res.data)
+        {
+          this.customer = res.data[0]
+          this.loading = false
+          this.customerProfile = true
+          this.addresses = res.data[0].addresses
+          this.ready = true
+        }
+      },
 
     }
 
