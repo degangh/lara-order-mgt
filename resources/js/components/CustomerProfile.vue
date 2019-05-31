@@ -64,10 +64,10 @@
             
           </v-layout>
         </v-container>
+<div v-if = "addresses">
+<v-divider :inset="$vuetify.breakpoint.mdAndUp" ></v-divider>
 
-<v-divider :inset="$vuetify.breakpoint.mdAndUp"></v-divider>
-
-<v-subheader :inset="$vuetify.breakpoint.mdAndUp">Other Addresses</v-subheader>
+<v-subheader :inset="$vuetify.breakpoint.mdAndUp" >Other Addresses</v-subheader>
 <v-container grid-list-sm fluid class="pa-4  grey--text text-lighten-1" v-if="addresses.length > 0">
   <v-flex xs12  justify-space-between v-for = "(a, index) in addresses" :key="index">
               <v-layout class="address-wrapper">
@@ -84,7 +84,7 @@
               </v-layout>
             </v-flex>
 </v-container>
-<v-container grid-list-sm fluid class="pa-4  grey--text text-lighten-1" v-if="addresses.length == 0">
+<v-container grid-list-sm fluid class="pa-4  grey--text text-lighten-1" v-if="addresses.length === 0">
   <v-layout
       row wrap inset
     >
@@ -108,6 +108,30 @@
   </v-layout>
 </v-container>
 </div>
+
+<div>
+  
+</div>
+<v-container  fluid class="pa-4  grey--text text-lighten-1" v-if="!customer">
+  <v-layout
+      row wrap 
+    >
+
+
+        <v-alert
+      :value="true"
+      color="error"
+      icon="warning"
+      outline
+      
+    >
+      Customer Not Found
+    </v-alert>
+
+
+  </v-layout>
+</v-container>
+</div>
 </template>
 
 
@@ -116,10 +140,10 @@ export default {
 
     data () {
       return {
-        customer: {},
+        customer: false,
         customerProfile: false,
         loading: true,
-        addresses: [],
+        addresses: false,
         ready: false
         
 
@@ -137,9 +161,11 @@ export default {
       requestCustomerInfo () {
         axios.get('/api/customers/' + this.$route.params.id)
           .then(this.handleResponse)
+          .catch(this.handleError)
       },
 
       handleResponse (res) {
+        console.log(res.data)
         if (res.data)
         {
           this.customer = res.data[0]
@@ -147,8 +173,12 @@ export default {
           this.customerProfile = true
           this.addresses = res.data[0].addresses
           this.ready = true
-        }
+        }  
       },
+      handleError(error) {
+        this.ready = true
+        this.loading = false
+      }
 
     }
 

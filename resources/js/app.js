@@ -83,12 +83,13 @@ window.axios.interceptors.response.use(response => {
     //router.go("/login");
     location.href="/login"
    }
+   /*
    if (error.response.status === 404) {
     //place your reentry code
-    //router.go("/login");
+    //router.go("/NotFound");
     console.log('not found')
-   }
-   return error;
+   }*/
+   return Promise.reject(error.response);
  });
 
 const app = new Vue({
