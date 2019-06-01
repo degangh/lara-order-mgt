@@ -49,7 +49,8 @@ class CustomerController extends Controller
             "customer_id" => $customer->id,
             "address" => $request->address,
             "postcode" => $request->postcode,
-            "mobile" => $request->mobile
+            "mobile" => $request->mobile,
+            "is_default" => '1'
         ]);
 
         $address->save();
