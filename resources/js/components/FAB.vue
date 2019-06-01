@@ -109,14 +109,7 @@ export default {
    }},
 
     methods: {
-        clickCreateContact () {
-
-            this.$emit('popupContactForm')
-        },
-        clickCreateProduct () {
-
-            this.$emit('popupProductForm')
-        },
+        
         popupFormDialog (form) {
             this.$emit('popupFormDialog', form)
         }
