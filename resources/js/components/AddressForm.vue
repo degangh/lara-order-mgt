@@ -17,6 +17,7 @@
                 prepend-icon="business"
                 placeholder="Address"
                 v-model = "address"
+                :rules = "addressRules"
               ></v-text-field>
             </v-flex>
             
@@ -26,6 +27,7 @@
                 prepend-icon="phonelink_ring"
                 placeholder="1388888888"
                 v-model = "mobile"
+                :rules  = "mobileRules"
                 
               ></v-text-field>
             </v-flex>
@@ -60,7 +62,15 @@ export default {
             postcode: '',
             valid: false,
             snackbar: false,
-            snackbarText: ''
+            snackbarText: '',
+            mobileRules: [
+              v => !!v || 'Phone number is required',
+              v => /^\d+$/.test(v) || 'Phone number must contain digit only'
+            ],
+            addressRules: [
+              v => !!v || 'Address is required',
+              
+            ],
         }
     },
     methods: {
@@ -69,6 +79,8 @@ export default {
             this.$emit("closeDialog", form)
         },
         saveAddress () {
+          if (!this.$refs.AddressForm.validate()) return
+
           this.emitCloseDialog('addressDialog')
         }
     }
