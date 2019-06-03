@@ -31,7 +31,7 @@ class AddressTest extends TestCase
         $customer = factory(\App\Customer::class)->create();
         $address = factory(\App\Address::class)->make(['mobile'=>$customer->mobile ,'customer_id' => $customer->id]);
         //user is able to add another address to this customer
-        $this->json('post' , '/api/address', $address->toArray())->assertStatus(200)->assertJsonStructure([
+        $this->json('post' , '/api/addresses', $address->toArray())->assertStatus(200)->assertJsonStructure([
  
                 'id', 'customer_id','address'
 
@@ -47,7 +47,7 @@ class AddressTest extends TestCase
         $customer = factory(\App\Customer::class)->create();
         $addresses = factory(\App\Address::class, 3)->create(['mobile'=>$customer->mobile, 'customer_id' => $customer->id]);
         //user is able to specify one of the address as default
-        $this->json('patch', '/api/address/default', [
+        $this->json('patch', '/api/addresses/default', [
             'address_id'=>$addresses[0]->id,
             'customer_id' => $customer->id,
             'is_default' => 1
