@@ -80,7 +80,22 @@ export default {
         },
         saveAddress () {
           if (!this.$refs.AddressForm.validate()) return
+          axios.post('/api/addresses', {
+     
+                  customer_id: this.$route.params.id,
+                  address: this.address,
+                  mobile: this.mobile,
+                  postcode: this.postcode
+     
+          })
+          .then(this.handleResponse)
+          .catch(function (err) {
+            alert (err)
+          })
+          
+        },
 
+        handleResponse(res) {
           this.emitCloseDialog('addressDialog')
         }
     }
