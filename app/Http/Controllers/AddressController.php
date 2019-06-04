@@ -97,6 +97,7 @@ class AddressController extends Controller
      */
     public function setDefault(Address $address)
     {
-
+        $address->is_default = "1";
+        $address->save();
     }
 }

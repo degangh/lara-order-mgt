@@ -39,20 +39,40 @@ class AddressTest extends TestCase
     }
 
     /** @test */
-    function an_login_user_can_set_default_address()
+    function a_login_user_can_set_default_address()
     {
         //given an authenticated user
         $this->actingAs($this->user, 'api');
         //and an existing customer with multiple addresses (3 in this test case)
         $customer = factory(\App\Customer::class)->create();
+        //with a default address
+        $default_address = factory(\App\Address::class)->create(['mobile'=>$customer->mobile, 'customer_id' => $customer->id, 'is_default' => '1']);
+        //and other 3 addresses
         $addresses = factory(\App\Address::class, 3)->create(['mobile'=>$customer->mobile, 'customer_id' => $customer->id]);
         //user is able to specify one of the address as default
         $this->json('patch', '/api/addresses/default', [
-            'address_id'=>$addresses[0]->id,
+            'id'=>$addresses[0]->id,
             'customer_id' => $customer->id,
             'is_default' => 1
             ])->assertStatus(200);
-        //and there should be one and only one default address for each customer
+        
+        //the address is set to default
+        $this->assertDatabaseHas('addresses', array(
+            'customer_id' => $customer->id,
+            'address' => $addresses[0]->address,
+            'is_default' => '1'
+        ));
+
+        //and there is only default address for this customer
+        $count = \App\Address::where(
+            [
+                ['customer_id', $customer->id],
+                ['is_default', 1],
+            ]
+            )->count();
+        $this->assertEquals($count,1);
+
+        
     }
 }
     
