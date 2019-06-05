@@ -151,9 +151,12 @@ export default {
     },
 
     mounted() {
-        console.log(this.$route.params.id)
+       this.requestCustomerInfo();
 
-        this.requestCustomerInfo();
+       this.$root.$on("addNewAddress", (address) => {
+         this.addresses.push(address)
+         if (this.customer.addresses.length == 0) this.customer.addresses.push(address)
+         })
 
     },
 

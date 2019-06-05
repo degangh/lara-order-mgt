@@ -96,6 +96,8 @@ export default {
         },
 
         handleResponse(res) {
+          console.log(res.data)
+          this.$root.$emit('addNewAddress', res.data)
           this.emitCloseDialog('addressDialog')
         }
     }
