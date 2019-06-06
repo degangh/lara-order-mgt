@@ -53,7 +53,7 @@ class AddressTest extends TestCase
         $this->json('patch', '/api/addresses/default', [
             'id'=>$addresses[0]->id,
             'customer_id' => $customer->id,
-            'is_default' => 1
+            'is_default' => "1"
             ])->assertStatus(200);
         
         //the address is set to default
@@ -67,7 +67,7 @@ class AddressTest extends TestCase
         $count = \App\Address::where(
             [
                 ['customer_id', $customer->id],
-                ['is_default', 1],
+                ['is_default', "1"],
             ]
             )->count();
         $this->assertEquals($count,1);

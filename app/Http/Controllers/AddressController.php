@@ -95,9 +95,22 @@ class AddressController extends Controller
     /**
      * set an address as default address of the user
      */
-    public function setDefault(Address $address)
+    public function setDefault(Request $request)
     {
-        $address->is_default = "1";
-        $address->save();
+        //set address owner's all address is_default = '0'
+        $addresses = Address::where('customer_id', $request->customer_id)->get();
+
+        foreach ($addresses as $a) 
+        {
+            if ($a->id != $request->id) $a->is_default = '0';
+            else {
+
+                $a->is_default = "1";
+            }
+
+            $a->save();
+        }
+
+        
     }
 }
