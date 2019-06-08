@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Address;
 use Illuminate\Http\Request;
+use App\Customer;
 
 class AddressController extends Controller
 {
@@ -110,6 +111,8 @@ class AddressController extends Controller
 
             $a->save();
         }
+
+        return Customer::with('addresses')->find($request->customer_id);
 
         
     }

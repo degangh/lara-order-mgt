@@ -69,7 +69,11 @@
 
 <v-subheader :inset="$vuetify.breakpoint.mdAndUp" >Other Addresses</v-subheader>
 <v-container grid-list-sm fluid class="pa-4  grey--text text-lighten-1" v-if="addresses.length > 0">
-  <v-flex xs12  justify-space-between v-for = "(a, index) in addresses" :key="index">
+  <v-flex xs12  
+  justify-space-between 
+  v-for = "(a, index) in addresses" 
+  :key="index"
+  @click = "setDefaultAddress(a)">
               <v-layout class="address-wrapper">
                 
                 <v-flex xs2 sm1 mb-4 text-xs-left text-sm-right pr-2>
@@ -181,6 +185,14 @@ export default {
       handleError(error) {
         this.ready = true
         this.loading = false
+      },
+      setDefaultAddress(address) {
+        axios.patch('/api/addresses/default', {
+          id: address.id,
+          customer_id: address.customer_id
+        })
+          .then(this.handleResponse)
+          .catch(this.handleError)
       }
 
     }
