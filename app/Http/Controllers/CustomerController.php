@@ -15,7 +15,10 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return Customer::with('addresses')->paginate(20);
+        return Customer::with(array(
+            'addresses' => function ($query){
+                $query->orderBy('is_default', 'desc');
+            }))->paginate(20);
     }
 
     /**
@@ -68,7 +71,11 @@ class CustomerController extends Controller
      */
     public function show(Customer $customer)
     {
-        return Customer::with('addresses')->find($customer);
+        return Customer::with(array(
+            'addresses' => function ($query){
+                $query->orderBy('is_default', 'desc') ;
+            })
+        )->where('id',$customer->id)->get();
     }
 
     /**

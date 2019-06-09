@@ -112,7 +112,11 @@ class AddressController extends Controller
             $a->save();
         }
 
-        return Customer::with('addresses')->find($request->customer_id);
+        return Customer::with(array(
+            'addresses' => function ($query) {
+                $query->orderBy('is_default', 'asc');
+            })
+            )->where('id',$request->customer_id)->get();
 
         
     }
