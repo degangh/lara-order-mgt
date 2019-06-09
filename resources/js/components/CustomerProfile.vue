@@ -191,8 +191,7 @@ export default {
           id: address.id,
           customer_id: address.customer_id
         })
-          .then(this.handleResponse)
-          .catch(this.handleError)
+          .then(this.requestCustomerInfo)
       }
 
     }
