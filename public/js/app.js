@@ -850,7 +850,7 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global, setImmediate) {/*!
- * Vue.js v2.6.7
+ * Vue.js v2.6.10
  * (c) 2014-2019 Evan You
  * Released under the MIT License.
  */
@@ -1328,7 +1328,7 @@ var config = ({
  * using https://www.w3.org/TR/html53/semantics-scripting.html#potentialcustomelementname
  * skipping \u10000-\uEFFFF due to it freezing up PhantomJS
  */
-var unicodeLetters = 'a-zA-Z\u00B7\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u037D\u037F-\u1FFF\u200C-\u200D\u203F-\u2040\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD';
+var unicodeRegExp = /a-zA-Z\u00B7\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u037D\u037F-\u1FFF\u200C-\u200D\u203F-\u2040\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD/;
 
 /**
  * Check if a string starts with $ or _
@@ -1353,7 +1353,7 @@ function def (obj, key, val, enumerable) {
 /**
  * Parse simple path.
  */
-var bailRE = new RegExp(("[^" + unicodeLetters + ".$_\\d]"));
+var bailRE = new RegExp(("[^" + (unicodeRegExp.source) + ".$_\\d]"));
 function parsePath (path) {
   if (bailRE.test(path)) {
     return
@@ -2257,7 +2257,7 @@ function checkComponents (options) {
 }
 
 function validateComponentName (name) {
-  if (!new RegExp(("^[a-zA-Z][\\-\\.0-9_" + unicodeLetters + "]*$")).test(name)) {
+  if (!new RegExp(("^[a-zA-Z][\\-\\.0-9_" + (unicodeRegExp.source) + "]*$")).test(name)) {
     warn(
       'Invalid component name: "' + name + '". Component names ' +
       'should conform to valid custom element name in html5 specification.'
@@ -2708,10 +2708,11 @@ function invokeWithErrorHandling (
   var res;
   try {
     res = args ? handler.apply(context, args) : handler.call(context);
-    if (res && !res._isVue && isPromise(res)) {
+    if (res && !res._isVue && isPromise(res) && !res._handled) {
+      res.catch(function (e) { return handleError(e, vm, info + " (Promise/async)"); });
       // issue #9511
-      // reassign to res to avoid catch triggering multiple times when nested calls
-      res = res.catch(function (e) { return handleError(e, vm, info + " (Promise/async)"); });
+      // avoid catch triggering multiple times when nested calls
+      res._handled = true;
     }
   } catch (e) {
     handleError(e, vm, info);
@@ -3394,7 +3395,8 @@ function normalizeScopedSlots (
   prevSlots
 ) {
   var res;
-  var isStable = slots ? !!slots.$stable : true;
+  var hasNormalSlots = Object.keys(normalSlots).length > 0;
+  var isStable = slots ? !!slots.$stable : !hasNormalSlots;
   var key = slots && slots.$key;
   if (!slots) {
     res = {};
@@ -3406,7 +3408,8 @@ function normalizeScopedSlots (
     prevSlots &&
     prevSlots !== emptyObject &&
     key === prevSlots.$key &&
-    Object.keys(normalSlots).length === 0
+    !hasNormalSlots &&
+    !prevSlots.$hasNormal
   ) {
     // fast path 2: stable scoped slots w/ no normal slots to proxy,
     // only need to normalize once
@@ -3432,6 +3435,7 @@ function normalizeScopedSlots (
   }
   def(res, '$stable', isStable);
   def(res, '$key', key);
+  def(res, '$hasNormal', hasNormalSlots);
   return res
 }
 
@@ -3441,8 +3445,10 @@ function normalizeScopedSlot(normalSlots, key, fn) {
     res = res && typeof res === 'object' && !Array.isArray(res)
       ? [res] // single vnode
       : normalizeChildren(res);
-    return res && res.length === 0
-      ? undefined
+    return res && (
+      res.length === 0 ||
+      (res.length === 1 && res[0].isComment) // #9658
+    ) ? undefined
       : res
   };
   // this is a slot using the new v-slot syntax without scope. although it is
@@ -3622,12 +3628,13 @@ function bindObjectProps (
             : data.attrs || (data.attrs = {});
         }
         var camelizedKey = camelize(key);
-        if (!(key in hash) && !(camelizedKey in hash)) {
+        var hyphenatedKey = hyphenate(key);
+        if (!(camelizedKey in hash) && !(hyphenatedKey in hash)) {
           hash[key] = value[key];
 
           if (isSync) {
             var on = data.on || (data.on = {});
-            on[("update:" + camelizedKey)] = function ($event) {
+            on[("update:" + key)] = function ($event) {
               value[key] = $event;
             };
           }
@@ -4461,17 +4468,23 @@ function resolveAsyncComponent (
     return factory.resolved
   }
 
+  var owner = currentRenderingInstance;
+  if (owner && isDef(factory.owners) && factory.owners.indexOf(owner) === -1) {
+    // already pending
+    factory.owners.push(owner);
+  }
+
   if (isTrue(factory.loading) && isDef(factory.loadingComp)) {
     return factory.loadingComp
   }
 
-  var owner = currentRenderingInstance;
-  if (isDef(factory.owners)) {
-    // already pending
-    factory.owners.push(owner);
-  } else {
+  if (owner && !isDef(factory.owners)) {
     var owners = factory.owners = [owner];
     var sync = true;
+    var timerLoading = null;
+    var timerTimeout = null
+
+    ;(owner).$on('hook:destroyed', function () { return remove(owners, owner); });
 
     var forceRender = function (renderCompleted) {
       for (var i = 0, l = owners.length; i < l; i++) {
@@ -4480,6 +4493,14 @@ function resolveAsyncComponent (
 
       if (renderCompleted) {
         owners.length = 0;
+        if (timerLoading !== null) {
+          clearTimeout(timerLoading);
+          timerLoading = null;
+        }
+        if (timerTimeout !== null) {
+          clearTimeout(timerTimeout);
+          timerTimeout = null;
+        }
       }
     };
 
@@ -4526,7 +4547,8 @@ function resolveAsyncComponent (
           if (res.delay === 0) {
             factory.loading = true;
           } else {
-            setTimeout(function () {
+            timerLoading = setTimeout(function () {
+              timerLoading = null;
               if (isUndef(factory.resolved) && isUndef(factory.error)) {
                 factory.loading = true;
                 forceRender(false);
@@ -4536,7 +4558,8 @@ function resolveAsyncComponent (
         }
 
         if (isDef(res.timeout)) {
-          setTimeout(function () {
+          timerTimeout = setTimeout(function () {
+            timerTimeout = null;
             if (isUndef(factory.resolved)) {
               reject(
                 "timeout (" + (res.timeout) + "ms)"
@@ -5082,11 +5105,21 @@ var getNow = Date.now;
 // timestamp can either be hi-res (relative to page load) or low-res
 // (relative to UNIX epoch), so in order to compare time we have to use the
 // same timestamp type when saving the flush timestamp.
-if (inBrowser && getNow() > document.createEvent('Event').timeStamp) {
-  // if the low-res timestamp which is bigger than the event timestamp
-  // (which is evaluated AFTER) it means the event is using a hi-res timestamp,
-  // and we need to use the hi-res version for event listeners as well.
-  getNow = function () { return performance.now(); };
+// All IE versions use low-res event timestamps, and have problematic clock
+// implementations (#9632)
+if (inBrowser && !isIE) {
+  var performance = window.performance;
+  if (
+    performance &&
+    typeof performance.now === 'function' &&
+    getNow() > document.createEvent('Event').timeStamp
+  ) {
+    // if the event timestamp, although evaluated AFTER the Date.now(), is
+    // smaller than it, it means the event is using a hi-res timestamp,
+    // and we need to use the hi-res version for event listener timestamps as
+    // well.
+    getNow = function () { return performance.now(); };
+  }
 }
 
 /**
@@ -6251,7 +6284,7 @@ Object.defineProperty(Vue, 'FunctionalRenderContext', {
   value: FunctionalRenderContext
 });
 
-Vue.version = '2.6.7';
+Vue.version = '2.6.10';
 
 /*  */
 
@@ -8343,8 +8376,10 @@ function add$1 (
         e.target === e.currentTarget ||
         // event is fired after handler attachment
         e.timeStamp >= attachedTimestamp ||
-        // #9462 bail for iOS 9 bug: event.timeStamp is 0 after history.pushState
-        e.timeStamp === 0 ||
+        // bail for environments that have buggy event.timeStamp implementations
+        // #9462 iOS 9 bug: event.timeStamp is 0 after history.pushState
+        // #9681 QtWebEngine event.timeStamp is negative value
+        e.timeStamp <= 0 ||
         // #9448 bail if event is fired in another document in a multi-page
         // electron/nw.js app, since event.timeStamp will be using a different
         // starting reference
@@ -8411,10 +8446,11 @@ function updateDOMProps (oldVnode, vnode) {
   }
 
   for (key in oldProps) {
-    if (isUndef(props[key])) {
+    if (!(key in props)) {
       elm[key] = '';
     }
   }
+
   for (key in props) {
     cur = props[key];
     // ignore children if the node has textContent or innerHTML,
@@ -8962,8 +8998,8 @@ function enter (vnode, toggleDisplay) {
   var context = activeInstance;
   var transitionNode = activeInstance.$vnode;
   while (transitionNode && transitionNode.parent) {
-    transitionNode = transitionNode.parent;
     context = transitionNode.context;
+    transitionNode = transitionNode.parent;
   }
 
   var isAppear = !context._isMounted || !vnode.isRootInsert;
@@ -10053,7 +10089,7 @@ var isNonPhrasingTag = makeMap(
 // Regular Expressions for parsing tags and attributes
 var attribute = /^\s*([^\s"'<>\/=]+)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/;
 var dynamicArgAttribute = /^\s*((?:v-[\w-]+:|@|:|#)\[[^=]+\][^\s"'<>\/=]*)(?:\s*(=)\s*(?:"([^"]*)"+|'([^']*)'+|([^\s"'=<>`]+)))?/;
-var ncname = "[a-zA-Z_][\\-\\.0-9_a-zA-Z" + unicodeLetters + "]*";
+var ncname = "[a-zA-Z_][\\-\\.0-9_a-zA-Z" + (unicodeRegExp.source) + "]*";
 var qnameCapture = "((?:" + ncname + "\\:)?" + ncname + ")";
 var startTagOpen = new RegExp(("^<" + qnameCapture));
 var startTagClose = /^\s*(\/?)>/;
@@ -10315,7 +10351,7 @@ function parseHTML (html, options) {
         ) {
           options.warn(
             ("tag <" + (stack[i].tag) + "> has no matching end tag."),
-            { start: stack[i].start }
+            { start: stack[i].start, end: stack[i].end }
           );
         }
         if (options.end) {
@@ -10352,7 +10388,7 @@ var dynamicArgRE = /^\[.*\]$/;
 
 var argRE = /:(.*)$/;
 var bindRE = /^:|^\.|^v-bind:/;
-var modifierRE = /\.[^.]+/g;
+var modifierRE = /\.[^.\]]+(?=[^\]]*$)/g;
 
 var slotRE = /^v-slot(:|$)|^#/;
 
@@ -10529,7 +10565,7 @@ function parse (
     shouldDecodeNewlinesForHref: options.shouldDecodeNewlinesForHref,
     shouldKeepComment: options.comments,
     outputSourceRange: options.outputSourceRange,
-    start: function start (tag, attrs, unary, start$1) {
+    start: function start (tag, attrs, unary, start$1, end) {
       // check namespace.
       // inherit parent ns if there is one
       var ns = (currentParent && currentParent.ns) || platformGetTagNamespace(tag);
@@ -10548,6 +10584,7 @@ function parse (
       {
         if (options.outputSourceRange) {
           element.start = start$1;
+          element.end = end;
           element.rawAttrsMap = element.attrsList.reduce(function (cumulated, attr) {
             cumulated[attr.name] = attr;
             return cumulated
@@ -10669,7 +10706,7 @@ function parse (
         text = preserveWhitespace ? ' ' : '';
       }
       if (text) {
-        if (whitespaceOption === 'condense') {
+        if (!inPre && whitespaceOption === 'condense') {
           // condense consecutive whitespaces into single space
           text = text.replace(whitespaceRE$1, ' ');
         }
@@ -11530,7 +11567,7 @@ function isDirectChildOfTemplateFor (node) {
 
 /*  */
 
-var fnExpRE = /^([\w$_]+|\([^)]*?\))\s*=>|^function\s*\(/;
+var fnExpRE = /^([\w$_]+|\([^)]*?\))\s*=>|^function\s*(?:[\w$]+)?\s*\(/;
 var fnInvokeRE = /\([^)]*?\);*$/;
 var simplePathRE = /^[A-Za-z_$][\w$]*(?:\.[A-Za-z_$][\w$]*|\['[^']*?']|\["[^"]*?"]|\[\d+]|\[[A-Za-z_$][\w$]*])*$/;
 
@@ -12032,7 +12069,7 @@ function genScopedSlots (
   // components with only scoped slots to skip forced updates from parent.
   // but in some cases we have to bail-out of this optimization
   // for example if the slot contains dynamic names, has v-if or v-for on them...
-  var needsForceUpdate = Object.keys(slots).some(function (key) {
+  var needsForceUpdate = el.for || Object.keys(slots).some(function (key) {
     var slot = slots[key];
     return (
       slot.slotTargetDynamic ||
@@ -43173,7 +43210,7 @@ var content = __webpack_require__(29);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("49045985", content, false, {});
+var update = __webpack_require__(3)("35658a52", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -43197,7 +43234,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.tile-link a {\r\n    text-decoration: none;\n}\r\n", ""]);
+exports.push([module.i, "\n.tile-link a {\n    text-decoration: none;\n}\n", ""]);
 
 // exports
 
@@ -43618,14 +43655,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        clickCreateContact: function clickCreateContact() {
-
-            this.$emit('popupContactForm');
-        },
-        clickCreateProduct: function clickCreateProduct() {
-
-            this.$emit('popupProductForm');
-        },
         popupFormDialog: function popupFormDialog(form) {
             this.$emit('popupFormDialog', form);
         }
@@ -43675,7 +43704,7 @@ var render = function() {
         },
         [
           _c("v-icon", [
-            _vm._v("\r\n                        add\r\n                    ")
+            _vm._v("\n                        add\n                    ")
           ]),
           _vm._v(" "),
           _c("v-icon", [_vm._v("close")])
@@ -43695,7 +43724,7 @@ var render = function() {
         },
         [
           _c("v-icon", [
-            _vm._v("\r\n                    account_circle\r\n                ")
+            _vm._v("\n                    account_circle\n                ")
           ])
         ],
         1
@@ -43713,7 +43742,7 @@ var render = function() {
         },
         [
           _c("v-icon", [
-            _vm._v("\r\n                    shopping_cart\r\n                ")
+            _vm._v("\n                    shopping_cart\n                ")
           ])
         ],
         1
@@ -43737,7 +43766,7 @@ var render = function() {
             },
             [
               _c("v-icon", [
-                _vm._v("\r\n                    business\r\n                ")
+                _vm._v("\n                    business\n                ")
               ])
             ],
             1
@@ -43749,7 +43778,7 @@ var render = function() {
         { attrs: { fab: "", small: "", color: "indigo", dark: "" } },
         [
           _c("v-icon", [
-            _vm._v("\r\n                    attach_money\r\n                ")
+            _vm._v("\n                    attach_money\n                ")
           ])
         ],
         1
@@ -43830,7 +43859,7 @@ var content = __webpack_require__(37);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("1456fcca", content, false, {});
+var update = __webpack_require__(3)("fe5ad530", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -44283,7 +44312,7 @@ var render = function() {
             expression: "snackbar"
           }
         },
-        [_vm._v("\r\n      " + _vm._s(_vm.snackbarText) + "\r\n    ")]
+        [_vm._v("\n      " + _vm._s(_vm.snackbarText) + "\n    ")]
       )
     ],
     1
@@ -44623,7 +44652,7 @@ var render = function() {
             expression: "snackbar"
           }
         },
-        [_vm._v("\r\n      " + _vm._s(_vm.snackbarText) + "\r\n    ")]
+        [_vm._v("\n      " + _vm._s(_vm.snackbarText) + "\n    ")]
       )
     ],
     1
@@ -44739,6 +44768,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "AddressForm",
@@ -44754,7 +44785,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             postcode: '',
             valid: false,
             snackbar: false,
-            snackbarText: ''
+            snackbarText: '',
+            mobileRules: [function (v) {
+                return !!v || 'Phone number is required';
+            }, function (v) {
+                return (/^\d+$/.test(v) || 'Phone number must contain digit only'
+                );
+            }],
+            addressRules: [function (v) {
+                return !!v || 'Address is required';
+            }]
         };
     },
 
@@ -44764,6 +44804,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$emit("closeDialog", form);
         },
         saveAddress: function saveAddress() {
+            if (!this.$refs.AddressForm.validate()) return;
+            axios.post('/api/addresses', {
+
+                customer_id: this.$route.params.id,
+                address: this.address,
+                mobile: this.mobile,
+                postcode: this.postcode
+
+            }).then(this.handleResponse).catch(function (err) {
+                alert(err);
+            });
+        },
+        handleResponse: function handleResponse(res) {
+            console.log(res.data);
+            this.$root.$emit('addNewAddress', res.data);
             this.emitCloseDialog('addressDialog');
         }
     }
@@ -44849,7 +44904,8 @@ var render = function() {
                           _c("v-text-field", {
                             attrs: {
                               "prepend-icon": "business",
-                              placeholder: "Address"
+                              placeholder: "Address",
+                              rules: _vm.addressRules
                             },
                             model: {
                               value: _vm.address,
@@ -44871,7 +44927,8 @@ var render = function() {
                             attrs: {
                               type: "tel",
                               "prepend-icon": "phonelink_ring",
-                              placeholder: "1388888888"
+                              placeholder: "1388888888",
+                              rules: _vm.mobileRules
                             },
                             model: {
                               value: _vm.mobile,
@@ -44935,7 +44992,7 @@ var render = function() {
             expression: "snackbar"
           }
         },
-        [_vm._v("\r\n      " + _vm._s(_vm.snackbarText) + "\r\n    ")]
+        [_vm._v("\n      " + _vm._s(_vm.snackbarText) + "\n    ")]
       )
     ],
     1
@@ -45003,9 +45060,9 @@ var render = function() {
                                   item.heading
                                     ? _c("v-subheader", [
                                         _vm._v(
-                                          "\r\n                " +
+                                          "\n                " +
                                             _vm._s(item.heading) +
-                                            "\r\n              "
+                                            "\n              "
                                         )
                                       ])
                                     : _vm._e()
@@ -45072,9 +45129,9 @@ var render = function() {
                                         [
                                           _c("v-list-tile-title", [
                                             _vm._v(
-                                              "\r\n                  " +
+                                              "\n                  " +
                                                 _vm._s(item.text) +
-                                                "\r\n                "
+                                                "\n                "
                                             )
                                           ])
                                         ],
@@ -45112,9 +45169,9 @@ var render = function() {
                                       [
                                         _c("v-list-tile-title", [
                                           _vm._v(
-                                            "\r\n                  " +
+                                            "\n                  " +
                                               _vm._s(child.text) +
-                                              "\r\n                "
+                                              "\n                "
                                           )
                                         ])
                                       ],
@@ -45147,9 +45204,9 @@ var render = function() {
                                 [
                                   _c("v-list-tile-title", [
                                     _vm._v(
-                                      "\r\n                " +
+                                      "\n                " +
                                         _vm._s(item.text) +
-                                        "\r\n              "
+                                        "\n              "
                                     )
                                   ])
                                 ],
@@ -45436,9 +45493,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "content" }, [
           _c("div", { staticClass: "m-b-md" }, [
             _c("h2", { staticClass: "title m-b-md" }, [
-              _vm._v(
-                "\r\n                        Welcome\r\n                    "
-              )
+              _vm._v("\n                        Welcome\n                    ")
             ]),
             _vm._v(" "),
             _c("h3")
@@ -45787,7 +45842,7 @@ var content = __webpack_require__(55);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("1d6ff25d", content, false, {});
+var update = __webpack_require__(3)("0c1e39b0", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -45811,7 +45866,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.pagination-container[data-v-4fd97649] {\r\n    float: right;\r\n    padding: 0.3rem 1rem\n}\n.loading-wrapper[data-v-4fd97649]{\r\n    height: 2.4rem\n}\n.col1[data-v-4fd97649] {\r\n    width: 20%\n}\n.col2[data-v-4fd97649] {\r\n    width: 20%\n}\ntr[data-v-4fd97649] {\r\n    cursor: hand\n}\ntr[data-v-4fd97649]:hover {\r\n\r\n    -webkit-box-shadow: inset 0 -1px 0 0 rgba(100,121,143,0.122);\r\n\r\n            box-shadow: inset 0 -1px 0 0 rgba(100,121,143,0.122);\r\n    cursor: pointer;\n}\r\n", ""]);
+exports.push([module.i, "\n.pagination-container[data-v-4fd97649] {\n    float: right;\n    padding: 0.3rem 1rem\n}\n.loading-wrapper[data-v-4fd97649]{\n    height: 2.4rem\n}\n.col1[data-v-4fd97649] {\n    width: 20%\n}\n.col2[data-v-4fd97649] {\n    width: 20%\n}\ntr[data-v-4fd97649] {\n    cursor: hand\n}\ntr[data-v-4fd97649]:hover {\n\n    -webkit-box-shadow: inset 0 -1px 0 0 rgba(100,121,143,0.122);\n\n            box-shadow: inset 0 -1px 0 0 rgba(100,121,143,0.122);\n    cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -46055,25 +46110,25 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", { staticClass: "col1" }, [
         _vm._v(
-          "\r\n                            Name\r\n                            "
+          "\n                            Name\n                            "
         )
       ]),
       _vm._v(" "),
       _c("th", { staticClass: "col2" }, [
         _vm._v(
-          "\r\n                            Mobile\r\n                            "
+          "\n                            Mobile\n                            "
         )
       ]),
       _vm._v(" "),
       _c("th", [
         _vm._v(
-          "\r\n                            Address\r\n                            "
+          "\n                            Address\n                            "
         )
       ]),
       _vm._v(" "),
       _c("th", [
         _vm._v(
-          "\r\n                            ID No\r\n                            "
+          "\n                            ID No\n                            "
         )
       ])
     ])
@@ -46150,7 +46205,7 @@ var content = __webpack_require__(60);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("50af689f", content, false, {});
+var update = __webpack_require__(3)("acf0cba8", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -46174,7 +46229,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.pagination-container[data-v-8a00ae1a] {\r\n    float: right;\r\n    padding: 0.3rem 1rem\n}\n.loading-wrapper[data-v-8a00ae1a]{\r\n    height: 2.4rem\n}\n.col1[data-v-8a00ae1a] {\r\n    width: 20%\n}\n.col2[data-v-8a00ae1a] {\r\n    width: 20%\n}\r\n", ""]);
+exports.push([module.i, "\n.pagination-container[data-v-8a00ae1a] {\n    float: right;\n    padding: 0.3rem 1rem\n}\n.loading-wrapper[data-v-8a00ae1a]{\n    height: 2.4rem\n}\n.col1[data-v-8a00ae1a] {\n    width: 20%\n}\n.col2[data-v-8a00ae1a] {\n    width: 20%\n}\n", ""]);
 
 // exports
 
@@ -46412,25 +46467,25 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", { staticClass: "col1" }, [
         _vm._v(
-          "\r\n                            Name\r\n                            "
+          "\n                            Name\n                            "
         )
       ]),
       _vm._v(" "),
       _c("th", { staticClass: "col2" }, [
         _vm._v(
-          "\r\n                            Mobile\r\n                            "
+          "\n                            Mobile\n                            "
         )
       ]),
       _vm._v(" "),
       _c("th", [
         _vm._v(
-          "\r\n                            Order Sum\r\n                            "
+          "\n                            Order Sum\n                            "
         )
       ]),
       _vm._v(" "),
       _c("th", [
         _vm._v(
-          "\r\n                            Order Date\r\n                            "
+          "\n                            Order Date\n                            "
         )
       ]),
       _vm._v(" "),
@@ -46509,7 +46564,7 @@ var content = __webpack_require__(65);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("d3314918", content, false, {});
+var update = __webpack_require__(3)("19f95dc1", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -46533,7 +46588,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.pagination-container[data-v-7e94e6d4] {\r\n    float: right;\r\n    padding: 0.3rem 1rem\n}\n.loading-wrapper[data-v-7e94e6d4]{\r\n    height: 2.4rem\n}\n.col1[data-v-7e94e6d4] {\r\n    width: 20%\n}\n.col2[data-v-7e94e6d4] {\r\n    width: 20%\n}\ntr[data-v-7e94e6d4] {\r\n    cursor: hand\n}\ntr[data-v-7e94e6d4]:hover {\r\n\r\n    -webkit-box-shadow: inset 0 -1px 0 0 rgba(100,121,143,0.122);\r\n\r\n            box-shadow: inset 0 -1px 0 0 rgba(100,121,143,0.122);\r\n    cursor: pointer;\n}\r\n", ""]);
+exports.push([module.i, "\n.pagination-container[data-v-7e94e6d4] {\n    float: right;\n    padding: 0.3rem 1rem\n}\n.loading-wrapper[data-v-7e94e6d4]{\n    height: 2.4rem\n}\n.col1[data-v-7e94e6d4] {\n    width: 20%\n}\n.col2[data-v-7e94e6d4] {\n    width: 20%\n}\ntr[data-v-7e94e6d4] {\n    cursor: hand\n}\ntr[data-v-7e94e6d4]:hover {\n\n    -webkit-box-shadow: inset 0 -1px 0 0 rgba(100,121,143,0.122);\n\n            box-shadow: inset 0 -1px 0 0 rgba(100,121,143,0.122);\n    cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -46752,13 +46807,13 @@ var staticRenderFns = [
     return _c("tr", [
       _c("th", { staticClass: "col1" }, [
         _vm._v(
-          "\r\n                            Name\r\n                            "
+          "\n                            Name\n                            "
         )
       ]),
       _vm._v(" "),
       _c("th", { staticClass: "col2" }, [
         _vm._v(
-          "\r\n                            Ref Price AUD\r\n                            "
+          "\n                            Ref Price AUD\n                            "
         )
       ])
     ])
@@ -46835,7 +46890,7 @@ var content = __webpack_require__(70);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("15e0119f", content, false, {});
+var update = __webpack_require__(3)("2ab7111c", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -46964,7 +47019,7 @@ var content = __webpack_require__(74);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("1395ee43", content, false, {});
+var update = __webpack_require__(3)("069b5390", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -46988,7 +47043,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.address-wrapper[data-v-d0686a60] {\r\n  vertical-align: bottom;\r\n  font-size: 1.3rem;\r\n  cursor: pointer\n}\r\n", ""]);
+exports.push([module.i, "\n.address-wrapper[data-v-d0686a60] {\n  vertical-align: bottom;\n  font-size: 1.3rem;\n  cursor: pointer\n}\n", ""]);
 
 // exports
 
@@ -46999,6 +47054,10 @@ exports.push([module.i, "\n.address-wrapper[data-v-d0686a60] {\r\n  vertical-ali
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -47149,9 +47208,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   mounted: function mounted() {
-    console.log(this.$route.params.id);
+    var _this = this;
 
     this.requestCustomerInfo();
+
+    this.$root.$on("addNewAddress", function (address) {
+      _this.addresses.push(address);
+      if (_this.customer.addresses.length == 0) _this.customer.addresses.push(address);
+    });
   },
 
 
@@ -47172,6 +47236,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     handleError: function handleError(error) {
       this.ready = true;
       this.loading = false;
+    },
+    setDefaultAddress: function setDefaultAddress(address) {
+      axios.patch('/api/addresses/default', {
+        id: address.id,
+        customer_id: address.customer_id
+      }).then(this.requestCustomerInfo);
     }
   }
 
@@ -47441,7 +47511,12 @@ var render = function() {
                             "v-flex",
                             {
                               key: index,
-                              attrs: { xs12: "", "justify-space-between": "" }
+                              attrs: { xs12: "", "justify-space-between": "" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.setDefaultAddress(a)
+                                }
+                              }
                             },
                             [
                               _c(
@@ -47488,11 +47563,11 @@ var render = function() {
                                     },
                                     [
                                       _vm._v(
-                                        "\r\n                " +
+                                        "\n                " +
                                           _vm._s(a.address) +
                                           " " +
                                           _vm._s(a.mobile) +
-                                          "\r\n                "
+                                          "\n                "
                                       )
                                     ]
                                   )
@@ -47544,7 +47619,7 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\r\n      There is no address available for this customer.\r\n    "
+                                            "\n      There is no address available for this customer.\n    "
                                           )
                                         ]
                                       )
@@ -47590,7 +47665,7 @@ var render = function() {
                             outline: ""
                           }
                         },
-                        [_vm._v("\r\n      Customer Not Found\r\n    ")]
+                        [_vm._v("\n      Customer Not Found\n    ")]
                       )
                     ],
                     1
