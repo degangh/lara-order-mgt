@@ -16,11 +16,17 @@ import Order from "./components/Order";
 import Product from "./components/Product";
 import CustomerInfo from "./components/CustomerInfo";
 import NotFound from "./components/NotFound";
+import Dashboard from "./components/Dashboard";
 
 
 const router = new VueRouter({
     mode: "history",
     routes: [
+        {
+            path: "/dashboard",
+            name: "dashboard",
+            component: Dashboard
+        },
         {
             path: "/",
             name: "home",

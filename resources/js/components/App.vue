@@ -158,6 +158,7 @@ export default {
         productDialog: false,
         drawer: null,
         items: [
+          { icon: 'dashboard', text: 'Dashboard' , path: '/dashboard'},
           { icon: 'contacts', text: 'Customers' , path: '/customers'},
           { icon: 'history', text: 'Orders', path: '/orders' },
           { icon: 'shopping_cart', text: 'Products', path: '/products' },
