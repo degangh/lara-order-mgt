@@ -16,8 +16,14 @@ class ProductRespositoryTest extends TestCase
     {
         parent::setup();
 
-        $this->productRepository = Mockery::mock('ProdcutRepositoryInterface');
-        $this->app->instance('ProductRepositoryInterface', $this->productRespository);
+        /*
+        $this->productRepository = Mockery::mock('ProductRepositoryInterface');
+        $this->app->instance('ProductRepositoryInterface', $this->productRepository);
+        $this->product = factory(\App\Product::class)->make();
+        $this->productRepository->shouldReceive('create')->andReturn($this->product);
+        */
+        $this->product = factory(\App\Product::class)->make();
+        $this->productRepository = new \App\Repositories\ProductRepository;
     }
 
     public function tearDown()
@@ -32,8 +38,11 @@ class ProductRespositoryTest extends TestCase
         //given a product name and price
 
         //a product instance should be saved, and returned
-
+        $product = $this->productRepository->create(array(
+            'name' => $this->product->name,
+            'ref_price_aud' =>$this->product->ref_price_aud
+        ));
         //data base has the new created product information
-
+        $this->assertInstanceOf('\App\Product', $product);
     }
 }
