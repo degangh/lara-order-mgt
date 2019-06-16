@@ -1,7 +1,7 @@
 <?php
 namespace App\Repositories\Contract;
 
-interface ProductRespositoryInterface
+interface ProductRepositoryInterface
 {
     /**
      * get list of records, default 20 records

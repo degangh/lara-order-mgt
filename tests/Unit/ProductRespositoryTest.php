@@ -38,10 +38,9 @@ class ProductRespositoryTest extends TestCase
         //given a product name and price
 
         //a product instance should be saved, and returned
-        $product = $this->productRepository->create(array(
-            'name' => $this->product->name,
-            'ref_price_aud' =>$this->product->ref_price_aud
-        ));
+        $product = $this->productRepository->create(
+            $this->product
+        );
         //data base has the new created product information
         $this->assertInstanceOf('\App\Product', $product);
     }

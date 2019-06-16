@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 use App\Repositories\Contract\ProductRepositoryInterface;
+use App\Product;
 
 class ProductRepository implements ProductRepositoryInterface
 {
@@ -13,10 +14,10 @@ class ProductRepository implements ProductRepositoryInterface
     public function create($attributes)
     {
         
-        /*return Product::create([
+        return Product::create([
             'name' => $attributes->name,
             'ref_price_aud' => $attributes->ref_price_aud
-        ]);*/
-        return True;
+        ]);
+        
     }
 }
