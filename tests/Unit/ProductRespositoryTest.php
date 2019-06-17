@@ -43,5 +43,10 @@ class ProductRespositoryTest extends TestCase
         );
         //data base has the new created product information
         $this->assertInstanceOf('\App\Product', $product);
+
+        $this->assertDatabaseHas('products', array(
+            'name' => $this->product->name,
+            'ref_price_aud' => $this->product->ref_price_aud
+        ));
     }
 }
