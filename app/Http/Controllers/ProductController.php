@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
+use App\Repositories\Contract\ProductRepositoryInterface;
+
 
 class ProductController extends Controller
 {
+    protected $productRepository;
+    
+    public function __construct(ProductRepositoryInterface $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::paginate(20);
+        return $this->productRepository->all();
     }
 
     /**
@@ -35,12 +44,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product = Product::create([
-            'name' => $request->name,
-            'ref_price_aud' => $request->ref_price_aud
-        ]);
-
-        $product->save();
+        $product = $this->productRepository->create($request);
 
         return response()->json($product->toArray());
     }
