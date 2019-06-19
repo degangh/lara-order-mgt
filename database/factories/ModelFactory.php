@@ -50,7 +50,7 @@ $factory->define(App\Address::class, function(Faker $faker){
 
 $factory->define(App\Product::class, function(Faker $faker){
     return [
-        'name' => $faker->name,
+        'name' => $faker->word,
         'ref_price_aud' => mt_rand(100,1000)/100,
     ];
 });
