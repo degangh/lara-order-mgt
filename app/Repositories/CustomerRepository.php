@@ -4,11 +4,15 @@ namespace App\Repositories;
 use App\Repositories\Contract\CustomerRepositoryInterface;
 use App\Customer;
 
+
 class CustomerRepository implements CustomerRepositoryInterface
 {
     public function all($records_per_page = 20)
     {
-        return Customer::paginate(20);
+        return Customer::with(array(
+            'addresses' => function ($query){
+                $query->orderBy('is_default', 'desc');
+            }))->paginate(20);
     }
 
     public function create($attributes)
