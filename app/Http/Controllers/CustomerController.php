@@ -5,9 +5,18 @@ namespace App\Http\Controllers;
 use App\Customer;
 use App\Address;
 use Illuminate\Http\Request;
+use App\Repositories\Contract\CustomerRepositoryInterface;
+
 
 class CustomerController extends Controller
 {
+    
+    protected $customerRepository;
+    
+    public function __construct(CustomerRepositoryInterface $customerRepository)
+    {
+        $this->customerRepository = $customerRepository;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,10 +24,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return Customer::with(array(
-            'addresses' => function ($query){
-                $query->orderBy('is_default', 'desc');
-            }))->paginate(20);
+        return $this->customerRepository->all();
     }
 
     /**
@@ -39,14 +45,8 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $customer = Customer::create([
-            'name' => $request->name,
-            'name_py' => $request->name_py,
-            'mobile' => $request->mobile,
-            'id_no' => $request->id_no
-        ]);
-
-        $customer->save();
+        $customer = $this->customerRepository->create($request);
+        
 
         $address = Address::create([
             "customer_id" => $customer->id,
