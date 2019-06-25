@@ -1,9 +1,8 @@
 <template>
-<div class="container-fluid">
-        <div class="flex-center position-ref full-height">
-            <div class="content">
-                <v-layout>
-                    <v-flex xs12 sm3 m-3>
+
+<v-container  fluid grid-list-md>
+                <v-layout row wrap>
+                    <v-flex  xs12 sm3>
                         <v-card color="green" class="white--text">
                         <v-card-text>
                             <v-layout>
@@ -18,7 +17,7 @@
                         </v-card-text>
                         </v-card>
                     </v-flex>
-                    <v-flex xs12 sm3 m-3>
+                    <v-flex  xs12 sm3>
                         <v-card color="orange" class="white--text">
                         <v-card-text>
                             <v-layout>
@@ -33,7 +32,7 @@
                         </v-card-text>
                         </v-card>
                     </v-flex>
-                    <v-flex xs12 sm3 m-3>
+                    <v-flex  xs12 sm3>
                         <v-card color="indigo" class="white--text">
                         <v-card-text>
                             <v-layout>
@@ -47,8 +46,8 @@
                             </v-layout>
                         </v-card-text>
                         </v-card>
-                    </v-flex>
-                    <v-flex xs12 sm3 m-3>
+                        </v-flex>
+                    <v-flex  xs12 sm3>
                         <v-card color="purple" class="white--text">
                         <v-card-text>
                             <v-layout>
@@ -64,13 +63,25 @@
                         </v-card>
                     </v-flex>
                 </v-layout>
-            </div>
-        </div>
-</div>
+
+                <v-layout>
+                    <v-flex m-3 xs12>
+                    <v-card>
+                        <v-card-title>Sales Revenu</v-card-title>
+                        <v-card-text>
+                            <sales-line-chart></sales-line-chart>
+                        </v-card-text>
+                    </v-card>
+                    </v-flex>
+                </v-layout>
+                </v-container>
 </template>
 
 <script>
+import SalesLineChart from "./SalesLineChart"
 export default {
-
+    components: {
+        SalesLineChart
+    }
 }
 </script>
