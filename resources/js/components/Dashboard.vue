@@ -55,8 +55,8 @@
                             <v-icon class="white--text" size="65px" dark >favorite_border</v-icon>
                             </v-flex>
                             <v-flex xs7 text-xs-right>
-                            <div>ARPU</div>
-                            <div class="display-1">80</div>
+                            <div>Average Profit Rate</div>
+                            <div class="display-1">11.5%</div>
                             </v-flex>
                             </v-layout>
                         </v-card-text>

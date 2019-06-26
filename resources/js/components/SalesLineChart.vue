@@ -8,9 +8,16 @@ export default {
       labels: ['January', 'February', 'March', 'April', 'May'],
       datasets: [
         {
-          label: 'Data One',
-          backgroundColor: '#f87979',
-          data: [40, 23, 33, 52, 29]
+          label: 'Sales Revenue',
+          borderColor: '#f87979',
+          data: [40, 23, 33, 52, 29],
+          fill: false
+        },
+        {
+          label: 'Monthly Average',
+          borderColor: 'navy',
+          data: [35,35,35,35,35],
+          fill: false
         }
       ]
     },

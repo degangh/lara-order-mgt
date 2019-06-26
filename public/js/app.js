@@ -60239,6 +60239,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -62044,7 +62045,7 @@ var render = function() {
         [
           _c(
             "v-toolbar-title",
-            { staticClass: "ml-0 pl-3", staticStyle: { width: "300px" } },
+            { staticClass: "ml-0 pl-3" },
             [
               _c("v-toolbar-side-icon", {
                 on: {
@@ -62062,14 +62063,16 @@ var render = function() {
             1
           ),
           _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
           _vm.isLogin()
             ? _c("v-text-field", {
-                staticClass: "hidden-sm-and-down",
                 attrs: {
                   flat: "",
                   "solo-inverted": "",
-                  "prepend-icon": "search",
-                  label: "Search"
+                  "append-icon": "search",
+                  label: "Search",
+                  "ml-3": ""
                 }
               })
             : _vm._e(),
@@ -62079,7 +62082,7 @@ var render = function() {
           _vm.isLogin()
             ? _c(
                 "v-btn",
-                { attrs: { icon: "" } },
+                { staticClass: "hidden-sm-and-down", attrs: { icon: "" } },
                 [_c("v-icon", [_vm._v("apps")])],
                 1
               )
@@ -62088,7 +62091,7 @@ var render = function() {
           _vm.isLogin()
             ? _c(
                 "v-btn",
-                { attrs: { icon: "" } },
+                { staticClass: "hidden-sm-and-down", attrs: { icon: "" } },
                 [_c("v-icon", [_vm._v("notifications")])],
                 1
               )
@@ -64934,9 +64937,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       chartdata: {
         labels: ['January', 'February', 'March', 'April', 'May'],
         datasets: [{
-          label: 'Data One',
-          backgroundColor: '#f87979',
-          data: [40, 23, 33, 52, 29]
+          label: 'Sales Revenue',
+          borderColor: '#f87979',
+          data: [40, 23, 33, 52, 29],
+          fill: false
+        }, {
+          label: 'Monthly Average',
+          borderColor: 'navy',
+          data: [35, 35, 35, 35, 35],
+          fill: false
         }]
       },
       options: {
@@ -80380,10 +80389,10 @@ var render = function() {
                             "v-flex",
                             { attrs: { xs7: "", "text-xs-right": "" } },
                             [
-                              _c("div", [_vm._v("ARPU")]),
+                              _c("div", [_vm._v("Average Profit Rate")]),
                               _vm._v(" "),
                               _c("div", { staticClass: "display-1" }, [
-                                _vm._v("80")
+                                _vm._v("11.5%")
                               ])
                             ]
                           )

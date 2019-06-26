@@ -77,24 +77,25 @@
       :clipped-left="$vuetify.breakpoint.mdAndUp"
       fixed
     >
-      <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
+      <v-toolbar-title  class="ml-0 pl-3">
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <span class="hidden-sm-and-down">My CRM</span>
       </v-toolbar-title>
+      <v-spacer></v-spacer>
       <v-text-field
         flat
         solo-inverted
-        prepend-icon="search"
+        append-icon="search"
         label="Search"
-        class="hidden-sm-and-down"
+        ml-3
         v-if = "isLogin()"
       ></v-text-field>
       <v-spacer></v-spacer>
       
-      <v-btn icon v-if = "isLogin()">
+      <v-btn icon v-if = "isLogin()" class="hidden-sm-and-down">
         <v-icon>apps</v-icon>
       </v-btn>
-      <v-btn icon v-if = "isLogin()">
+      <v-btn icon v-if = "isLogin()" class="hidden-sm-and-down">
         <v-icon>notifications</v-icon>
       </v-btn>
       <v-menu offset-y v-if = "isLogin()">
