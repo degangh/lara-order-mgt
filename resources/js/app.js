@@ -29,8 +29,8 @@ const router = new VueRouter({
         },
         {
             path: "/",
-            name: "home",
-            component: Welcome
+            name: "dashboard",
+            component: Dashboard
         },
         {
             path: "/login",

@@ -17622,8 +17622,8 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         component: __WEBPACK_IMPORTED_MODULE_13__components_Dashboard___default.a
     }, {
         path: "/",
-        name: "home",
-        component: __WEBPACK_IMPORTED_MODULE_6__components_Welcome___default.a
+        name: "dashboard",
+        component: __WEBPACK_IMPORTED_MODULE_13__components_Dashboard___default.a
     }, {
         path: "/login",
         name: "login",
@@ -64936,7 +64936,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         datasets: [{
           label: 'Data One',
           backgroundColor: '#f87979',
-          data: [40, 25, 33, 52, 29]
+          data: [40, 23, 33, 52, 29]
         }]
       },
       options: {
@@ -80186,7 +80186,7 @@ var render = function() {
         [
           _c(
             "v-flex",
-            { attrs: { xs12: "", sm3: "" } },
+            { attrs: { xs12: "", sm6: "", md3: "" } },
             [
               _c(
                 "v-card",
@@ -80240,7 +80240,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "v-flex",
-            { attrs: { xs12: "", sm3: "" } },
+            { attrs: { xs12: "", sm6: "", md3: "" } },
             [
               _c(
                 "v-card",
@@ -80294,7 +80294,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "v-flex",
-            { attrs: { xs12: "", sm3: "" } },
+            { attrs: { xs12: "", sm6: "", md3: "" } },
             [
               _c(
                 "v-card",
@@ -80348,7 +80348,7 @@ var render = function() {
           _vm._v(" "),
           _c(
             "v-flex",
-            { attrs: { xs12: "", sm3: "" } },
+            { attrs: { xs12: "", sm6: "", md3: "" } },
             [
               _c(
                 "v-card",
@@ -80408,7 +80408,7 @@ var render = function() {
         [
           _c(
             "v-flex",
-            { attrs: { "m-3": "", xs12: "" } },
+            { attrs: { "mt-3": "", xs12: "" } },
             [
               _c(
                 "v-card",

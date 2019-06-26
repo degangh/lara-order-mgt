@@ -2,7 +2,7 @@
 
 <v-container  fluid grid-list-md>
                 <v-layout row wrap>
-                    <v-flex  xs12 sm3>
+                    <v-flex  xs12 sm6 md3>
                         <v-card color="green" class="white--text">
                         <v-card-text>
                             <v-layout>
@@ -17,7 +17,7 @@
                         </v-card-text>
                         </v-card>
                     </v-flex>
-                    <v-flex  xs12 sm3>
+                    <v-flex  xs12 sm6 md3>
                         <v-card color="orange" class="white--text">
                         <v-card-text>
                             <v-layout>
@@ -32,7 +32,7 @@
                         </v-card-text>
                         </v-card>
                     </v-flex>
-                    <v-flex  xs12 sm3>
+                    <v-flex  xs12 sm6 md3>
                         <v-card color="indigo" class="white--text">
                         <v-card-text>
                             <v-layout>
@@ -47,7 +47,7 @@
                         </v-card-text>
                         </v-card>
                         </v-flex>
-                    <v-flex  xs12 sm3>
+                    <v-flex  xs12 sm6 md3>
                         <v-card color="purple" class="white--text">
                         <v-card-text>
                             <v-layout>
@@ -65,7 +65,7 @@
                 </v-layout>
 
                 <v-layout>
-                    <v-flex m-3 xs12>
+                    <v-flex mt-3 xs12>
                     <v-card>
                         <v-card-title>Sales Revenu</v-card-title>
                         <v-card-text>
