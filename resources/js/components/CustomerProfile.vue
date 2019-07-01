@@ -135,6 +135,9 @@
 
   </v-layout>
 </v-container>
+<v-snackbar v-model="snackbar">
+      {{snackbarText}}
+</v-snackbar>
 </div>
 </template>
 
@@ -148,7 +151,9 @@ export default {
         customerProfile: false,
         loading: true,
         addresses: false,
-        ready: false
+        ready: false,
+        snackbar: false,
+        snackbarText: "Address is set successfully"
         
 
       }
@@ -180,6 +185,7 @@ export default {
           this.customerProfile = true
           this.addresses = res.data[0].addresses
           this.ready = true
+
         }  
       },
       handleError(error) {
@@ -191,7 +197,10 @@ export default {
           id: address.id,
           customer_id: address.customer_id
         })
-          .then(this.requestCustomerInfo)
+          .then(this.requestCustomerInfo).then(this.showSnackbar)
+      },
+      showSnackbar(){
+        this.snackbar = true
       }
 
     }

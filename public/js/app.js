@@ -64005,6 +64005,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -64013,7 +64016,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       customerProfile: false,
       loading: true,
       addresses: false,
-      ready: false
+      ready: false,
+      snackbar: false,
+      snackbarText: "Address is set successfully"
 
     };
   },
@@ -64051,7 +64056,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       axios.patch('/api/addresses/default', {
         id: address.id,
         customer_id: address.customer_id
-      }).then(this.requestCustomerInfo);
+      }).then(this.requestCustomerInfo).then(this.showSnackbar);
+    },
+    showSnackbar: function showSnackbar() {
+      this.snackbar = true;
     }
   }
 
@@ -64483,7 +64491,21 @@ var render = function() {
                 ],
                 1
               )
-            : _vm._e()
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "v-snackbar",
+            {
+              model: {
+                value: _vm.snackbar,
+                callback: function($$v) {
+                  _vm.snackbar = $$v
+                },
+                expression: "snackbar"
+              }
+            },
+            [_vm._v("\r\n      " + _vm._s(_vm.snackbarText) + "\r\n")]
+          )
         ],
         1
       )
