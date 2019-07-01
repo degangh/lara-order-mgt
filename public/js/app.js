@@ -80599,13 +80599,81 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "OrderForm",
 
     data: function data() {
         return {
-            valid: false
+            valid: false,
+            e1: 0
         };
     },
 
@@ -80691,10 +80759,167 @@ var render = function() {
                   }
                 },
                 [
-                  _c("v-container", {
-                    staticClass: "pa-4",
-                    attrs: { "grid-list-sm": "" }
-                  })
+                  _c(
+                    "v-container",
+                    { staticClass: "pa-4", attrs: { "grid-list-sm": "" } },
+                    [
+                      _c(
+                        "v-stepper",
+                        {
+                          model: {
+                            value: _vm.e1,
+                            callback: function($$v) {
+                              _vm.e1 = $$v
+                            },
+                            expression: "e1"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-stepper-header",
+                            [
+                              _c(
+                                "v-stepper-step",
+                                { attrs: { complete: _vm.e1 > 1, step: "1" } },
+                                [_vm._v("Name of step 1")]
+                              ),
+                              _vm._v(" "),
+                              _c("v-divider"),
+                              _vm._v(" "),
+                              _c(
+                                "v-stepper-step",
+                                { attrs: { complete: _vm.e1 > 2, step: "2" } },
+                                [_vm._v("Name of step 2")]
+                              ),
+                              _vm._v(" "),
+                              _c("v-divider"),
+                              _vm._v(" "),
+                              _c("v-stepper-step", { attrs: { step: "3" } }, [
+                                _vm._v("Name of step 3")
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-stepper-items",
+                            [
+                              _c(
+                                "v-stepper-content",
+                                { attrs: { step: "1" } },
+                                [
+                                  _c("v-card", {
+                                    staticClass: "mb-5",
+                                    attrs: {
+                                      color: "grey lighten-1",
+                                      height: "200px"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: { color: "primary" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.e1 = 2
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\r\n          Continue\r\n        "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("v-btn", { attrs: { flat: "" } }, [
+                                    _vm._v("Cancel")
+                                  ])
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-stepper-content",
+                                { attrs: { step: "2" } },
+                                [
+                                  _c("v-card", {
+                                    staticClass: "mb-5",
+                                    attrs: {
+                                      color: "grey lighten-1",
+                                      height: "200px"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: { color: "primary" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.e1 = 3
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\r\n          Continue\r\n        "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("v-btn", { attrs: { flat: "" } }, [
+                                    _vm._v("Cancel")
+                                  ])
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-stepper-content",
+                                { attrs: { step: "3" } },
+                                [
+                                  _c("v-card", {
+                                    staticClass: "mb-5",
+                                    attrs: {
+                                      color: "grey lighten-1",
+                                      height: "200px"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: { color: "primary" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.e1 = 1
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\r\n          Continue\r\n        "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c("v-btn", { attrs: { flat: "" } }, [
+                                    _vm._v("Cancel")
+                                  ])
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
                 ],
                 1
               ),
