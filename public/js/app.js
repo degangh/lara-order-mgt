@@ -60091,6 +60091,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ProductForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__ProductForm__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__AddressForm__ = __webpack_require__(172);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__AddressForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__AddressForm__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__OrderForm__ = __webpack_require__(247);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__OrderForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__OrderForm__);
 //
 //
 //
@@ -60240,6 +60242,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 
@@ -60251,6 +60255,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       contactDialog: false,
       addressDialog: false,
       productDialog: false,
+      orderDialog: false,
       drawer: null,
       items: [{ icon: 'dashboard', text: 'Dashboard', path: '/dashboard' }, { icon: 'contacts', text: 'Customers', path: '/customers' }, { icon: 'history', text: 'Orders', path: '/orders' }, { icon: 'shopping_cart', text: 'Products', path: '/products' }],
       userItems: [{ title: 'Logout', func: 'logout' }, { title: 'Help', func: '' }],
@@ -60273,7 +60278,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     FloatingButton: __WEBPACK_IMPORTED_MODULE_0__FAB___default.a,
     ContactForm: __WEBPACK_IMPORTED_MODULE_1__ContactForm___default.a,
     ProductForm: __WEBPACK_IMPORTED_MODULE_2__ProductForm___default.a,
-    AddressForm: __WEBPACK_IMPORTED_MODULE_3__AddressForm___default.a
+    AddressForm: __WEBPACK_IMPORTED_MODULE_3__AddressForm___default.a,
+    OrderForm: __WEBPACK_IMPORTED_MODULE_4__OrderForm___default.a
   },
   methods: {
     isLogin: function isLogin() {
@@ -60351,6 +60357,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -60581,7 +60588,14 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-btn",
-        { attrs: { fab: "", small: "", color: "indigo", dark: "" } },
+        {
+          attrs: { fab: "", small: "", color: "indigo", dark: "" },
+          on: {
+            click: function($event) {
+              return _vm.popupFormDialog("orderDialog")
+            }
+          }
+        },
         [
           _c("v-icon", [
             _vm._v("\r\n                    attach_money\r\n                ")
@@ -62193,6 +62207,11 @@ var render = function() {
       _vm._v(" "),
       _c("address-form", {
         attrs: { dialog: _vm.addressDialog },
+        on: { closeDialog: _vm.closeFormDialog }
+      }),
+      _vm._v(" "),
+      _c("order-form", {
+        attrs: { dialog: _vm.orderDialog },
         on: { closeDialog: _vm.closeFormDialog }
       })
     ],
@@ -80475,6 +80494,256 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(248)
+/* template */
+var __vue_template__ = __webpack_require__(249)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/OrderForm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-92f51b52", Component.options)
+  } else {
+    hotAPI.reload("data-v-92f51b52", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 248 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "OrderForm",
+
+    data: function data() {
+        return {
+            valid: false
+        };
+    },
+
+
+    props: {
+        dialog: Boolean
+    },
+
+    methods: {
+        emitCloseDialog: function emitCloseDialog(form) {
+            this.$refs.ContactForm.reset();
+            this.$emit("closeDialog", form);
+        }
+    }
+});
+
+/***/ }),
+/* 249 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-dialog",
+        {
+          attrs: {
+            width: "800px",
+            fullscreen: _vm.$vuetify.breakpoint.smAndDown,
+            persistent: ""
+          },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-toolbar",
+                { attrs: { dark: "", color: "primary" } },
+                [
+                  _c("v-toolbar-title", [_vm._v("Create Order")]),
+                  _vm._v(" "),
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { icon: "", dark: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.emitCloseDialog("orderDialog")
+                        }
+                      }
+                    },
+                    [_c("v-icon", [_vm._v("close")])],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-form",
+                {
+                  ref: "ContactForm",
+                  model: {
+                    value: _vm.valid,
+                    callback: function($$v) {
+                      _vm.valid = $$v
+                    },
+                    expression: "valid"
+                  }
+                },
+                [
+                  _c("v-container", {
+                    staticClass: "pa-4",
+                    attrs: { "grid-list-sm": "" }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { flat: "", color: "primary" },
+                      on: {
+                        click: function($event) {
+                          return _vm.emitCloseDialog("orderDialog")
+                        }
+                      }
+                    },
+                    [_vm._v("Cancel")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    { attrs: { flat: "" }, on: { click: function($event) {} } },
+                    [_vm._v("Save")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-92f51b52", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

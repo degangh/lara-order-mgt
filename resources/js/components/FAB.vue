@@ -64,6 +64,7 @@
                        small
                        color="indigo"
                        dark
+                       @click="popupFormDialog('orderDialog')"
                 >
                 <v-icon >
                     attach_money

@@ -143,6 +143,7 @@
     <contact-form :dialog="contactDialog"  @closeDialog="closeFormDialog"></contact-form>
     <product-form :dialog="productDialog" @closeDialog="closeFormDialog"></product-form>
     <address-form :dialog="addressDialog" @closeDialog="closeFormDialog"></address-form>
+    <order-form :dialog="orderDialog" @closeDialog="closeFormDialog"></order-form>
 </v-app>
 
 </template>
@@ -152,11 +153,13 @@ import FloatingButton from './FAB'
 import ContactForm from "./ContactForm"
 import ProductForm from "./ProductForm"
 import AddressForm from "./AddressForm"
+import OrderForm from "./OrderForm"
 export default {
      data: () => ({
         contactDialog: false,
         addressDialog: false,
         productDialog: false,
+        orderDialog:false,
         drawer: null,
         items: [
           { icon: 'dashboard', text: 'Dashboard' , path: '/dashboard'},
@@ -187,7 +190,8 @@ export default {
         FloatingButton,
         ContactForm,
         ProductForm,
-        AddressForm
+        AddressForm,
+        OrderForm
       },
     methods: {
 
