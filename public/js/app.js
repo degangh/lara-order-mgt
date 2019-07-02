@@ -80646,26 +80646,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "OrderForm",
@@ -80684,8 +80664,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         emitCloseDialog: function emitCloseDialog(form) {
-            this.$refs.ContactForm.reset();
+            this.$refs.OrderForm.reset();
             this.$emit("closeDialog", form);
+        },
+        next: function next() {
+            console.log(this.e1);
+            this.e1 = parseInt(this.e1) + 1;
         }
     }
 });
@@ -80749,7 +80733,7 @@ var render = function() {
               _c(
                 "v-form",
                 {
-                  ref: "ContactForm",
+                  ref: "OrderForm",
                   model: {
                     value: _vm.valid,
                     callback: function($$v) {
@@ -80781,7 +80765,7 @@ var render = function() {
                               _c(
                                 "v-stepper-step",
                                 { attrs: { complete: _vm.e1 > 1, step: "1" } },
-                                [_vm._v("Name of step 1")]
+                                [_vm._v("Choose Customer")]
                               ),
                               _vm._v(" "),
                               _c("v-divider"),
@@ -80789,13 +80773,13 @@ var render = function() {
                               _c(
                                 "v-stepper-step",
                                 { attrs: { complete: _vm.e1 > 2, step: "2" } },
-                                [_vm._v("Name of step 2")]
+                                [_vm._v("Add Products")]
                               ),
                               _vm._v(" "),
                               _c("v-divider"),
                               _vm._v(" "),
                               _c("v-stepper-step", { attrs: { step: "3" } }, [
-                                _vm._v("Name of step 3")
+                                _vm._v("Final Confirmation")
                               ])
                             ],
                             1
@@ -80814,28 +80798,7 @@ var render = function() {
                                       color: "grey lighten-1",
                                       height: "200px"
                                     }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-btn",
-                                    {
-                                      attrs: { color: "primary" },
-                                      on: {
-                                        click: function($event) {
-                                          _vm.e1 = 2
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\r\n          Continue\r\n        "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("v-btn", { attrs: { flat: "" } }, [
-                                    _vm._v("Cancel")
-                                  ])
+                                  })
                                 ],
                                 1
                               ),
@@ -80850,28 +80813,7 @@ var render = function() {
                                       color: "grey lighten-1",
                                       height: "200px"
                                     }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-btn",
-                                    {
-                                      attrs: { color: "primary" },
-                                      on: {
-                                        click: function($event) {
-                                          _vm.e1 = 3
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\r\n          Continue\r\n        "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("v-btn", { attrs: { flat: "" } }, [
-                                    _vm._v("Cancel")
-                                  ])
+                                  })
                                 ],
                                 1
                               ),
@@ -80886,28 +80828,7 @@ var render = function() {
                                       color: "grey lighten-1",
                                       height: "200px"
                                     }
-                                  }),
-                                  _vm._v(" "),
-                                  _c(
-                                    "v-btn",
-                                    {
-                                      attrs: { color: "primary" },
-                                      on: {
-                                        click: function($event) {
-                                          _vm.e1 = 1
-                                        }
-                                      }
-                                    },
-                                    [
-                                      _vm._v(
-                                        "\r\n          Continue\r\n        "
-                                      )
-                                    ]
-                                  ),
-                                  _vm._v(" "),
-                                  _c("v-btn", { attrs: { flat: "" } }, [
-                                    _vm._v("Cancel")
-                                  ])
+                                  })
                                 ],
                                 1
                               )
@@ -80944,8 +80865,15 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-btn",
-                    { attrs: { flat: "" }, on: { click: function($event) {} } },
-                    [_vm._v("Save")]
+                    {
+                      attrs: { flat: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.next(_vm.e1)
+                        }
+                      }
+                    },
+                    [_vm._v("Continue")]
                   )
                 ],
                 1

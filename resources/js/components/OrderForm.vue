@@ -10,20 +10,20 @@
             <v-icon>close</v-icon>
           </v-btn>
         </v-toolbar>
-        <v-form v-model="valid" ref="ContactForm">
+        <v-form v-model="valid" ref="OrderForm">
         <v-container grid-list-sm class="pa-4">
 
             <v-stepper v-model="e1">
     <v-stepper-header>
-      <v-stepper-step :complete="e1 > 1" step="1">Name of step 1</v-stepper-step>
+      <v-stepper-step :complete="e1 > 1" step="1">Choose Customer</v-stepper-step>
 
       <v-divider></v-divider>
 
-      <v-stepper-step :complete="e1 > 2" step="2">Name of step 2</v-stepper-step>
+      <v-stepper-step :complete="e1 > 2" step="2">Add Products</v-stepper-step>
 
       <v-divider></v-divider>
 
-      <v-stepper-step step="3">Name of step 3</v-stepper-step>
+      <v-stepper-step step="3">Final Confirmation</v-stepper-step>
     </v-stepper-header>
 
     <v-stepper-items>
@@ -34,14 +34,9 @@
           height="200px"
         ></v-card>
 
-        <v-btn
-          color="primary"
-          @click="e1 = 2"
-        >
-          Continue
-        </v-btn>
+    
 
-        <v-btn flat>Cancel</v-btn>
+
       </v-stepper-content>
 
       <v-stepper-content step="2">
@@ -51,14 +46,7 @@
           height="200px"
         ></v-card>
 
-        <v-btn
-          color="primary"
-          @click="e1 = 3"
-        >
-          Continue
-        </v-btn>
 
-        <v-btn flat>Cancel</v-btn>
       </v-stepper-content>
 
       <v-stepper-content step="3">
@@ -68,14 +56,6 @@
           height="200px"
         ></v-card>
 
-        <v-btn
-          color="primary"
-          @click="e1 = 1"
-        >
-          Continue
-        </v-btn>
-
-        <v-btn flat>Cancel</v-btn>
       </v-stepper-content>
     </v-stepper-items>
   </v-stepper>
@@ -86,7 +66,7 @@
           <!--v-btn flat color="primary">More</v-btn-->
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="emitCloseDialog('orderDialog')">Cancel</v-btn>
-          <v-btn flat @click="">Save</v-btn>
+          <v-btn flat @click="next(e1)">Continue</v-btn>
         </v-card-actions>
       </v-card></v-dialog>
 </div>
@@ -109,8 +89,13 @@ export default {
 
     methods: {
         emitCloseDialog (form) {
-        this.$refs.ContactForm.reset()
+        this.$refs.OrderForm.reset()
         this.$emit("closeDialog", form)
+      },
+
+      next(){
+          console.log(this.e1)
+          this.e1 = parseInt(this.e1) + 1
       }
     }
 }
