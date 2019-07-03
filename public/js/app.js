@@ -80646,6 +80646,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "OrderForm",
@@ -80653,7 +80669,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             valid: false,
-            e1: 0
+            e1: 0,
+            next_button_text: 'Continue'
         };
     },
 
@@ -80670,6 +80687,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         next: function next() {
             console.log(this.e1);
             this.e1 = parseInt(this.e1) + 1;
+            if (this.e1 == 3) this.next_button_text = "Save";
         }
     }
 });
@@ -80792,13 +80810,26 @@ var render = function() {
                                 "v-stepper-content",
                                 { attrs: { step: "1" } },
                                 [
-                                  _c("v-card", {
-                                    staticClass: "mb-5",
-                                    attrs: {
-                                      color: "grey lighten-1",
-                                      height: "200px"
-                                    }
-                                  })
+                                  _c(
+                                    "v-card",
+                                    { attrs: { "min-height": "200px" } },
+                                    [
+                                      _c("v-autocomplete", {
+                                        attrs: {
+                                          label: "Customer",
+                                          "prepend-icon": "contacts"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("v-combobox", {
+                                        attrs: {
+                                          label: "Address",
+                                          "prepend-icon": "business"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
                                 ],
                                 1
                               ),
@@ -80807,13 +80838,19 @@ var render = function() {
                                 "v-stepper-content",
                                 { attrs: { step: "2" } },
                                 [
-                                  _c("v-card", {
-                                    staticClass: "mb-5",
-                                    attrs: {
-                                      color: "grey lighten-1",
-                                      height: "200px"
-                                    }
-                                  })
+                                  _c(
+                                    "v-card",
+                                    { attrs: { "min-height": "200px" } },
+                                    [
+                                      _c("v-autocomplete", {
+                                        attrs: {
+                                          label: "Search Products",
+                                          "prepend-icon": "shopping_cart"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
                                 ],
                                 1
                               ),
@@ -80826,7 +80863,7 @@ var render = function() {
                                     staticClass: "mb-5",
                                     attrs: {
                                       color: "grey lighten-1",
-                                      height: "200px"
+                                      "min-height": "200px"
                                     }
                                   })
                                 ],
@@ -80873,7 +80910,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Continue")]
+                    [_vm._v(_vm._s(_vm.next_button_text))]
                   )
                 ],
                 1

@@ -29,10 +29,24 @@
     <v-stepper-items>
       <v-stepper-content step="1">
         <v-card
-          class="mb-5"
-          color="grey lighten-1"
-          height="200px"
-        ></v-card>
+        min-height = "200px"
+
+        >
+         
+        <v-autocomplete
+        label = "Customer"
+        prepend-icon = "contacts"
+        >
+
+        </v-autocomplete>
+        <v-combobox
+        label = "Address"
+        prepend-icon = "business"
+        >
+
+        </v-combobox>
+        
+        </v-card>
 
     
 
@@ -40,11 +54,13 @@
       </v-stepper-content>
 
       <v-stepper-content step="2">
-        <v-card
-          class="mb-5"
-          color="grey lighten-1"
-          height="200px"
-        ></v-card>
+        <v-card min-height = "200px">
+        <v-autocomplete
+        label = "Search Products"
+        prepend-icon = "shopping_cart"
+        >
+        </v-autocomplete>
+        </v-card>
 
 
       </v-stepper-content>
@@ -53,7 +69,7 @@
         <v-card
           class="mb-5"
           color="grey lighten-1"
-          height="200px"
+          min-height = "200px"
         ></v-card>
 
       </v-stepper-content>
@@ -66,7 +82,7 @@
           <!--v-btn flat color="primary">More</v-btn-->
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="emitCloseDialog('orderDialog')">Cancel</v-btn>
-          <v-btn flat @click="next(e1)">Continue</v-btn>
+          <v-btn flat @click="next(e1)">{{next_button_text}}</v-btn>
         </v-card-actions>
       </v-card></v-dialog>
 </div>
@@ -79,7 +95,8 @@ export default {
     data() {
       return {
           valid: false,
-          e1: 0
+          e1: 0,
+          next_button_text: 'Continue'
       }
     },
 
@@ -96,6 +113,7 @@ export default {
       next(){
           console.log(this.e1)
           this.e1 = parseInt(this.e1) + 1
+          if (this.e1 == 3) this.next_button_text = "Save"
       }
     }
 }
