@@ -36,6 +36,11 @@
         <v-autocomplete
         label = "Customer"
         prepend-icon = "contacts"
+
+        :items="items"
+        item-text="name"
+        v-model='select'
+        return-object
         >
 
         </v-autocomplete>
@@ -96,7 +101,24 @@ export default {
       return {
           valid: false,
           e1: 0,
-          next_button_text: 'Continue'
+          next_button_text: 'Continue',
+          search: null,
+          select: null,
+          items: [
+            {id: 1, name: 'Nicolas'},
+            {id: 2, name: 'John Doe'},
+            {id: 1, name: 'Joseph Yeeve'},
+          ],
+      }
+    },
+
+    watch: {
+      search(v) {
+        console.log(this.search)
+      },
+      select(v)
+      {
+        console.log(this.select)
       }
     },
 
