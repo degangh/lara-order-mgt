@@ -12,7 +12,7 @@ class CustomerRepository implements CustomerRepositoryInterface
         return Customer::with(array(
             'addresses' => function ($query){
                 $query->orderBy('is_default', 'desc');
-            }))->paginate(20);
+            }))->paginate($records_per_page);
     }
 
     public function create($attributes)
