@@ -80662,6 +80662,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "OrderForm",
@@ -80670,10 +80677,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             valid: false,
             e1: 0,
-            next_button_text: 'Continue'
+            next_button_text: 'Continue',
+            isLoading: false,
+            search: null,
+            select: null,
+            items: []
         };
     },
 
+
+    watch: {
+        search: function search(v) {
+            this.isLoading = true;
+            if (v == null) return;
+            if (v.length < 2) return;
+
+            this.searchCustomer(v);
+        }
+    },
 
     props: {
         dialog: Boolean
@@ -80688,6 +80709,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log(this.e1);
             this.e1 = parseInt(this.e1) + 1;
             if (this.e1 == 3) this.next_button_text = "Save";
+        },
+        searchCustomer: function searchCustomer(v) {
+            this.items = [{ id: 1, name: 'Nicolas' }, { id: 1, name: 'Joseph' }, { id: 1, name: 'Eric' }];
+            console.log("called");
         }
     }
 });
@@ -80817,7 +80842,32 @@ var render = function() {
                                       _c("v-autocomplete", {
                                         attrs: {
                                           label: "Customer",
-                                          "prepend-icon": "contacts"
+                                          "prepend-icon": "contacts",
+                                          "search-input": _vm.search,
+                                          items: _vm.items,
+                                          loading: _vm.isLoading,
+                                          "hide-no-data": "",
+                                          "item-text": "name",
+                                          "return-object": ""
+                                        },
+                                        on: {
+                                          "update:searchInput": function(
+                                            $event
+                                          ) {
+                                            _vm.search = $event
+                                          },
+                                          "update:search-input": function(
+                                            $event
+                                          ) {
+                                            _vm.search = $event
+                                          }
+                                        },
+                                        model: {
+                                          value: _vm.select,
+                                          callback: function($$v) {
+                                            _vm.select = $$v
+                                          },
+                                          expression: "select"
                                         }
                                       }),
                                       _vm._v(" "),

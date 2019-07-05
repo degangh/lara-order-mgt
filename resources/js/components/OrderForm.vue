@@ -36,8 +36,10 @@
         <v-autocomplete
         label = "Customer"
         prepend-icon = "contacts"
-
+        :search-input.sync="search"
         :items="items"
+        :loading="isLoading"
+        hide-no-data
         item-text="name"
         v-model='select'
         return-object
@@ -102,24 +104,21 @@ export default {
           valid: false,
           e1: 0,
           next_button_text: 'Continue',
+          isLoading: false,
           search: null,
           select: null,
-          items: [
-            {id: 1, name: 'Nicolas'},
-            {id: 2, name: 'John Doe'},
-            {id: 1, name: 'Joseph Yeeve'},
-          ],
+          items: [],
       }
     },
 
     watch: {
       search(v) {
-        console.log(this.search)
+        this.isLoading = true
+        if ( v == null) return
+        if (v.length < 2 ) return
+
+        this.searchCustomer (v)
       },
-      select(v)
-      {
-        console.log(this.select)
-      }
     },
 
     props: {
@@ -136,6 +135,15 @@ export default {
           console.log(this.e1)
           this.e1 = parseInt(this.e1) + 1
           if (this.e1 == 3) this.next_button_text = "Save"
+      },
+
+      searchCustomer (v) {
+          this.items = [
+            {id: 1, name: 'Nicolas'},
+            {id: 1, name: 'Joseph'},
+            {id: 1, name: 'Eric'},
+          ]
+          console.log("called")
       }
     }
 }
