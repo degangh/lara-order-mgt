@@ -7,11 +7,16 @@ use App\Customer;
 
 class CustomerRepository implements CustomerRepositoryInterface
 {
-    public function all($records_per_page = 20)
+    public function all($keyword = '', $records_per_page = 20)
     {
-        return Customer::with(array(
+        if (empty($keyword)) return Customer::with(array(
             'addresses' => function ($query){
                 $query->orderBy('is_default', 'desc');
+            }))->paginate($records_per_page);
+        
+            return Customer::where('name', 'like', '%' . $keyword . '%')->with(array(
+                'addresses' => function ($query){
+                    $query->orderBy('is_default', 'desc');
             }))->paginate($records_per_page);
     }
 

@@ -10,7 +10,7 @@ interface CustomerRepositoryInterface
      * 
      * @return 
      */
-    public function all($record_per_page = 20);
+    public function all($keyword, $record_per_page = 20);
 
     public function create($attributes);
 
