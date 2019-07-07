@@ -118,6 +118,8 @@ export default {
         if (v.length < 2 ) return
 
         this.searchCustomer (v)
+
+        this.isLoading = false
       },
     },
 
@@ -128,6 +130,8 @@ export default {
     methods: {
         emitCloseDialog (form) {
         this.$refs.OrderForm.reset()
+        this.items = []
+        this.isLoading = false
         this.$emit("closeDialog", form)
       },
 
@@ -138,12 +142,15 @@ export default {
       },
 
       searchCustomer (v) {
-          this.items = [
-            {id: 1, name: 'Nicolas'},
-            {id: 1, name: 'Joseph'},
-            {id: 1, name: 'Eric'},
-          ]
-          console.log("called")
+
+          axios.get('/api/customers', {
+              params: {
+                  keyword: v
+              }
+          })
+          .then(res => {
+            this.items = res.data.data
+          })
       }
     }
 }
