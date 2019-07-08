@@ -62104,6 +62104,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "OrderForm",
@@ -62116,7 +62119,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             isLoading: false,
             search: null,
             select: null,
-            items: []
+            items: [],
+            addresses: [],
+            address: null
         };
     },
 
@@ -62130,6 +62135,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.searchCustomer(v);
 
             this.isLoading = false;
+        },
+        select: function select(v) {
+            this.requestAddress(v);
         }
     },
 
@@ -62159,6 +62167,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (res) {
                 _this.items = res.data.data;
             });
+        },
+        requestAddress: function requestAddress(v) {
+            console.log(v.id);
         }
     }
 });
@@ -62320,7 +62331,16 @@ var render = function() {
                                       _c("v-combobox", {
                                         attrs: {
                                           label: "Address",
-                                          "prepend-icon": "business"
+                                          "prepend-icon": "business",
+                                          items: _vm.addresses,
+                                          "return-object": ""
+                                        },
+                                        model: {
+                                          value: _vm.address,
+                                          callback: function($$v) {
+                                            _vm.address = $$v
+                                          },
+                                          expression: "address"
                                         }
                                       })
                                     ],

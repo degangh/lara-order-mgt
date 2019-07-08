@@ -49,6 +49,9 @@
         <v-combobox
         label = "Address"
         prepend-icon = "business"
+        :items = "addresses"
+        v-model = "address"
+        return-object
         >
 
         </v-combobox>
@@ -108,6 +111,8 @@ export default {
           search: null,
           select: null,
           items: [],
+          addresses: [],
+          address: null
       }
     },
 
@@ -121,6 +126,12 @@ export default {
 
         this.isLoading = false
       },
+
+      select (v)
+      {
+        this.requestAddress(v)
+
+      }
     },
 
     props: {
@@ -151,6 +162,11 @@ export default {
           .then(res => {
             this.items = res.data.data
           })
+      },
+
+      requestAddress (v) 
+      {
+        console.log(v.id)
       }
     }
 }
