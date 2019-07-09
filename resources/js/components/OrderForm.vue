@@ -51,6 +51,7 @@
         prepend-icon = "business"
         :items = "addresses"
         v-model = "address"
+        item-text = "address"
         return-object
         >
 
@@ -91,8 +92,10 @@
         <v-card-actions>
           <!--v-btn flat color="primary">More</v-btn-->
           <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="emitCloseDialog('orderDialog')">Cancel</v-btn>
-          <v-btn flat @click="next(e1)">{{next_button_text}}</v-btn>
+          <v-btn flat  @click="emitCloseDialog('orderDialog')">Cancel</v-btn>
+          <v-btn flat @click="prev(e1)" v-show="e1 > 1">Back</v-btn>
+          <v-btn flat color="primary" @click="next(e1)" v-show = "e1 < 3">Continue</v-btn>
+          <v-btn flat color="primary" @click="next(e1)" v-show="e1 == 3">Save</v-btn>
         </v-card-actions>
       </v-card></v-dialog>
 </div>
@@ -107,6 +110,7 @@ export default {
           valid: false,
           e1: 0,
           next_button_text: 'Continue',
+          back_button_text: 'Back',
           isLoading: false,
           search: null,
           select: null,
@@ -123,13 +127,14 @@ export default {
         if (v.length < 2 ) return
 
         this.searchCustomer (v)
-
+        this.address = null
         this.isLoading = false
       },
 
       select (v)
       {
-        this.requestAddress(v)
+        
+        if(v) this.addresses = v.addresses
 
       }
     },
@@ -140,6 +145,7 @@ export default {
 
     methods: {
         emitCloseDialog (form) {
+        this.e1 = 1
         this.$refs.OrderForm.reset()
         this.items = []
         this.isLoading = false
@@ -147,9 +153,13 @@ export default {
       },
 
       next(){
-          console.log(this.e1)
-          this.e1 = parseInt(this.e1) + 1
-          if (this.e1 == 3) this.next_button_text = "Save"
+          
+          if (this.e1 < 3) this.e1 = parseInt(this.e1) + 1
+
+      },
+
+      prev() {
+        this.e1 = parseInt(this.e1) - 1
       },
 
       searchCustomer (v) {
@@ -162,11 +172,6 @@ export default {
           .then(res => {
             this.items = res.data.data
           })
-      },
-
-      requestAddress (v) 
-      {
-        console.log(v.id)
       }
     }
 }
