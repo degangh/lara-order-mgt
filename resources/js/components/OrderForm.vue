@@ -36,12 +36,12 @@
         <v-autocomplete
         label = "Customer"
         prepend-icon = "contacts"
-        :search-input.sync="search"
-        :items="items"
+        :search-input.sync="customerSearch"
+        :items="customers"
         :loading="isLoading"
         hide-no-data
         item-text="name"
-        v-model='select'
+        v-model='selectedCustomer'
         return-object
         >
 
@@ -112,18 +112,19 @@ export default {
           next_button_text: 'Continue',
           back_button_text: 'Back',
           isLoading: false,
-          search: null,
-          select: null,
-          items: [],
+          customerSearch: null,
+          selectedCustomer: null,
+          customers: [],
           addresses: [],
           address: null
       }
     },
 
     watch: {
-      search(v) {
-        this.isLoading = true
+      customerSearch(v) {
         if ( v == null) return
+        if (v.length > 0) this.isLoading = true
+        if (v.length == 0) this.customers = []
         if (v.length < 2 ) return
 
         this.searchCustomer (v)
@@ -131,7 +132,7 @@ export default {
         this.isLoading = false
       },
 
-      select (v)
+      selectedCustomer (v)
       {
         
         if(v) this.addresses = v.addresses
@@ -147,7 +148,8 @@ export default {
         emitCloseDialog (form) {
         this.e1 = 1
         this.$refs.OrderForm.reset()
-        this.items = []
+        this.addresses = []
+        this.customers = []
         this.isLoading = false
         this.$emit("closeDialog", form)
       },
@@ -170,7 +172,7 @@ export default {
               }
           })
           .then(res => {
-            this.items = res.data.data
+            this.customers = res.data.data
           })
       }
     }
