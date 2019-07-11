@@ -62110,75 +62110,106 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "OrderForm",
+  name: "OrderForm",
 
-    data: function data() {
-        return {
-            valid: false,
-            e1: 0,
-            next_button_text: 'Continue',
-            back_button_text: 'Back',
-            isLoading: false,
-            customerSearch: null,
-            selectedCustomer: null,
-            customers: [],
-            addresses: [],
-            address: null
-        };
+  data: function data() {
+    return {
+      valid: false,
+      e1: 0,
+      next_button_text: 'Continue',
+      back_button_text: 'Back',
+      isLoading: false,
+      customerSearch: null,
+      productSearch: null,
+      selectedCustomer: null,
+      selectedProduct: null,
+      customers: [],
+      addresses: [],
+      products: [],
+      address: null
+    };
+  },
+
+
+  watch: {
+    customerSearch: function customerSearch(v) {
+      if (v == null) return;
+      if (v.length > 0) this.isLoading = true;
+      if (v.length == 0) this.customers = [];
+      if (v.length < 2) return;
+
+      this.searchCustomer(v);
+      this.address = null;
+      this.isLoading = false;
     },
-
-
-    watch: {
-        customerSearch: function customerSearch(v) {
-            if (v == null) return;
-            if (v.length > 0) this.isLoading = true;
-            if (v.length == 0) this.customers = [];
-            if (v.length < 2) return;
-
-            this.searchCustomer(v);
-            this.address = null;
-            this.isLoading = false;
-        },
-        selectedCustomer: function selectedCustomer(v) {
-
-            if (v) this.addresses = v.addresses;
-        }
+    productSearch: function productSearch(v) {
+      if (v == null) return;
+      if (v.length > 0) this.isLoading = true;
+      if (v.length == 0) this.customers = [];
+      if (v.length < 2) return;
+      this.searchProduct(v);
     },
+    selectedCustomer: function selectedCustomer(v) {
 
-    props: {
-        dialog: Boolean
+      if (v) this.addresses = v.addresses;
     },
-
-    methods: {
-        emitCloseDialog: function emitCloseDialog(form) {
-            this.e1 = 1;
-            this.$refs.OrderForm.reset();
-            this.addresses = [];
-            this.customers = [];
-            this.isLoading = false;
-            this.$emit("closeDialog", form);
-        },
-        next: function next() {
-
-            if (this.e1 < 3) this.e1 = parseInt(this.e1) + 1;
-        },
-        prev: function prev() {
-            this.e1 = parseInt(this.e1) - 1;
-        },
-        searchCustomer: function searchCustomer(v) {
-            var _this = this;
-
-            axios.get('/api/customers', {
-                params: {
-                    keyword: v
-                }
-            }).then(function (res) {
-                _this.customers = res.data.data;
-            });
-        }
+    selectedProduct: function selectedProduct(v) {
+      console.log(v);
     }
+  },
+
+  props: {
+    dialog: Boolean
+  },
+
+  methods: {
+    emitCloseDialog: function emitCloseDialog(form) {
+      this.e1 = 1;
+      this.$refs.OrderForm.reset();
+      this.addresses = [];
+      this.customers = [];
+      this.products = [];
+      this.isLoading = false;
+      this.$emit("closeDialog", form);
+    },
+    next: function next() {
+
+      if (this.e1 < 3) this.e1 = parseInt(this.e1) + 1;
+    },
+    prev: function prev() {
+      this.e1 = parseInt(this.e1) - 1;
+    },
+    searchCustomer: function searchCustomer(v) {
+      var _this = this;
+
+      axios.get('/api/customers', {
+        params: {
+          keyword: v
+        }
+      }).then(function (res) {
+        _this.customers = res.data.data;
+      });
+    },
+    searchProduct: function searchProduct(v) {
+      var _this2 = this;
+
+      axios.get('/api/products', {
+        params: {
+          keyword: v
+        }
+      }).then(function (res) {
+        _this2.products = res.data.data;
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -62369,7 +62400,31 @@ var render = function() {
                                       _c("v-autocomplete", {
                                         attrs: {
                                           label: "Search Products",
-                                          "prepend-icon": "shopping_cart"
+                                          "prepend-icon": "shopping_cart",
+                                          items: _vm.products,
+                                          "search-input": _vm.productSearch,
+                                          "item-text": "name",
+                                          "hide-no-data": "",
+                                          "return-object": ""
+                                        },
+                                        on: {
+                                          "update:searchInput": function(
+                                            $event
+                                          ) {
+                                            _vm.productSearch = $event
+                                          },
+                                          "update:search-input": function(
+                                            $event
+                                          ) {
+                                            _vm.productSearch = $event
+                                          }
+                                        },
+                                        model: {
+                                          value: _vm.selectedProduct,
+                                          callback: function($$v) {
+                                            _vm.selectedProduct = $$v
+                                          },
+                                          expression: "selectedProduct"
                                         }
                                       })
                                     ],

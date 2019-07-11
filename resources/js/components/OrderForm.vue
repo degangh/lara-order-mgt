@@ -69,6 +69,12 @@
         <v-autocomplete
         label = "Search Products"
         prepend-icon = "shopping_cart"
+        :items = "products"
+        v-model = "selectedProduct"
+        :search-input.sync="productSearch"
+        item-text = "name"
+        hide-no-data
+        return-object
         >
         </v-autocomplete>
         </v-card>
@@ -113,9 +119,12 @@ export default {
           back_button_text: 'Back',
           isLoading: false,
           customerSearch: null,
+          productSearch: null,
           selectedCustomer: null,
+          selectedProduct: null,
           customers: [],
           addresses: [],
+          products: [],
           address: null
       }
     },
@@ -132,11 +141,25 @@ export default {
         this.isLoading = false
       },
 
+      productSearch (v)
+      {
+        if ( v == null) return
+        if (v.length > 0) this.isLoading = true
+        if (v.length == 0) this.customers = []
+        if (v.length < 2 ) return
+        this.searchProduct (v)
+      },
+
       selectedCustomer (v)
       {
         
         if(v) this.addresses = v.addresses
 
+      },
+
+      selectedProduct (v)
+      {
+        console.log(v)
       }
     },
 
@@ -150,6 +173,7 @@ export default {
         this.$refs.OrderForm.reset()
         this.addresses = []
         this.customers = []
+        this.products = []
         this.isLoading = false
         this.$emit("closeDialog", form)
       },
@@ -173,6 +197,17 @@ export default {
           })
           .then(res => {
             this.customers = res.data.data
+          })
+      },
+
+      searchProduct (v) {
+        axios.get('/api/products', {
+              params: {
+                  keyword: v
+              }
+          })
+          .then(res => {
+            this.products = res.data.data
           })
       }
     }
