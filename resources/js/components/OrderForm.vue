@@ -43,6 +43,7 @@
         item-text="name"
         v-model='selectedCustomer'
         return-object
+        :rules = "customerRules"
         >
 
         </v-autocomplete>
@@ -53,6 +54,7 @@
         v-model = "address"
         item-text = "address"
         return-object
+        :rules = "addressRules"
         >
 
         </v-combobox>
@@ -125,7 +127,15 @@ export default {
           customers: [],
           addresses: [],
           products: [],
-          address: null
+          selectedProducts: [],
+          address: null,
+          customerRules: [
+          v => !!v || 'Customer must be selected'
+          ],
+          addressRules: [
+          v => !!v || 'Address must be selected'
+          ]
+
       }
     },
 
@@ -159,7 +169,9 @@ export default {
 
       selectedProduct (v)
       {
-        console.log(v)
+        v.num = 1
+        this.selectedProducts.push(v)
+        console.log(this.selectedProducts)
       }
     },
 
@@ -179,7 +191,7 @@ export default {
       },
 
       next(){
-          
+          if (!this.$refs.OrderForm.validate()) return
           if (this.e1 < 3) this.e1 = parseInt(this.e1) + 1
 
       },
