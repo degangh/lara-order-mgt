@@ -79,6 +79,7 @@
         return-object
         >
         </v-autocomplete>
+        <order-detail></order-detail>
         </v-card>
 
 
@@ -110,8 +111,14 @@
 </template>
 
 <script>
+import OrderDetail from './OrderDetail'
 export default {
     name: "OrderForm",
+
+    components: {
+      OrderDetail
+    },
+
 
     data() {
       return {
