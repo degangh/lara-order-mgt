@@ -10,9 +10,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-* PHP 7.0.1 or later
+* PHP 7.1.3 or later
 * MySQL
-* Laravel Framework
+* Laravel Framework 5.6
 * Vue.js + Vuetify + Vuex + VueRouter
 
 ### Installing
