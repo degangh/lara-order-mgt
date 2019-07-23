@@ -9,15 +9,13 @@ class CustomerRepository implements CustomerRepositoryInterface
 {
     public function all($keyword = '', $records_per_page = 20)
     {
-        if (empty($keyword)) return Customer::with(array(
+        
+        return Customer::when($keyword, function($query, $keyword){
+            return $query->where('name', 'like', '%' . $keyword . '%');
+        })->with(array(
             'addresses' => function ($query){
                 $query->orderBy('is_default', 'desc');
-            }))->paginate($records_per_page);
-        
-            return Customer::where('name', 'like', '%' . $keyword . '%')->with(array(
-                'addresses' => function ($query){
-                    $query->orderBy('is_default', 'desc');
-            }))->paginate($records_per_page);
+        }))->paginate($records_per_page);
     }
 
     public function create($attributes)
