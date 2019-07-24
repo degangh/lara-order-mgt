@@ -61998,6 +61998,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -62401,6 +62419,69 @@ var render = function() {
                                             _vm.productSearch = $event
                                           }
                                         },
+                                        scopedSlots: _vm._u([
+                                          {
+                                            key: "no-data",
+                                            fn: function() {
+                                              return [
+                                                _c(
+                                                  "v-list-tile",
+                                                  [
+                                                    _c("v-list-tile-title", [
+                                                      _vm._v(
+                                                        "\r\n              Search for products to add\r\n            "
+                                                      )
+                                                    ])
+                                                  ],
+                                                  1
+                                                )
+                                              ]
+                                            },
+                                            proxy: true
+                                          },
+                                          {
+                                            key: "item",
+                                            fn: function(ref) {
+                                              var item = ref.item
+                                              return [
+                                                _c(
+                                                  "v-list-tile-content",
+                                                  [
+                                                    _c("v-list-tile-title", {
+                                                      domProps: {
+                                                        textContent: _vm._s(
+                                                          item.name
+                                                        )
+                                                      }
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "v-list-tile-sub-title",
+                                                      {
+                                                        domProps: {
+                                                          textContent: _vm._s(
+                                                            item.ref_price_aud
+                                                          )
+                                                        }
+                                                      }
+                                                    )
+                                                  ],
+                                                  1
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-list-tile-action",
+                                                  [
+                                                    _c("v-icon", [
+                                                      _vm._v("add")
+                                                    ])
+                                                  ],
+                                                  1
+                                                )
+                                              ]
+                                            }
+                                          }
+                                        ]),
                                         model: {
                                           value: _vm.selectedProduct,
                                           callback: function($$v) {

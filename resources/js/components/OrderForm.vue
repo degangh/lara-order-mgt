@@ -78,6 +78,24 @@
         hide-no-data
         return-object
         >
+        <template v-slot:no-data>
+          <v-list-tile>
+            <v-list-tile-title>
+              Search for products to add
+            </v-list-tile-title>
+          </v-list-tile>
+        </template>
+        <template v-slot:item="{ item }">
+         
+          <v-list-tile-content>
+            <v-list-tile-title v-text="item.name"></v-list-tile-title>
+            <v-list-tile-sub-title v-text="item.ref_price_aud"></v-list-tile-sub-title>
+          </v-list-tile-content>
+          <v-list-tile-action>
+            <v-icon>add</v-icon>
+          </v-list-tile-action>
+        </template>
+
         </v-autocomplete>
         <order-detail></order-detail>
         </v-card>
