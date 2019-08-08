@@ -77,6 +77,7 @@
         item-text = "name"
         hide-no-data
         return-object
+        @input="afterselection"
         >
         <template v-slot:no-data>
           <v-list-tile>
@@ -97,7 +98,7 @@
         </template>
 
         </v-autocomplete>
-        <order-detail></order-detail>
+        <order-detail :products="selectedProducts"></order-detail>
         </v-card>
 
 
@@ -194,9 +195,11 @@ export default {
 
       selectedProduct (v)
       {
+        if (v == null) return;
         v.num = 1
         this.selectedProducts.push(v)
         console.log(this.selectedProducts)
+        this.selectedProduct = null
       }
     },
 
@@ -246,7 +249,13 @@ export default {
           .then(res => {
             this.products = res.data.data
           })
-      }
+      },
+
+      afterselection(item){
+      this.$nextTick(() => {
+        this.selectedProduct = null  
+      })
+    }
     }
 }
 </script>
