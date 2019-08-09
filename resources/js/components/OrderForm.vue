@@ -77,7 +77,8 @@
         item-text = "name"
         hide-no-data
         return-object
-        @input="afterselection"
+        @input="afterSelection"
+        @change="productSearch=null"
         >
         <template v-slot:no-data>
           <v-list-tile>
@@ -181,7 +182,7 @@ export default {
       {
         if ( v == null) return
         if (v.length > 0) this.isLoading = true
-        if (v.length == 0) this.customers = []
+        if (v.length == 0) this.products = []
         if (v.length < 2 ) return
         this.searchProduct (v)
       },
@@ -200,6 +201,8 @@ export default {
         this.selectedProducts.push(v)
         console.log(this.selectedProducts)
         this.selectedProduct = null
+        this.products = []
+        
       }
     },
 
@@ -251,11 +254,13 @@ export default {
           })
       },
 
-      afterselection(item){
-      this.$nextTick(() => {
-        this.selectedProduct = null  
-      })
-    }
+      afterSelection(){
+        this.$nextTick(() => {
+          this.selectedProduct = null
+        })
+      }
+
+      
     }
 }
 </script>

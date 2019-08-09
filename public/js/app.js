@@ -62143,6 +62143,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -62193,7 +62194,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     productSearch: function productSearch(v) {
       if (v == null) return;
       if (v.length > 0) this.isLoading = true;
-      if (v.length == 0) this.customers = [];
+      if (v.length == 0) this.products = [];
       if (v.length < 2) return;
       this.searchProduct(v);
     },
@@ -62207,6 +62208,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.selectedProducts.push(v);
       console.log(this.selectedProducts);
       this.selectedProduct = null;
+      this.products = [];
     }
   },
 
@@ -62253,7 +62255,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this2.products = res.data.data;
       });
     },
-    afterselection: function afterselection(item) {
+    afterSelection: function afterSelection() {
       var _this3 = this;
 
       this.$nextTick(function () {
@@ -62567,7 +62569,10 @@ var render = function() {
                                           ) {
                                             _vm.productSearch = $event
                                           },
-                                          input: _vm.afterselection
+                                          input: _vm.afterSelection,
+                                          change: function($event) {
+                                            _vm.productSearch = null
+                                          }
                                         },
                                         scopedSlots: _vm._u([
                                           {
