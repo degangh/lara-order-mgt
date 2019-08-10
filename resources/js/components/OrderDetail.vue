@@ -1,8 +1,13 @@
 <template>
 <div>
-<ul>
-    <li v-for="(item, index) of products" :key="index">{{item.name}}</li>
-</ul>
+<table class="table table-striped">
+    <tr v-for="(item, index) of products" :key="index">
+        <td>{{item.name}}</td>
+        <td>A${{item.ref_price_aud}}</td>
+        <td>CNY{{item.ref_sales_price_cny}}</td>
+        <td>{{item.num}}</td>
+    </tr>
+</table>
 </div>
 </template>
 <script>

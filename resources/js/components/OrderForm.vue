@@ -201,7 +201,7 @@ export default {
         this.selectedProducts.push(v)
         console.log(this.selectedProducts)
         this.selectedProduct = null
-        this.products = []
+        this.products = []  
         
       }
     },

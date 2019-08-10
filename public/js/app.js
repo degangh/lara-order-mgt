@@ -62204,6 +62204,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     selectedProduct: function selectedProduct(v) {
       if (v == null) return;
+      console.log(this.selectedProducts.includes(v));
       v.num = 1;
       this.selectedProducts.push(v);
       console.log(this.selectedProducts);
@@ -62325,6 +62326,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "OrderDetail",
@@ -62343,9 +62349,18 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c(
-      "ul",
+      "table",
+      { staticClass: "table table-striped" },
       _vm._l(_vm.products, function(item, index) {
-        return _c("li", { key: index }, [_vm._v(_vm._s(item.name))])
+        return _c("tr", { key: index }, [
+          _c("td", [_vm._v(_vm._s(item.name))]),
+          _vm._v(" "),
+          _c("td", [_vm._v("A$" + _vm._s(item.ref_price_aud))]),
+          _vm._v(" "),
+          _c("td", [_vm._v("CNY" + _vm._s(item.ref_sales_price_cny))]),
+          _vm._v(" "),
+          _c("td", [_vm._v(_vm._s(item.num))])
+        ])
       }),
       0
     )
