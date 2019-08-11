@@ -62204,9 +62204,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     selectedProduct: function selectedProduct(v) {
       if (v == null) return;
-      console.log(this.selectedProducts.includes(v));
       v.num = 1;
-      this.selectedProducts.push(v);
+      if (this.hasProduct(this.selectedProducts, v)) this.addOneProduct(v);else this.selectedProducts.push(v);
       console.log(this.selectedProducts);
       this.selectedProduct = null;
       this.products = [];
@@ -62261,6 +62260,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.$nextTick(function () {
         _this3.selectedProduct = null;
+      });
+    },
+    hasProduct: function hasProduct(pArray, p) {
+
+      var flag = false;
+      pArray.forEach(function (ele) {
+        if (ele.id == p.id) flag = true;
+      });
+
+      return flag;
+    },
+    addOneProduct: function addOneProduct(p) {
+      this.selectedProducts.forEach(function (ele) {
+        if (ele.id == p.id) ele.num++;
       });
     }
   }

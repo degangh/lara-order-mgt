@@ -198,7 +198,8 @@ export default {
       {
         if (v == null) return;
         v.num = 1
-        this.selectedProducts.push(v)
+        if (this.hasProduct(this.selectedProducts, v)) this.addOneProduct(v)
+        else this.selectedProducts.push(v)
         console.log(this.selectedProducts)
         this.selectedProduct = null
         this.products = []  
@@ -257,6 +258,22 @@ export default {
       afterSelection(){
         this.$nextTick(() => {
           this.selectedProduct = null
+        })
+      },
+
+      hasProduct(pArray, p){
+
+        let flag = false
+        pArray.forEach(function(ele){
+          if (ele.id == p.id) flag = true
+        })
+
+        return flag
+      },
+
+      addOneProduct(p) {
+        this.selectedProducts.forEach(function(ele){
+          if (ele.id == p.id) ele.num++
         })
       }
 
