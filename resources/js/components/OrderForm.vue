@@ -272,9 +272,16 @@ export default {
       },
 
       addOneProduct(p) {
-        this.selectedProducts.forEach(function(ele){
-          if (ele.id == p.id) ele.num++
+        this.selectedProducts.forEach((ele,idx) =>{
+          
+          if (ele.id == p.id) 
+          {
+            p.num = ele.num + 1
+            this.$set(this.selectedProducts, idx, p)
+          }
         })
+
+        
       }
 
       

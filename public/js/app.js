@@ -62272,8 +62272,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return flag;
     },
     addOneProduct: function addOneProduct(p) {
-      this.selectedProducts.forEach(function (ele) {
-        if (ele.id == p.id) ele.num++;
+      var _this4 = this;
+
+      this.selectedProducts.forEach(function (ele, idx) {
+
+        if (ele.id == p.id) {
+          p.num = ele.num + 1;
+          _this4.$set(_this4.selectedProducts, idx, p);
+        }
       });
     }
   }
