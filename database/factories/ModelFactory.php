@@ -49,9 +49,11 @@ $factory->define(App\Address::class, function(Faker $faker){
 });
 
 $factory->define(App\Product::class, function(Faker $faker){
+    $price_aud = mt_rand(100,1000)/100;
     return [
         'name' => $faker->word,
-        'ref_price_aud' => mt_rand(100,1000)/100,
+        'ref_price_aud' => $price_aud,
+        'rrp_cny' => $price_aud * 5 * 1.25
     ];
 });
 

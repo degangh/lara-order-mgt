@@ -8,6 +8,7 @@ class Product extends Model
 {
     protected $fillable = [
         'name',
-        'ref_price_aud'
+        'ref_price_aud',
+        'rrp_cny'
     ];
 }

@@ -23,10 +23,20 @@
             
             <v-flex xs12>
               <v-text-field
-                type="tel"
+                type="number"
                 prepend-icon="money"
                 placeholder="Product Price in AUD"
                 v-model = "ref_price_aud"
+                :rules="priceRules"
+              ></v-text-field>
+            </v-flex>
+
+            <v-flex xs12>
+              <v-text-field
+                type="number"
+                prepend-icon="money"
+                placeholder="Sale Price in CNY"
+                v-model = "rrp_cny"
                 :rules="priceRules"
               ></v-text-field>
             </v-flex>
@@ -58,6 +68,7 @@ export default {
         return {
             name: '',
             ref_price_aud: '',
+            rrp_cny: '',
             valid: false,
             snackbar: false,
             snackbarText: 'Saving Product ...',
@@ -81,7 +92,8 @@ export default {
           axios.post('/api/products', {
      
                   name: this.name,
-                  ref_price_aud: this.ref_price_aud
+                  ref_price_aud: this.ref_price_aud,
+                  rrp_cny: this.rrp_cny
      
           })
           .then(this.handleResponse)

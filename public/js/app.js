@@ -61378,6 +61378,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "ProductForm",
@@ -61390,6 +61400,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             name: '',
             ref_price_aud: '',
+            rrp_cny: '',
             valid: false,
             snackbar: false,
             snackbarText: 'Saving Product ...',
@@ -61415,7 +61426,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/api/products', {
 
                 name: this.name,
-                ref_price_aud: this.ref_price_aud
+                ref_price_aud: this.ref_price_aud,
+                rrp_cny: this.rrp_cny
 
             }).then(this.handleResponse).catch(function (err) {
                 alert(err);
@@ -61534,7 +61546,7 @@ var render = function() {
                         [
                           _c("v-text-field", {
                             attrs: {
-                              type: "tel",
+                              type: "number",
                               "prepend-icon": "money",
                               placeholder: "Product Price in AUD",
                               rules: _vm.priceRules
@@ -61545,6 +61557,29 @@ var render = function() {
                                 _vm.ref_price_aud = $$v
                               },
                               expression: "ref_price_aud"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs12: "" } },
+                        [
+                          _c("v-text-field", {
+                            attrs: {
+                              type: "number",
+                              "prepend-icon": "money",
+                              placeholder: "Sale Price in CNY",
+                              rules: _vm.priceRules
+                            },
+                            model: {
+                              value: _vm.rrp_cny,
+                              callback: function($$v) {
+                                _vm.rrp_cny = $$v
+                              },
+                              expression: "rrp_cny"
                             }
                           })
                         ],
@@ -64477,6 +64512,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -64578,15 +64617,13 @@ var render = function() {
               _c(
                 "tbody",
                 _vm._l(_vm.products, function(product, index) {
-                  return _c(
-                    "tr",
-                    { key: index, on: { click: function($event) {} } },
-                    [
-                      _c("td", [_vm._v(_vm._s(product.name))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(product.ref_price_aud))])
-                    ]
-                  )
+                  return _c("tr", { key: index }, [
+                    _c("td", [_vm._v(_vm._s(product.name))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(product.ref_price_aud))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(product.rrp_cny))])
+                  ])
                 }),
                 0
               )
@@ -64635,6 +64672,12 @@ var staticRenderFns = [
       _c("th", { staticClass: "col2" }, [
         _vm._v(
           "\n                            Ref Price AUD\n                            "
+        )
+      ]),
+      _vm._v(" "),
+      _c("th", { staticClass: "col2" }, [
+        _vm._v(
+          "\n                            RRP CNY\n                            "
         )
       ])
     ])

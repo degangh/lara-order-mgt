@@ -43,7 +43,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {        
         $product = $this->productRepository->create($request);
 
         return response()->json($product->toArray());

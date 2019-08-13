@@ -23,12 +23,16 @@
                             <th class="col2">
                             Ref Price AUD
                             </th>
+                            <th class="col2">
+                            RRP CNY
+                            </th>
                             
                         </tr>
                         <tbody>
-                        <tr v-for = "(product, index) of products" :key="index" @click="">
+                        <tr v-for = "(product, index) of products" :key="index" >
                             <td>{{product.name}}</td>
                             <td>{{product.ref_price_aud}}</td>
+                            <td>{{product.rrp_cny}}</td>
                             
                         </tr>
 

@@ -16,10 +16,11 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function create($attributes)
     {
-        
+
         return Product::create([
             'name' => $attributes->name,
-            'ref_price_aud' => $attributes->ref_price_aud
+            'ref_price_aud' => $attributes->ref_price_aud,
+            'rrp_cny' => $attributes->rrp_cny
         ]);
         
     }
