@@ -4,7 +4,7 @@
     <tr v-for="(item, index) of products" :key="index">
         <td>{{item.name}}</td>
         <td>A${{item.ref_price_aud}}</td>
-        <td>CNY{{item.ref_sales_price_cny}}</td>
+        <td>CNY{{item.rrp_cny}}</td>
         <td>{{item.num}}</td>
     </tr>
 </table>
