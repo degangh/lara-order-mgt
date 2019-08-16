@@ -62283,9 +62283,12 @@ var render = function() {
         return _c("tr", { key: index }, [
           _c("td", [_vm._v(_vm._s(item.name))]),
           _vm._v(" "),
-          _c("td", [_vm._v("A$" + _vm._s(item.ref_price_aud))]),
+          _c("td", [_vm._v("AUD" + _vm._s(item.ref_price_aud))]),
           _vm._v(" "),
-          _c("td", [_vm._v("CNY" + _vm._s(item.rrp_cny))]),
+          _c("td", [
+            _vm._v("CNY"),
+            _c("input", { domProps: { value: item.rrp_cny } })
+          ]),
           _vm._v(" "),
           _c("td", [_vm._v(_vm._s(item.num))])
         ])
