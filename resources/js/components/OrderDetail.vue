@@ -1,13 +1,18 @@
 <template>
 <div>
-<table class="table table-striped">
-    <tr v-for="(item, index) of products" :key="index">
-        <td>{{item.name}}</td>
-        <td>AUD{{item.ref_price_aud}}</td>
-        <td>CNY<input :value="item.rrp_cny"></td>
-        <td>{{item.num}}</td>
-    </tr>
-</table>
+<v-container>
+    <v-flex row v-for="(item, index) of products" :key="index">
+        <v-flex md3 sm12 xs12>{{item.name}}</v-flex>
+        <v-flex md3 sm4 xs4>
+            <v-text-field class="table-cell-input" prefix="AUD" :value="item.ref_price_aud"></v-text-field>
+        </v-flex>
+        <v-flex md3 sm4 xs4>
+            <v-text-field class="table-cell-input" prefix="CNY" :value="item.rrp_cny"></v-text-field>
+        </v-flex>
+        <v-flex md3 sm4 xs4><v-text-field class="table-cell-input" :value="item.num"></v-text-field></v-flex>
+    </v-flex>
+</v-container>
+
 </div>
 </template>
 <script>
@@ -18,3 +23,14 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+v-flex {
+    vertical-align: middle
+}
+
+.table-cell-input{
+    font-size: 0.9rem
+}
+
+</style>
