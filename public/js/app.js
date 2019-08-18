@@ -62406,7 +62406,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\nv-flex[data-v-30ab9ca4] {\n    vertical-align: middle\n}\n.table-cell-input[data-v-30ab9ca4]{\n    font-size: 0.9rem\n}\n\n", ""]);
+exports.push([module.i, "\n.flex-cell[data-v-30ab9ca4] {\n    margin:0px\n}\n.table-cell-input[data-v-30ab9ca4]{\n    font-size: 0.9rem;\n    margin-left: 0.5rem;\n}\n.table-cell-input input[data-v-30ab9ca4] {\n    text-align: center;\n}\n\n", ""]);
 
 // exports
 
@@ -62458,11 +62458,16 @@ var render = function() {
         _vm._l(_vm.products, function(item, index) {
           return _c(
             "v-flex",
-            { key: index, attrs: { row: "" } },
+            { key: index, attrs: { row: "", "align-center": "", wrap: "" } },
             [
-              _c("v-flex", { attrs: { md3: "", sm12: "", xs12: "" } }, [
-                _vm._v(_vm._s(item.name))
-              ]),
+              _c(
+                "v-flex",
+                {
+                  staticClass: "flex-cell",
+                  attrs: { md3: "", sm12: "", xs12: "" }
+                },
+                [_vm._v(_vm._s(item.name))]
+              ),
               _vm._v(" "),
               _c(
                 "v-flex",
