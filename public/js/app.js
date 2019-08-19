@@ -62179,6 +62179,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -62316,6 +62318,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this4.$set(_this4.selectedProducts, idx, p);
         }
       });
+    },
+    updateSelectedProducts: function updateSelectedProducts(product_id, new_value, key) {
+      console.log(product_id, new_value, key);
     }
   }
 });
@@ -62439,6 +62444,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: "OrderDetail",
     props: {
         products: Array
+    },
+    methods: {
+        emitUpdateSelectedProduct: function emitUpdateSelectedProduct(product_id, key) {
+            this.$emit('updateSelectedProducts', {
+                product_id: product_id,
+                new_value: event.target.value,
+                key: key
+            });
+        }
     }
 });
 
@@ -62487,7 +62501,12 @@ var render = function() {
                 [
                   _c("v-text-field", {
                     staticClass: "table-cell-input",
-                    attrs: { prefix: "CNY", value: item.rrp_cny }
+                    attrs: { prefix: "CNY", value: item.rrp_cny },
+                    on: {
+                      change: function($event) {
+                        return _vm.emitUpdateSelectedProduct(item.id, "rrp_cny")
+                      }
+                    }
                   })
                 ],
                 1
@@ -62812,6 +62831,10 @@ var render = function() {
                                       _c("order-detail", {
                                         attrs: {
                                           products: _vm.selectedProducts
+                                        },
+                                        on: {
+                                          updateSelectedProducts:
+                                            _vm.updateSelectedProducts
                                         }
                                       })
                                     ],

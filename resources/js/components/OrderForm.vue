@@ -99,7 +99,9 @@
         </template>
 
         </v-autocomplete>
-        <order-detail :products="selectedProducts"></order-detail>
+        <order-detail 
+        :products="selectedProducts"
+        @updateSelectedProducts="updateSelectedProducts"></order-detail>
         </v-card>
 
 
@@ -282,6 +284,10 @@ export default {
         })
 
         
+      },
+      updateSelectedProducts(product_id,new_value,key)
+      {
+        console.log(product_id, new_value, key)
       }
 
       
