@@ -44,6 +44,7 @@
         v-model='selectedCustomer'
         return-object
         :rules = "customerRules"
+        autofocus
         >
 
         </v-autocomplete>
@@ -285,9 +286,9 @@ export default {
 
         
       },
-      updateSelectedProducts(product_id,new_value,key)
+      updateSelectedProducts(payload)
       {
-        console.log(product_id, new_value, key)
+        console.log(payload)
       }
 
       
