@@ -62196,6 +62196,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     updateSelectedProducts: function updateSelectedProducts(payload) {
       console.log(payload);
+      console.log(this.selectedProducts.length);
+      console.log(this.selectedProducts);
+      this.selectedProducts.map(function (sp, index) {
+        //if(sp.id == payload.id) this.selectedProducts[index].num = payload.num
+      });
     }
   }
 });

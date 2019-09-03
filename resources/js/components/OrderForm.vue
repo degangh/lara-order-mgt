@@ -289,6 +289,12 @@ export default {
       updateSelectedProducts(payload)
       {
         console.log(payload)
+        console.log(this.selectedProducts.length)
+        
+        this.selectedProducts.map((sp, index) => {
+          //dosomething here
+        })
+        console.log(this.selectedProducts)
       }
 
       
