@@ -280,7 +280,7 @@ export default {
           
           if (ele.id == p.id) 
           {
-            p.num = ele.num + 1
+            p.num = new Number(ele.num) + 1
             this.$set(this.selectedProducts, idx, p)
           }
         })

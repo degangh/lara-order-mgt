@@ -62190,7 +62190,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.selectedProducts.forEach(function (ele, idx) {
 
         if (ele.id == p.id) {
-          p.num = ele.num + 1;
+          p.num = new Number(ele.num) + 1;
           _this4.$set(_this4.selectedProducts, idx, p);
         }
       });
@@ -62203,7 +62203,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this5.selectedProducts[index][payload.key] = payload.new_value;
         }
       });
-      console.log(this.selectedProducts);
     }
   }
 });
@@ -62337,6 +62336,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "OrderDetail",
@@ -62387,7 +62389,11 @@ var render = function() {
                 [
                   _c("v-text-field", {
                     staticClass: "table-cell-input",
-                    attrs: { prefix: "AUD", value: item.ref_price_aud },
+                    attrs: {
+                      prefix: "AUD",
+                      value: item.ref_price_aud,
+                      type: "number"
+                    },
                     on: {
                       change: function($event) {
                         return _vm.emitUpdateSelectedProduct(
@@ -62407,7 +62413,11 @@ var render = function() {
                 [
                   _c("v-text-field", {
                     staticClass: "table-cell-input",
-                    attrs: { prefix: "CNY", value: item.rrp_cny },
+                    attrs: {
+                      prefix: "CNY",
+                      type: "number",
+                      value: item.rrp_cny
+                    },
                     on: {
                       change: function($event) {
                         return _vm.emitUpdateSelectedProduct(item.id, "rrp_cny")
@@ -62424,7 +62434,7 @@ var render = function() {
                 [
                   _c("v-text-field", {
                     staticClass: "table-cell-input",
-                    attrs: { value: item.num },
+                    attrs: { type: "number", value: item.num },
                     on: {
                       change: function($event) {
                         return _vm.emitUpdateSelectedProduct(item.id, "num")

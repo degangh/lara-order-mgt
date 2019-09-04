@@ -8,6 +8,7 @@
             class="table-cell-input"
             prefix="AUD"
             :value="item.ref_price_aud"
+            type="number"
             @change="emitUpdateSelectedProduct(item.id, 'ref_price_aud')"
           ></v-text-field>
         </v-flex>
@@ -15,6 +16,7 @@
           <v-text-field
             class="table-cell-input"
             prefix="CNY"
+            type="number"
             :value="item.rrp_cny"
             @change="emitUpdateSelectedProduct(item.id, 'rrp_cny')"
           ></v-text-field>
@@ -22,6 +24,7 @@
         <v-flex md3 sm4 xs4>
           <v-text-field
             class="table-cell-input"
+            type="number"
             :value="item.num"
             @change="emitUpdateSelectedProduct(item.id, 'num')"
           ></v-text-field>
