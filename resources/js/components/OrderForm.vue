@@ -221,6 +221,7 @@ export default {
         this.addresses = []
         this.customers = []
         this.products = []
+        this.selectedProducts = []
         this.isLoading = false
         this.$emit("closeDialog", form)
       },
@@ -287,14 +288,12 @@ export default {
         
       },
       updateSelectedProducts(payload)
-      {
-        console.log(payload)
-        console.log(this.selectedProducts.length)
-        
+      {        
         this.selectedProducts.map((sp, index) => {
-          //dosomething here
+          if(sp.id == payload.product_id) {
+            this.selectedProducts[index][payload.key] = payload.new_value
+          }
         })
-        console.log(this.selectedProducts)
       }
 
       

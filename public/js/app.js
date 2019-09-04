@@ -62135,6 +62135,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.addresses = [];
       this.customers = [];
       this.products = [];
+      this.selectedProducts = [];
       this.isLoading = false;
       this.$emit("closeDialog", form);
     },
@@ -62195,12 +62196,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     updateSelectedProducts: function updateSelectedProducts(payload) {
-      console.log(payload);
-      console.log(this.selectedProducts.length);
-      console.log(this.selectedProducts);
+      var _this5 = this;
+
       this.selectedProducts.map(function (sp, index) {
-        //if(sp.id == payload.id) this.selectedProducts[index].num = payload.num
+        if (sp.id == payload.product_id) {
+          _this5.selectedProducts[index][payload.key] = payload.new_value;
+        }
       });
+      console.log(this.selectedProducts);
     }
   }
 });
