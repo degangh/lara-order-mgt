@@ -110,10 +110,11 @@
 
       <v-stepper-content step="3">
         <v-card
-          class="mb-5"
-          color="grey lighten-1"
-          min-height = "200px"
-        ></v-card>
+        >
+        <order-detail-confirm 
+        :products="selectedProducts"
+        @updateSelectedProducts="updateSelectedProducts"></order-detail-confirm>
+        </v-card>
 
       </v-stepper-content>
     </v-stepper-items>
@@ -135,11 +136,13 @@
 
 <script>
 import OrderDetail from './OrderDetail'
+import OrderDetailConfirm from './OrderDetailConfirm'
 export default {
     name: "OrderForm",
 
     components: {
-      OrderDetail
+      OrderDetail,
+      OrderDetailConfirm
     },
 
 
