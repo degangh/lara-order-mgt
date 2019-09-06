@@ -62584,38 +62584,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "OrderDetailConfirm",
   props: {
     products: Array
   },
-  methods: {
-    emitUpdateSelectedProduct: function emitUpdateSelectedProduct(product_id, key) {
-      this.$emit("updateSelectedProducts", {
-        product_id: product_id,
-        new_value: event.target.value,
-        key: key
-      });
-    }
-  }
+  methods: {}
 });
 
 /***/ }),
@@ -62645,67 +62620,17 @@ var render = function() {
                 [_vm._v(_vm._s(item.name))]
               ),
               _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { md3: "", sm4: "", xs4: "" } },
-                [
-                  _c("v-text-field", {
-                    staticClass: "table-cell-input",
-                    attrs: {
-                      prefix: "AUD",
-                      value: item.ref_price_aud,
-                      type: "number"
-                    },
-                    on: {
-                      change: function($event) {
-                        return _vm.emitUpdateSelectedProduct(
-                          item.id,
-                          "ref_price_aud"
-                        )
-                      }
-                    }
-                  })
-                ],
-                1
-              ),
+              _c("v-flex", { attrs: { md3: "", sm4: "", xs4: "" } }, [
+                _vm._v("\n        " + _vm._s(item.ref_price_aud) + "\n      ")
+              ]),
               _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { md3: "", sm4: "", xs4: "" } },
-                [
-                  _c("v-text-field", {
-                    staticClass: "table-cell-input",
-                    attrs: {
-                      prefix: "CNY",
-                      type: "number",
-                      value: item.rrp_cny
-                    },
-                    on: {
-                      change: function($event) {
-                        return _vm.emitUpdateSelectedProduct(item.id, "rrp_cny")
-                      }
-                    }
-                  })
-                ],
-                1
-              ),
+              _c("v-flex", { attrs: { md3: "", sm4: "", xs4: "" } }, [
+                _vm._v("\n        " + _vm._s(item.rrp_cny) + "\n      ")
+              ]),
               _vm._v(" "),
-              _c(
-                "v-flex",
-                { attrs: { md3: "", sm4: "", xs4: "" } },
-                [
-                  _c("v-text-field", {
-                    staticClass: "table-cell-input",
-                    attrs: { type: "number", value: item.num },
-                    on: {
-                      change: function($event) {
-                        return _vm.emitUpdateSelectedProduct(item.id, "num")
-                      }
-                    }
-                  })
-                ],
-                1
-              )
+              _c("v-flex", { attrs: { md3: "", sm4: "", xs4: "" } }, [
+                _vm._v("\n        " + _vm._s(item.num) + "\n      ")
+              ])
             ],
             1
           )
