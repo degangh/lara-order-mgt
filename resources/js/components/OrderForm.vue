@@ -113,7 +113,7 @@
         >
         <order-detail-confirm 
         :products="selectedProducts"
-        @updateSelectedProducts="updateSelectedProducts"></order-detail-confirm>
+        ></order-detail-confirm>
         </v-card>
 
       </v-stepper-content>
