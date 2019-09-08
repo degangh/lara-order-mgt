@@ -62722,7 +62722,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   props: {
     products: Array
   },
-  methods: {},
+  methods: {
+    calculateTotalPrice: function calculateTotalPrice() {
+      var total = 0;
+      this.products.map(function (product) {
+        total += product.num * product.rrp_cny;
+      });
+      return total;
+    }
+  },
   mounted: function mounted() {
     console.log(this.products);
   },
@@ -62783,7 +62791,9 @@ var render = function() {
             )
           }),
           _vm._v(" "),
-          _c("v-flex", [_vm._v("\n      " + _vm._s(_vm.totalPrice) + "\n    ")])
+          _c("v-flex", [
+            _vm._v("\n      " + _vm._s(this.calculateTotalPrice()) + "\n    ")
+          ])
         ],
         2
       )

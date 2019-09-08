@@ -17,7 +17,7 @@
         </v-flex>
       </v-flex>
       <v-flex>
-        {{totalPrice}}
+        {{this.calculateTotalPrice()}}
       </v-flex>
     </v-container>
   </div>
@@ -29,7 +29,13 @@ export default {
     products: Array
   },
   methods: {
-    
+    calculateTotalPrice(){
+      let total = 0
+      this.products.map((product) => {
+        total += product.num * product.rrp_cny
+      })
+      return total
+    }
   },
   mounted() {
     console.log(this.products)
