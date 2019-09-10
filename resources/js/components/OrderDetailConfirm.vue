@@ -1,24 +1,26 @@
 <template>
   <div>
     <v-container>
-      <v-flex row v-for="(item, index) of products" :key="index" align-center wrap>
-        <v-flex  class="flex-cell">{{item.name}}</v-flex>
-        <v-flex >
+      <table class="table">
+      <tr v-for="(item, index) of products" :key="index" align-center wrap>
+        <td>{{item.name}}</td>
+        <td text-right>
           {{item.ref_price_aud}}
-        </v-flex>
-        <v-flex >
+        </td>
+        <td text-right>
           {{item.rrp_cny}}
-        </v-flex>
-        <v-flex >
+        </td>
+        <td text-right>
           {{item.num}}
-        </v-flex>
-        <v-flex>
+        </td>
+        <td text-right>
           {{item.num * item.rrp_cny}}
-        </v-flex>
-      </v-flex>
-      <v-flex>
-        {{this.calculateTotalPrice()}}
-      </v-flex>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="5" text-right>{{this.calculateTotalPrice()}}</td>
+      </tr>
+      </table>
     </v-container>
   </div>
 </template>

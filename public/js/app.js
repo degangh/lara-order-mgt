@@ -62716,6 +62716,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "OrderDetailConfirm",
@@ -62757,46 +62759,52 @@ var render = function() {
   return _c(
     "div",
     [
-      _c(
-        "v-container",
-        [
-          _vm._l(_vm.products, function(item, index) {
-            return _c(
-              "v-flex",
-              { key: index, attrs: { row: "", "align-center": "", wrap: "" } },
-              [
-                _c("v-flex", { staticClass: "flex-cell" }, [
-                  _vm._v(_vm._s(item.name))
-                ]),
-                _vm._v(" "),
-                _c("v-flex", [
-                  _vm._v("\n        " + _vm._s(item.ref_price_aud) + "\n      ")
-                ]),
-                _vm._v(" "),
-                _c("v-flex", [
-                  _vm._v("\n        " + _vm._s(item.rrp_cny) + "\n      ")
-                ]),
-                _vm._v(" "),
-                _c("v-flex", [
-                  _vm._v("\n        " + _vm._s(item.num) + "\n      ")
-                ]),
-                _vm._v(" "),
-                _c("v-flex", [
-                  _vm._v(
-                    "\n        " + _vm._s(item.num * item.rrp_cny) + "\n      "
-                  )
-                ])
-              ],
-              1
-            )
-          }),
-          _vm._v(" "),
-          _c("v-flex", [
-            _vm._v("\n      " + _vm._s(this.calculateTotalPrice()) + "\n    ")
-          ])
-        ],
-        2
-      )
+      _c("v-container", [
+        _c(
+          "table",
+          { staticClass: "table" },
+          [
+            _vm._l(_vm.products, function(item, index) {
+              return _c(
+                "tr",
+                { key: index, attrs: { "align-center": "", wrap: "" } },
+                [
+                  _c("td", [_vm._v(_vm._s(item.name))]),
+                  _vm._v(" "),
+                  _c("td", { attrs: { "text-right": "" } }, [
+                    _vm._v(
+                      "\n        " + _vm._s(item.ref_price_aud) + "\n      "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { attrs: { "text-right": "" } }, [
+                    _vm._v("\n        " + _vm._s(item.rrp_cny) + "\n      ")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { attrs: { "text-right": "" } }, [
+                    _vm._v("\n        " + _vm._s(item.num) + "\n      ")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", { attrs: { "text-right": "" } }, [
+                    _vm._v(
+                      "\n        " +
+                        _vm._s(item.num * item.rrp_cny) +
+                        "\n      "
+                    )
+                  ])
+                ]
+              )
+            }),
+            _vm._v(" "),
+            _c("tr", [
+              _c("td", { attrs: { colspan: "5", "text-right": "" } }, [
+                _vm._v(_vm._s(this.calculateTotalPrice()))
+              ])
+            ])
+          ],
+          2
+        )
+      ])
     ],
     1
   )
