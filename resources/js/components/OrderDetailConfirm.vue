@@ -4,21 +4,21 @@
       <table class="table">
       <tr v-for="(item, index) of products" :key="index" align-center wrap>
         <td>{{item.name}}</td>
-        <td text-right>
+        <td class="text-right">
           {{item.ref_price_aud}}
         </td>
-        <td text-right>
+        <td class="text-right">
           {{item.rrp_cny}}
         </td>
-        <td text-right>
+        <td class="text-right">
           {{item.num}}
         </td>
-        <td text-right>
+        <td class="text-right">
           {{item.num * item.rrp_cny}}
         </td>
       </tr>
       <tr>
-        <td colspan="5" text-right>{{this.calculateTotalPrice()}}</td>
+        <td colspan="5" class="text-right">{{this.calculateTotalPrice()}}</td>
       </tr>
       </table>
     </v-container>

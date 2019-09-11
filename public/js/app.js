@@ -62771,21 +62771,21 @@ var render = function() {
                 [
                   _c("td", [_vm._v(_vm._s(item.name))]),
                   _vm._v(" "),
-                  _c("td", { attrs: { "text-right": "" } }, [
+                  _c("td", { staticClass: "text-right" }, [
                     _vm._v(
                       "\n        " + _vm._s(item.ref_price_aud) + "\n      "
                     )
                   ]),
                   _vm._v(" "),
-                  _c("td", { attrs: { "text-right": "" } }, [
+                  _c("td", { staticClass: "text-right" }, [
                     _vm._v("\n        " + _vm._s(item.rrp_cny) + "\n      ")
                   ]),
                   _vm._v(" "),
-                  _c("td", { attrs: { "text-right": "" } }, [
+                  _c("td", { staticClass: "text-right" }, [
                     _vm._v("\n        " + _vm._s(item.num) + "\n      ")
                   ]),
                   _vm._v(" "),
-                  _c("td", { attrs: { "text-right": "" } }, [
+                  _c("td", { staticClass: "text-right" }, [
                     _vm._v(
                       "\n        " +
                         _vm._s(item.num * item.rrp_cny) +
@@ -62797,7 +62797,7 @@ var render = function() {
             }),
             _vm._v(" "),
             _c("tr", [
-              _c("td", { attrs: { colspan: "5", "text-right": "" } }, [
+              _c("td", { staticClass: "text-right", attrs: { colspan: "5" } }, [
                 _vm._v(_vm._s(this.calculateTotalPrice()))
               ])
             ])
