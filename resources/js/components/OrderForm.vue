@@ -203,7 +203,8 @@ export default {
       selectedProduct (v)
       {
         if (v == null) return;
-        v.num = 1
+        //v.num = 1 //this will bring a bug, but why?
+        v = {...v, num: 1} //this works, but why?
         if (this.hasProduct(this.selectedProducts, v)) this.addOneProduct(v)
         else this.selectedProducts.push(v)
         console.log(this.selectedProducts)

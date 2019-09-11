@@ -62049,6 +62049,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__OrderDetail___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__OrderDetail__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__OrderDetailConfirm__ = __webpack_require__(182);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__OrderDetailConfirm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__OrderDetailConfirm__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -62247,8 +62249,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     selectedProduct: function selectedProduct(v) {
       if (v == null) return;
-      v.num = 1;
-      if (this.hasProduct(this.selectedProducts, v)) this.addOneProduct(v);else this.selectedProducts.push(v);
+      //v.num = 1 //this will bring a bug, but why?
+      v = _extends({}, v, { num: 1 //this works, but why?
+      });if (this.hasProduct(this.selectedProducts, v)) this.addOneProduct(v);else this.selectedProducts.push(v);
       console.log(this.selectedProducts);
       this.selectedProduct = null;
       this.products = [];
