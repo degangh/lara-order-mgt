@@ -14,4 +14,6 @@ interface OrderRepositoryInterface
 
     public function create($attributes);
 
+    public function createDetail($order, $orderItems);
+
 }

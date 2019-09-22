@@ -12,6 +12,8 @@ interface OrderDetailRepositoryInterface
      */
     public function all($record_per_page = 20);
 
-    public function create($items);
+    public function create($atrributes);
+
+    public function createDetails($items);
 
 }
