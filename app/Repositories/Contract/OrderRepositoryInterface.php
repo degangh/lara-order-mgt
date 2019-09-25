@@ -12,7 +12,7 @@ interface OrderRepositoryInterface
      */
     public function all($record_per_page = 20);
 
-    public function create($attributes);
+    public function create($attributes, $user);
 
     public function createDetail($order, $orderItems);
 
