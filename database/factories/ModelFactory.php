@@ -66,6 +66,9 @@ $factory->define(App\Order::class, function(Faker $faker){
         'customer_id' => function(){
             return factory('App\Customer')->create()->id;
         },
+        'address_id' => function() {
+            return factory('App\Address')->create()->id;
+        }
 
     ];
 
