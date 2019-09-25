@@ -1,6 +1,7 @@
 <?php
 
 namespace Tests\Unit;
+use Mockery;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -37,7 +38,6 @@ class OrderRepositoryTest extends TestCase
             'customer_id' => $this->customer->id,
             'address_id' => $this->address->id
         ]);
-        var_dump($this->order);
 
         $order = $this->orderRepository->create($this->order, $this->user);
         //an order instance should be save and returned

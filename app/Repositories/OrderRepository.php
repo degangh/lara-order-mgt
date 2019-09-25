@@ -19,6 +19,7 @@ class OrderRepository implements OrderRepositoryInterface
         return Order::create([
             'customer_id' => $attributes->customer_id,
             'user_id' => $user->id,
+            'address_id' => $attributes->address_id
         ]);
     }
 
