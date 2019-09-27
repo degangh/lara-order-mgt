@@ -42,9 +42,11 @@ class OrderRepositoryTest extends TestCase
         $order = $this->orderRepository->create($this->order, $this->user);
         //an order instance should be save and returned
         $this->assertInstanceOf('\App\Order', $order);
-        
-
         //the database should have new created order instance
+        $this->assertDatabaseHas('orders', array(
+            'customer_id' => $this->customer->id,
+            'address_id' => $this->address->id
+        ));
 
     }
 
