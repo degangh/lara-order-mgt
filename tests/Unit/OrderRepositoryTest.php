@@ -21,6 +21,10 @@ class OrderRepositoryTest extends TestCase
         $this->user = factory(\App\User::class)->create();
         $this->customer = factory(\App\Customer::class)->create();
         $this->address = factory(\App\Address::class)->create(['customer_id' => $this->customer->id]);
+        $this->order = factory(\App\Order::class)->make([
+            'customer_id' => $this->customer->id,
+            'address_id' => $this->address->id
+        ]);
         $this->orderRepository = new \App\Repositories\OrderRepository;
     }
 
@@ -34,11 +38,6 @@ class OrderRepositoryTest extends TestCase
     public function it_can_save_order_info()
     {
         //give customer and address
-        $this->order = factory(\App\Order::class)->make([
-            'customer_id' => $this->customer->id,
-            'address_id' => $this->address->id
-        ]);
-
         $order = $this->orderRepository->create($this->order, $this->user);
         //an order instance should be save and returned
         $this->assertInstanceOf('\App\Order', $order);
@@ -53,9 +52,9 @@ class OrderRepositoryTest extends TestCase
     public function it_can_save_order_items()
     {
         //given an existing order 
-
+        $order = $this->orderRepository->create($this->order, $this->user);
         //and a set of order items
-
+        
         //the order items can be saved into database
     }
 }
