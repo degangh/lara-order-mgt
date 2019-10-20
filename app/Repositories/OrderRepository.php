@@ -25,6 +25,14 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function createDetail($order, $orderItems)
     {
-        
+        collect($orderItems)->map(function($orderItem){
+            return OrderItem::create([
+                'order_id' => $order->id,
+                'product_id' => $orderItem->product_id,
+                'unit_price_cny' => $orderItem->unit_price_cny,
+                'purchase_price_aud' => $orderItem->purchase_price_aud,
+                'quantity' => $orderItem->quantity
+            ]);
+        });
     }
 }
