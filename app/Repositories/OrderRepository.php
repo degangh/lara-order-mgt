@@ -3,6 +3,7 @@
 namespace App\Repositories;
 use App\Repositories\Contract\OrderRepositoryInterface;
 use App\Order;
+use App\OrderItem;
 
 class OrderRepository implements OrderRepositoryInterface
 {
@@ -25,13 +26,14 @@ class OrderRepository implements OrderRepositoryInterface
 
     public function createDetail($order, $orderItems)
     {
-        collect($orderItems)->map(function($orderItem){
+        collect($orderItems)->map(function($orderItem) use (&$order){
             return OrderItem::create([
                 'order_id' => $order->id,
                 'product_id' => $orderItem->product_id,
                 'unit_price_cny' => $orderItem->unit_price_cny,
                 'purchase_price_aud' => $orderItem->purchase_price_aud,
-                'quantity' => $orderItem->quantity
+                'quantity' => $orderItem->quantity,
+                'exchange_rate' => $orderItem->exchange_rate
             ]);
         });
     }

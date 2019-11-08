@@ -10,6 +10,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class OrderRepositoryTest extends TestCase
 {
     private $productRepository;
+    private $orderRepository;
     private $order;
     private $customer;
     private $user;
@@ -49,12 +50,20 @@ class OrderRepositoryTest extends TestCase
 
     }
 
+    /** @test */
     public function it_can_save_order_items()
     {
         //given an existing order 
         $order = $this->orderRepository->create($this->order, $this->user);
         //and a set of order items
-        
+        $orderItems = factory(\App\OrderItem::class,3)->make([
+            'order_id' => $order->id
+        ]);
+        $this->orderRepository->createDetail($order, $orderItems);
         //the order items can be saved into database
+        $this->assertDatabaseHas('order_items', array(
+            'order_id' => $order->id,
+            
+        ));
     }
 }
