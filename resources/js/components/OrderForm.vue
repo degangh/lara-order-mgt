@@ -128,7 +128,7 @@
           <v-btn flat  @click="emitCloseDialog('orderDialog')">Cancel</v-btn>
           <v-btn flat @click="prev(e1)" v-show="e1 > 1">Back</v-btn>
           <v-btn flat color="primary" @click="next(e1)" v-show = "e1 < 3">Continue</v-btn>
-          <v-btn flat color="primary" @click="next(e1)" v-show="e1 == 3">Save</v-btn>
+          <v-btn flat color="primary" @click="save()" v-show="e1 == 3">Save</v-btn>
         </v-card-actions>
       </v-card></v-dialog>
 </div>
@@ -298,6 +298,11 @@ export default {
             this.selectedProducts[index][payload.key] = payload.new_value
           }
         })
+      }, 
+
+      save()
+      {
+        console.log(this.selectedProducts)
       }
 
       
