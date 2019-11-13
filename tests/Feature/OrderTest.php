@@ -14,6 +14,9 @@ class OrderTest extends TestCase
         parent::setup();
         $this->user = factory(\App\User::class)->create();
         $this->customer = factory(\App\Customer::class)->create();
+        $this->address = factory(\App\Address::class)->create([
+            'customer_id' => $this->customer->id
+        ]);
     }
     
     /** @test */
@@ -26,18 +29,20 @@ class OrderTest extends TestCase
         //when the user created order
         $order = factory(\App\Order::class)->make([
             'user_id' => $this->user->id,
-            'customer_id' => $this->customer->id
+            'customer_id' => $this->customer->id,
+            'address_id' => $this->address->id
             ]
         );
 
         //the order should be visible in the database
-        $this->json('post', '/api/order', $order->toArray())
+        $response = $this->json('post', '/api/order', $order->toArray())
         ->assertStatus(200)
         ->assertJsonStructure([
             'user_id', 'customer_id', 'id', 'updated_at', 'created_at'
             ]);
-
         
+
+       
     }
 
     /** @test */

@@ -4,19 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use Illuminate\Http\Request;
+use App\Repositories\Contract\OrderRepositoryInterface;
 
 class OrderController extends Controller
 {
+    protected $orderRepository;
+    
+    /**
+     * 
+     */
+    public function __construct(OrderRepositoryInterface $orderRepository)
+    {
+        $this->orderRepository = $orderRepository;
+    }
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        /*
         return Order::with('customer')->withCount(['items as sum' => function($query) {
             $query->select(\DB::raw('sum(quantity*unit_price_cny)'));
         }])->paginate(20);
+        */
+        return $this->orderRepository->all($request->keyword);
     }
 
     /**
@@ -37,12 +51,9 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $order = Order::create([
-            'user_id' => $request->user_id,
-            'customer_id' => $request->customer_id
-        ]);
+        $order = $this->orderRepository->create($request, auth()->user());
 
-        $order->save();
+        $orderDetail = $this->orderRepository->createDetail($order,   $request->orderItems);
 
         return response()->json($order->toArray());
     }

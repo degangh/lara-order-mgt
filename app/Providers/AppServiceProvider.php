@@ -36,5 +36,9 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Contract\AddressRepositoryInterface',
             'App\Repositories\AddressRepository'
         );
+        $this->app->bind(
+            'App\Repositories\Contract\OrderRepositoryInterface',
+            'App\Repositories\OrderRepository'
+        );
     }
 }

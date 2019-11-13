@@ -9,7 +9,10 @@ class OrderRepository implements OrderRepositoryInterface
 {
     public function all($keyword = '', $records_per_page = 20)
     {
-        return Order::when($keyword, function($query, $keyword){
+
+        return Order::with('customer')->withCount(['items as sum' => function($query) {
+            $query->select(\DB::raw('sum(quantity*unit_price_cny)'));
+        }])->when($keyword, function($query, $keyword){
             return $query->where('name', 'like', '%' . $keyword . '%');
         })->paginate(20);
 
