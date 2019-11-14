@@ -298,11 +298,25 @@ export default {
             this.selectedProducts[index][payload.key] = payload.new_value
           }
         })
-      }, 
+      },
 
+      handleOrderCreationResponse(res)
+      {
+        console.log(res)
+      },
       save()
       {
-        console.log(this.selectedProducts)
+        axios.post('/api/order', {
+     
+                  customer_id: this.selectedCustomer.id,
+                  address_id: this.address.id,
+                  orderItems: this.selectedProducts
+     
+          })
+          .then(this.handleOrderCreationResponse)
+          .catch(function (err) {
+            alert (err)
+          })
       }
 
       
