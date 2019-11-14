@@ -32,11 +32,11 @@ class OrderRepository implements OrderRepositoryInterface
         collect($orderItems)->map(function($orderItem) use (&$order){
             return OrderItem::create([
                 'order_id' => $order->id,
-                'product_id' => $orderItem->product_id,
-                'unit_price_cny' => $orderItem->unit_price_cny,
-                'purchase_price_aud' => $orderItem->purchase_price_aud,
-                'quantity' => $orderItem->quantity,
-                'exchange_rate' => $orderItem->exchange_rate
+                'product_id' => $orderItem['id'],
+                'unit_price_cny' => $orderItem['rrp_cny'],
+                'purchase_price_aud' => $orderItem['ref_price_aud'],
+                'quantity' => $orderItem['num'],
+                'exchange_rate' => 5
             ]);
         });
     }
