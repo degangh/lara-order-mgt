@@ -62212,8 +62212,19 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         }
       });
     },
+    handleOrderCreationResponse: function handleOrderCreationResponse(res) {
+      console.log(res);
+    },
     save: function save() {
-      console.log(this.selectedProducts);
+      axios.post('/api/order', {
+
+        customer_id: this.selectedCustomer.id,
+        address_id: this.address.id,
+        orderItems: this.selectedProducts
+
+      }).then(this.handleOrderCreationResponse).catch(function (err) {
+        alert(err);
+      });
     }
   }
 });
