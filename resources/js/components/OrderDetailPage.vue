@@ -15,9 +15,20 @@ export default {
     },
 
     methods: {
-        requestOrderDetailData()
-        {
-            
+        requestOrderDetailData() {
+            axios.get('/api/orders/' + this.$route.params.id)
+            .then(this.handleResponse)
+            .catch(this.handleError)
+        },
+        handleResponse (res) {
+            console.log(res.data)
+            this.ready = true
+            this.loading = false
+        },
+        handleError (error) {
+            alert (error)
+            this.ready = true
+            this.loading = false
         }
     }
 }

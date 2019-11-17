@@ -66,7 +66,8 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return Order::with('items')
+        ->where('id',$order->id)->get();
     }
 
     /**

@@ -31,6 +31,7 @@ Route::patch('addresses/default' , 'AddressController@setDefault')->middleware('
 
 
 Route::get('orders', 'OrderController@index')->middleware('auth:api');
+Route::get('orders/{order}', 'OrderController@show')->middleware('auth:api');
 Route::post('order', 'OrderController@store')->middleware('auth:api');
 Route::post('order/{order}/items' , 'OrderItemController@store')->middleware('auth:api');
 
