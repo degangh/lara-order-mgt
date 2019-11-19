@@ -66,7 +66,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        return Order::with('items', 'items.product')
+        return Order::with('customer','items', 'items.product')
         ->where('id',$order->id)->get();
     }
 
