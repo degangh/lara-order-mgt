@@ -64851,11 +64851,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            orderDetails: []
+            order: false
         };
     },
     mounted: function mounted() {
@@ -64868,7 +64899,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get('/api/orders/' + this.$route.params.id).then(this.handleResponse).catch(this.handleError);
         },
         handleResponse: function handleResponse(res) {
-            console.log(res.data);
+            console.log(res.data[0]);
+            this.order = res.data[0];
             this.ready = true;
             this.loading = false;
         },
@@ -64888,7 +64920,74 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("oop2")])
+  return _vm.order
+    ? _c(
+        "v-container",
+        {
+          staticClass: "pa-4 title grey--text text-lighten-1",
+          attrs: { "grid-list-sm": "", fluid: "" }
+        },
+        [
+          _c(
+            "v-layout",
+            { attrs: { row: "" } },
+            [
+              _c("v-flex", { attrs: { "xs-4": "" } }, [
+                _vm._v("\n                Customer Name:\n            ")
+              ]),
+              _vm._v(" "),
+              _c("v-flex", { attrs: { "xs-8": "" } }, [
+                _vm._v(
+                  "\n                 " +
+                    _vm._s(_vm.order.customer.name) +
+                    "\n            "
+                )
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-layout",
+            { attrs: { row: "" } },
+            [
+              _c("v-flex", { attrs: { "xs-4": "" } }, [
+                _vm._v("\n                Address: \n            ")
+              ]),
+              _vm._v(" "),
+              _c("v-flex", { attrs: { "xs-8": "" } }, [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.order.address.address) +
+                    "\n            "
+                )
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-layout",
+            { attrs: { row: "" } },
+            [
+              _c("v-flex", { attrs: { "xs-4": "" } }, [
+                _vm._v("\n                PHone: \n            ")
+              ]),
+              _vm._v(" "),
+              _c("v-flex", { attrs: { "xs-8": "" } }, [
+                _vm._v(
+                  "\n                " +
+                    _vm._s(_vm.order.address.mobile) +
+                    "\n            "
+                )
+              ])
+            ],
+            1
+          )
+        ],
+        1
+      )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
