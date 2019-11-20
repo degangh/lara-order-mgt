@@ -1,12 +1,43 @@
 <template>
-    <div>oop2</div>
+  <v-container grid-list-sm fluid class="pa-4 title grey--text text-lighten-1" v-if="order">
+          <v-layout row>
+              <v-flex xs-4>
+                  Customer Name:
+              </v-flex>
+              <v-flex xs-8>
+                   {{order.customer.name}}
+              </v-flex>
+              
+          </v-layout>
+          <v-layout row>
+
+              <v-flex xs-4>
+                  Address: 
+              </v-flex>
+              <v-flex xs-8>
+                  {{order.address.address}}
+              </v-flex>
+
+          </v-layout>
+
+          <v-layout row>
+
+              <v-flex xs-4>
+                  PHone: 
+              </v-flex>
+              <v-flex xs-8>
+                  {{order.address.mobile}}
+              </v-flex>
+
+          </v-layout>
+  </v-container>
 </template>
 
 <script>
 export default {
     data () {
         return {
-            orderDetails: []
+            order: false
         }
     },
 
@@ -21,7 +52,8 @@ export default {
             .catch(this.handleError)
         },
         handleResponse (res) {
-            console.log(res.data)
+            console.log(res.data[0])
+            this.order = res.data[0]
             this.ready = true
             this.loading = false
         },
