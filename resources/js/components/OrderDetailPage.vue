@@ -1,20 +1,20 @@
 <template>
   <v-container grid-list-sm fluid class="pa-4 title grey--text text-lighten-1" v-if="order">
-          <v-layout row>
-              <v-flex xs-4>
+          <v-layout row wrap>
+              <v-flex xs4>
                   Customer Name:
               </v-flex>
-              <v-flex xs-8>
+              <v-flex xs8>
                    {{order.customer.name}}
               </v-flex>
               
           </v-layout>
           <v-layout row>
 
-              <v-flex xs-4>
+              <v-flex xs4>
                   Address: 
               </v-flex>
-              <v-flex xs-8>
+              <v-flex xs8>
                   {{order.address.address}}
               </v-flex>
 
@@ -22,14 +22,29 @@
 
           <v-layout row>
 
-              <v-flex xs-4>
+              <v-flex xs4>
                   PHone: 
               </v-flex>
-              <v-flex xs-8>
+              <v-flex xs8>
                   {{order.address.mobile}}
               </v-flex>
 
           </v-layout>
+          <v-divider></v-divider>
+        <v-layout v-for = "(item, index) of order.items" :key="index">
+            <v-flex xs3>
+                {{item.product.name}}
+            </v-flex>
+            <v-flex xs3>
+                {{item.quantity}}
+            </v-flex>
+            <v-flex xs3>
+                {{item.unit_price_cny}}
+            </v-flex>
+            <v-flex xs3>
+                {{item.quantity * item.unit_price_cny}}
+            </v-flex>
+        </v-layout>
   </v-container>
 </template>
 

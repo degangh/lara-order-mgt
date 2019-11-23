@@ -64882,6 +64882,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -64930,13 +64945,13 @@ var render = function() {
         [
           _c(
             "v-layout",
-            { attrs: { row: "" } },
+            { attrs: { row: "", wrap: "" } },
             [
-              _c("v-flex", { attrs: { "xs-4": "" } }, [
+              _c("v-flex", { attrs: { xs4: "" } }, [
                 _vm._v("\n                Customer Name:\n            ")
               ]),
               _vm._v(" "),
-              _c("v-flex", { attrs: { "xs-8": "" } }, [
+              _c("v-flex", { attrs: { xs8: "" } }, [
                 _vm._v(
                   "\n                 " +
                     _vm._s(_vm.order.customer.name) +
@@ -64951,11 +64966,11 @@ var render = function() {
             "v-layout",
             { attrs: { row: "" } },
             [
-              _c("v-flex", { attrs: { "xs-4": "" } }, [
+              _c("v-flex", { attrs: { xs4: "" } }, [
                 _vm._v("\n                Address: \n            ")
               ]),
               _vm._v(" "),
-              _c("v-flex", { attrs: { "xs-8": "" } }, [
+              _c("v-flex", { attrs: { xs8: "" } }, [
                 _vm._v(
                   "\n                " +
                     _vm._s(_vm.order.address.address) +
@@ -64970,11 +64985,11 @@ var render = function() {
             "v-layout",
             { attrs: { row: "" } },
             [
-              _c("v-flex", { attrs: { "xs-4": "" } }, [
+              _c("v-flex", { attrs: { xs4: "" } }, [
                 _vm._v("\n                PHone: \n            ")
               ]),
               _vm._v(" "),
-              _c("v-flex", { attrs: { "xs-8": "" } }, [
+              _c("v-flex", { attrs: { xs8: "" } }, [
                 _vm._v(
                   "\n                " +
                     _vm._s(_vm.order.address.mobile) +
@@ -64983,9 +64998,50 @@ var render = function() {
               ])
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _c("v-divider"),
+          _vm._v(" "),
+          _vm._l(_vm.order.items, function(item, index) {
+            return _c(
+              "v-layout",
+              { key: index },
+              [
+                _c("v-flex", { attrs: { xs3: "" } }, [
+                  _vm._v(
+                    "\n              " +
+                      _vm._s(item.product.name) +
+                      "\n          "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("v-flex", { attrs: { xs3: "" } }, [
+                  _vm._v(
+                    "\n              " + _vm._s(item.quantity) + "\n          "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("v-flex", { attrs: { xs3: "" } }, [
+                  _vm._v(
+                    "\n              " +
+                      _vm._s(item.unit_price_cny) +
+                      "\n          "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("v-flex", { attrs: { xs3: "" } }, [
+                  _vm._v(
+                    "\n              " +
+                      _vm._s(item.quantity * item.unit_price_cny) +
+                      "\n          "
+                  )
+                ])
+              ],
+              1
+            )
+          })
         ],
-        1
+        2
       )
     : _vm._e()
 }
