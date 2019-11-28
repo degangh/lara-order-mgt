@@ -149,7 +149,6 @@ export default {
         this.snackbar = false
         this.emitCloseDialog('contactDialog')
         if (res.data.id) this.$router.push("/customer/" + res.data.id);
-        console.log (res.data.id)
       }
     }
 }
