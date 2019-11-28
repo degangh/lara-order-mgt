@@ -302,7 +302,8 @@ export default {
 
       handleOrderCreationResponse(res)
       {
-        console.log(res)
+        this.emitCloseDialog('orderDialog')
+        if (res.data.id) this.$router.push("/orders/" + res.data.id);
       },
       save()
       {
