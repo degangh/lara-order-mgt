@@ -35,14 +35,21 @@
             <v-flex xs3>
                 {{item.product.name}}
             </v-flex>
-            <v-flex xs3>
+            <v-flex xs3 text-right>
                 {{item.quantity}}
             </v-flex>
-            <v-flex xs3>
+            <v-flex xs3 text-right>
                 {{item.unit_price_cny}}
             </v-flex>
-            <v-flex xs3>
-                {{item.quantity * item.unit_price_cny}}
+            <v-flex xs3 text-right>
+                {{parseFloat(item.quantity * item.unit_price_cny).toFixed(2)}}
+            </v-flex>
+
+            
+        </v-layout>
+        <v-layout>
+            <v-flex xs12 text-right>
+                {{orderSum}}
             </v-flex>
         </v-layout>
   </v-container>
@@ -58,6 +65,17 @@ export default {
 
     mounted () {
         this.requestOrderDetailData()
+    },
+
+    computed:{
+        orderSum: function()
+        {
+            let sum = 0.00
+            this.order.items.map(function(item){
+                sum += item.quantity * item.unit_price_cny
+            })
+            return parseFloat(sum).toFixed(2)
+        }
     },
 
     methods: {

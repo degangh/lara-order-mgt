@@ -64897,6 +64897,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -64908,6 +64915,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.requestOrderDetailData();
     },
 
+
+    computed: {
+        orderSum: function orderSum() {
+            var sum = 0.00;
+            this.order.items.map(function (item) {
+                sum += item.quantity * item.unit_price_cny;
+            });
+            return parseFloat(sum).toFixed(2);
+        }
+    },
 
     methods: {
         requestOrderDetailData: function requestOrderDetailData() {
@@ -65015,13 +65032,13 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("v-flex", { attrs: { xs3: "" } }, [
+                _c("v-flex", { attrs: { xs3: "", "text-right": "" } }, [
                   _vm._v(
                     "\n              " + _vm._s(item.quantity) + "\n          "
                   )
                 ]),
                 _vm._v(" "),
-                _c("v-flex", { attrs: { xs3: "" } }, [
+                _c("v-flex", { attrs: { xs3: "", "text-right": "" } }, [
                   _vm._v(
                     "\n              " +
                       _vm._s(item.unit_price_cny) +
@@ -65029,17 +65046,33 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("v-flex", { attrs: { xs3: "" } }, [
+                _c("v-flex", { attrs: { xs3: "", "text-right": "" } }, [
                   _vm._v(
                     "\n              " +
-                      _vm._s(item.quantity * item.unit_price_cny) +
+                      _vm._s(
+                        parseFloat(item.quantity * item.unit_price_cny).toFixed(
+                          2
+                        )
+                      ) +
                       "\n          "
                   )
                 ])
               ],
               1
             )
-          })
+          }),
+          _vm._v(" "),
+          _c(
+            "v-layout",
+            [
+              _c("v-flex", { attrs: { xs12: "", "text-right": "" } }, [
+                _vm._v(
+                  "\n              " + _vm._s(_vm.orderSum) + "\n          "
+                )
+              ])
+            ],
+            1
+          )
         ],
         2
       )
