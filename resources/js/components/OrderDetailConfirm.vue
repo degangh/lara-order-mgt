@@ -21,11 +21,20 @@
         <td colspan="5" class="text-right">{{this.calculateTotalPrice()}}</td>
       </tr>
       </table>
+      <v-text-field
+       label="Exchange Rate AUD/CNY"
+       v-model="exchange_rate">
+      </v-text-field>
     </v-container>
   </div>
 </template>
 <script>
 export default {
+  data() {
+    return {
+      exchange_rate: 5
+    }
+  },
   name: "OrderDetailConfirm",
   props: {
     products: Array
@@ -37,10 +46,17 @@ export default {
         total += product.num * product.rrp_cny
       })
       return total
+    },
+    getCurrencyRate(base, target){
+      axios.get('https://api.exchangeratesapi.io/latest?base='+base+'&symbols=' + target)
+      .then(function(res){
+        console.log(res)
+      })
+      return 4.81
     }
   },
   mounted() {
-    console.log(this.products)
+    this.exchange_rate = this.getCurrencyRate('AUD', 'CNY')
   },
   computed: {
     totalPrice: function(){

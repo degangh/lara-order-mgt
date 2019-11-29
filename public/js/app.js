@@ -62345,7 +62345,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       });
     },
     handleOrderCreationResponse: function handleOrderCreationResponse(res) {
-      console.log(res);
       this.emitCloseDialog('orderDialog');
       if (res.data.id) this.$router.push("/orders/" + res.data.id);
     },
@@ -62743,8 +62742,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      exchange_rate: 5
+    };
+  },
+
   name: "OrderDetailConfirm",
   props: {
     products: Array
@@ -62756,10 +62765,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         total += product.num * product.rrp_cny;
       });
       return total;
+    },
+    getCurrencyRate: function getCurrencyRate(base, target) {
+      axios.get('https://api.exchangeratesapi.io/latest?base=' + base + '&symbols=' + target, {
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/vnd.example.v1+json'
+        }
+      }).then(function (res) {
+        console.log(res);
+      });
+      return 4.81;
     }
   },
   mounted: function mounted() {
-    console.log(this.products);
+    this.exchange_rate = this.getCurrencyRate('AUD', 'CNY');
   },
 
   computed: {
@@ -62784,52 +62804,69 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("v-container", [
-        _c(
-          "table",
-          { staticClass: "table" },
-          [
-            _vm._l(_vm.products, function(item, index) {
-              return _c(
-                "tr",
-                { key: index, attrs: { "align-center": "", wrap: "" } },
-                [
-                  _c("td", [_vm._v(_vm._s(item.name))]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "text-right" }, [
-                    _vm._v(
-                      "\n        " + _vm._s(item.ref_price_aud) + "\n      "
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "text-right" }, [
-                    _vm._v("\n        " + _vm._s(item.rrp_cny) + "\n      ")
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "text-right" }, [
-                    _vm._v("\n        " + _vm._s(item.num) + "\n      ")
-                  ]),
-                  _vm._v(" "),
-                  _c("td", { staticClass: "text-right" }, [
-                    _vm._v(
-                      "\n        " +
-                        _vm._s(item.num * item.rrp_cny) +
-                        "\n      "
-                    )
-                  ])
-                ]
-              )
-            }),
-            _vm._v(" "),
-            _c("tr", [
-              _c("td", { staticClass: "text-right", attrs: { colspan: "5" } }, [
-                _vm._v(_vm._s(this.calculateTotalPrice()))
+      _c(
+        "v-container",
+        [
+          _c(
+            "table",
+            { staticClass: "table" },
+            [
+              _vm._l(_vm.products, function(item, index) {
+                return _c(
+                  "tr",
+                  { key: index, attrs: { "align-center": "", wrap: "" } },
+                  [
+                    _c("td", [_vm._v(_vm._s(item.name))]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "text-right" }, [
+                      _vm._v(
+                        "\n        " + _vm._s(item.ref_price_aud) + "\n      "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "text-right" }, [
+                      _vm._v("\n        " + _vm._s(item.rrp_cny) + "\n      ")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "text-right" }, [
+                      _vm._v("\n        " + _vm._s(item.num) + "\n      ")
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticClass: "text-right" }, [
+                      _vm._v(
+                        "\n        " +
+                          _vm._s(item.num * item.rrp_cny) +
+                          "\n      "
+                      )
+                    ])
+                  ]
+                )
+              }),
+              _vm._v(" "),
+              _c("tr", [
+                _c(
+                  "td",
+                  { staticClass: "text-right", attrs: { colspan: "5" } },
+                  [_vm._v(_vm._s(this.calculateTotalPrice()))]
+                )
               ])
-            ])
-          ],
-          2
-        )
-      ])
+            ],
+            2
+          ),
+          _vm._v(" "),
+          _c("v-text-field", {
+            attrs: { label: "Exchange Rate AUD/CNY" },
+            model: {
+              value: _vm.exchange_rate,
+              callback: function($$v) {
+                _vm.exchange_rate = $$v
+              },
+              expression: "exchange_rate"
+            }
+          })
+        ],
+        1
+      )
     ],
     1
   )
