@@ -62620,11 +62620,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      exchange_rate: 5
+      exchange_rate: null
     };
   },
 
@@ -62646,14 +62647,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       fetch('https://api.exchangeratesapi.io/latest?base=' + base + '&symbols=' + target).then(function (response) {
         return response.json();
       }).then(function (data) {
-        return _this.exchange_rate = data.rates.CNY;
+        return _this.exchange_rate = parseFloat(data.rates[target]).toFixed(2);
       });
-
-      return 4.81;
     }
   },
   mounted: function mounted() {
-    this.exchange_rate = this.getCurrencyRate('AUD', 'CNY');
+    this.getCurrencyRate('AUD', 'CNY');
   },
 
   computed: {
@@ -62737,7 +62736,8 @@ var render = function() {
               },
               expression: "exchange_rate"
             }
-          })
+          }),
+          _vm._v("\n    Real-time exchange rate from EU central bank\n  ")
         ],
         1
       )

@@ -25,6 +25,7 @@
        label="Exchange Rate AUD/CNY"
        v-model="exchange_rate">
       </v-text-field>
+      Real-time exchange rate from EU central bank
     </v-container>
   </div>
 </template>
@@ -32,7 +33,7 @@
 export default {
   data() {
     return {
-      exchange_rate: 5
+      exchange_rate: null
     }
   },
   name: "OrderDetailConfirm",
@@ -50,13 +51,11 @@ export default {
     getCurrencyRate(base, target){
       fetch('https://api.exchangeratesapi.io/latest?base='+base+'&symbols=' + target).then(function(response){
         return response.json()
-      }).then(data => this.exchange_rate = data.rates.CNY)
-      
-      return 4.81
+      }).then(data => this.exchange_rate = parseFloat(data.rates[target]).toFixed(2))
     }
   },
   mounted() {
-    this.exchange_rate = this.getCurrencyRate('AUD', 'CNY')
+    this.getCurrencyRate('AUD', 'CNY')
   },
   computed: {
     totalPrice: function(){
