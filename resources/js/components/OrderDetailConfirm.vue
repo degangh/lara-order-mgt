@@ -48,10 +48,10 @@ export default {
       return total
     },
     getCurrencyRate(base, target){
-      axios.get('https://api.exchangeratesapi.io/latest?base='+base+'&symbols=' + target)
-      .then(function(res){
-        console.log(res)
-      })
+      fetch('https://api.exchangeratesapi.io/latest?base='+base+'&symbols=' + target).then(function(response){
+        return response.json()
+      }).then(data => this.exchange_rate = data.rates.CNY)
+      
       return 4.81
     }
   },
