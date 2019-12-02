@@ -62579,7 +62579,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n.flex-cell[data-v-2b445ca8] {\r\n  margin: 0px;\n}\n.table-cell-input[data-v-2b445ca8] {\r\n  font-size: 0.9rem;\r\n  margin-left: 0.5rem;\n}\n.table-cell-input input[data-v-2b445ca8] {\r\n  text-align: center;\n}\r\n", ""]);
+exports.push([module.i, "\n.flex-cell[data-v-2b445ca8] {\r\n  margin: 0px;\n}\n.table-cell-input[data-v-2b445ca8] {\r\n  font-size: 0.9rem;\r\n  margin-left: 0.5rem;\n}\n.table-cell-input input[data-v-2b445ca8] {\r\n  text-align: center;\n}\n.text-field-footer[data-v-2b445ca8]\r\n{\r\n  margin-top: -1rem\n}\r\n", ""]);
 
 // exports
 
@@ -62737,7 +62737,12 @@ var render = function() {
               expression: "exchange_rate"
             }
           }),
-          _vm._v("\n    Real-time exchange rate from EU central bank\n  ")
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { staticClass: "text-field-footer grey--text text--lighten-4" },
+            [_vm._v("Real-time exchange rate from EU central bank")]
+          )
         ],
         1
       )

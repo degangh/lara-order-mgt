@@ -25,7 +25,7 @@
        label="Exchange Rate AUD/CNY"
        v-model="exchange_rate">
       </v-text-field>
-      Real-time exchange rate from EU central bank
+      <v-flex class="text-field-footer grey--text text--lighten-4" >Real-time exchange rate from EU central bank</v-flex>
     </v-container>
   </div>
 </template>
@@ -81,5 +81,9 @@ export default {
 
 .table-cell-input input {
   text-align: center;
+}
+.text-field-footer
+{
+  margin-top: -1rem
 }
 </style>
