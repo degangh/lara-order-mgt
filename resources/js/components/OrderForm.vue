@@ -113,6 +113,7 @@
         >
         <order-detail-confirm 
         :products="selectedProducts"
+        :exchange_rate = "exchange_rate"
         ></order-detail-confirm>
         </v-card>
 
@@ -145,6 +146,10 @@ export default {
       OrderDetailConfirm
     },
 
+    mounted() {
+      this.getCurrencyRate('AUD', 'CNY')
+    },
+
 
     data() {
       return {
@@ -162,6 +167,7 @@ export default {
           products: [],
           selectedProducts: [],
           address: null,
+          exchange_rate: null,
           customerRules: [
           v => !!v || 'Customer must be selected'
           ],
@@ -261,6 +267,12 @@ export default {
           .then(res => {
             this.products = res.data.data
           })
+      },
+
+      getCurrencyRate(base, target){
+      fetch('https://api.exchangeratesapi.io/latest?base='+base+'&symbols=' + target).then(function(response){
+        return response.json()
+        }).then(data => this.exchange_rate = parseFloat(parseFloat(data.rates[target]).toFixed(2)))
       },
 
       afterSelection(){

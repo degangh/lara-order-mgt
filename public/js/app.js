@@ -62067,6 +62067,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -62078,6 +62079,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     OrderDetailConfirm: __WEBPACK_IMPORTED_MODULE_1__OrderDetailConfirm___default.a
   },
 
+  mounted: function mounted() {
+    this.getCurrencyRate('AUD', 'CNY');
+  },
   data: function data() {
     return {
       valid: false,
@@ -62094,6 +62098,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       products: [],
       selectedProducts: [],
       address: null,
+      exchange_rate: null,
       customerRules: [function (v) {
         return !!v || 'Customer must be selected';
       }],
@@ -62182,11 +62187,20 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         _this2.products = res.data.data;
       });
     },
-    afterSelection: function afterSelection() {
+    getCurrencyRate: function getCurrencyRate(base, target) {
       var _this3 = this;
 
+      fetch('https://api.exchangeratesapi.io/latest?base=' + base + '&symbols=' + target).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        return _this3.exchange_rate = parseFloat(parseFloat(data.rates[target]).toFixed(2));
+      });
+    },
+    afterSelection: function afterSelection() {
+      var _this4 = this;
+
       this.$nextTick(function () {
-        _this3.selectedProduct = null;
+        _this4.selectedProduct = null;
       });
     },
     hasProduct: function hasProduct(pArray, p) {
@@ -62199,22 +62213,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       return flag;
     },
     addOneProduct: function addOneProduct(p) {
-      var _this4 = this;
+      var _this5 = this;
 
       this.selectedProducts.forEach(function (ele, idx) {
 
         if (ele.id == p.id) {
           p.num = new Number(ele.num) + 1;
-          _this4.$set(_this4.selectedProducts, idx, p);
+          _this5.$set(_this5.selectedProducts, idx, p);
         }
       });
     },
     updateSelectedProducts: function updateSelectedProducts(payload) {
-      var _this5 = this;
+      var _this6 = this;
 
       this.selectedProducts.map(function (sp, index) {
         if (sp.id == payload.product_id) {
-          _this5.selectedProducts[index][payload.key] = payload.new_value;
+          _this6.selectedProducts[index][payload.key] = payload.new_value;
         }
       });
     },
@@ -62623,16 +62637,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      exchange_rate: null
-    };
-  },
 
   name: "OrderDetailConfirm",
   props: {
-    products: Array
+    products: Array,
+    exchange_rate: Number
   },
+
+  data: function data() {
+    return {
+      rate: this.exchange_rate
+    };
+  },
+
+
   methods: {
     calculateTotalPrice: function calculateTotalPrice() {
       var total = 0;
@@ -62640,19 +62658,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         total += product.num * product.rrp_cny;
       });
       return total;
-    },
-    getCurrencyRate: function getCurrencyRate(base, target) {
-      var _this = this;
-
-      fetch('https://api.exchangeratesapi.io/latest?base=' + base + '&symbols=' + target).then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        return _this.exchange_rate = parseFloat(data.rates[target]).toFixed(2);
-      });
     }
-  },
-  mounted: function mounted() {
-    this.getCurrencyRate('AUD', 'CNY');
   },
 
   computed: {
@@ -62728,19 +62734,12 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("v-text-field", {
-            attrs: { label: "Exchange Rate AUD/CNY" },
-            model: {
-              value: _vm.exchange_rate,
-              callback: function($$v) {
-                _vm.exchange_rate = $$v
-              },
-              expression: "exchange_rate"
-            }
+            attrs: { label: "Exchange Rate AUD/CNY", value: _vm.exchange_rate }
           }),
           _vm._v(" "),
           _c(
             "v-flex",
-            { staticClass: "text-field-footer grey--text text--lighten-4" },
+            { staticClass: "text-field-footer grey--text text--lighten-1" },
             [_vm._v("Real-time exchange rate from EU central bank")]
           )
         ],
@@ -63071,7 +63070,8 @@ var render = function() {
                                     [
                                       _c("order-detail-confirm", {
                                         attrs: {
-                                          products: _vm.selectedProducts
+                                          products: _vm.selectedProducts,
+                                          exchange_rate: _vm.exchange_rate
                                         }
                                       })
                                     ],

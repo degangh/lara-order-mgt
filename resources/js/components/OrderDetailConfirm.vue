@@ -23,23 +23,27 @@
       </table>
       <v-text-field
        label="Exchange Rate AUD/CNY"
-       v-model="exchange_rate">
+       :value="exchange_rate">
       </v-text-field>
-      <v-flex class="text-field-footer grey--text text--lighten-4" >Real-time exchange rate from EU central bank</v-flex>
+      <v-flex class="text-field-footer grey--text text--lighten-1" >Real-time exchange rate from EU central bank</v-flex>
     </v-container>
   </div>
 </template>
 <script>
 export default {
-  data() {
-    return {
-      exchange_rate: null
-    }
-  },
+  
   name: "OrderDetailConfirm",
   props: {
-    products: Array
+    products: Array,
+    exchange_rate: Number
   },
+
+  data() {
+    return {
+      rate: this.exchange_rate
+    }
+  },
+
   methods: {
     calculateTotalPrice(){
       let total = 0
@@ -47,16 +51,10 @@ export default {
         total += product.num * product.rrp_cny
       })
       return total
-    },
-    getCurrencyRate(base, target){
-      fetch('https://api.exchangeratesapi.io/latest?base='+base+'&symbols=' + target).then(function(response){
-        return response.json()
-      }).then(data => this.exchange_rate = parseFloat(data.rates[target]).toFixed(2))
     }
+
   },
-  mounted() {
-    this.getCurrencyRate('AUD', 'CNY')
-  },
+
   computed: {
     totalPrice: function(){
       let total = 0
