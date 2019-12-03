@@ -62644,13 +62644,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     exchange_rate: Number
   },
 
-  data: function data() {
-    return {
-      rate: this.exchange_rate
-    };
-  },
-
-
   methods: {
     calculateTotalPrice: function calculateTotalPrice() {
       var total = 0;

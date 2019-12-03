@@ -38,13 +38,7 @@ export default {
     exchange_rate: Number
   },
 
-  data() {
-    return {
-      rate: this.exchange_rate
-    }
-  },
-
-  methods: {
+ methods: {
     calculateTotalPrice(){
       let total = 0
       this.products.map((product) => {
