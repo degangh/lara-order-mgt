@@ -23,7 +23,8 @@
       </table>
       <v-text-field
        label="Exchange Rate AUD/CNY"
-       :value="exchange_rate">
+       :value="exchange_rate"
+       @change="emitRateChange">
       </v-text-field>
       <v-flex class="text-field-footer grey--text text--lighten-1" >Real-time exchange rate from EU central bank</v-flex>
     </v-container>
@@ -45,6 +46,10 @@ export default {
         total += product.num * product.rrp_cny
       })
       return total
+    },
+    emitRateChange()
+    {
+      this.$emit('updateExchangeRate', {rate: event.target.value})
     }
 
   },

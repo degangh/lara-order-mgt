@@ -114,6 +114,7 @@
         <order-detail-confirm 
         :products="selectedProducts"
         :exchange_rate = "exchange_rate"
+        @updateExchangeRate="updateExchangeRate"
         ></order-detail-confirm>
         </v-card>
 
@@ -317,13 +318,19 @@ export default {
         this.emitCloseDialog('orderDialog')
         if (res.data.id) this.$router.push("/orders/" + res.data.id);
       },
+      updateExchangeRate(payload)
+      {
+        console.log(payload.rate)
+        //this.exchange_rate = payload.rate
+      },
       save()
       {
         axios.post('/api/order', {
      
                   customer_id: this.selectedCustomer.id,
                   address_id: this.address.id,
-                  orderItems: this.selectedProducts
+                  orderItems: this.selectedProducts,
+                  exchange_rate: this.exchange_rate
      
           })
           .then(this.handleOrderCreationResponse)
