@@ -53,7 +53,7 @@ class OrderController extends Controller
     {
         $order = $this->orderRepository->create($request, auth()->user());
 
-        $orderDetail = $this->orderRepository->createDetail($order,   $request->orderItems);
+        $orderDetail = $this->orderRepository->createDetail($order,   $request->orderItems, $request->exchange_rate);
 
         return response()->json($order->toArray());
     }

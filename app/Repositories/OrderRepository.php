@@ -27,16 +27,16 @@ class OrderRepository implements OrderRepositoryInterface
         ]);
     }
 
-    public function createDetail($order, $orderItems)
+    public function createDetail($order, $orderItems, $exchange_rate)
     {
-        collect($orderItems)->map(function($orderItem) use (&$order){
+        collect($orderItems)->map(function($orderItem) use (&$order, &$exchange_rate){
             return OrderItem::create([
                 'order_id' => $order->id,
                 'product_id' => $orderItem['id'],
                 'unit_price_cny' => $orderItem['rrp_cny'],
                 'purchase_price_aud' => $orderItem['ref_price_aud'],
                 'quantity' => $orderItem['num'],
-                'exchange_rate' => 5
+                'exchange_rate' => $exchange_rate
             ]);
         });
     }
