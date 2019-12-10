@@ -62151,14 +62151,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   methods: {
     emitCloseDialog: function emitCloseDialog(form) {
       this.e1 = 1;
-      this.$refs.OrderForm.reset();
+      //this.$refs.OrderForm.reset()
       this.addresses = [];
+      this.address = null;
       this.customers = [];
       this.products = [];
       this.selectedProducts = [];
       this.isLoading = false;
       this.$emit("closeDialog", form);
-      this.$refs['exchange_rate'].value = parseFloat(this.exchange_rate);
+      this.getCurrencyRate('AUD', 'CNY');
       console.log('after submit', this.exchange_rate);
     },
     next: function next() {
@@ -62653,11 +62654,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     products: Array,
     exchange_rate: Number
   },
-
-  mounted: function mounted() {
-    console.log("in child components: ", exchange_rate);
-  },
-
 
   methods: {
     calculateTotalPrice: function calculateTotalPrice() {

@@ -228,14 +228,15 @@ export default {
     methods: {
         emitCloseDialog (form) {
         this.e1 = 1
-        this.$refs.OrderForm.reset()
+        //this.$refs.OrderForm.reset()
         this.addresses = []
+        this.address = null
         this.customers = []
         this.products = []
         this.selectedProducts = []
         this.isLoading = false
         this.$emit("closeDialog", form)
-        this.$refs['exchange_rate'].value = parseFloat(this.exchange_rate)
+        this.getCurrencyRate('AUD', 'CNY')
         console.log('after submit', this.exchange_rate)
       },
 
