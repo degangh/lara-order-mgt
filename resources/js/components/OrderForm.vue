@@ -235,6 +235,8 @@ export default {
         this.selectedProducts = []
         this.isLoading = false
         this.$emit("closeDialog", form)
+        this.$refs['exchange_rate'].value = parseFloat(this.exchange_rate)
+        console.log('after submit', this.exchange_rate)
       },
 
       next(){
@@ -321,7 +323,7 @@ export default {
       updateExchangeRate(payload)
       {
         console.log(payload.rate)
-        //this.exchange_rate = payload.rate
+        this.exchange_rate = payload.rate
       },
       save()
       {
