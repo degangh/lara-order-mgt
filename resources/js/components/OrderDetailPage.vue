@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-sm fluid class="pa-4 title grey--text text-lighten-1" v-if="order">
+  <v-container grid-list-sm fluid  v-if="order">
           <v-layout row wrap>
               <v-flex xs4>
                   Customer Name:
@@ -23,7 +23,7 @@
           <v-layout row>
 
               <v-flex xs4>
-                  PHone: 
+                  Phone: 
               </v-flex>
               <v-flex xs8>
                   {{order.address.mobile}}
@@ -31,7 +31,7 @@
 
           </v-layout>
           <v-divider></v-divider>
-        <v-layout v-for = "(item, index) of order.items" :key="index">
+        <v-layout v-for = "(item, index) of order.items" :key="index" class="body-2 grey--text text-darken-3" >
             <v-flex xs3>
                 {{item.product.name}}
             </v-flex>
