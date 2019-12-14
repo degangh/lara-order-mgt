@@ -1,5 +1,10 @@
 <template>
   <v-container grid-list-sm fluid  v-if="order">
+          <v-layout row>
+              <v-flex xs12 class="title">
+                  Customer Infomration
+              </v-flex>
+          </v-layout>
           <v-layout row wrap>
               <v-flex xs4>
                   Customer Name:
@@ -31,7 +36,12 @@
 
           </v-layout>
           <v-divider></v-divider>
-        <v-layout v-for = "(item, index) of order.items" :key="index" class="body-2 grey--text text-darken-3" >
+          <v-layout row>
+              <v-flex xs12 class="title">
+                  Order Detail
+              </v-flex>
+          </v-layout>
+        <v-layout v-for = "(item, index) of order.items" :key="index" class="caption text-lighten-2" >
             <v-flex xs3>
                 {{item.product.name}}
             </v-flex>
@@ -48,7 +58,7 @@
             
         </v-layout>
         <v-layout>
-            <v-flex xs12 text-right>
+            <v-flex xs12 text-right class="body-2">
                 {{orderSum}}
             </v-flex>
         </v-layout>

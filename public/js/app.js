@@ -64960,6 +64960,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -65013,6 +65023,17 @@ var render = function() {
         "v-container",
         { attrs: { "grid-list-sm": "", fluid: "" } },
         [
+          _c(
+            "v-layout",
+            { attrs: { row: "" } },
+            [
+              _c("v-flex", { staticClass: "title", attrs: { xs12: "" } }, [
+                _vm._v("\n                Customer Infomration\n            ")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
           _c(
             "v-layout",
             { attrs: { row: "", wrap: "" } },
@@ -65072,10 +65093,21 @@ var render = function() {
           _vm._v(" "),
           _c("v-divider"),
           _vm._v(" "),
+          _c(
+            "v-layout",
+            { attrs: { row: "" } },
+            [
+              _c("v-flex", { staticClass: "title", attrs: { xs12: "" } }, [
+                _vm._v("\n                Order Detail\n            ")
+              ])
+            ],
+            1
+          ),
+          _vm._v(" "),
           _vm._l(_vm.order.items, function(item, index) {
             return _c(
               "v-layout",
-              { key: index, staticClass: "body-2 grey--text text-darken-3" },
+              { key: index, staticClass: "caption text-lighten-2" },
               [
                 _c("v-flex", { attrs: { xs3: "" } }, [
                   _vm._v(
@@ -65118,11 +65150,18 @@ var render = function() {
           _c(
             "v-layout",
             [
-              _c("v-flex", { attrs: { xs12: "", "text-right": "" } }, [
-                _vm._v(
-                  "\n              " + _vm._s(_vm.orderSum) + "\n          "
-                )
-              ])
+              _c(
+                "v-flex",
+                {
+                  staticClass: "body-2",
+                  attrs: { xs12: "", "text-right": "" }
+                },
+                [
+                  _vm._v(
+                    "\n              " + _vm._s(_vm.orderSum) + "\n          "
+                  )
+                ]
+              )
             ],
             1
           )
