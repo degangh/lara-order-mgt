@@ -41,17 +41,41 @@
                   Order Detail
               </v-flex>
           </v-layout>
+          <v-layout  class="font-weight-black" >
+            <v-flex xs4>
+                Product
+            </v-flex>
+            <v-flex xs2 text-right>
+                Quantity
+            </v-flex>
+            
+            <v-flex xs2 text-right>
+                Purchase Price AUD
+            </v-flex>
+            <v-flex xs2 text-right>
+                Unit Price CNY
+            </v-flex>
+            
+            <v-flex xs2 text-right>
+                Sub Total
+            </v-flex>
+
+            
+        </v-layout>
         <v-layout v-for = "(item, index) of order.items" :key="index" class="caption text-lighten-2" >
-            <v-flex xs3>
+            <v-flex xs4>
                 {{item.product.name}}
             </v-flex>
-            <v-flex xs3 text-right>
+            <v-flex xs2 text-right>
                 {{item.quantity}}
             </v-flex>
-            <v-flex xs3 text-right>
-                {{item.unit_price_cny}}
+            <v-flex xs2 text-right>
+                AUD{{item.purchase_price_aud}}
             </v-flex>
-            <v-flex xs3 text-right>
+            <v-flex xs2 text-right>
+                CNY{{item.unit_price_cny}}
+            </v-flex>
+            <v-flex xs2 text-right>
                 {{parseFloat(item.quantity * item.unit_price_cny).toFixed(2)}}
             </v-flex>
 
