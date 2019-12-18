@@ -64994,6 +64994,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -65145,7 +65153,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("v-flex", { attrs: { xs2: "", "text-right": "" } }, [
-                _vm._v("\n              Unit Price CNY\n          ")
+                _vm._v("\n              Unit Sale Price CNY\n          ")
               ]),
               _vm._v(" "),
               _c("v-flex", { attrs: { xs2: "", "text-right": "" } }, [
@@ -65218,6 +65226,27 @@ var render = function() {
                 [
                   _vm._v(
                     "\n              " + _vm._s(_vm.orderSum) + "\n          "
+                  )
+                ]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-layout",
+            [
+              _c(
+                "v-flex",
+                {
+                  staticClass: "caption text-lighten-2",
+                  attrs: { xs12: "", "text-right": "" }
+                },
+                [
+                  _vm._v(
+                    "\n              Exchange Rate: " +
+                      _vm._s(_vm.order.items[0].exchange_rate) +
+                      "\n          "
                   )
                 ]
               )

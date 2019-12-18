@@ -53,7 +53,7 @@
                 Purchase Price AUD
             </v-flex>
             <v-flex xs2 text-right>
-                Unit Price CNY
+                Unit Sale Price CNY
             </v-flex>
             
             <v-flex xs2 text-right>
@@ -82,10 +82,18 @@
             
         </v-layout>
         <v-layout>
+            
             <v-flex xs12 text-right class="body-2">
                 {{orderSum}}
             </v-flex>
         </v-layout>
+
+        <v-layout>
+            <v-flex xs12 text-right class="caption text-lighten-2">
+                Exchange Rate: {{order.items[0].exchange_rate}}
+            </v-flex>
+        </v-layout>
+        
   </v-container>
 </template>
 
