@@ -62,6 +62,19 @@
                 <v-btn 
                        fab
                        small
+                       color="light-blue accent-1"
+                       dark
+                       @click="popupFormDialog('orderDialog')"
+                       v-if= "editOrderButton"
+                >
+                <v-icon >
+                    edit
+                </v-icon>
+                </v-btn>
+
+                <v-btn 
+                       fab
+                       small
                        color="indigo"
                        dark
                        @click="popupFormDialog('orderDialog')"
@@ -94,13 +107,16 @@ export default {
             bottom: true,
             left: false,
             transition: 'slide-y-reverse-transition',
-            addressButton: false
+            addressButton: false,
+            editOrderButton: false
         }
     },
 
     mounted () {
         if (this.$router.currentRoute.name == "customerInfo") this.addressButton = true
         else this.addressButton = false
+
+        if (this.$router.currentRoute.name == "orderDetailPage") this.editOrderButton = true
     },
 
    watch: {
