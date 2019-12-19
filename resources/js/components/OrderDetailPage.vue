@@ -127,7 +127,6 @@ export default {
             .catch(this.handleError)
         },
         handleResponse (res) {
-            console.log(res.data[0])
             this.order = res.data[0]
             this.ready = true
             this.loading = false

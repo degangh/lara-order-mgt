@@ -60296,11 +60296,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       return localStorage.getItem("jwt") != null;
     },
     logout: function logout() {
-      console.log('logout clicked');
       localStorage.removeItem('jwt');
       this.$forceUpdate();
       this.$router.push("/login");
-      console.log(localStorage.getItem("jwt"));
     },
     apply_func: function apply_func(func_name) {
       if (func_name) this[func_name]();
@@ -64945,7 +64943,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.get('/api/orders/' + this.$route.params.id).then(this.handleResponse).catch(this.handleError);
         },
         handleResponse: function handleResponse(res) {
-            console.log(res.data[0]);
             this.order = res.data[0];
             this.ready = true;
             this.loading = false;

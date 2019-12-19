@@ -200,11 +200,9 @@ export default {
       },
       
       logout () {
-        console.log('logout clicked')
         localStorage.removeItem('jwt');
         this.$forceUpdate();
         this.$router.push("/login");
-        console.log(localStorage.getItem("jwt"))
         
       },
       apply_func(func_name) {
