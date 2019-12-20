@@ -144,6 +144,7 @@
     <product-form :dialog="productDialog" @closeDialog="closeFormDialog"></product-form>
     <address-form :dialog="addressDialog" @closeDialog="closeFormDialog"></address-form>
     <order-form :dialog="orderDialog" @closeDialog="closeFormDialog"></order-form>
+    <edit-order-form :dialog="editOrderDialog" @closeDialog="closeFormDialog"></edit-order-form>
 </v-app>
 
 </template>
@@ -154,12 +155,14 @@ import ContactForm from "./ContactForm"
 import ProductForm from "./ProductForm"
 import AddressForm from "./AddressForm"
 import OrderForm from "./OrderForm"
+import EditOrderForm from "./EditOrderForm"
 export default {
      data: () => ({
         contactDialog: false,
         addressDialog: false,
         productDialog: false,
         orderDialog:false,
+        editOrderDialog: false,
         drawer: null,
         items: [
           { icon: 'dashboard', text: 'Dashboard' , path: '/dashboard'},
@@ -191,7 +194,8 @@ export default {
         ContactForm,
         ProductForm,
         AddressForm,
-        OrderForm
+        OrderForm,
+        EditOrderForm
       },
     methods: {
 

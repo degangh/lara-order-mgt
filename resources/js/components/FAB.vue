@@ -64,7 +64,7 @@
                        small
                        color="light-blue accent-1"
                        dark
-                       @click="popupFormDialog('orderDialog')"
+                       @click="popupFormDialog('editOrderDialog')"
                        v-if= "editOrderButton"
                 >
                 <v-icon >
@@ -117,12 +117,15 @@ export default {
         else this.addressButton = false
 
         if (this.$router.currentRoute.name == "orderDetailPage") this.editOrderButton = true
+        else this.editOrderButton = false
     },
 
    watch: {
         '$route' (to, from){
             if (this.$router.currentRoute.name == 'customerInfo') this.addressButton = true
             else this.addressButton = false
+            if (this.$router.currentRoute.name == "orderDetailPage") this.editOrderButton = true
+            else this.editOrderButton = false
    }},
 
     methods: {

@@ -60103,6 +60103,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__AddressForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__AddressForm__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__OrderForm__ = __webpack_require__(175);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__OrderForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__OrderForm__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__EditOrderForm__ = __webpack_require__(263);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__EditOrderForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__EditOrderForm__);
 //
 //
 //
@@ -60253,6 +60255,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 
@@ -60266,6 +60270,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       addressDialog: false,
       productDialog: false,
       orderDialog: false,
+      editOrderDialog: false,
       drawer: null,
       items: [{ icon: 'dashboard', text: 'Dashboard', path: '/dashboard' }, { icon: 'contacts', text: 'Customers', path: '/customers' }, { icon: 'history', text: 'Orders', path: '/orders' }, { icon: 'shopping_cart', text: 'Products', path: '/products' }],
       userItems: [{ title: 'Logout', func: 'logout' }, { title: 'Help', func: '' }],
@@ -60289,7 +60294,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     ContactForm: __WEBPACK_IMPORTED_MODULE_1__ContactForm___default.a,
     ProductForm: __WEBPACK_IMPORTED_MODULE_2__ProductForm___default.a,
     AddressForm: __WEBPACK_IMPORTED_MODULE_3__AddressForm___default.a,
-    OrderForm: __WEBPACK_IMPORTED_MODULE_4__OrderForm___default.a
+    OrderForm: __WEBPACK_IMPORTED_MODULE_4__OrderForm___default.a,
+    EditOrderForm: __WEBPACK_IMPORTED_MODULE_5__EditOrderForm___default.a
   },
   methods: {
     isLogin: function isLogin() {
@@ -60481,13 +60487,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         if (this.$router.currentRoute.name == "customerInfo") this.addressButton = true;else this.addressButton = false;
 
-        if (this.$router.currentRoute.name == "orderDetailPage") this.editOrderButton = true;
+        if (this.$router.currentRoute.name == "orderDetailPage") this.editOrderButton = true;else this.editOrderButton = false;
     },
 
 
     watch: {
         '$route': function $route(to, from) {
             if (this.$router.currentRoute.name == 'customerInfo') this.addressButton = true;else this.addressButton = false;
+            if (this.$router.currentRoute.name == "orderDetailPage") this.editOrderButton = true;else this.editOrderButton = false;
         }
     },
 
@@ -60622,7 +60629,7 @@ var render = function() {
               },
               on: {
                 click: function($event) {
-                  return _vm.popupFormDialog("orderDialog")
+                  return _vm.popupFormDialog("editOrderDialog")
                 }
               }
             },
@@ -63631,6 +63638,11 @@ var render = function() {
       _vm._v(" "),
       _c("order-form", {
         attrs: { dialog: _vm.orderDialog },
+        on: { closeDialog: _vm.closeFormDialog }
+      }),
+      _vm._v(" "),
+      _c("edit-order-form", {
+        attrs: { dialog: _vm.editOrderDialog },
         on: { closeDialog: _vm.closeFormDialog }
       })
     ],
@@ -82352,6 +82364,864 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(264)
+/* template */
+var __vue_template__ = __webpack_require__(265)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/EditOrderForm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-66dd7426", Component.options)
+  } else {
+    hotAPI.reload("data-v-66dd7426", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 264 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__OrderDetail__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__OrderDetail___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__OrderDetail__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__OrderDetailConfirm__ = __webpack_require__(182);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__OrderDetailConfirm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__OrderDetailConfirm__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "EditOrderForm",
+
+  components: {
+    OrderDetail: __WEBPACK_IMPORTED_MODULE_0__OrderDetail___default.a,
+    OrderDetailConfirm: __WEBPACK_IMPORTED_MODULE_1__OrderDetailConfirm___default.a
+  },
+
+  mounted: function mounted() {
+    this.getCurrencyRate('AUD', 'CNY');
+
+    if (this.$router.currentRoute.name == "orderDetailPage") {
+      axios.get('/api/orders/' + this.$route.params.id).then(function (res) {
+        console.log(res.data[0]);
+      });
+    }
+  },
+  data: function data() {
+    return {
+      valid: false,
+      e1: 0,
+      next_button_text: 'Continue',
+      back_button_text: 'Back',
+      isLoading: false,
+      customerSearch: null,
+      productSearch: null,
+      selectedCustomer: null,
+      selectedProduct: null,
+      customers: [],
+      addresses: [],
+      products: [],
+      selectedProducts: [],
+      address: null,
+      exchange_rate: null,
+      customerRules: [function (v) {
+        return !!v || 'Customer must be selected';
+      }],
+      addressRules: [function (v) {
+        return !!v || 'Address must be selected';
+      }]
+
+    };
+  },
+
+
+  watch: {
+    customerSearch: function customerSearch(v) {
+      if (v == null) return;
+      if (v.length > 0) this.isLoading = true;
+      if (v.length == 0) this.customers = [];
+      if (v.length < 2) return;
+
+      this.searchCustomer(v);
+      this.address = null;
+      this.isLoading = false;
+    },
+    productSearch: function productSearch(v) {
+      if (v == null) return;
+      if (v.length > 0) this.isLoading = true;
+      if (v.length == 0) this.products = [];
+      if (v.length < 2) return;
+      this.searchProduct(v);
+    },
+    selectedCustomer: function selectedCustomer(v) {
+
+      if (v) this.addresses = v.addresses;
+    },
+    selectedProduct: function selectedProduct(v) {
+      if (v == null) return;
+      //v.num = 1 //this will bring a bug, but why?
+      v = _extends({}, v, { num: 1 //this works, but why?
+      });if (this.hasProduct(this.selectedProducts, v)) this.addOneProduct(v);else this.selectedProducts.push(v);
+      console.log(this.selectedProducts);
+      this.selectedProduct = null;
+      this.products = [];
+    }
+  },
+
+  props: {
+    dialog: Boolean
+  },
+
+  methods: {
+    emitCloseDialog: function emitCloseDialog(form) {
+      this.e1 = 1;
+      //this.$refs.OrderForm.reset()
+      this.addresses = [];
+      this.address = null;
+      this.customers = [];
+      this.products = [];
+      this.selectedProducts = [];
+      this.isLoading = false;
+      this.$emit("closeDialog", form);
+      this.getCurrencyRate('AUD', 'CNY');
+      console.log('after submit', this.exchange_rate);
+    },
+    next: function next() {
+      if (!this.$refs.OrderForm.validate()) return;
+      if (this.e1 < 3) this.e1 = parseInt(this.e1) + 1;
+    },
+    prev: function prev() {
+      this.e1 = parseInt(this.e1) - 1;
+    },
+    searchCustomer: function searchCustomer(v) {
+      var _this = this;
+
+      axios.get('/api/customers', {
+        params: {
+          keyword: v
+        }
+      }).then(function (res) {
+        _this.customers = res.data.data;
+      });
+    },
+    searchProduct: function searchProduct(v) {
+      var _this2 = this;
+
+      axios.get('/api/products', {
+        params: {
+          keyword: v
+        }
+      }).then(function (res) {
+        _this2.products = res.data.data;
+      });
+    },
+    getCurrencyRate: function getCurrencyRate(base, target) {
+      var _this3 = this;
+
+      fetch('https://api.exchangeratesapi.io/latest?base=' + base + '&symbols=' + target).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        return _this3.exchange_rate = parseFloat(parseFloat(data.rates[target]).toFixed(2));
+      });
+    },
+    afterSelection: function afterSelection() {
+      var _this4 = this;
+
+      this.$nextTick(function () {
+        _this4.selectedProduct = null;
+      });
+    },
+    hasProduct: function hasProduct(pArray, p) {
+
+      var flag = false;
+      pArray.forEach(function (ele) {
+        if (ele.id == p.id) flag = true;
+      });
+
+      return flag;
+    },
+    addOneProduct: function addOneProduct(p) {
+      var _this5 = this;
+
+      this.selectedProducts.forEach(function (ele, idx) {
+
+        if (ele.id == p.id) {
+          p.num = new Number(ele.num) + 1;
+          _this5.$set(_this5.selectedProducts, idx, p);
+        }
+      });
+    },
+    updateSelectedProducts: function updateSelectedProducts(payload) {
+      var _this6 = this;
+
+      this.selectedProducts.map(function (sp, index) {
+        if (sp.id == payload.product_id) {
+          _this6.selectedProducts[index][payload.key] = payload.new_value;
+        }
+      });
+    },
+    handleOrderCreationResponse: function handleOrderCreationResponse(res) {
+      this.emitCloseDialog('editOrderDialog');
+      if (res.data.id) this.$router.push("/orders/" + res.data.id);
+    },
+    updateExchangeRate: function updateExchangeRate(payload) {
+      console.log(payload.rate);
+      this.exchange_rate = payload.rate;
+    },
+    save: function save() {
+      axios.post('/api/order', {
+
+        customer_id: this.selectedCustomer.id,
+        address_id: this.address.id,
+        orderItems: this.selectedProducts,
+        exchange_rate: this.exchange_rate
+
+      }).then(this.handleOrderCreationResponse).catch(function (err) {
+        alert(err);
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 265 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "v-dialog",
+        {
+          attrs: {
+            width: "800px",
+            fullscreen: _vm.$vuetify.breakpoint.smAndDown,
+            persistent: ""
+          },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-toolbar",
+                { attrs: { dark: "", color: "primary" } },
+                [
+                  _c("v-toolbar-title", [_vm._v("Edit Order")]),
+                  _vm._v(" "),
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { icon: "", dark: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.emitCloseDialog("editOrderDialog")
+                        }
+                      }
+                    },
+                    [_c("v-icon", [_vm._v("close")])],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-form",
+                {
+                  ref: "OrderForm",
+                  model: {
+                    value: _vm.valid,
+                    callback: function($$v) {
+                      _vm.valid = $$v
+                    },
+                    expression: "valid"
+                  }
+                },
+                [
+                  _c(
+                    "v-container",
+                    { staticClass: "pa-4", attrs: { "grid-list-sm": "" } },
+                    [
+                      _c(
+                        "v-stepper",
+                        {
+                          model: {
+                            value: _vm.e1,
+                            callback: function($$v) {
+                              _vm.e1 = $$v
+                            },
+                            expression: "e1"
+                          }
+                        },
+                        [
+                          _c(
+                            "v-stepper-header",
+                            [
+                              _c(
+                                "v-stepper-step",
+                                { attrs: { complete: _vm.e1 > 1, step: "1" } },
+                                [_vm._v("Choose Customer")]
+                              ),
+                              _vm._v(" "),
+                              _c("v-divider"),
+                              _vm._v(" "),
+                              _c(
+                                "v-stepper-step",
+                                { attrs: { complete: _vm.e1 > 2, step: "2" } },
+                                [_vm._v("Add Products")]
+                              ),
+                              _vm._v(" "),
+                              _c("v-divider"),
+                              _vm._v(" "),
+                              _c("v-stepper-step", { attrs: { step: "3" } }, [
+                                _vm._v("Final Confirmation")
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-stepper-items",
+                            [
+                              _c(
+                                "v-stepper-content",
+                                { attrs: { step: "1" } },
+                                [
+                                  _c(
+                                    "v-card",
+                                    { attrs: { "min-height": "200px" } },
+                                    [
+                                      _c("v-autocomplete", {
+                                        attrs: {
+                                          label: "Customer",
+                                          "prepend-icon": "contacts",
+                                          "search-input": _vm.customerSearch,
+                                          items: _vm.customers,
+                                          loading: _vm.isLoading,
+                                          "hide-no-data": "",
+                                          "item-text": "name",
+                                          "return-object": "",
+                                          rules: _vm.customerRules,
+                                          autofocus: ""
+                                        },
+                                        on: {
+                                          "update:searchInput": function(
+                                            $event
+                                          ) {
+                                            _vm.customerSearch = $event
+                                          },
+                                          "update:search-input": function(
+                                            $event
+                                          ) {
+                                            _vm.customerSearch = $event
+                                          }
+                                        },
+                                        model: {
+                                          value: _vm.selectedCustomer,
+                                          callback: function($$v) {
+                                            _vm.selectedCustomer = $$v
+                                          },
+                                          expression: "selectedCustomer"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("v-combobox", {
+                                        attrs: {
+                                          label: "Address",
+                                          "prepend-icon": "business",
+                                          items: _vm.addresses,
+                                          "item-text": "address",
+                                          "return-object": "",
+                                          rules: _vm.addressRules
+                                        },
+                                        model: {
+                                          value: _vm.address,
+                                          callback: function($$v) {
+                                            _vm.address = $$v
+                                          },
+                                          expression: "address"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-stepper-content",
+                                { attrs: { step: "2" } },
+                                [
+                                  _c(
+                                    "v-card",
+                                    { attrs: { "min-height": "200px" } },
+                                    [
+                                      _c("v-autocomplete", {
+                                        attrs: {
+                                          label: "Search Products",
+                                          "prepend-icon": "shopping_cart",
+                                          items: _vm.products,
+                                          "search-input": _vm.productSearch,
+                                          "item-text": "name",
+                                          "hide-no-data": "",
+                                          "return-object": ""
+                                        },
+                                        on: {
+                                          "update:searchInput": function(
+                                            $event
+                                          ) {
+                                            _vm.productSearch = $event
+                                          },
+                                          "update:search-input": function(
+                                            $event
+                                          ) {
+                                            _vm.productSearch = $event
+                                          },
+                                          input: _vm.afterSelection,
+                                          change: function($event) {
+                                            _vm.productSearch = null
+                                          }
+                                        },
+                                        scopedSlots: _vm._u([
+                                          {
+                                            key: "no-data",
+                                            fn: function() {
+                                              return [
+                                                _c(
+                                                  "v-list-tile",
+                                                  [
+                                                    _c("v-list-tile-title", [
+                                                      _vm._v(
+                                                        "\r\n              Search for products to add\r\n            "
+                                                      )
+                                                    ])
+                                                  ],
+                                                  1
+                                                )
+                                              ]
+                                            },
+                                            proxy: true
+                                          },
+                                          {
+                                            key: "item",
+                                            fn: function(ref) {
+                                              var item = ref.item
+                                              return [
+                                                _c(
+                                                  "v-list-tile-content",
+                                                  [
+                                                    _c("v-list-tile-title", {
+                                                      domProps: {
+                                                        textContent: _vm._s(
+                                                          item.name
+                                                        )
+                                                      }
+                                                    }),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "v-list-tile-sub-title",
+                                                      {
+                                                        domProps: {
+                                                          textContent: _vm._s(
+                                                            item.ref_price_aud
+                                                          )
+                                                        }
+                                                      }
+                                                    )
+                                                  ],
+                                                  1
+                                                ),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "v-list-tile-action",
+                                                  [
+                                                    _c("v-icon", [
+                                                      _vm._v("add")
+                                                    ])
+                                                  ],
+                                                  1
+                                                )
+                                              ]
+                                            }
+                                          }
+                                        ]),
+                                        model: {
+                                          value: _vm.selectedProduct,
+                                          callback: function($$v) {
+                                            _vm.selectedProduct = $$v
+                                          },
+                                          expression: "selectedProduct"
+                                        }
+                                      }),
+                                      _vm._v(" "),
+                                      _c("order-detail", {
+                                        attrs: {
+                                          products: _vm.selectedProducts
+                                        },
+                                        on: {
+                                          updateSelectedProducts:
+                                            _vm.updateSelectedProducts
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "v-stepper-content",
+                                { attrs: { step: "3" } },
+                                [
+                                  _c(
+                                    "v-card",
+                                    [
+                                      _c("order-detail-confirm", {
+                                        attrs: {
+                                          products: _vm.selectedProducts,
+                                          exchange_rate: _vm.exchange_rate
+                                        },
+                                        on: {
+                                          updateExchangeRate:
+                                            _vm.updateExchangeRate
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { flat: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.emitCloseDialog("editOrderDialog")
+                        }
+                      }
+                    },
+                    [_vm._v("Cancel")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.e1 > 1,
+                          expression: "e1 > 1"
+                        }
+                      ],
+                      attrs: { flat: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.prev(_vm.e1)
+                        }
+                      }
+                    },
+                    [_vm._v("Back")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.e1 < 3,
+                          expression: "e1 < 3"
+                        }
+                      ],
+                      attrs: { flat: "", color: "primary" },
+                      on: {
+                        click: function($event) {
+                          return _vm.next(_vm.e1)
+                        }
+                      }
+                    },
+                    [_vm._v("Continue")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.e1 == 3,
+                          expression: "e1 == 3"
+                        }
+                      ],
+                      attrs: { flat: "", color: "primary" },
+                      on: {
+                        click: function($event) {
+                          return _vm.save()
+                        }
+                      }
+                    },
+                    [_vm._v("Save")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-66dd7426", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
