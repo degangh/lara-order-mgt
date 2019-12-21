@@ -143,7 +143,7 @@
     <contact-form  :dialog="contactDialog"  @closeDialog="closeFormDialog"></contact-form>
     <product-form  :dialog="productDialog" @closeDialog="closeFormDialog"></product-form>
     <address-form  :dialog="addressDialog" @closeDialog="closeFormDialog"></address-form>
-    <order-form  :dialog="orderDialog" @closeDialog="closeFormDialog"></order-form>
+    <order-form :action="formAction" :dialog="orderDialog" @closeDialog="closeFormDialog"></order-form>
 </v-app>
 
 </template>
@@ -161,10 +161,6 @@ export default {
         productDialog: false,
         orderDialog:false,
         formAction:null,
-        formAction0: null,
-        formAction1: null,
-        formAction2:null,
-        formAction3:null,
         drawer: null,
         items: [
           { icon: 'dashboard', text: 'Dashboard' , path: '/dashboard'},
@@ -216,7 +212,7 @@ export default {
       
       openFormDialog (payload){
         this[payload.form] = true
-        this[formAction] = payload.action
+        this.formAction = payload.action
       },
       closeFormDialog (form) {
         this[form] = false

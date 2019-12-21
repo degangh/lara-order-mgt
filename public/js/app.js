@@ -60393,10 +60393,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       productDialog: false,
       orderDialog: false,
       formAction: null,
-      formAction0: null,
-      formAction1: null,
-      formAction2: null,
-      formAction3: null,
       drawer: null,
       items: [{ icon: 'dashboard', text: 'Dashboard', path: '/dashboard' }, { icon: 'contacts', text: 'Customers', path: '/customers' }, { icon: 'history', text: 'Orders', path: '/orders' }, { icon: 'shopping_cart', text: 'Products', path: '/products' }],
       userItems: [{ title: 'Logout', func: 'logout' }, { title: 'Help', func: '' }],
@@ -60436,7 +60432,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     openFormDialog: function openFormDialog(payload) {
       this[payload.form] = true;
-      this[formAction] = payload.action;
+      this.formAction = payload.action;
     },
     closeFormDialog: function closeFormDialog(form) {
       this[form] = false;
@@ -62256,7 +62252,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
   mounted: function mounted() {
     this.getCurrencyRate('AUD', 'CNY');
-    console.log(this.formAction);
+    console.log(this.action);
   },
   data: function data() {
     return {
@@ -62321,7 +62317,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
   props: {
     dialog: Boolean,
-    formAction: String
+    action: String
   },
 
   methods: {
@@ -63768,7 +63764,7 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("order-form", {
-        attrs: { dialog: _vm.orderDialog },
+        attrs: { action: _vm.formAction, dialog: _vm.orderDialog },
         on: { closeDialog: _vm.closeFormDialog }
       })
     ],

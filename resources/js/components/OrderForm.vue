@@ -223,7 +223,7 @@ export default {
 
     props: {
         dialog: Boolean,
-        formAction: String
+        action: String
     },
 
     methods: {
