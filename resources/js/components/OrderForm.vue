@@ -222,7 +222,8 @@ export default {
     },
 
     props: {
-        dialog: Boolean
+        dialog: Boolean,
+        formAction: String
     },
 
     methods: {

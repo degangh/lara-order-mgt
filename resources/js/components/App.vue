@@ -140,10 +140,10 @@
     >
       <v-icon>add</v-icon>
     </v-btn-->
-    <contact-form :dialog="contactDialog"  @closeDialog="closeFormDialog"></contact-form>
-    <product-form :dialog="productDialog" @closeDialog="closeFormDialog"></product-form>
-    <address-form :dialog="addressDialog" @closeDialog="closeFormDialog"></address-form>
-    <order-form :dialog="orderDialog" @closeDialog="closeFormDialog"></order-form>
+    <contact-form  :dialog="contactDialog"  @closeDialog="closeFormDialog"></contact-form>
+    <product-form  :dialog="productDialog" @closeDialog="closeFormDialog"></product-form>
+    <address-form  :dialog="addressDialog" @closeDialog="closeFormDialog"></address-form>
+    <order-form  :dialog="orderDialog" @closeDialog="closeFormDialog"></order-form>
 </v-app>
 
 </template>
@@ -160,6 +160,11 @@ export default {
         addressDialog: false,
         productDialog: false,
         orderDialog:false,
+        formAction:null,
+        formAction0: null,
+        formAction1: null,
+        formAction2:null,
+        formAction3:null,
         drawer: null,
         items: [
           { icon: 'dashboard', text: 'Dashboard' , path: '/dashboard'},
@@ -209,11 +214,13 @@ export default {
         if (func_name) this[func_name]()
       },
       
-      openFormDialog (form){
-        this[form] = true
+      openFormDialog (payload){
+        this[payload.form] = true
+        this[formAction] = payload.action
       },
       closeFormDialog (form) {
         this[form] = false
+        this.formAction = null
       }
       
 
