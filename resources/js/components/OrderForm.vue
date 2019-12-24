@@ -218,6 +218,22 @@ export default {
         this.selectedProduct = null
         this.products = []  
         
+      },
+
+      action(v)
+      {
+        if (v == "edit")
+        {
+          axios.get('/api/orders/' + this.$route.params.id)
+            .then(res => {
+              console.log(res.data[0])
+              this.customers = [res.data[0].customer]
+              this.selectedCustomer = res.data[0].customer
+              this.addresses = [res.data[0].address]
+              this.address = res.data[0].address
+              //this.selectedProducts = res.data[0].items
+              })
+        }
       }
     },
 

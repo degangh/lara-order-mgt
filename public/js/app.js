@@ -62252,7 +62252,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
   mounted: function mounted() {
     this.getCurrencyRate('AUD', 'CNY');
-    console.log(this.action);
   },
   data: function data() {
     return {
@@ -62312,6 +62311,20 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       console.log(this.selectedProducts);
       this.selectedProduct = null;
       this.products = [];
+    },
+    action: function action(v) {
+      var _this = this;
+
+      if (v == "edit") {
+        axios.get('/api/orders/' + this.$route.params.id).then(function (res) {
+          console.log(res.data[0]);
+          _this.customers = [res.data[0].customer];
+          _this.selectedCustomer = res.data[0].customer;
+          _this.addresses = [res.data[0].address];
+          _this.address = res.data[0].address;
+          _this.selectedProducts = res.data[0].items;
+        });
+      }
     }
   },
 
@@ -62342,41 +62355,41 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.e1 = parseInt(this.e1) - 1;
     },
     searchCustomer: function searchCustomer(v) {
-      var _this = this;
+      var _this2 = this;
 
       axios.get('/api/customers', {
         params: {
           keyword: v
         }
       }).then(function (res) {
-        _this.customers = res.data.data;
+        _this2.customers = res.data.data;
       });
     },
     searchProduct: function searchProduct(v) {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.get('/api/products', {
         params: {
           keyword: v
         }
       }).then(function (res) {
-        _this2.products = res.data.data;
+        _this3.products = res.data.data;
       });
     },
     getCurrencyRate: function getCurrencyRate(base, target) {
-      var _this3 = this;
+      var _this4 = this;
 
       fetch('https://api.exchangeratesapi.io/latest?base=' + base + '&symbols=' + target).then(function (response) {
         return response.json();
       }).then(function (data) {
-        return _this3.exchange_rate = parseFloat(parseFloat(data.rates[target]).toFixed(2));
+        return _this4.exchange_rate = parseFloat(parseFloat(data.rates[target]).toFixed(2));
       });
     },
     afterSelection: function afterSelection() {
-      var _this4 = this;
+      var _this5 = this;
 
       this.$nextTick(function () {
-        _this4.selectedProduct = null;
+        _this5.selectedProduct = null;
       });
     },
     hasProduct: function hasProduct(pArray, p) {
@@ -62389,22 +62402,22 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       return flag;
     },
     addOneProduct: function addOneProduct(p) {
-      var _this5 = this;
+      var _this6 = this;
 
       this.selectedProducts.forEach(function (ele, idx) {
 
         if (ele.id == p.id) {
           p.num = new Number(ele.num) + 1;
-          _this5.$set(_this5.selectedProducts, idx, p);
+          _this6.$set(_this6.selectedProducts, idx, p);
         }
       });
     },
     updateSelectedProducts: function updateSelectedProducts(payload) {
-      var _this6 = this;
+      var _this7 = this;
 
       this.selectedProducts.map(function (sp, index) {
         if (sp.id == payload.product_id) {
-          _this6.selectedProducts[index][payload.key] = payload.new_value;
+          _this7.selectedProducts[index][payload.key] = payload.new_value;
         }
       });
     },
