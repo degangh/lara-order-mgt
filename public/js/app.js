@@ -62322,7 +62322,10 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           _this.selectedCustomer = res.data[0].customer;
           _this.addresses = [res.data[0].address];
           _this.address = res.data[0].address;
-          _this.selectedProducts = res.data[0].items;
+          //this.selectedProducts = res.data[0].items
+          res.data[0].items.map(function (item) {
+            console.log(item);
+          });
         });
       }
     }

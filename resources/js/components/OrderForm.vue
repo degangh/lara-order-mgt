@@ -232,6 +232,9 @@ export default {
               this.addresses = [res.data[0].address]
               this.address = res.data[0].address
               //this.selectedProducts = res.data[0].items
+              res.data[0].items.map((item)=>{
+                console.log(item)
+              })
               })
         }
       }
