@@ -233,7 +233,13 @@ export default {
               this.address = res.data[0].address
               //this.selectedProducts = res.data[0].items
               res.data[0].items.map((item)=>{
-                console.log(item)
+                let product = {}
+                product.ref_price_aud = item.purchase_price_aud
+                product.rrp_cny = item.unit_price_cny
+                product.id = item.product.id
+                product.name = item.product.name
+                product.num = item.quantity
+                this.selectedProducts.push(product)
               })
               })
         }

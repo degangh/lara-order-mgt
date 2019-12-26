@@ -62324,7 +62324,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           _this.address = res.data[0].address;
           //this.selectedProducts = res.data[0].items
           res.data[0].items.map(function (item) {
-            console.log(item);
+            var product = {};
+            product.ref_price_aud = item.purchase_price_aud;
+            product.rrp_cny = item.unit_price_cny;
+            product.id = item.product.id;
+            product.name = item.product.name;
+            product.num = item.quantity;
+            _this.selectedProducts.push(product);
           });
         });
       }
