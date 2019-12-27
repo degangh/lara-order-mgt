@@ -354,6 +354,8 @@ export default {
       },
       save()
       {
+        if (this.action == null)
+        
         axios.post('/api/order', {
      
                   customer_id: this.selectedCustomer.id,
@@ -366,6 +368,10 @@ export default {
           .catch(function (err) {
             alert (err)
           })
+
+          else{
+            console.log(this.action)
+          }
       }
 
       

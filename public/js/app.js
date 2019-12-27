@@ -62439,7 +62439,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.exchange_rate = payload.rate;
     },
     save: function save() {
-      axios.post('/api/order', {
+      if (this.action == null) axios.post('/api/order', {
 
         customer_id: this.selectedCustomer.id,
         address_id: this.address.id,
@@ -62448,7 +62448,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
       }).then(this.handleOrderCreationResponse).catch(function (err) {
         alert(err);
-      });
+      });else {
+        console.log(this.action);
+      }
     }
   }
 });
