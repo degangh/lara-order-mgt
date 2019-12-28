@@ -371,6 +371,13 @@ export default {
 
           else{
             console.log(this.action)
+            axios.patch('/api/orders/' + this.$route.params.id , {
+                  
+                  customer_id: this.selectedCustomer.id,
+                  address_id: this.address.id,
+                  orderItems: this.selectedProducts,
+                  exchange_rate: this.exchange_rate
+            })
           }
       }
 

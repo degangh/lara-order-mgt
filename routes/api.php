@@ -36,4 +36,5 @@ Route::post('order', 'OrderController@store')->middleware('auth:api');
 Route::post('order/{order}/items' , 'OrderItemController@store')->middleware('auth:api');
 
 Route::post('login', 'PassportController@login');
+Route::patch('orders/{order}', 'OrderController@update')->middleware('auth:api');
 
