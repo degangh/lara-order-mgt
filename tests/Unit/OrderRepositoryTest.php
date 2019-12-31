@@ -66,4 +66,27 @@ class OrderRepositoryTest extends TestCase
             
         ));
     }
+
+    /** @test */
+    public function it_can_update_order_change_item()
+    {
+        //given an existing order
+        $order = $this->orderRepository->create($this->order, $this->user);
+        //and a set of existing order items
+        $orderItems = factory(\App\OrderItem::class,3)->create([
+            'order_id' => $order->id
+        ]);
+        //the order items (unit price, num of product) can be updated
+    }
+
+    /** @test */
+    public function it_can_update_order_delete_item()
+    {
+        //give an existing order 
+
+        //and a set of existing order items
+
+        //one of the order items can be delete from the order
+
+    }
 }
