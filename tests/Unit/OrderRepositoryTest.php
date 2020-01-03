@@ -78,8 +78,15 @@ class OrderRepositoryTest extends TestCase
         ]);
         //an existing order items can be updated
         $item = $orderItems[0];
+        $new_unit_price = $item->rrp_cny + 15;
+        $item->rrp_cny = $new_unit_price;
 
         $this->orderItemRepository->update($item);
+
+        $this->assertDatabaseHas('order_items', array(
+            'order_id' => $order->id,
+            'unit_price_cny' => $new_unit_price
+        ));
         
     }
 
