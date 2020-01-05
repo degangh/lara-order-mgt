@@ -169,11 +169,7 @@ export default {
         addressDialog: false,
         productDialog: false,
         orderDialog:false,
-<<<<<<< HEAD
-        editOrderDialog: false,
-=======
         formAction:null,
->>>>>>> 1f4b5a30a5cb51e82754389bea6427230a8ea175
         drawer: null,
         items: [
           { icon: 'dashboard', text: 'Dashboard' , path: '/dashboard'},
