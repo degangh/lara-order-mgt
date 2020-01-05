@@ -64,11 +64,7 @@
                        small
                        color="light-blue accent-1"
                        dark
-<<<<<<< HEAD
-                       @click="popupFormDialog('editOrderDialog')"
-=======
                        @click="popupFormDialog('orderDialog', 'edit')"
->>>>>>> 1f4b5a30a5cb51e82754389bea6427230a8ea175
                        v-if= "editOrderButton"
                 >
                 <v-icon >
