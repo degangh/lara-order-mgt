@@ -218,11 +218,37 @@ export default {
         this.selectedProduct = null
         this.products = []  
         
+      },
+
+      action(v)
+      {
+        if (v == "edit")
+        {
+          axios.get('/api/orders/' + this.$route.params.id)
+            .then(res => {
+              console.log(res.data[0])
+              this.customers = [res.data[0].customer]
+              this.selectedCustomer = res.data[0].customer
+              this.addresses = [res.data[0].address]
+              this.address = res.data[0].address
+              //this.selectedProducts = res.data[0].items
+              res.data[0].items.map((item)=>{
+                let product = {}
+                product.ref_price_aud = item.purchase_price_aud
+                product.rrp_cny = item.unit_price_cny
+                product.id = item.product.id
+                product.name = item.product.name
+                product.num = item.quantity
+                this.selectedProducts.push(product)
+              })
+              })
+        }
       }
     },
 
     props: {
-        dialog: Boolean
+        dialog: Boolean,
+        action: String
     },
 
     methods: {
@@ -328,6 +354,8 @@ export default {
       },
       save()
       {
+        if (this.action == null)
+        
         axios.post('/api/order', {
      
                   customer_id: this.selectedCustomer.id,
@@ -340,6 +368,17 @@ export default {
           .catch(function (err) {
             alert (err)
           })
+
+          else{
+            console.log(this.action)
+            axios.patch('/api/orders/' + this.$route.params.id , {
+                  
+                  customer_id: this.selectedCustomer.id,
+                  address_id: this.address.id,
+                  orderItems: this.selectedProducts,
+                  exchange_rate: this.exchange_rate
+            })
+          }
       }
 
       

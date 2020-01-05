@@ -64,7 +64,11 @@
                        small
                        color="light-blue accent-1"
                        dark
+<<<<<<< HEAD
                        @click="popupFormDialog('editOrderDialog')"
+=======
+                       @click="popupFormDialog('orderDialog', 'edit')"
+>>>>>>> 1f4b5a30a5cb51e82754389bea6427230a8ea175
                        v-if= "editOrderButton"
                 >
                 <v-icon >
@@ -130,8 +134,8 @@ export default {
 
     methods: {
         
-        popupFormDialog (form) {
-            this.$emit('popupFormDialog', form)
+        popupFormDialog (form, action=null) {
+            this.$emit('popupFormDialog', {form: form, action:action})
         }
 
     }

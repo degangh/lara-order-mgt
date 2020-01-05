@@ -66,4 +66,56 @@ class OrderRepositoryTest extends TestCase
             
         ));
     }
+
+    /** @test */
+    public function it_can_update_order_change_item()
+    {
+        //given an existing order
+        $order = $this->orderRepository->create($this->order, $this->user);
+        //and a set of existing order items
+        $orderItems = factory(\App\OrderItem::class,3)->create([
+            'order_id' => $order->id
+        ]);
+        //an existing order items can be updated
+        $item = $orderItems[0];
+        $new_unit_price = $item->rrp_cny + 15;
+        $item->rrp_cny = $new_unit_price;
+
+        $this->orderItemRepository->update($item);
+
+        $this->assertDatabaseHas('order_items', array(
+            'order_id' => $order->id,
+            'unit_price_cny' => $new_unit_price
+        ));
+        
+    }
+
+    /** @test */
+    public function it_can_update_order_delete_item()
+    {
+        //give an existing order 
+        $order = $this->orderRepository->create($this->order, $this->user);
+        //and a set of existing order items
+        $orderItems = factory(\App\OrderItem::class,3)->create([
+            'order_id' => $order->id
+        ]);
+        $item = $orderItems[0];
+        //one of the order items can be delete from the order
+        $this->orderItemRepository->update($item);
+    }
+
+    public function it_can_update_order_add_item()
+    {
+        //give an existing order
+        $order = $this->orderRepository->create($this->order, $this->user);
+        //and a set of existing order items
+        $orderItems = factory(\App\OrderItem::class,3)->create([
+            'order_id' => $order->id
+        ]);
+        //an new order item can be added
+        $newItem = factory(\App\OrderItem::class,1)->make([
+            'order_id' => $order->id
+        ]);
+        //
+    }
 }
