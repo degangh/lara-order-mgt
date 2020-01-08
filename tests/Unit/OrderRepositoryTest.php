@@ -101,7 +101,7 @@ class OrderRepositoryTest extends TestCase
         ]);
         $item = $orderItems[0];
         //one of the order items can be delete from the order
-        $this->orderItemRepository->update($item);
+        $this->orderItemRepository->delete($order,$item);
     }
 
     public function it_can_update_order_add_item()
@@ -116,6 +116,12 @@ class OrderRepositoryTest extends TestCase
         $newItem = factory(\App\OrderItem::class,1)->make([
             'order_id' => $order->id
         ]);
-        //
+        
+        $this->orderItemRepository->add($order, $newItem);
+        //the new product can be found 
+        $this->assertDatabaseHas('order_items', array(
+            'order_id' => $order->id,
+            'product_id' => $newItem->product_id
+        ));
     }
 }
