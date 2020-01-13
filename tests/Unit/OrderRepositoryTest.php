@@ -59,7 +59,9 @@ class OrderRepositoryTest extends TestCase
         $orderItems = factory(\App\OrderItem::class,3)->make([
             'order_id' => $order->id
         ]);
-        $this->orderRepository->createDetail($order, $orderItems);
+
+        $exchange_rate = 5;
+        $this->orderRepository->createDetail($order, $orderItems, $exchange_rate);
         //the order items can be saved into database
         $this->assertDatabaseHas('order_items', array(
             'order_id' => $order->id,
