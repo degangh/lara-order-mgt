@@ -18,4 +18,14 @@ class OrderItemRepository implements OrderItemRepositoryInterface
             'exchange_rate' => $exchange_rate
         ]);
     }
+
+    public function update(OrderItem $item)
+    {
+
+    }
+
+    public function delete(OrderItem $item)
+    {
+        return OrderItem::find($item->id)->delete();
+    }
 }
