@@ -15,4 +15,8 @@ interface CustomerRepositoryInterface
     public function create($attributes);
 
     public function find($id);
+
+    public function update(Customer $customer);
+
+    public function delete(Customer $customer);
 }

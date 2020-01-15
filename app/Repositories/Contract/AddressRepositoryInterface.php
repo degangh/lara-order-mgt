@@ -15,4 +15,8 @@ interface AddressRepositoryInterface
     public function create($attributes);
 
     public function find($id);
+
+    public function update(Address $address);
+
+    public function delete(Address $address);
 }
