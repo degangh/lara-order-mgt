@@ -21,7 +21,12 @@ class OrderItemRepository implements OrderItemRepositoryInterface
 
     public function update(OrderItem $item)
     {
-
+        $orderItem = OrderItem::find($item->id);
+        $orderItem->unit_price_cny = $item->unit_price_cny;
+        $orderItem->quantity = $item->quantity;
+        $orderItem->purchase_price_aud = $item->purchase_price_aud;
+        
+        return $orderItem->save();
     }
 
     public function delete(OrderItem $item)

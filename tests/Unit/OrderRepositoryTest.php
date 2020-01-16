@@ -11,6 +11,7 @@ class OrderRepositoryTest extends TestCase
 {
     private $productRepository;
     private $orderRepository;
+    private $orderItemRepository;
     private $order;
     private $customer;
     private $user;
@@ -27,6 +28,7 @@ class OrderRepositoryTest extends TestCase
             'address_id' => $this->address->id
         ]);
         $this->orderRepository = new \App\Repositories\OrderRepository;
+        $this->orderItemRepository = new \App\Repositories\OrderItemRepository;
     }
 
     public function tearDown()
@@ -80,14 +82,20 @@ class OrderRepositoryTest extends TestCase
         ]);
         //an existing order items can be updated
         $item = $orderItems[0];
-        $new_unit_price = $item->rrp_cny + 15;
-        $item->rrp_cny = $new_unit_price;
+        $new_unit_price = $item->unit_price_cny + 15;
+        $new_quantity = $item->quantity + 2;
+        $new_purchase_price_aud = $item->purchase_price_aud + 1.5;
+        $item->unit_price_cny = $new_unit_price;
+        $item->purchase_price_aud = $new_purchase_price_aud;
+        $item->quantity = $new_quantity;
 
         $this->orderItemRepository->update($item);
 
         $this->assertDatabaseHas('order_items', array(
             'order_id' => $order->id,
-            'unit_price_cny' => $new_unit_price
+            'unit_price_cny' => $new_unit_price,
+            'purchase_price_aud' => $new_purchase_price_aud,
+            'quantity' => $new_quantity
         ));
         
     }
