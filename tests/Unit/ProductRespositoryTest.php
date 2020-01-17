@@ -49,4 +49,27 @@ class ProductRespositoryTest extends TestCase
             'ref_price_aud' => $this->product->ref_price_aud
         ));
     }
+
+    /** @test */
+    public function it_can_update_product()
+    {
+        //give an existing produt
+        $product = $this->productRepository->create(
+            $this->product
+        );
+
+        $new_ref_price_aud = round($product->ref_price_aud + 1, 2);
+        $new_rrp_cny = round($product->rrp_cny + 1, 2);
+
+        $product->ref_price_aud = $new_ref_price_aud;
+        $product->rrp_cny = $new_rrp_cny;
+
+        $this->productRepository->update($product);
+
+        $this->assertDatabaseHas('products', array(
+            'id' => $product->id,
+            'ref_price_aud' => $new_ref_price_aud,
+            'rrp_cny' => $new_rrp_cny
+        ));
+    }
 }

@@ -24,4 +24,17 @@ class ProductRepository implements ProductRepositoryInterface
         ]);
         
     }
+
+    public function update(Product $product)
+    {
+        $p = Product::find($product->id);
+        $p->rrp_cny = $product->rrp_cny;
+        $p->ref_price_aud = $product->ref_price_aud;
+        return $p->save();
+    }
+
+    public function delete(Product $product)
+    {
+
+    }
 }
