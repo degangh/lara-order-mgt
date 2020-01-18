@@ -61,5 +61,28 @@ class ProductTest extends TestCase
         ]);
         
     }
+
+    /** @test */
+    public function an_authenticated_user_can_change_product()
+    {
+        //given an authenticated user
+        $this->actingAs($this->user, 'api');
+        //and an existing product
+        $product = factory(\App\Product::class)->create();
+    
+        //when  user send a patch reuqest with product information
+        $this->json('post', '/api/products', $this->product->toArray())->assertStatus(200)->assertJsonStructure([
+            'id', 'name', 'ref_price_aud'
+        ]);
+        //and the product information should be in database
+        $this->assertDatabaseHas('products', [
+            'name' => $this->product->name,
+            'ref_price_aud' => $this->product->ref_price_aud
+        ]);
+        //product information shall be returned in json format
+
+
+
+    }
     
 }
