@@ -71,10 +71,10 @@ class ProductTest extends TestCase
         $product = factory(\App\Product::class)->create();
     
         //when  user send a patch reuqest with product information
-        $this->json('post', '/api/products', $this->product->toArray())->assertStatus(200)->assertJsonStructure([
+        $this->json('patch', '/api/products', $product->toArray())->assertStatus(200)->assertJsonStructure([
             'id', 'name', 'ref_price_aud'
         ]);
-        //and the product information should be in database
+        //and the product's new information should be in database
         $this->assertDatabaseHas('products', [
             'name' => $this->product->name,
             'ref_price_aud' => $this->product->ref_price_aud
