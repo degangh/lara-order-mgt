@@ -25,12 +25,14 @@ class ProductRepository implements ProductRepositoryInterface
         
     }
 
-    public function update(Product $product)
+    public function update($attributes)
     {
-        $p = Product::find($product->id);
-        $p->rrp_cny = $product->rrp_cny;
-        $p->ref_price_aud = $product->ref_price_aud;
-        return $p->save();
+        $p = Product::find($attributes->id);
+        $p->name = $attributes->name;
+        $p->rrp_cny = $attributes->rrp_cny;
+        $p->ref_price_aud = $attributes->ref_price_aud;
+        $p->save();
+        return $p;
     }
 
     public function delete(Product $product)

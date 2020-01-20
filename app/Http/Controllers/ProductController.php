@@ -80,7 +80,10 @@ class ProductController extends Controller
      */
     public function update(Request $request)
     {
-        //
+        
+        $product = $this->productRepository->update($request);
+
+        return response()->json($product->toArray());
     }
 
     /**

@@ -69,6 +69,14 @@ class ProductTest extends TestCase
         $this->actingAs($this->user, 'api');
         //and an existing product
         $product = factory(\App\Product::class)->create();
+
+        $new_name = $product->name . ' edit';
+        $new_aud = $product->ref_price_aud + 1.5;
+        $new_cny = $product->rrp_cny + 3.5;
+
+        $product->name = $new_name;
+        $product->ref_price_aud = $new_aud;
+        $product->rrp_cny = $new_cny;
     
         //when  user send a patch reuqest with product information
         $this->json('patch', '/api/products', $product->toArray())->assertStatus(200)->assertJsonStructure([
@@ -76,8 +84,10 @@ class ProductTest extends TestCase
         ]);
         //and the product's new information should be in database
         $this->assertDatabaseHas('products', [
-            'name' => $this->product->name,
-            'ref_price_aud' => $this->product->ref_price_aud
+            'id' => $product->id,
+            'name' => $new_name,
+            'ref_price_aud' => round($new_aud,2),
+            'rrp_cny' => round($new_cny,2)
         ]);
         //product information shall be returned in json format
 
