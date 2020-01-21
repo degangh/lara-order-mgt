@@ -34,4 +34,8 @@ class CustomerRepository implements CustomerRepositoryInterface
     {
 
     }
+
+    public function update($customer){}
+
+    public function delete($customer){}
 }
