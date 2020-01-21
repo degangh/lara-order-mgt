@@ -140,18 +140,11 @@
     >
       <v-icon>add</v-icon>
     </v-btn-->
-<<<<<<< HEAD
     <contact-form :dialog="contactDialog"  @closeDialog="closeFormDialog"></contact-form>
     <product-form :dialog="productDialog" @closeDialog="closeFormDialog"></product-form>
     <address-form :dialog="addressDialog" @closeDialog="closeFormDialog"></address-form>
     <order-form :dialog="orderDialog" @closeDialog="closeFormDialog"></order-form>
     <edit-order-form :dialog="editOrderDialog" @closeDialog="closeFormDialog"></edit-order-form>
-=======
-    <contact-form  :dialog="contactDialog"  @closeDialog="closeFormDialog"></contact-form>
-    <product-form  :dialog="productDialog" @closeDialog="closeFormDialog"></product-form>
-    <address-form  :dialog="addressDialog" @closeDialog="closeFormDialog"></address-form>
-    <order-form :action="formAction" :dialog="orderDialog" @closeDialog="closeFormDialog"></order-form>
->>>>>>> 1f4b5a30a5cb51e82754389bea6427230a8ea175
 </v-app>
 
 </template>
