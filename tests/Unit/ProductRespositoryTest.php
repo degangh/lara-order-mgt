@@ -57,7 +57,7 @@ class ProductRespositoryTest extends TestCase
         $product = $this->productRepository->create(
             $this->product
         );
-
+        //change the attributes of this product
         $new_ref_price_aud = round($product->ref_price_aud + 1, 2);
         $new_rrp_cny = round($product->rrp_cny + 1, 2);
 
