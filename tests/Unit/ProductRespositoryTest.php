@@ -57,19 +57,27 @@ class ProductRespositoryTest extends TestCase
         $product = $this->productRepository->create(
             $this->product
         );
+
+        
         //change the attributes of this product
         $new_ref_price_aud = round($product->ref_price_aud + 1, 2);
         $new_rrp_cny = round($product->rrp_cny + 1, 2);
+        $new_name = $product->name . " edit";
 
-        $product->ref_price_aud = $new_ref_price_aud;
-        $product->rrp_cny = $new_rrp_cny;
-
-        $this->productRepository->update($product);
+        $updated_product = factory(\App\Product::class)->make([
+            'id' => $product->id,
+            'name' => $new_name,
+            'rrp_cny' => $new_rrp_cny,
+            'ref_price_aud' => $new_ref_price_aud
+        ]);
+        
+        $this->productRepository->update($updated_product, $product);
 
         $this->assertDatabaseHas('products', array(
             'id' => $product->id,
             'ref_price_aud' => $new_ref_price_aud,
-            'rrp_cny' => $new_rrp_cny
+            'rrp_cny' => $new_rrp_cny,
+            'name' => $new_name
         ));
     }
 }

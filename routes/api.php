@@ -25,7 +25,7 @@ Route::get('customers/{customer}', 'CustomerController@show')->middleware('auth:
 
 Route::get('products', 'ProductController@index')->middleware('auth:api');
 Route::post('products', 'ProductController@store')->middleware('auth:api');
-Route::patch('products', 'ProductController@update')->middleware('auth:api');
+Route::patch('products/{product}', 'ProductController@update')->middleware('auth:api');
 
 Route::post('addresses', 'AddressController@store')->middleware('auth:api');
 Route::patch('addresses/default' , 'AddressController@setDefault')->middleware('auth:api');

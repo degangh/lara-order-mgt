@@ -79,7 +79,7 @@ class ProductTest extends TestCase
         $product->rrp_cny = $new_cny;
     
         //when  user send a patch reuqest with product information
-        $this->json('patch', '/api/products', $product->toArray())->assertStatus(200)->assertJsonStructure([
+        $this->json('patch', '/api/products/'.$product->id, $product->toArray())->assertStatus(200)->assertJsonStructure([
             'id', 'name', 'ref_price_aud'
         ]);
         //and the product's new information should be in database

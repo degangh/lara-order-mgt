@@ -28,7 +28,7 @@ interface ProductRepositoryInterface
      * 
      * @return Bool
      */
-    public function update($attributes);
+    public function update($attributes, Product $product);
 
     /**
      * delete a product from database

@@ -44,6 +44,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {        
+        dd($request);
         $product = $this->productRepository->create($request);
 
         return response()->json($product->toArray());
@@ -78,10 +79,9 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {
-        
-        $product = $this->productRepository->update($request);
+    public function update(Request $request, Product $product)
+    {        
+        $product = $this->productRepository->update($request, $product);
 
         return response()->json($product->toArray());
     }
