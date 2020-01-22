@@ -26,6 +26,10 @@
                             <th class="col2">
                             RRP CNY
                             </th>
+
+                            <th class="col2"> 
+                                Edit
+                            </th>
                             
                         </tr>
                         <tbody>
@@ -33,7 +37,13 @@
                             <td>{{product.name}}</td>
                             <td>{{product.ref_price_aud}}</td>
                             <td>{{product.rrp_cny}}</td>
-                            
+                            <td>
+                                <v-btn  text icon color="primary">
+                                    <v-icon>
+                                        edit 
+                                    </v-icon>
+                                </v-btn>
+                            </td>
                         </tr>
 
                         
@@ -138,7 +148,5 @@ tr {
 tr:hover {
 
     box-shadow: inset 0 -1px 0 0 rgba(100,121,143,0.122);
-    cursor: pointer;
-
 }
 </style>

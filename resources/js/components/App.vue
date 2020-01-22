@@ -144,7 +144,6 @@
     <product-form :dialog="productDialog" @closeDialog="closeFormDialog"></product-form>
     <address-form :dialog="addressDialog" @closeDialog="closeFormDialog"></address-form>
     <order-form :dialog="orderDialog" @closeDialog="closeFormDialog"></order-form>
-    <edit-order-form :dialog="editOrderDialog" @closeDialog="closeFormDialog"></edit-order-form>
 </v-app>
 
 </template>
