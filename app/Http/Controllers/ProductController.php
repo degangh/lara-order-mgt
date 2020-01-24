@@ -44,7 +44,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {        
-        dd($request);
         $product = $this->productRepository->create($request);
 
         return response()->json($product->toArray());
