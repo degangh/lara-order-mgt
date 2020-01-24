@@ -140,7 +140,8 @@ export default {
       },
       closeFormDialog (form) {
         this[form] = false
-        this.formAction = null
+        this.formAction = null,
+        this.requestProductData();
       }
 
   }

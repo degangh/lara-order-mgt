@@ -66320,7 +66320,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         closeFormDialog: function closeFormDialog(form) {
             this[form] = false;
-            this.formAction = null;
+            this.formAction = null, this.requestProductData();
         }
     }
 });
