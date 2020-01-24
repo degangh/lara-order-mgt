@@ -4,7 +4,7 @@
       <v-card>
         <v-toolbar dark color="primary">
           
-          <v-toolbar-title>Add Product</v-toolbar-title>
+          <v-toolbar-title>{{form_title}}</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon dark @click="emitCloseDialog('productDialog')">
             <v-icon>close</v-icon>
@@ -47,6 +47,7 @@
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="emitCloseDialog('productDialog')">Cancel</v-btn>
           <v-btn flat @click="saveProduct">Save</v-btn>
+
         </v-card-actions>
         </v-card>
     </v-dialog>
@@ -61,12 +62,29 @@ export default {
     name: "ProductForm" , 
 
     props: {
-        dialog: Boolean
+        dialog: Boolean,
+        product: {
+          type: [Object, null]
+        }
+    },
+
+    watch: {
+      product (p) {
+        if (p == null) return;
+        this.rrp_cny = p.rrp_cny
+        this.ref_price_aud = p.ref_price_aud
+        this.name = p.name
+        this.form_title = "Edit Product",
+        this.is_edit = true
+
+      }
     },
 
     data() {
         return {
+            form_title: 'Create Product',
             name: '',
+            is_edit: false,
             ref_price_aud: '',
             rrp_cny: '',
             valid: false,
@@ -86,15 +104,21 @@ export default {
             this.$refs.ProductForm.reset()
             this.$emit("closeDialog", form)
         },
+
         saveProduct () {
           if (!this.$refs.ProductForm.validate()) return
           this.snackbar = true
-          axios.post('/api/products', {
-     
+          let formAction = (this.is_edit) ? 'patch' : 'post'
+          let url = '/api/products' + ((this.is_edit) ? '/' + this.product.id : '' )
+          axios({
+              method: formAction,
+              url: url,
+              data: {
                   name: this.name,
                   ref_price_aud: this.ref_price_aud,
                   rrp_cny: this.rrp_cny
      
+              }
           })
           .then(this.handleResponse)
           .catch(function (err) {
@@ -104,7 +128,7 @@ export default {
         handleResponse () {
           this.snackbar = false
           this.emitCloseDialog('productDialog')
-          this.snackbarText = "New Product Saved"
+          this.snackbarText = (this.is_edit)? "Product Updated" : "New Product Saved"
           this.snackbar = true
           /*
           if (res.data.id) this.$router.push("/customer/" + res.data.id);

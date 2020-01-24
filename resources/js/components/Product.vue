@@ -38,7 +38,7 @@
                             <td>{{product.ref_price_aud}}</td>
                             <td>{{product.rrp_cny}}</td>
                             <td>
-                                <v-btn  text icon small color="primary" @click="popupFormDialog('productDialog')">
+                                <v-btn  text icon small color="primary" @click="popupFormDialog('productDialog', product)">
                                     <v-icon small>
                                         edit 
                                     </v-icon>
@@ -66,7 +66,11 @@
                 </div>
             </div>
         </div>
-        <product-form :dialog="productDialog" @closeDialog="closeFormDialog"></product-form>
+        <product-form 
+        :dialog="productDialog" 
+        @closeDialog="closeFormDialog"
+        :product = "selectedProduct"
+        ></product-form>
 
 </div>
 </template>
@@ -81,7 +85,8 @@ export default {
       page: 1,
       totalPage: null,
       loading: true,
-      productDialog: false
+      productDialog: false,
+      selectedProduct: null,
 
     }
   },
@@ -129,8 +134,9 @@ export default {
           this.$router.push('/products/p' + this.page)
       },
 
-      popupFormDialog (form, action=null) {
+      popupFormDialog (form, product = null) {
             this[form] =  true
+            this.selectedProduct = product
       },
       closeFormDialog (form) {
         this[form] = false
