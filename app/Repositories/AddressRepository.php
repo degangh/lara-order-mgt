@@ -31,7 +31,11 @@ class AddressRepository implements AddressRepositoryInterface
 
     public function update($attributes, Address $address)
     {
-
+        $address->address = $attributes->address;
+        $address->postcode = $attributes->postcode;
+        $address->mobile = $attributes->mobile;
+        $address->save();
+        return $address;
     }
 
     public function delete(Address $address){}

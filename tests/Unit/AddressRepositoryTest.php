@@ -34,20 +34,18 @@ class AddressRepositoryTest extends TestCase
         //given a customer and an existing address
         $address = $this->addressRepository->create($this->address);
         //and a set of updated address data
-        $new_mobile = $faker->phoneNumber;
-        $new_address = $faker->address;
-        $new_postcode = $faker->postcode;
-        $updated_address = factory(\App\Address::class)->create([
-            'id' => $address->id,
+        $new_mobile = $this->faker->phoneNumber;
+        $new_address = $this->faker->address;
+        $new_postcode = $this->faker->postcode;
+        $updated_address = factory(\App\Address::class)->make([
             'mobile' => $new_mobile,
             'address' => $new_address,
-            'postcode' => $postcode,
-            'customer_id' => $address->customer_id
+            'postcode' => $new_postcode,
         ]);
 
-        $this->addressRepository->update($updated_product, $product);
+        $this->addressRepository->update($updated_address, $address);
 
-        $this->assertDatabaseHas('products', array(
+        $this->assertDatabaseHas('addresses', array(
             'id' => $address->id,
             'mobile' => $new_mobile,
             'customer_id' => $address->customer_id,

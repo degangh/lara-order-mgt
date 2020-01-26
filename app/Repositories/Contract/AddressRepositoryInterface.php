@@ -1,5 +1,6 @@
 <?php
 namespace App\Repositories\Contract;
+use App\Address;
 
 interface AddressRepositoryInterface
 {
@@ -16,7 +17,7 @@ interface AddressRepositoryInterface
 
     public function find($id);
 
-    public function update(Address $address);
+    public function update($attribute, Address $address);
 
     public function delete(Address $address);
 }
