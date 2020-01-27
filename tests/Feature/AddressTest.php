@@ -11,7 +11,7 @@ use App\Address;
 
 class AddressTest extends TestCase
 {
-    
+    use WithFaker;
     public function setup()
     {
         parent::setup();
@@ -73,6 +73,36 @@ class AddressTest extends TestCase
         $this->assertEquals($count,1);
 
         
+    }
+
+    /** @test */
+    public function a_login_user_can_update_address()
+    {
+        //given an authenticated user
+        $this->actingAs($this->user, 'api');
+        //and an existing customer with an address
+        $customer = factory(\App\Customer::class)->create();    
+        $address = factory(\App\Address::class)->create(['mobile'=>$customer->mobile, 'customer_id' => $customer->id]);
+        //and updated address data
+        $new_mobile = $this->faker->phoneNumber;
+        $new_address = $this->faker->address;
+        $new_postcode = $this->faker->postcode;
+        //the user is able to send updatd address data
+        $this->json('patch', '/api/addresses/'.$address->id, [
+                'mobile' => $new_mobile,
+                'address' => $new_address,
+                'postcode' => $new_postcode
+            ])->assertStatus(200);
+        
+        //the address is set to default
+        $this->assertDatabaseHas('addresses', array(
+            'id' => $address->id,
+            'customer_id' => $customer->id,
+            'address' => $new_address,
+            'mobile' => $new_mobile,
+            'postcode' => $new_postcode
+        ));
+
     }
 }
     

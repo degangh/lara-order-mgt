@@ -29,6 +29,7 @@ Route::patch('products/{product}', 'ProductController@update')->middleware('auth
 
 Route::post('addresses', 'AddressController@store')->middleware('auth:api');
 Route::patch('addresses/default' , 'AddressController@setDefault')->middleware('auth:api');
+Route::patch('addresses/{address}' , 'AddressController@update')->middleware('auth:api');
 
 
 Route::get('orders', 'OrderController@index')->middleware('auth:api');
