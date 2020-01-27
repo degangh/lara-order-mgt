@@ -5,9 +5,17 @@ namespace App\Http\Controllers;
 use App\Address;
 use Illuminate\Http\Request;
 use App\Customer;
+use App\Repositories\Contract\AddressRepositoryInterface;
 
 class AddressController extends Controller
 {
+    protected $addressRepository;
+    
+    public function __construct(AddressRepositoryInterface $addressRepository)
+    {
+        $this->addressRepository = $addressRepository;
+    }
+    
     /**
      * Display a listing of the address.
      *
@@ -79,7 +87,9 @@ class AddressController extends Controller
      */
     public function update(Request $request, Address $address)
     {
-        //
+        $new_address = $this->addressRepository->update($request, $address);
+
+        return response()->json($new_address->toArray());
     }
 
     /**
