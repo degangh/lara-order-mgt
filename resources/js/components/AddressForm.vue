@@ -31,6 +31,16 @@
                 
               ></v-text-field>
             </v-flex>
+
+            <v-flex xs12>
+              <v-text-field
+                prepend-icon="room"
+                placeholder="Postcode: etc. 100010"
+                v-model = "postcode"
+                
+                
+              ></v-text-field>
+            </v-flex>
         </v-container>
         </v-form>
         <v-card-actions>
