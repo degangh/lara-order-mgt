@@ -73,17 +73,23 @@
   justify-space-between 
   v-for = "(a, index) in addresses" 
   :key="index"
-  @click = "setDefaultAddress(a)">
+  >
               <v-layout class="address-wrapper">
                 
-                <v-flex xs2 sm1 mb-4 text-xs-left text-sm-right pr-2>
+                <v-flex xs2 sm1 mt-2 text-xs-left text-sm-right pr-2 @click = "setDefaultAddress(a)">
                 
                 <v-icon v-if = "!Boolean(a.is_default*1)">check_box_outline_blank</v-icon>
                 <v-icon v-else  color="blue darken-2">check_box</v-icon>
                 </v-flex>
                 <v-flex xs10 sm11 mb-4 body-2>
-                {{a.address}} {{a.mobile}}
+                <span @click = "setDefaultAddress(a)">{{a.address}} {{a.mobile}}</span>
+                <v-btn text icon @click="popupFormDialog('addressDialog', a)">
+                    <v-icon small>
+                      edit
+                    </v-icon>
+                  </v-btn>
                 </v-flex>
+                
                 
               </v-layout>
             </v-flex>
@@ -138,12 +144,18 @@
 <v-snackbar v-model="snackbar">
       {{snackbarText}}
 </v-snackbar>
+    <address-form :dialog="addressDialog" @closeDialog="closeFormDialog"></address-form>
+
 </div>
 </template>
 
 
 <script>
+import AddressForm from "./AddressForm"
 export default {
+    components: {
+        AddressForm
+      },
 
     data () {
       return {
@@ -153,7 +165,9 @@ export default {
         addresses: false,
         ready: false,
         snackbar: false,
-        snackbarText: "Address is set successfully"
+        snackbarText: "Address is set successfully",
+        addressDialog: false,
+        selectedAddress: null,
         
 
       }
@@ -201,6 +215,15 @@ export default {
       },
       showSnackbar(){
         this.snackbar = true
+      },
+      popupFormDialog (form, address = null) {
+            this[form] =  true
+            this.selectedAddress = address
+      },
+      closeFormDialog (form) {
+        this[form] = false
+        this.formAction = null
+        
       }
 
     }
