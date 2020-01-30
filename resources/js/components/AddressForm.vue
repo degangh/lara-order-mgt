@@ -4,7 +4,7 @@
       <v-card>
         <v-toolbar dark color="primary">
           
-          <v-toolbar-title>Add Address</v-toolbar-title>
+          <v-toolbar-title>{{form_title}}</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon dark @click="emitCloseDialog('addressDialog')">
             <v-icon>close</v-icon>
@@ -62,11 +62,27 @@ export default {
     name: "AddressForm" , 
 
     props: {
-        dialog: Boolean
+        dialog: Boolean,
+        selectedAddress: {
+          type: [Object, null]
+        }
+    },
+
+    watch: {
+      selectedAddress(a) {
+        if (a == null) return;
+        this.address = a.address
+        this.mobile = a.mobile
+        this.postcode = a.postcode
+        this.is_edit = true
+        this.form_title = "Edit Address"
+      }
     },
 
     data() {
         return {
+            form_title: 'Add Address',
+            is_edit: false,
             address: '',
             mobile: '',
             postcode: '',
@@ -90,13 +106,17 @@ export default {
         },
         saveAddress () {
           if (!this.$refs.AddressForm.validate()) return
-          axios.post('/api/addresses', {
-     
+          let formAction = (this.is_edit) ? 'patch' : 'post'
+          let url = '/api/addresses' + ((this.is_edit) ? '/' + this.selectedAddress.id : '' )
+          axios({
+            method: formAction,
+            url: url,
+            data: {
                   customer_id: this.$route.params.id,
                   address: this.address,
                   mobile: this.mobile,
                   postcode: this.postcode
-     
+            }
           })
           .then(this.handleResponse)
           .catch(function (err) {
@@ -106,7 +126,7 @@ export default {
         },
 
         handleResponse(res) {
-          this.$root.$emit('addNewAddress', res.data)
+          //this.$root.$emit('addNewAddress', res.data)
           this.emitCloseDialog('addressDialog')
         }
     }

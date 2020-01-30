@@ -82,7 +82,7 @@
                 <v-icon v-else  color="blue darken-2">check_box</v-icon>
                 </v-flex>
                 <v-flex xs10 sm11 mb-4 body-2>
-                <span @click = "setDefaultAddress(a)">{{a.address}} {{a.mobile}}</span>
+                <span @click = "setDefaultAddress(a)">{{a.address}} {{a.postcode}} {{a.mobile}}</span>
                 <v-btn text icon @click="popupFormDialog('addressDialog', a)">
                     <v-icon small>
                       edit
@@ -144,7 +144,10 @@
 <v-snackbar v-model="snackbar">
       {{snackbarText}}
 </v-snackbar>
-    <address-form :dialog="addressDialog" @closeDialog="closeFormDialog"></address-form>
+    <address-form 
+    :dialog="addressDialog" 
+    @closeDialog="closeFormDialog"
+    :selectedAddress = "selectedAddress"></address-form>
 
 </div>
 </template>
@@ -223,6 +226,7 @@ export default {
       closeFormDialog (form) {
         this[form] = false
         this.formAction = null
+        this.requestCustomerInfo()
         
       }
 

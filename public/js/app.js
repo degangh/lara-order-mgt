@@ -61819,55 +61819,75 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "AddressForm",
+  name: "AddressForm",
 
-    props: {
-        dialog: Boolean
-    },
-
-    data: function data() {
-        return {
-            address: '',
-            mobile: '',
-            postcode: '',
-            valid: false,
-            snackbar: false,
-            snackbarText: '',
-            mobileRules: [function (v) {
-                return !!v || 'Phone number is required';
-            }, function (v) {
-                return (/^\d+$/.test(v) || 'Phone number must contain digit only'
-                );
-            }],
-            addressRules: [function (v) {
-                return !!v || 'Address is required';
-            }]
-        };
-    },
-
-    methods: {
-        emitCloseDialog: function emitCloseDialog(form) {
-            this.$refs.AddressForm.reset();
-            this.$emit("closeDialog", form);
-        },
-        saveAddress: function saveAddress() {
-            if (!this.$refs.AddressForm.validate()) return;
-            axios.post('/api/addresses', {
-
-                customer_id: this.$route.params.id,
-                address: this.address,
-                mobile: this.mobile,
-                postcode: this.postcode
-
-            }).then(this.handleResponse).catch(function (err) {
-                alert(err);
-            });
-        },
-        handleResponse: function handleResponse(res) {
-            this.$root.$emit('addNewAddress', res.data);
-            this.emitCloseDialog('addressDialog');
-        }
+  props: {
+    dialog: Boolean,
+    selectedAddress: {
+      type: [Object, null]
     }
+  },
+
+  watch: {
+    selectedAddress: function selectedAddress(a) {
+      if (a == null) return;
+      this.address = a.address;
+      this.mobile = a.mobile;
+      this.postcode = a.postcode;
+      this.is_edit = true;
+      this.form_title = "Edit Address";
+    }
+  },
+
+  data: function data() {
+    return {
+      form_title: 'Add Address',
+      is_edit: false,
+      address: '',
+      mobile: '',
+      postcode: '',
+      valid: false,
+      snackbar: false,
+      snackbarText: '',
+      mobileRules: [function (v) {
+        return !!v || 'Phone number is required';
+      }, function (v) {
+        return (/^\d+$/.test(v) || 'Phone number must contain digit only'
+        );
+      }],
+      addressRules: [function (v) {
+        return !!v || 'Address is required';
+      }]
+    };
+  },
+
+  methods: {
+    emitCloseDialog: function emitCloseDialog(form) {
+      this.$refs.AddressForm.reset();
+      this.$emit("closeDialog", form);
+    },
+    saveAddress: function saveAddress() {
+      if (!this.$refs.AddressForm.validate()) return;
+      var formAction = this.is_edit ? 'patch' : 'post';
+      var url = '/api/addresses' + (this.is_edit ? '/' + this.selectedAddress.id : '');
+      axios({
+        method: formAction,
+        url: url,
+        data: {
+          customer_id: this.$route.params.id,
+          address: this.address,
+          mobile: this.mobile,
+          postcode: this.postcode
+        }
+      }).then(this.handleResponse).catch(function (err) {
+        alert(err);
+      });
+    },
+    handleResponse: function handleResponse(res) {
+      //this.$root.$emit('addNewAddress', res.data)
+      this.emitCloseDialog('addressDialog');
+    }
+  }
 });
 
 /***/ }),
@@ -61905,7 +61925,7 @@ var render = function() {
                 "v-toolbar",
                 { attrs: { dark: "", color: "primary" } },
                 [
-                  _c("v-toolbar-title", [_vm._v("Add Address")]),
+                  _c("v-toolbar-title", [_vm._v(_vm._s(_vm.form_title))]),
                   _vm._v(" "),
                   _c("v-spacer"),
                   _vm._v(" "),
@@ -66913,6 +66933,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -66982,6 +67005,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     closeFormDialog: function closeFormDialog(form) {
       this[form] = false;
       this.formAction = null;
+      this.requestCustomerInfo();
     }
   }
 
@@ -67315,6 +67339,8 @@ var render = function() {
                                           _vm._v(
                                             _vm._s(a.address) +
                                               " " +
+                                              _vm._s(a.postcode) +
+                                              " " +
                                               _vm._s(a.mobile)
                                           )
                                         ]
@@ -67468,7 +67494,10 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("address-form", {
-            attrs: { dialog: _vm.addressDialog },
+            attrs: {
+              dialog: _vm.addressDialog,
+              selectedAddress: _vm.selectedAddress
+            },
             on: { closeDialog: _vm.closeFormDialog }
           })
         ],
