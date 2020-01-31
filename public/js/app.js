@@ -61884,7 +61884,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     handleResponse: function handleResponse(res) {
-      //this.$root.$emit('addNewAddress', res.data)
+      this.$root.$emit('addNewAddress', res.data);
       this.emitCloseDialog('addressDialog');
     }
   }
@@ -66963,8 +66963,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     this.requestCustomerInfo();
 
     this.$root.$on("addNewAddress", function (address) {
-      _this.addresses.push(address);
-      if (_this.customer.addresses.length == 0) _this.customer.addresses.push(address);
+      _this.requestCustomerInfo();
     });
   },
 

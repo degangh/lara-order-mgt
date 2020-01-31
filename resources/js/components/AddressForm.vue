@@ -126,7 +126,7 @@ export default {
         },
 
         handleResponse(res) {
-          //this.$root.$emit('addNewAddress', res.data)
+          this.$root.$emit('addNewAddress', res.data)
           this.emitCloseDialog('addressDialog')
         }
     }

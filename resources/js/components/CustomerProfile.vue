@@ -180,8 +180,7 @@ export default {
        this.requestCustomerInfo();
 
        this.$root.$on("addNewAddress", (address) => {
-         this.addresses.push(address)
-         if (this.customer.addresses.length == 0) this.customer.addresses.push(address)
+         this.requestCustomerInfo()
          })
 
     },
