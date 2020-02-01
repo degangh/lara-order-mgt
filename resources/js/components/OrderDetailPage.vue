@@ -14,13 +14,16 @@
               </v-flex>
               
           </v-layout>
-          <v-layout row>
+          <v-layout row >
 
               <v-flex xs4>
                   Address: 
               </v-flex>
-              <v-flex xs8>
+              <v-flex xs8 v-if="order.address">
                   {{order.address.address}}
+              </v-flex>
+              <v-flex xs8 v-else>
+                  Address Missing
               </v-flex>
 
           </v-layout>
@@ -30,8 +33,11 @@
               <v-flex xs4>
                   Phone: 
               </v-flex>
-              <v-flex xs8>
+              <v-flex xs8 v-if="order.address">
                   {{order.address.mobile}}
+              </v-flex>
+              <v-flex v-else>
+                  Mobile is missing
               </v-flex>
 
           </v-layout>
