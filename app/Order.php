@@ -28,4 +28,9 @@ class Order extends Model
     {
         return $this->belongsTo(Address::class, 'address_id');
     }
+
+    public function status()
+    {
+        return $this->hasOne(Status::class, 'status_id');
+    }
 }
