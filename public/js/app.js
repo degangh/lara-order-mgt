@@ -65996,6 +65996,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -66137,125 +66143,141 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c(
-            "v-layout",
-            { staticClass: "font-weight-black" },
-            [
-              _c("v-flex", { attrs: { xs4: "" } }, [
-                _vm._v("\n              Product\n          ")
-              ]),
-              _vm._v(" "),
-              _c("v-flex", { attrs: { xs2: "", "text-right": "" } }, [
-                _vm._v("\n              Quantity\n          ")
-              ]),
-              _vm._v(" "),
-              _c("v-flex", { attrs: { xs2: "", "text-right": "" } }, [
-                _vm._v("\n              Purchase Price AUD\n          ")
-              ]),
-              _vm._v(" "),
-              _c("v-flex", { attrs: { xs2: "", "text-right": "" } }, [
-                _vm._v("\n              Unit Sale Price CNY\n          ")
-              ]),
-              _vm._v(" "),
-              _c("v-flex", { attrs: { xs2: "", "text-right": "" } }, [
-                _vm._v("\n              Sub Total\n          ")
-              ])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _vm._l(_vm.order.items, function(item, index) {
-            return _c(
-              "v-layout",
-              { key: index, staticClass: "caption text-lighten-2" },
-              [
-                _c("v-flex", { attrs: { xs4: "" } }, [
-                  _vm._v(
-                    "\n              " +
-                      _vm._s(item.product.name) +
-                      "\n          "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("v-flex", { attrs: { xs2: "", "text-right": "" } }, [
-                  _vm._v(
-                    "\n              " + _vm._s(item.quantity) + "\n          "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("v-flex", { attrs: { xs2: "", "text-right": "" } }, [
-                  _vm._v(
-                    "\n              AUD" +
-                      _vm._s(item.purchase_price_aud) +
-                      "\n          "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("v-flex", { attrs: { xs2: "", "text-right": "" } }, [
-                  _vm._v(
-                    "\n              CNY" +
-                      _vm._s(item.unit_price_cny) +
-                      "\n          "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("v-flex", { attrs: { xs2: "", "text-right": "" } }, [
-                  _vm._v(
-                    "\n              " +
-                      _vm._s(
-                        parseFloat(item.quantity * item.unit_price_cny).toFixed(
-                          2
+          _vm.order.items.length > 0
+            ? _c(
+                "div",
+                [
+                  _c(
+                    "v-layout",
+                    { staticClass: "font-weight-black" },
+                    [
+                      _c("v-flex", { attrs: { xs4: "" } }, [
+                        _vm._v("\n              Product\n          ")
+                      ]),
+                      _vm._v(" "),
+                      _c("v-flex", { attrs: { xs2: "", "text-right": "" } }, [
+                        _vm._v("\n              Quantity\n          ")
+                      ]),
+                      _vm._v(" "),
+                      _c("v-flex", { attrs: { xs2: "", "text-right": "" } }, [
+                        _vm._v("\n              Purchase Price AUD\n          ")
+                      ]),
+                      _vm._v(" "),
+                      _c("v-flex", { attrs: { xs2: "", "text-right": "" } }, [
+                        _vm._v(
+                          "\n              Unit Sale Price CNY\n          "
                         )
-                      ) +
-                      "\n          "
+                      ]),
+                      _vm._v(" "),
+                      _c("v-flex", { attrs: { xs2: "", "text-right": "" } }, [
+                        _vm._v("\n              Sub Total\n          ")
+                      ])
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _vm._l(_vm.order.items, function(item, index) {
+                    return _c(
+                      "v-layout",
+                      { key: index, staticClass: "caption text-lighten-2" },
+                      [
+                        _c("v-flex", { attrs: { xs4: "" } }, [
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(item.product.name) +
+                              "\n          "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("v-flex", { attrs: { xs2: "", "text-right": "" } }, [
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(item.quantity) +
+                              "\n          "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("v-flex", { attrs: { xs2: "", "text-right": "" } }, [
+                          _vm._v(
+                            "\n              AUD" +
+                              _vm._s(item.purchase_price_aud) +
+                              "\n          "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("v-flex", { attrs: { xs2: "", "text-right": "" } }, [
+                          _vm._v(
+                            "\n              CNY" +
+                              _vm._s(item.unit_price_cny) +
+                              "\n          "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("v-flex", { attrs: { xs2: "", "text-right": "" } }, [
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(
+                                parseFloat(
+                                  item.quantity * item.unit_price_cny
+                                ).toFixed(2)
+                              ) +
+                              "\n          "
+                          )
+                        ])
+                      ],
+                      1
+                    )
+                  }),
+                  _vm._v(" "),
+                  _c(
+                    "v-layout",
+                    [
+                      _c(
+                        "v-flex",
+                        {
+                          staticClass: "body-2",
+                          attrs: { xs12: "", "text-right": "" }
+                        },
+                        [
+                          _vm._v(
+                            "\n              " +
+                              _vm._s(_vm.orderSum) +
+                              "\n          "
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-layout",
+                    [
+                      _c(
+                        "v-flex",
+                        {
+                          staticClass: "caption text-lighten-2",
+                          attrs: { xs12: "", "text-right": "" }
+                        },
+                        [
+                          _vm._v(
+                            "\n              Exchange Rate: " +
+                              _vm._s(_vm.order.items[0].exchange_rate) +
+                              "\n          "
+                          )
+                        ]
+                      )
+                    ],
+                    1
                   )
-                ])
-              ],
-              1
-            )
-          }),
-          _vm._v(" "),
-          _c(
-            "v-layout",
-            [
-              _c(
-                "v-flex",
-                {
-                  staticClass: "body-2",
-                  attrs: { xs12: "", "text-right": "" }
-                },
-                [
-                  _vm._v(
-                    "\n              " + _vm._s(_vm.orderSum) + "\n          "
-                  )
-                ]
+                ],
+                2
               )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-layout",
-            [
-              _c(
-                "v-flex",
-                {
-                  staticClass: "caption text-lighten-2",
-                  attrs: { xs12: "", "text-right": "" }
-                },
-                [
-                  _vm._v(
-                    "\n              Exchange Rate: " +
-                      _vm._s(_vm.order.items[0].exchange_rate) +
-                      "\n          "
-                  )
-                ]
-              )
-            ],
-            1
-          )
+            : _c("div", { attrs: { "text-center": "" } }, [
+                _vm._v("\n          No items in the order\n      ")
+              ])
         ],
-        2
+        1
       )
     : _vm._e()
 }

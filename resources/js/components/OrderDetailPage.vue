@@ -42,11 +42,12 @@
 
           </v-layout>
           <v-divider></v-divider>
-          <v-layout row>
+          <v-layout row >
               <v-flex xs12 class="title">
                   Order Detail
               </v-flex>
           </v-layout>
+          <div v-if="order.items.length > 0">
           <v-layout  class="font-weight-black" >
             <v-flex xs4>
                 Product
@@ -87,6 +88,7 @@
 
             
         </v-layout>
+        
         <v-layout>
             
             <v-flex xs12 text-right class="body-2">
@@ -94,11 +96,15 @@
             </v-flex>
         </v-layout>
 
-        <v-layout>
+        <v-layout >
             <v-flex xs12 text-right class="caption text-lighten-2">
                 Exchange Rate: {{order.items[0].exchange_rate}}
             </v-flex>
         </v-layout>
+        </div>
+        <div text-center v-else>
+            No items in the order
+        </div>
         
   </v-container>
 </template>
