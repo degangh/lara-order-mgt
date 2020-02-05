@@ -66002,6 +66002,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -66275,7 +66296,52 @@ var render = function() {
               )
             : _c("div", { attrs: { "text-center": "" } }, [
                 _vm._v("\n          No items in the order\n      ")
-              ])
+              ]),
+          _vm._v(" "),
+          _c(
+            "v-layout",
+            [
+              _c(
+                "v-flex",
+                { attrs: { xs12: "", md4: "" } },
+                [
+                  _c(
+                    "v-btn",
+                    { attrs: { color: "blue", dark: "" } },
+                    [
+                      _c("v-icon", [_vm._v("add")]),
+                      _vm._v("Add item\n              ")
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { attrs: { xs12: "", md4: "" } },
+                [
+                  _c("v-btn", { attrs: { color: "blue", dark: "" } }, [
+                    _vm._v("\n                  Mark as Sent\n              ")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-flex",
+                { attrs: { xs12: "", md4: "" } },
+                [
+                  _c("v-btn", { attrs: { color: "blue", dark: "" } }, [
+                    _vm._v("\n                  Mark as Paid\n              ")
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
         ],
         1
       )

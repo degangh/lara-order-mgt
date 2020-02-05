@@ -105,6 +105,27 @@
         <div text-center v-else>
             No items in the order
         </div>
+        <v-layout>
+            <v-flex xs12 md4>
+                <v-btn color="blue" dark>
+                    <v-icon>add</v-icon>Add item
+                </v-btn>
+            </v-flex>
+
+            <v-flex xs12 md4>
+                <v-btn color="blue" dark>
+                    Mark as Sent
+                </v-btn>
+            </v-flex>
+
+            <v-flex xs12 md4>
+                <v-btn color="blue" dark>
+                    Mark as Paid
+                </v-btn>
+            </v-flex>
+        </v-layout>
+
+            
         
   </v-container>
 </template>
