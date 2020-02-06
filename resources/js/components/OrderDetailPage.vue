@@ -114,13 +114,13 @@
 
             <v-flex xs12 md4>
                 <v-btn color="blue" dark>
-                    Mark as Sent
+                    <v-icon>local_shipping</v-icon>Mark as Sent
                 </v-btn>
             </v-flex>
 
             <v-flex xs12 md4>
                 <v-btn color="blue" dark>
-                    Mark as Paid
+                    <v-icon>local_atm</v-icon>Mark as Paid
                 </v-btn>
             </v-flex>
         </v-layout>

@@ -66518,9 +66518,15 @@ var render = function() {
                 "v-flex",
                 { attrs: { xs12: "", md4: "" } },
                 [
-                  _c("v-btn", { attrs: { color: "blue", dark: "" } }, [
-                    _vm._v("\n                  Mark as Sent\n              ")
-                  ])
+                  _c(
+                    "v-btn",
+                    { attrs: { color: "blue", dark: "" } },
+                    [
+                      _c("v-icon", [_vm._v("local_shipping")]),
+                      _vm._v("Mark as Sent\n              ")
+                    ],
+                    1
+                  )
                 ],
                 1
               ),
@@ -66529,9 +66535,15 @@ var render = function() {
                 "v-flex",
                 { attrs: { xs12: "", md4: "" } },
                 [
-                  _c("v-btn", { attrs: { color: "blue", dark: "" } }, [
-                    _vm._v("\n                  Mark as Paid\n              ")
-                  ])
+                  _c(
+                    "v-btn",
+                    { attrs: { color: "blue", dark: "" } },
+                    [
+                      _c("v-icon", [_vm._v("local_atm")]),
+                      _vm._v("Mark as Paid\n              ")
+                    ],
+                    1
+                  )
                 ],
                 1
               )
