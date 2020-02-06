@@ -107,7 +107,7 @@
         </div>
         <v-layout>
             <v-flex xs12 md4>
-                <v-btn color="blue" dark>
+                <v-btn color="blue" dark @click="popupFormDialog('orderDetailDialogue')">
                     <v-icon>add</v-icon>Add item
                 </v-btn>
             </v-flex>
@@ -125,16 +125,21 @@
             </v-flex>
         </v-layout>
 
-            
+        <edit-order-item :dialog="orderDetailDialogue"></edit-order-item>    
         
   </v-container>
 </template>
 
 <script>
+import EditOrderItem from './EditOrderItem'
 export default {
+    components: {
+        EditOrderItem
+    },
     data () {
         return {
-            order: false
+            order: false,
+            orderDetailDialogue: false
         }
     },
 
@@ -168,6 +173,14 @@ export default {
             alert (error)
             this.ready = true
             this.loading = false
+        },
+        popupFormDialog (form, address = null) {
+            this[form] =  true
+        
+        },
+        closeFormDialog (form) {
+        this[form] = false
+        
         }
     }
 }
