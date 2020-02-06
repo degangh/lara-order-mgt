@@ -6,41 +6,36 @@
           
           <v-toolbar-title>Add Product</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn icon dark @click="emitCloseDialog('contactDialog')">
+          <v-btn icon dark @click="emitCloseDialog('orderDetailDialogue')">
             <v-icon>close</v-icon>
           </v-btn>
         </v-toolbar>
-        <v-form v-model="valid" ref="ContactForm">
+        <v-form v-model="valid" ref="OrderDetailForm">
         <v-container grid-list-sm class="pa-4">
-            <v-toolbar
-
-            >
-                <v-toolbar-title>Product Search</v-toolbar-title>
+            <v-card>
+                
                 <v-autocomplete
+                prepend-icon = "shopping_cart"
                 v-model="select"
-                :loading="loading"
                 :items="products"
                 :search-input.sync="search"
                 cache-items
                 class="mx-4"
-                flat
                 hide-no-data
                 hide-details
                 label="search product name"
-                solo-inverted
+                @change="productSearch=null"
                 ></v-autocomplete>
-                <v-btn icon>
-                <v-icon>mdi-dots-vertical</v-icon>
-                </v-btn>
-            </v-toolbar>
+            </v-card>    
+           
         </v-container>
         </v-form>
 
         <v-card-actions>
           
           <v-spacer></v-spacer>
-          <v-btn flat color="primary" @click="emitCloseDialog('contactDialog')">Cancel</v-btn>
-          <v-btn flat @click="saveContact">Save</v-btn>
+          <v-btn flat color="primary" @click="emitCloseDialog('orderDetailDialogue')">Cancel</v-btn>
+          <v-btn flat @click="saveOrderItem">Save</v-btn>
         </v-card-actions>
 
   </v-card>
@@ -59,10 +54,12 @@ export default {
         return {
             products: ["SA", "NSW" , "VIC"],
             select: null,
+            valid: true,
+            productSearch: null,
         }
     },
     watch: {
-      search (val) {
+      productSearch (val) {
         val && val !== this.select && this.querySelections(val)
       },
     },
@@ -73,6 +70,13 @@ export default {
         emitCloseDialog(form)
         {
             this.$emit("closeDialog", form)
+        },
+        search(v) {
+            console.log(v)
+        },
+        saveOrderItem()
+        {
+            console.log("save order")
         }
     },
     props: {

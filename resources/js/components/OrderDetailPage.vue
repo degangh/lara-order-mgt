@@ -125,7 +125,7 @@
             </v-flex>
         </v-layout>
 
-        <edit-order-item :dialog="orderDetailDialogue"></edit-order-item>    
+        <edit-order-item :dialog="orderDetailDialogue" @closeDialog="closeFormDialog"></edit-order-item>    
         
   </v-container>
 </template>

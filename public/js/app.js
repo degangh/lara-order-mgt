@@ -66051,11 +66051,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -66064,12 +66059,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             products: ["SA", "NSW", "VIC"],
-            select: null
+            select: null,
+            valid: true,
+            productSearch: null
         };
     },
 
     watch: {
-        search: function search(val) {
+        productSearch: function productSearch(val) {
             val && val !== this.select && this.querySelections(val);
         }
     },
@@ -66079,6 +66076,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         emitCloseDialog: function emitCloseDialog(form) {
             this.$emit("closeDialog", form);
+        },
+        search: function search(v) {
+            console.log(v);
+        },
+        saveOrderItem: function saveOrderItem() {
+            console.log("save order");
         }
     },
     props: {
@@ -66131,7 +66134,7 @@ var render = function() {
                       attrs: { icon: "", dark: "" },
                       on: {
                         click: function($event) {
-                          return _vm.emitCloseDialog("contactDialog")
+                          return _vm.emitCloseDialog("orderDetailDialogue")
                         }
                       }
                     },
@@ -66145,7 +66148,7 @@ var render = function() {
               _c(
                 "v-form",
                 {
-                  ref: "ContactForm",
+                  ref: "OrderDetailForm",
                   model: {
                     value: _vm.valid,
                     callback: function($$v) {
@@ -66160,22 +66163,18 @@ var render = function() {
                     { staticClass: "pa-4", attrs: { "grid-list-sm": "" } },
                     [
                       _c(
-                        "v-toolbar",
+                        "v-card",
                         [
-                          _c("v-toolbar-title", [_vm._v("Product Search")]),
-                          _vm._v(" "),
                           _c("v-autocomplete", {
                             staticClass: "mx-4",
                             attrs: {
-                              loading: _vm.loading,
+                              "prepend-icon": "shopping_cart",
                               items: _vm.products,
                               "search-input": _vm.search,
                               "cache-items": "",
-                              flat: "",
                               "hide-no-data": "",
                               "hide-details": "",
-                              label: "search product name",
-                              "solo-inverted": ""
+                              label: "search product name"
                             },
                             on: {
                               "update:searchInput": function($event) {
@@ -66183,6 +66182,9 @@ var render = function() {
                               },
                               "update:search-input": function($event) {
                                 _vm.search = $event
+                              },
+                              change: function($event) {
+                                _vm.productSearch = null
                               }
                             },
                             model: {
@@ -66192,14 +66194,7 @@ var render = function() {
                               },
                               expression: "select"
                             }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "v-btn",
-                            { attrs: { icon: "" } },
-                            [_c("v-icon", [_vm._v("mdi-dots-vertical")])],
-                            1
-                          )
+                          })
                         ],
                         1
                       )
@@ -66221,7 +66216,7 @@ var render = function() {
                       attrs: { flat: "", color: "primary" },
                       on: {
                         click: function($event) {
-                          return _vm.emitCloseDialog("contactDialog")
+                          return _vm.emitCloseDialog("orderDetailDialogue")
                         }
                       }
                     },
@@ -66230,7 +66225,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "v-btn",
-                    { attrs: { flat: "" }, on: { click: _vm.saveContact } },
+                    { attrs: { flat: "" }, on: { click: _vm.saveOrderItem } },
                     [_vm._v("Save")]
                   )
                 ],
@@ -66544,7 +66539,10 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("edit-order-item", { attrs: { dialog: _vm.orderDetailDialogue } })
+          _c("edit-order-item", {
+            attrs: { dialog: _vm.orderDetailDialogue },
+            on: { closeDialog: _vm.closeFormDialog }
+          })
         ],
         1
       )
