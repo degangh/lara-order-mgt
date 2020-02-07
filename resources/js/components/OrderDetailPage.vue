@@ -108,19 +108,19 @@
         <v-layout>
             <v-flex xs12 md4>
                 <v-btn color="blue" dark @click="popupFormDialog('orderDetailDialogue')">
-                    <v-icon>add</v-icon>Add item
+                    <v-icon left>add</v-icon>Add item
                 </v-btn>
             </v-flex>
 
             <v-flex xs12 md4>
                 <v-btn color="blue" dark>
-                    <v-icon>local_shipping</v-icon>Mark as Sent
+                    <v-icon left>local_shipping</v-icon>Mark as Sent
                 </v-btn>
             </v-flex>
 
             <v-flex xs12 md4>
                 <v-btn color="blue" dark>
-                    <v-icon>local_atm</v-icon>Mark as Paid
+                    <v-icon left>local_atm</v-icon>Mark as Paid
                 </v-btn>
             </v-flex>
         </v-layout>

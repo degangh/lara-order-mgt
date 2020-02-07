@@ -66505,7 +66505,7 @@ var render = function() {
                       }
                     },
                     [
-                      _c("v-icon", [_vm._v("add")]),
+                      _c("v-icon", { attrs: { left: "" } }, [_vm._v("add")]),
                       _vm._v("Add item\n              ")
                     ],
                     1
@@ -66522,7 +66522,9 @@ var render = function() {
                     "v-btn",
                     { attrs: { color: "blue", dark: "" } },
                     [
-                      _c("v-icon", [_vm._v("local_shipping")]),
+                      _c("v-icon", { attrs: { left: "" } }, [
+                        _vm._v("local_shipping")
+                      ]),
                       _vm._v("Mark as Sent\n              ")
                     ],
                     1
@@ -66539,7 +66541,9 @@ var render = function() {
                     "v-btn",
                     { attrs: { color: "blue", dark: "" } },
                     [
-                      _c("v-icon", [_vm._v("local_atm")]),
+                      _c("v-icon", { attrs: { left: "" } }, [
+                        _vm._v("local_atm")
+                      ]),
                       _vm._v("Mark as Paid\n              ")
                     ],
                     1
