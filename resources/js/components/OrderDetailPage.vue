@@ -105,21 +105,21 @@
         <div text-center v-else>
             No items in the order
         </div>
-        <v-layout>
-            <v-flex xs12 md4>
-                <v-btn color="blue" dark @click="popupFormDialog('orderDetailDialogue')">
+        <v-layout wrap>
+            <v-flex xs12 md4 text-center>
+                <v-btn color="blue" dark @click="popupFormDialog('orderDetailDialogue')" block>
                     <v-icon left>add</v-icon>Add item
                 </v-btn>
             </v-flex>
 
-            <v-flex xs12 md4>
-                <v-btn color="blue" dark>
+            <v-flex xs12 md4 text-center>
+                <v-btn color="blue" dark  block>
                     <v-icon left>local_shipping</v-icon>Mark as Sent
                 </v-btn>
             </v-flex>
 
-            <v-flex xs12 md4>
-                <v-btn color="blue" dark>
+            <v-flex xs12 md4 text-center>
+                <v-btn color="blue" dark block>
                     <v-icon left>local_atm</v-icon>Mark as Paid
                 </v-btn>
             </v-flex>
