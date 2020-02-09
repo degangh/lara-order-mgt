@@ -62487,7 +62487,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       //v.num = 1 //this will bring a bug, but why?
       v = _extends({}, v, { num: 1 //this works, but why?
       });if (this.hasProduct(this.selectedProducts, v)) this.addOneProduct(v);else this.selectedProducts.push(v);
-      console.log(this.selectedProducts);
+      //console.log(this.selectedProducts)
       this.selectedProduct = null;
       this.products = [];
     },
@@ -66182,7 +66182,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            products: ["SA", "NSW", "VIC"],
+            products: null,
             select: null,
             valid: true,
             productSearch: null
@@ -66196,7 +66196,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         querySelections: function querySelections(val) {
-            console.log("test");
+            var _this = this;
+
+            axios.get('/api/products', {
+                params: {
+                    keyword: val
+                }
+            }).then(function (res) {
+                _this.products = res.data.data;
+            });
         },
         emitCloseDialog: function emitCloseDialog(form) {
             this.$emit("closeDialog", form);

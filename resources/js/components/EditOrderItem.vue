@@ -18,7 +18,7 @@
                 prepend-icon = "shopping_cart"
                 v-model="select"
                 :items="products"
-                :search-input.sync="search"
+                :search-input.sync="productSearch"
                 cache-items
                 class="mx-4"
                 hide-no-data
@@ -52,20 +52,31 @@ export default {
     
     data () {
         return {
-            products: ["SA", "NSW" , "VIC"],
+            products: null,
             select: null,
             valid: true,
             productSearch: null,
         }
     },
     watch: {
-      productSearch (val) {
-        val && val !== this.select && this.querySelections(val)
+      productSearch (v) {
+        if ( v == null) return
+        if (v.length > 0) this.isLoading = true
+        if (v.length == 0) this.products = []
+        if (v.length < 2 ) return
+        this.searchProduct (v)
       },
     },
     methods : {
-        querySelections(val) {
-            console.log("test")
+        searchProduct(v) {
+            axios.get('/api/products', {
+              params: {
+                  keyword: v
+              }
+          })
+          .then(res => {
+            this.products = res.data.data
+          })
         },
         emitCloseDialog(form)
         {

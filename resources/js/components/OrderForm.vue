@@ -214,7 +214,7 @@ export default {
         v = {...v, num: 1} //this works, but why?
         if (this.hasProduct(this.selectedProducts, v)) this.addOneProduct(v)
         else this.selectedProducts.push(v)
-        console.log(this.selectedProducts)
+        //console.log(this.selectedProducts)
         this.selectedProduct = null
         this.products = []  
         
