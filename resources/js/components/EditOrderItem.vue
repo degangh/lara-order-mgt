@@ -12,20 +12,21 @@
         </v-toolbar>
         <v-form v-model="valid" ref="OrderDetailForm">
         <v-container grid-list-sm class="pa-4">
-            <v-card>
+            <v-card min-height = "200px">
                 
                 <v-autocomplete
                 prepend-icon = "shopping_cart"
                 v-model="select"
                 :items="products"
                 :search-input.sync="productSearch"
-                cache-items
-                class="mx-4"
+                :loading="isLoading"
+                item-text="name"
                 hide-no-data
-                hide-details
+                return-object
                 label="search product name"
-                @change="productSearch=null"
-                ></v-autocomplete>
+                >
+                
+                </v-autocomplete>
             </v-card>    
            
         </v-container>
@@ -52,7 +53,8 @@ export default {
     
     data () {
         return {
-            products: null,
+            products: [],
+            isLoading: false,
             select: null,
             valid: true,
             productSearch: null,
@@ -65,6 +67,7 @@ export default {
         if (v.length == 0) this.products = []
         if (v.length < 2 ) return
         this.searchProduct (v)
+        this.isLoading = false
       },
     },
     methods : {
@@ -76,6 +79,7 @@ export default {
           })
           .then(res => {
             this.products = res.data.data
+            console.log(this.products)
           })
         },
         emitCloseDialog(form)

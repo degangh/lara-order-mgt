@@ -66175,6 +66175,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -66182,7 +66183,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            products: null,
+            products: [],
+            isLoading: false,
             select: null,
             valid: true,
             productSearch: null
@@ -66190,20 +66192,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     watch: {
-        productSearch: function productSearch(val) {
-            val && val !== this.select && this.querySelections(val);
+        productSearch: function productSearch(v) {
+            if (v == null) return;
+            if (v.length > 0) this.isLoading = true;
+            if (v.length == 0) this.products = [];
+            if (v.length < 2) return;
+            this.searchProduct(v);
+            this.isLoading = false;
         }
     },
     methods: {
-        querySelections: function querySelections(val) {
+        searchProduct: function searchProduct(v) {
             var _this = this;
 
             axios.get('/api/products', {
                 params: {
-                    keyword: val
+                    keyword: v
                 }
             }).then(function (res) {
                 _this.products = res.data.data;
+                console.log(_this.products);
             });
         },
         emitCloseDialog: function emitCloseDialog(form) {
@@ -66296,27 +66304,25 @@ var render = function() {
                     [
                       _c(
                         "v-card",
+                        { attrs: { "min-height": "200px" } },
                         [
                           _c("v-autocomplete", {
-                            staticClass: "mx-4",
                             attrs: {
                               "prepend-icon": "shopping_cart",
                               items: _vm.products,
-                              "search-input": _vm.search,
-                              "cache-items": "",
+                              "search-input": _vm.productSearch,
+                              loading: _vm.isLoading,
+                              "item-text": "name",
                               "hide-no-data": "",
-                              "hide-details": "",
+                              "return-object": "",
                               label: "search product name"
                             },
                             on: {
                               "update:searchInput": function($event) {
-                                _vm.search = $event
+                                _vm.productSearch = $event
                               },
                               "update:search-input": function($event) {
-                                _vm.search = $event
-                              },
-                              change: function($event) {
-                                _vm.productSearch = null
+                                _vm.productSearch = $event
                               }
                             },
                             model: {
