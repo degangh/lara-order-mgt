@@ -66176,6 +66176,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -66331,6 +66349,30 @@ var render = function() {
                                 _vm.select = $$v
                               },
                               expression: "select"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("v-text-field", {
+                            attrs: {
+                              type: "number",
+                              "prepend-icon": "attach_money",
+                              label: "Purchased Price in AUD"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("v-text-field", {
+                            attrs: {
+                              type: "number",
+                              "prepend-icon": "attach_money",
+                              label: "Selling Price in CNY"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("v-text-field", {
+                            attrs: {
+                              type: "number",
+                              "prepend-icon": "library_add",
+                              label: "Quantity"
                             }
                           })
                         ],

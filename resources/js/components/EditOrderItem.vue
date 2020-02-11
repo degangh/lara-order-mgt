@@ -27,6 +27,24 @@
                 >
                 
                 </v-autocomplete>
+                <v-text-field
+                type="number"
+                prepend-icon="attach_money"
+                label = "Purchased Price in AUD">
+                </v-text-field>
+
+                <v-text-field
+                type="number"
+                prepend-icon="attach_money"
+                label = "Selling Price in CNY">
+                </v-text-field>
+                
+                <v-text-field
+                type="number"
+                prepend-icon = "library_add"
+                label = "Quantity">
+                </v-text-field>
+                
             </v-card>    
            
         </v-container>
