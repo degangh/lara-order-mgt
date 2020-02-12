@@ -12,11 +12,11 @@
         </v-toolbar>
         <v-form v-model="valid" ref="OrderDetailForm">
         <v-container grid-list-sm class="pa-4">
-            <v-card min-height = "200px">
+            
                 
                 <v-autocomplete
                 prepend-icon = "shopping_cart"
-                v-model="select"
+                v-model="selectedProduct"
                 :items="products"
                 :search-input.sync="productSearch"
                 :loading="isLoading"
@@ -30,22 +30,25 @@
                 <v-text-field
                 type="number"
                 prepend-icon="attach_money"
-                label = "Purchased Price in AUD">
+                label = "Purchased Price in AUD"
+                v-model = "ref_price_aud">
                 </v-text-field>
 
                 <v-text-field
                 type="number"
                 prepend-icon="attach_money"
-                label = "Selling Price in CNY">
+                label = "Selling Price in CNY"
+                v-model = "rrp_cny">
                 </v-text-field>
                 
                 <v-text-field
                 type="number"
                 prepend-icon = "library_add"
-                label = "Quantity">
+                label = "Quantity"
+                v-model = "quantity">
                 </v-text-field>
                 
-            </v-card>    
+               
            
         </v-container>
         </v-form>
@@ -73,9 +76,13 @@ export default {
         return {
             products: [],
             isLoading: false,
-            select: null,
+            selectedProduct: null,
             valid: true,
             productSearch: null,
+            ref_price_aud: 0,
+            quantity: 0,
+            rrp_cny: 0
+
         }
     },
     watch: {
@@ -87,6 +94,13 @@ export default {
         this.searchProduct (v)
         this.isLoading = false
       },
+      selectedProduct (v) {
+        if (v == null) return
+        this.ref_price_aud = v.ref_price_aud
+        this.rrp_cny = v.rrp_cny
+        this.quantity = 1
+
+      }
     },
     methods : {
         searchProduct(v) {
@@ -97,7 +111,6 @@ export default {
           })
           .then(res => {
             this.products = res.data.data
-            console.log(this.products)
           })
         },
         emitCloseDialog(form)
