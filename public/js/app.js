@@ -66073,6 +66073,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -66087,9 +66095,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             productSearch: null,
             ref_price_aud: 0,
             quantity: 0,
-            rrp_cny: 0
+            rrp_cny: 0,
+            exchange_rate: null
 
         };
+    },
+    mounted: function mounted() {
+        this.getCurrencyRate('AUD', 'CNY');
     },
 
     watch: {
@@ -66128,6 +66140,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         saveOrderItem: function saveOrderItem() {
             console.log("save order");
+        },
+        getCurrencyRate: function getCurrencyRate(base, target) {
+            var _this2 = this;
+
+            fetch('https://api.exchangeratesapi.io/latest?base=' + base + '&symbols=' + target).then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                return _this2.exchange_rate = parseFloat(parseFloat(data.rates[target]).toFixed(2));
+            });
         }
     },
     props: {
@@ -66279,7 +66300,31 @@ var render = function() {
                           },
                           expression: "quantity"
                         }
-                      })
+                      }),
+                      _vm._v(" "),
+                      _c("v-text-field", {
+                        attrs: {
+                          type: "number",
+                          "prepend-icon": "money",
+                          label: "Exchange Rate"
+                        },
+                        model: {
+                          value: _vm.exchange_rate,
+                          callback: function($$v) {
+                            _vm.exchange_rate = $$v
+                          },
+                          expression: "exchange_rate"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c(
+                        "span",
+                        {
+                          staticClass:
+                            "text-field-footer grey--text text--lighten-1"
+                        },
+                        [_vm._v("Real-time exchange rate from EU central bank")]
+                      )
                     ],
                     1
                   )

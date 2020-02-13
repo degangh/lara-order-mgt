@@ -47,6 +47,14 @@
                 label = "Quantity"
                 v-model = "quantity">
                 </v-text-field>
+
+                <v-text-field
+                type="number"
+                prepend-icon = "money"
+                label = "Exchange Rate"
+                v-model = "exchange_rate">
+                </v-text-field>
+                <span class="text-field-footer grey--text text--lighten-1" >Real-time exchange rate from EU central bank</span>
                 
                
            
@@ -81,9 +89,13 @@ export default {
             productSearch: null,
             ref_price_aud: 0,
             quantity: 0,
-            rrp_cny: 0
+            rrp_cny: 0,
+            exchange_rate : null
 
         }
+    },
+    mounted () {
+      this.getCurrencyRate('AUD', 'CNY')
     },
     watch: {
       productSearch (v) {
@@ -123,7 +135,12 @@ export default {
         saveOrderItem()
         {
             console.log("save order")
-        }
+        },
+        getCurrencyRate(base, target){
+          fetch('https://api.exchangeratesapi.io/latest?base='+base+'&symbols=' + target).then(function(response){
+          return response.json()
+          }).then(data => this.exchange_rate = parseFloat(parseFloat(data.rates[target]).toFixed(2)))
+      },
     },
     props: {
         dialog: Boolean
