@@ -134,7 +134,25 @@ export default {
         },
         saveOrderItem()
         {
-            console.log("save order")
+            axios.post('/api/order/' + this.$route.params.id + "/items", {
+
+                  product_id : this.selectedProduct.id,
+                  unit_price_cny : this.rrp_cny,
+                  purchase_price_aud : this.ref_price_aud,
+                  quantity: this.quantity,
+                  
+                  exchange_rate: this.exchange_rate, 
+     
+          })
+          .then(this.handleOrderItemResponse)
+          .catch(function (err) {
+            alert (err)
+          })
+        },
+
+        handleOrderItemResponse()
+        {
+          console.log("sent and done")
         },
         getCurrencyRate(base, target){
           fetch('https://api.exchangeratesapi.io/latest?base='+base+'&symbols=' + target).then(function(response){

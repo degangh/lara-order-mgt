@@ -36,7 +36,7 @@ class OrderItemController extends Controller
      */
     public function store(Request $request, Order $order)
     {
-        $order->items()->create([
+        return $order->items()->create([
             'order_id' => $order->id,
             'product_id' => $request->product_id,
             'quantity' => $request->quantity,

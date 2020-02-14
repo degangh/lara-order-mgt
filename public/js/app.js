@@ -66139,7 +66139,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log(v);
         },
         saveOrderItem: function saveOrderItem() {
-            console.log("save order");
+            axios.post('/api/order/' + this.$route.params.id + "/items", {
+
+                product_id: this.selectedProduct.id,
+                unit_price_cny: this.rrp_cny,
+                purchase_price_aud: this.ref_price_aud,
+                quantity: this.quantity,
+
+                exchange_rate: this.exchange_rate
+
+            }).then(this.handleOrderItemResponse).catch(function (err) {
+                alert(err);
+            });
+        },
+        handleOrderItemResponse: function handleOrderItemResponse() {
+            console.log("sent and done");
         },
         getCurrencyRate: function getCurrencyRate(base, target) {
             var _this2 = this;
