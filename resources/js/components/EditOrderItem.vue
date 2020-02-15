@@ -152,7 +152,7 @@ export default {
 
         handleOrderItemResponse()
         {
-          console.log("sent and done")
+          this.emitCloseDialog('orderDetailDialogue')
         },
         getCurrencyRate(base, target){
           fetch('https://api.exchangeratesapi.io/latest?base='+base+'&symbols=' + target).then(function(response){

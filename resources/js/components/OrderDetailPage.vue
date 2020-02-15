@@ -180,6 +180,7 @@ export default {
         },
         closeFormDialog (form) {
         this[form] = false
+        this.requestOrderDetailData()
         
         }
     }
