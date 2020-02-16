@@ -66258,6 +66258,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         emitCloseDialog: function emitCloseDialog(form) {
+            this.$refs.OrderDetailForm.reset();
             this.$emit("closeDialog", form);
         },
         search: function search(v) {

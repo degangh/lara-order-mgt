@@ -127,6 +127,7 @@ export default {
         },
         emitCloseDialog(form)
         {
+            this.$refs.OrderDetailForm.reset()
             this.$emit("closeDialog", form)
         },
         search(v) {
