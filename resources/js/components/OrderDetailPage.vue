@@ -113,7 +113,7 @@
             </v-flex>
 
             <v-flex xs12 md4 text-center>
-                <v-btn color="blue" dark  block>
+                <v-btn color="blue" dark  block @click="confirm('confirmDialog')">
                     <v-icon left>local_shipping</v-icon>Mark as Sent
                 </v-btn>
             </v-flex>
@@ -126,20 +126,23 @@
         </v-layout>
 
         <edit-order-item :dialog="orderDetailDialogue" @closeDialog="closeFormDialog"></edit-order-item>    
-        
+        <confirm-dialog :dialog="confirmDialog"></confirm-dialog>
   </v-container>
 </template>
 
 <script>
 import EditOrderItem from './EditOrderItem'
+import ConfirmDialog from './ConfirmDialog'
 export default {
     components: {
-        EditOrderItem
+        EditOrderItem,
+        ConfirmDialog
     },
     data () {
         return {
             order: false,
-            orderDetailDialogue: false
+            orderDetailDialogue: false,
+            confirmDialog: false
         }
     },
 
@@ -182,6 +185,9 @@ export default {
         this[form] = false
         this.requestOrderDetailData()
         
+        },
+        confirm(form){
+            this[form] = true
         }
     }
 }
