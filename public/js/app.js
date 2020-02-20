@@ -66655,7 +66655,7 @@ var render = function() {
                       attrs: { flat: "" },
                       on: {
                         click: function($event) {
-                          return _vm.emitCloseDialog("closeDialog")
+                          return _vm.emitCloseDialog("confirmDialog")
                         }
                       }
                     },
@@ -66668,7 +66668,7 @@ var render = function() {
                       attrs: { flat: "", color: "primary" },
                       on: {
                         click: function($event) {
-                          return _vm.emitCloseDialog("closeDialog")
+                          return _vm.emitCloseDialog("confirmDialog")
                         }
                       }
                     },
@@ -67014,7 +67014,10 @@ var render = function() {
             on: { closeDialog: _vm.closeFormDialog }
           }),
           _vm._v(" "),
-          _c("confirm-dialog", { attrs: { dialog: _vm.confirmDialog } })
+          _c("confirm-dialog", {
+            attrs: { dialog: _vm.confirmDialog },
+            on: { closeDialog: _vm.closeFormDialog }
+          })
         ],
         1
       )

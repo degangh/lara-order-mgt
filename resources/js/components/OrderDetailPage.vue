@@ -126,7 +126,7 @@
         </v-layout>
 
         <edit-order-item :dialog="orderDetailDialogue" @closeDialog="closeFormDialog"></edit-order-item>    
-        <confirm-dialog :dialog="confirmDialog"></confirm-dialog>
+        <confirm-dialog :dialog="confirmDialog" @closeDialog="closeFormDialog"></confirm-dialog>
   </v-container>
 </template>
 
