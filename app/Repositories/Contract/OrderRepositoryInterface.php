@@ -16,4 +16,6 @@ interface OrderRepositoryInterface
 
     public function createDetail($order, $orderItems, $exchange_rate);
 
+    public function changeStatus($order , $status);
+
 }

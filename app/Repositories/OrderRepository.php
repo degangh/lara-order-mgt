@@ -40,4 +40,9 @@ class OrderRepository implements OrderRepositoryInterface
             ]);
         });
     }
+
+    public function changeStatus($order , $status)
+    {
+        
+    }
 }
