@@ -4,6 +4,7 @@ namespace App\Repositories;
 use App\Repositories\Contract\OrderRepositoryInterface;
 use App\Order;
 use App\OrderItem;
+use App\OrderStatus;
 
 class OrderRepository implements OrderRepositoryInterface
 {
@@ -41,8 +42,9 @@ class OrderRepository implements OrderRepositoryInterface
         });
     }
 
-    public function changeStatus($order , $status)
+    public function changeStatus(Order $order , OrderStatus $status)
     {
-        
+        $order->status_id = $status->id;
+        $order->save();
     }
 }

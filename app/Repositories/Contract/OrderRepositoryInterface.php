@@ -1,6 +1,8 @@
 <?php
 namespace App\Repositories\Contract;
 
+use App\Order;
+use App\OrderStatus;
 interface OrderRepositoryInterface
 {
     /**
@@ -16,6 +18,6 @@ interface OrderRepositoryInterface
 
     public function createDetail($order, $orderItems, $exchange_rate);
 
-    public function changeStatus($order , $status);
+    public function changeStatus(Order $order , OrderStatus $status);
 
 }

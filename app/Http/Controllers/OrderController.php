@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\OrderStatus;
 use Illuminate\Http\Request;
 use App\Repositories\Contract\OrderRepositoryInterface;
 
@@ -102,5 +103,10 @@ class OrderController extends Controller
     public function destroy(Order $order)
     {
         //
+    }
+
+    public function status(Order $order, OrderStatus $status)
+    {
+        $this->orderRepository->changeStatus($order, $status);
     }
 }
