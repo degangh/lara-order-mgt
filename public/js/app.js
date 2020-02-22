@@ -66027,6 +66027,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -66039,7 +66045,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             order: false,
             orderDetailDialogue: false,
-            confirmDialog: false
+            confirmDialog: false,
+            dialogTitle: '',
+            message: ''
         };
     },
     mounted: function mounted() {
@@ -66080,8 +66088,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this[form] = false;
             this.requestOrderDetailData();
         },
-        confirm: function confirm(form) {
+        confirm: function confirm(form, title, message) {
             this[form] = true;
+            this.dialogTitle = title;
+            this.message = message;
         }
     }
 });
@@ -66599,7 +66609,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "ConfirmDialog",
     props: {
-        dialog: Boolean
+        dialog: Boolean,
+        title: String,
+        message: String
 
     },
     methods: {
@@ -66637,12 +66649,10 @@ var render = function() {
             "v-card",
             [
               _c("v-card-title", { staticClass: "headline" }, [
-                _vm._v("Confirm")
+                _vm._v(_vm._s(_vm.title))
               ]),
               _vm._v(" "),
-              _c("v-card-text", [
-                _vm._v("Confirm to mark to order status to SENT ?")
-              ]),
+              _c("v-card-text", [_vm._v(" " + _vm._s(_vm.message))]),
               _vm._v(" "),
               _c(
                 "v-card-actions",
@@ -66971,7 +66981,11 @@ var render = function() {
                       attrs: { color: "blue", dark: "", block: "" },
                       on: {
                         click: function($event) {
-                          return _vm.confirm("confirmDialog")
+                          return _vm.confirm(
+                            "confirmDialog",
+                            "Confirm",
+                            "Mark this order as sent?"
+                          )
                         }
                       }
                     },
@@ -67015,7 +67029,11 @@ var render = function() {
           }),
           _vm._v(" "),
           _c("confirm-dialog", {
-            attrs: { dialog: _vm.confirmDialog },
+            attrs: {
+              dialog: _vm.confirmDialog,
+              title: _vm.dialogTitle,
+              message: _vm.message
+            },
             on: { closeDialog: _vm.closeFormDialog }
           })
         ],

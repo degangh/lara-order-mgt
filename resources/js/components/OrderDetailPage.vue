@@ -113,7 +113,8 @@
             </v-flex>
 
             <v-flex xs12 md4 text-center>
-                <v-btn color="blue" dark  block @click="confirm('confirmDialog')">
+                <v-btn color="blue" dark  block 
+                @click="confirm('confirmDialog','Confirm', 'Mark this order as sent?')">
                     <v-icon left>local_shipping</v-icon>Mark as Sent
                 </v-btn>
             </v-flex>
@@ -126,7 +127,12 @@
         </v-layout>
 
         <edit-order-item :dialog="orderDetailDialogue" @closeDialog="closeFormDialog"></edit-order-item>    
-        <confirm-dialog :dialog="confirmDialog" @closeDialog="closeFormDialog"></confirm-dialog>
+        <confirm-dialog 
+        :dialog="confirmDialog"
+        :title = "dialogTitle"
+        :message = "message" 
+        @closeDialog="closeFormDialog"
+        ></confirm-dialog>
   </v-container>
 </template>
 
@@ -142,7 +148,9 @@ export default {
         return {
             order: false,
             orderDetailDialogue: false,
-            confirmDialog: false
+            confirmDialog: false,
+            dialogTitle: '',
+            message: ''
         }
     },
 
@@ -186,8 +194,10 @@ export default {
         this.requestOrderDetailData()
         
         },
-        confirm(form){
+        confirm(form, title, message){
             this[form] = true
+            this.dialogTitle = title
+            this.message = message
         }
     }
 }
