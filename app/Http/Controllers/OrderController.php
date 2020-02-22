@@ -107,6 +107,6 @@ class OrderController extends Controller
 
     public function status(Order $order, OrderStatus $status)
     {
-        $this->orderRepository->changeStatus($order, $status);
+        return $this->orderRepository->changeStatus($order, $status);
     }
 }

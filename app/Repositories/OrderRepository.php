@@ -46,5 +46,7 @@ class OrderRepository implements OrderRepositoryInterface
     {
         $order->status_id = $status->id;
         $order->save();
+
+        return $order;
     }
 }
