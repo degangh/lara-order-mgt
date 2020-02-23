@@ -6,8 +6,8 @@
         <v-card-text> {{message}}</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn flat   @click="emitCloseDialog('confirmDialog')">No</v-btn>
-          <v-btn flat color="primary"  @click="emitCloseDialog('confirmDialog')">Yes</v-btn>
+          <v-btn flat   @click="noEvent()">No</v-btn>
+          <v-btn flat color="primary"  @click="yesEvent()">Yes</v-btn>
         </v-card-actions>
     </v-card>
 </v-dialog>
@@ -26,6 +26,12 @@ export default {
     methods: {
         emitCloseDialog(form) {
             this.$emit("closeDialog", form)
+        },
+        yesEvent(){
+            this.$emit("yesEvent")
+        },
+        noEvent(){
+            this.$emit("noEvent")
         }
     }
 }

@@ -66033,6 +66033,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -66092,6 +66094,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this[form] = true;
             this.dialogTitle = title;
             this.message = message;
+        },
+        yesEventHandler: function yesEventHandler() {
+            console.log('handle yes');
+            this.confirmDialog = false;
+        },
+        noEventHandler: function noEventHandler() {
+            console.log('handel no');
+            this.confirmDialog = false;
         }
     }
 });
@@ -66617,6 +66627,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         emitCloseDialog: function emitCloseDialog(form) {
             this.$emit("closeDialog", form);
+        },
+        yesEvent: function yesEvent() {
+            this.$emit("yesEvent");
+        },
+        noEvent: function noEvent() {
+            this.$emit("noEvent");
         }
     }
 });
@@ -66665,7 +66681,7 @@ var render = function() {
                       attrs: { flat: "" },
                       on: {
                         click: function($event) {
-                          return _vm.emitCloseDialog("confirmDialog")
+                          return _vm.noEvent()
                         }
                       }
                     },
@@ -66678,7 +66694,7 @@ var render = function() {
                       attrs: { flat: "", color: "primary" },
                       on: {
                         click: function($event) {
-                          return _vm.emitCloseDialog("confirmDialog")
+                          return _vm.yesEvent()
                         }
                       }
                     },
@@ -67034,7 +67050,11 @@ var render = function() {
               title: _vm.dialogTitle,
               message: _vm.message
             },
-            on: { closeDialog: _vm.closeFormDialog }
+            on: {
+              closeDialog: _vm.closeFormDialog,
+              yesEvent: _vm.yesEventHandler,
+              noEvent: _vm.noEventHandler
+            }
           })
         ],
         1

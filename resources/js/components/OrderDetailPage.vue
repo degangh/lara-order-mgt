@@ -132,6 +132,8 @@
         :title = "dialogTitle"
         :message = "message" 
         @closeDialog="closeFormDialog"
+        @yesEvent="yesEventHandler"
+        @noEvent="noEventHandler"
         ></confirm-dialog>
   </v-container>
 </template>
@@ -198,7 +200,20 @@ export default {
             this[form] = true
             this.dialogTitle = title
             this.message = message
+        },
+        yesEventHandler()
+        {
+            console.log('handle yes')
+            this.confirmDialog = false
+
+        },
+        noEventHandler()
+        {
+            console.log('handel no')
+            this.confirmDialog = false
         }
+
+
     }
 }
 </script>
