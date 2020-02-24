@@ -66049,7 +66049,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             orderDetailDialogue: false,
             confirmDialog: false,
             dialogTitle: '',
-            message: ''
+            message: '',
+            status: null
         };
     },
     mounted: function mounted() {
@@ -66097,6 +66098,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         yesEventHandler: function yesEventHandler() {
             console.log('handle yes');
+            axios.patch('/api/order/' + this.$route.params.id + '/paid');
             this.confirmDialog = false;
         },
         noEventHandler: function noEventHandler() {

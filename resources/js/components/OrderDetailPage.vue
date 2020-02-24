@@ -152,7 +152,8 @@ export default {
             orderDetailDialogue: false,
             confirmDialog: false,
             dialogTitle: '',
-            message: ''
+            message: '', 
+            status: null
         }
     },
 
@@ -204,6 +205,7 @@ export default {
         yesEventHandler()
         {
             console.log('handle yes')
+            axios.patch('/api/order/' + this.$route.params.id + '/paid')
             this.confirmDialog = false
 
         },
