@@ -120,7 +120,7 @@
             </v-flex>
 
             <v-flex xs12 md4 text-center>
-                <v-btn color="blue" dark block>
+                <v-btn color="blue" dark block @click="openConfirm">
                     <v-icon left>local_atm</v-icon>Mark as Paid
                 </v-btn>
             </v-flex>
@@ -135,16 +135,19 @@
         @yesEvent="yesEventHandler"
         @noEvent="noEventHandler"
         ></confirm-dialog>
+        <confirm ref="confirm"></confirm>
   </v-container>
 </template>
 
 <script>
 import EditOrderItem from './EditOrderItem'
 import ConfirmDialog from './ConfirmDialog'
+import Confirm from './Confirm'
 export default {
     components: {
         EditOrderItem,
-        ConfirmDialog
+        ConfirmDialog,
+        Confirm
     },
     data () {
         return {
@@ -213,6 +216,10 @@ export default {
         {
             console.log('handel no')
             this.confirmDialog = false
+        },
+        openConfirm()
+        {
+            this.$refs.confirm.open('Delete', 'Are you sure?', { color: 'red' }).then((confirm) => {})
         }
 
 
