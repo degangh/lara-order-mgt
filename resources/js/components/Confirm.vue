@@ -1,11 +1,9 @@
 <template>
-  <v-dialog v-model="dialog" :max-width="options.width" :style="{ zIndex: options.zIndex }" @keydown.esc="cancel">
+  <v-dialog slot="activator" v-model="dialog" :max-width="options.width" :style="{ zIndex: options.zIndex }" @keydown.esc="cancel">
     <v-card>
-      <v-toolbar>
-        <v-toolbar-title>{{ title }}</v-toolbar-title>
-      </v-toolbar>
+      <v-card-title class="headline">{{title}}</v-card-title>
       <v-card-text v-show="!!message" class="pa-4">{{ message }}</v-card-text>
-      <v-card-actions class="pt-0">
+      <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn flat text @click.native="cancel">Cancel</v-btn>
         <v-btn flat color="primary" @click.native="agree">Yes</v-btn>
@@ -17,6 +15,8 @@
 <script>
 /**
  * Vuetify Confirm Dialog component
+ * 
+ * Original Author: https://gist.github.com/eolant/ba0f8a5c9135d1a146e1db575276177d
  *
  * Insert component where you want to use it:
  * <confirm ref="confirm"></confirm>
@@ -72,7 +72,8 @@ export default {
       this.dialog = false
     },
     cancel() {
-      this.resolve(false)
+      //this.resolve(false)
+      this.reject()
       this.dialog = false
     }
   }

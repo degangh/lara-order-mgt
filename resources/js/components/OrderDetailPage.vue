@@ -120,7 +120,7 @@
             </v-flex>
 
             <v-flex xs12 md4 text-center>
-                <v-btn color="blue" dark block @click="openConfirm">
+                <v-btn color="blue" dark block @click="confirmPaid">
                     <v-icon left>local_atm</v-icon>Mark as Paid
                 </v-btn>
             </v-flex>
@@ -217,9 +217,21 @@ export default {
             console.log('handel no')
             this.confirmDialog = false
         },
-        openConfirm()
+        confirmSent()
         {
-            this.$refs.confirm.open('Delete', 'Are you sure?', { color: 'red' }).then((confirm) => {})
+            this.$refs.confirm.open('Confirm', 'Are you sure to mark the order status to `Sent`?', {}).then((confirm) => {
+                console.log(confirm)
+            }).catch(()=>{
+                console.log('cancel clicked')
+            })
+        },
+        confirmPaid()
+        {
+            this.$refs.confirm.open('Confirm', 'Are you sure to mark the order status to `Sent`?', {}).then((confirm) => {
+                console.log(confirm)
+            }).catch(()=>{
+                console.log('cancel clicked')
+            })
         }
 
 

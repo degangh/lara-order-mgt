@@ -65986,8 +65986,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log('handel no');
             this.confirmDialog = false;
         },
-        openConfirm: function openConfirm() {
-            this.$refs.confirm.open('Delete', 'Are you sure?', { color: 'red' }).then(function (confirm) {});
+        confirmSent: function confirmSent() {
+            this.$refs.confirm.open('Confirm', 'Are you sure to mark the order status to `Sent`?', {}).then(function (confirm) {
+                console.log(confirm);
+            }).catch(function () {
+                console.log('cancel clicked');
+            });
+        },
+        confirmPaid: function confirmPaid() {
+            this.$refs.confirm.open('Confirm', 'Are you sure to mark the order status to `Sent`?', {}).then(function (confirm) {
+                console.log(confirm);
+            }).catch(function () {
+                console.log('cancel clicked');
+            });
         }
     }
 });
@@ -66538,6 +66549,17 @@ var render = function() {
         "v-dialog",
         {
           attrs: { persistent: "", "max-width": "290" },
+          on: {
+            keydown: function($event) {
+              if (
+                !$event.type.indexOf("key") &&
+                _vm._k($event.keyCode, "esc", 27, $event.key, ["Esc", "Escape"])
+              ) {
+                return null
+              }
+              return _vm.noEvent()
+            }
+          },
           model: {
             value: _vm.dialog,
             callback: function($$v) {
@@ -66676,11 +66698,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /**
  * Vuetify Confirm Dialog component
+ * 
+ * Original Author: https://gist.github.com/eolant/ba0f8a5c9135d1a146e1db575276177d
  *
  * Insert component where you want to use it:
  * <confirm ref="confirm"></confirm>
@@ -66740,7 +66762,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.dialog = false;
     },
     cancel: function cancel() {
-      this.resolve(false);
+      //this.resolve(false)
+      this.reject();
       this.dialog = false;
     }
   }
@@ -66758,7 +66781,7 @@ var render = function() {
     "v-dialog",
     {
       style: { zIndex: _vm.options.zIndex },
-      attrs: { "max-width": _vm.options.width },
+      attrs: { slot: "activator", "max-width": _vm.options.width },
       on: {
         keydown: function($event) {
           if (
@@ -66770,6 +66793,7 @@ var render = function() {
           return _vm.cancel($event)
         }
       },
+      slot: "activator",
       model: {
         value: _vm.dialog,
         callback: function($$v) {
@@ -66782,11 +66806,9 @@ var render = function() {
       _c(
         "v-card",
         [
-          _c(
-            "v-toolbar",
-            [_c("v-toolbar-title", [_vm._v(_vm._s(_vm.title))])],
-            1
-          ),
+          _c("v-card-title", { staticClass: "headline" }, [
+            _vm._v(_vm._s(_vm.title))
+          ]),
           _vm._v(" "),
           _c(
             "v-card-text",
@@ -66806,7 +66828,6 @@ var render = function() {
           _vm._v(" "),
           _c(
             "v-card-actions",
-            { staticClass: "pt-0" },
             [
               _c("v-spacer"),
               _vm._v(" "),
@@ -67157,7 +67178,12 @@ var render = function() {
                     "v-btn",
                     {
                       attrs: { color: "blue", dark: "", block: "" },
-                      on: { click: _vm.openConfirm }
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                          return _vm.confirmPaid($event)
+                        }
+                      }
                     },
                     [
                       _c("v-icon", { attrs: { left: "" } }, [
