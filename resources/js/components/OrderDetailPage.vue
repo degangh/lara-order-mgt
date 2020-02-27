@@ -114,49 +114,36 @@
 
             <v-flex xs12 md4 text-center>
                 <v-btn color="blue" dark  block 
-                @click="confirm('confirmDialog','Confirm', 'Mark this order as sent?')">
+                @click="confirmDialog('Confirm','Confirm to mark the order as `SENT`?', {}, 'sent')">
                     <v-icon left>local_shipping</v-icon>Mark as Sent
                 </v-btn>
             </v-flex>
 
             <v-flex xs12 md4 text-center>
-                <v-btn color="blue" dark block @click="confirmPaid">
+                <v-btn color="blue" dark block 
+                @click="confirmDialog('Confirm','Only confirm to the order as `PAID` after the money is collected', {}, 'paid')">
                     <v-icon left>local_atm</v-icon>Mark as Paid
                 </v-btn>
             </v-flex>
         </v-layout>
 
         <edit-order-item :dialog="orderDetailDialogue" @closeDialog="closeFormDialog"></edit-order-item>    
-        <confirm-dialog 
-        :dialog="confirmDialog"
-        :title = "dialogTitle"
-        :message = "message" 
-        @closeDialog="closeFormDialog"
-        @yesEvent="yesEventHandler"
-        @noEvent="noEventHandler"
-        ></confirm-dialog>
         <confirm ref="confirm"></confirm>
   </v-container>
 </template>
 
 <script>
 import EditOrderItem from './EditOrderItem'
-import ConfirmDialog from './ConfirmDialog'
 import Confirm from './Confirm'
 export default {
     components: {
         EditOrderItem,
-        ConfirmDialog,
         Confirm
     },
     data () {
         return {
             order: false,
             orderDetailDialogue: false,
-            confirmDialog: false,
-            dialogTitle: '',
-            message: '', 
-            status: null
         }
     },
 
@@ -200,37 +187,15 @@ export default {
         this.requestOrderDetailData()
         
         },
-        confirm(form, title, message){
-            this[form] = true
-            this.dialogTitle = title
-            this.message = message
-        },
-        yesEventHandler()
-        {
-            console.log('handle yes')
-            axios.patch('/api/order/' + this.$route.params.id + '/paid')
-            this.confirmDialog = false
 
-        },
-        noEventHandler()
+        confirmDialog(title, message, options, operation)
         {
-            console.log('handel no')
-            this.confirmDialog = false
-        },
-        confirmSent()
-        {
-            this.$refs.confirm.open('Confirm', 'Are you sure to mark the order status to `Sent`?', {}).then((confirm) => {
-                console.log(confirm)
+            this.$refs.confirm.open(title, message, options).then((confirm) => {
+                axios.patch('/api/order/' + this.$route.params.id + '/' + operation)
+                .then(()=>{console.log('update status done')})
+                .catch(()=>{})
             }).catch(()=>{
-                console.log('cancel clicked')
-            })
-        },
-        confirmPaid()
-        {
-            this.$refs.confirm.open('Confirm', 'Are you sure to mark the order status to `Sent`?', {}).then((confirm) => {
-                console.log(confirm)
-            }).catch(()=>{
-                console.log('cancel clicked')
+                
             })
         }
 
