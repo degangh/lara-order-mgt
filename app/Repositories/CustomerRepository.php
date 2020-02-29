@@ -30,6 +30,14 @@ class CustomerRepository implements CustomerRepositoryInterface
         
     }
 
+
+    public function orders(Customer $customer)
+    {
+        return $customer->orders()->withCount(['items as sum' => function($query) {
+            $query->select(\DB::raw('sum(quantity*unit_price_cny)'));
+        }])->orderBy('id','desc')->paginate(20);
+    }
+
     public function find($id)
     {
 
