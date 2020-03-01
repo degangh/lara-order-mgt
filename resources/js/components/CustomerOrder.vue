@@ -1,14 +1,36 @@
 <template>
 <div>
-    <order ref='order'></order>
+    <order-list :orders='orders' ref='order-list'></order-list>
 </div>
 </template>
 
 <script>
-import Order from './Order'
+import OrderList from './OrderList'
 export default {
     components: {
-      Order
+      OrderList
     },
+    data () {
+        return {
+            orders: null
+        }
+    },
+    mounted() {
+        this.requestOrderData()
+    },
+    methods : {
+        requestOrderData () {
+            axios.get('/api/customers/' + this.$route.params.id + '/orders')
+            .then(this.handleOrderData)
+        },
+
+        handleOrderData (res) {
+            this.orders = res.data.data
+            //this.totalPage = res.data.last_page
+            //this.loading = false
+
+        }
+    }
+    
 }
 </script>

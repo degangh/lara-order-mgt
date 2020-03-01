@@ -3,6 +3,7 @@
 namespace App\Repositories;
 use App\Repositories\Contract\CustomerRepositoryInterface;
 use App\Customer;
+use App\OrderStatus;
 
 
 class CustomerRepository implements CustomerRepositoryInterface
@@ -33,9 +34,9 @@ class CustomerRepository implements CustomerRepositoryInterface
 
     public function orders(Customer $customer)
     {
-        return $customer->orders()->withCount(['items as sum' => function($query) {
+        return $customer->orders()->with('customer')->with('status')->withCount(['items as sum' => function($query) {
             $query->select(\DB::raw('sum(quantity*unit_price_cny)'));
-        }])->orderBy('id','desc')->paginate(20);
+        }])->orderBy('id','desc')->paginate(120);
     }
 
     public function find($id)
