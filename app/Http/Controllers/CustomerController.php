@@ -111,4 +111,9 @@ class CustomerController extends Controller
     {
         //
     }
+
+    public function orders(Customer $customer)
+    {
+        return $this->customerRepository->orders($customer);
+    }
 }

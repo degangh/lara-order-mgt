@@ -15,7 +15,7 @@ class OrderRepository implements OrderRepositoryInterface
             $query->select(\DB::raw('sum(quantity*unit_price_cny)'));
         }])->when($keyword, function($query, $keyword){
             return $query->where('name', 'like', '%' . $keyword . '%');
-        })->paginate(20);
+        })->orderBy('id','desc')->paginate(20);
 
     }
 

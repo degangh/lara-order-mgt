@@ -31,6 +31,6 @@ class Order extends Model
 
     public function status()
     {
-        return $this->hasOne(Status::class, 'status_id');
+        return $this->belongsTo(OrderStatus::class, 'status_id');
     }
 }

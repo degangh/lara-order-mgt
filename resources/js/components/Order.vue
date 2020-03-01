@@ -85,7 +85,6 @@ export default {
     watch: {
         '$route' (to, from){
 
-            console.log(this.$router.currentRoute.path)
             if (this.$router.currentRoute.path == '/orders') this.page =1
             this.loading = true
             this.$router.push(this.$router.currentRoute.path)
@@ -105,7 +104,6 @@ export default {
 
         handleOrderData (res) {
             this.orders = res.data.data
-            //this.page = res.data.current_page
             this.totalPage = res.data.last_page
             this.loading = false
 
