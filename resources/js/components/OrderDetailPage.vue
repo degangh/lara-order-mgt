@@ -44,7 +44,7 @@
           <v-divider></v-divider>
           <v-layout row >
               <v-flex xs12 class="title">
-                  Order Detail
+                  Order Detail - {{order.status.name | uppercase}}
               </v-flex>
           </v-layout>
           <div v-if="order.items.length > 0">
@@ -192,13 +192,21 @@ export default {
         {
             this.$refs.confirm.open(title, message, options).then((confirm) => {
                 axios.patch('/api/order/' + this.$route.params.id + '/' + operation)
-                .then(()=>{console.log('update status done')})
+                .then(()=>{this.requestOrderDetailData();console.log('update status done')})
                 .catch(()=>{})
             }).catch(()=>{
                 
             })
         }
 
+
+    },
+    filters: {
+        uppercase: function (value) {
+            if (!value) return ''
+            value = value.toString()
+            return value.toUpperCase()
+        }
 
     }
 }
