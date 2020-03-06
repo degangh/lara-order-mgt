@@ -13,43 +13,8 @@
                         ></v-pagination>
                     </div>
                     <div v-if="loading" class="loading-wrapper"> <v-progress-linear :indeterminate="true"></v-progress-linear></div>
-                    <div class="table-responsive">
-                    <table class="table table-striped">
-                        <tr>
-                            <th class="col1">
-                            Name
-                            </th>
-                            <th class="col2">
-                            Mobile
-                            </th>
-                            <th>
-                            Order Sum
-                            </th>
-                            <th>
-                            Order Date
-                            </th>
-                            <th>
-                            
-                            </th>
-                        </tr>
-                        <tbody>
-                        <tr v-for = "(order, index) of orders" :key="index" @click="gotoOrderPage(order.id)">
-                            <td v-if="order.customer">{{order.customer.name}}</td>
-                            <td v-else>N/A</td>
-                            <td v-if="order.customer">{{order.customer.mobile}}</td>
-                            <td v-else>N/A</td>
-                            <td v-if="order.sum" class="text-right">{{order.sum}}</td>
-                            <td v-else class="text-right">0.00</td>
-                            <td>{{order.created_at}}</td>
-                        </tr>
-
-                        
-                        </tbody>
-
-
-
-                    </table>
-                    </div>
+                    <order-list :orders="orders"></order-list>
+                    
                     <div class="pagination-container">
                         <v-pagination
                         v-model="page"
@@ -66,8 +31,11 @@
 </div>
 </template>
 <script>
+import OrderList from './OrderList'
 export default {
-
+    components: {
+        OrderList
+    },
     data () {
         return {
             orders: [],
