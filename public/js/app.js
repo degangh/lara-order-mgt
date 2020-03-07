@@ -66415,7 +66415,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         emitCloseDialog: function emitCloseDialog(form) {
-            this.$refs.OrderDetailForm.reset();
+            //this.$refs.OrderDetailForm.reset()
+            this.selectedProduct = null;
+            this.ref_price_aud = null;
+            this.quantity = null;
+            this.rrp_cny = null;
             this.$emit("closeDialog", form);
         },
         search: function search(v) {

@@ -127,7 +127,11 @@ export default {
         },
         emitCloseDialog(form)
         {
-            this.$refs.OrderDetailForm.reset()
+            //this.$refs.OrderDetailForm.reset()
+            this.selectedProduct = null
+            this.ref_price_aud = null
+            this.quantity = null
+            this.rrp_cny = null
             this.$emit("closeDialog", form)
         },
         search(v) {
