@@ -3,6 +3,8 @@ import VueRouter from "vue-router";
 import Vuetify from 'vuetify'
 import Vuex from 'vuex';
 import 'vuetify/dist/vuetify.min.css'
+import vueNumeralFilterInstaller from 'vue-numeral-filter';
+Vue.use(vueNumeralFilterInstaller);
 
 Vue.use(VueRouter);
 Vue.use(Vuetify)

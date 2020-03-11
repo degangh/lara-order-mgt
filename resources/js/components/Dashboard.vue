@@ -11,7 +11,7 @@
                             </v-flex>
                             <v-flex xs7 text-xs-right>
                             <div>Sales Revenue</div>
-                            <div class="display-1">2,333</div>
+                            <div class="display-1">{{sales_revenue | numeral('0,0.[00]')}}</div>
                             </v-flex>
                             </v-layout>
                         </v-card-text>
@@ -26,7 +26,7 @@
                             </v-flex>
                             <v-flex xs7 text-xs-right>
                             <div>Transactions</div>
-                            <div class="display-1">17</div>
+                            <div class="display-1">{{transaction}}</div>
                             </v-flex>
                             </v-layout>
                         </v-card-text>
@@ -41,7 +41,7 @@
                             </v-flex>
                             <v-flex xs7 text-xs-right>
                             <div>Profit</div>
-                            <div class="display-1">799</div>
+                            <div class="display-1">{{profit}}</div>
                             </v-flex>
                             </v-layout>
                         </v-card-text>
@@ -56,7 +56,7 @@
                             </v-flex>
                             <v-flex xs7 text-xs-right>
                             <div>Average Profit Rate</div>
-                            <div class="display-1">11.5%</div>
+                            <div class="display-1">{{profit_rate | numeral('0.[00]%') }}</div>
                             </v-flex>
                             </v-layout>
                         </v-card-text>
@@ -82,6 +82,14 @@ import SalesLineChart from "./SalesLineChart"
 export default {
     components: {
         SalesLineChart
+    }, 
+    data () {
+        return {
+            sales_revenue: 3200.25,
+            transaction: 23,
+            profit:800,
+            profit_rate: 0.175
+        }
     }
 }
 </script>
