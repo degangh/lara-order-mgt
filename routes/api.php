@@ -42,3 +42,4 @@ Route::patch('order/{order}/{status}' , 'OrderController@status')->middleware('a
 Route::post('login', 'PassportController@login');
 Route::patch('orders/{order}', 'OrderController@update')->middleware('auth:api');
 
+Route::get('dashboard', 'DashboardController@index')->middleware('auth:api');

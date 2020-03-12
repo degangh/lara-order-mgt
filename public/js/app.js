@@ -71013,11 +71013,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            sales_revenue: 3200.25,
-            transaction: 23,
-            profit: 800,
-            profit_rate: 0.175
+            sales_revenue: null,
+            transaction: null,
+            profit: null,
+            profit_rate: null
         };
+    },
+    mounted: function mounted() {
+        this.requestDashboardData();
+    },
+
+    methods: {
+        requestDashboardData: function requestDashboardData() {
+            var _this = this;
+
+            axios.get('/api/dashboard').then(function (res) {
+                console.log(res.data);
+                _this.sales_revenue = res.data.sales_revenue;
+                _this.transaction = res.data.transaction;
+                _this.profit = res.data.profit;
+                _this.profit_rate = res.data.sales_revenue > 0 ? res.data.profit / res.data.sales_revenue : 0;
+            });
+        }
     }
 });
 

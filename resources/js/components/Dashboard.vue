@@ -85,10 +85,23 @@ export default {
     }, 
     data () {
         return {
-            sales_revenue: 3200.25,
-            transaction: 23,
-            profit:800,
-            profit_rate: 0.175
+            sales_revenue: null,
+            transaction: null,
+            profit:null,
+            profit_rate: null
+        }
+    }, 
+    mounted () {
+        this.requestDashboardData();
+    },
+    methods: {
+        requestDashboardData () {
+            axios.get('/api/dashboard').then((res) => {
+                this.sales_revenue = res.data.sales_revenue
+                this.transaction = res.data.transaction
+                this.profit = res.data.profit
+                this.profit_rate = (res.data.sales_revenue > 0) ? res.data.profit/res.data.sales_revenue : 0
+            })
         }
     }
 }
