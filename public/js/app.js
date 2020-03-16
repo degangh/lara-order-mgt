@@ -68104,6 +68104,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -68974,12 +68982,13 @@ var render = function() {
           _vm.order.items.length > 0
             ? _c(
                 "div",
+                { attrs: { "fill-height": "" } },
                 [
                   _c(
                     "v-layout",
                     { staticClass: "font-weight-black" },
                     [
-                      _c("v-flex", { attrs: { xs4: "" } }, [
+                      _c("v-flex", { attrs: { xs3: "" } }, [
                         _vm._v("\n              Product\n          ")
                       ]),
                       _vm._v(" "),
@@ -68999,6 +69008,10 @@ var render = function() {
                       _vm._v(" "),
                       _c("v-flex", { attrs: { xs2: "", "text-right": "" } }, [
                         _vm._v("\n              Sub Total\n          ")
+                      ]),
+                      _vm._v(" "),
+                      _c("v-flex", { attrs: { "text-center": "" } }, [
+                        _vm._v("\n              Action\n          ")
                       ])
                     ],
                     1
@@ -69007,9 +69020,12 @@ var render = function() {
                   _vm._l(_vm.order.items, function(item, index) {
                     return _c(
                       "v-layout",
-                      { key: index, staticClass: "caption text-lighten-2" },
+                      {
+                        key: index,
+                        staticClass: "caption text-lighten-2 align-center"
+                      },
                       [
-                        _c("v-flex", { attrs: { xs4: "" } }, [
+                        _c("v-flex", { attrs: { xs3: "" } }, [
                           _vm._v(
                             "\n              " +
                               _vm._s(item.product.name) +
@@ -69051,7 +69067,27 @@ var render = function() {
                               ) +
                               "\n          "
                           )
-                        ])
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "v-flex",
+                          { attrs: { xs1: "", "text-center": "", sm: "3" } },
+                          [
+                            _c(
+                              "v-btn",
+                              { attrs: { icon: "", "x-small": "" } },
+                              [
+                                _c(
+                                  "v-icon",
+                                  { attrs: { color: "blue-grey" } },
+                                  [_vm._v("delete")]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
                       ],
                       1
                     )
@@ -71028,7 +71064,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.get('/api/dashboard').then(function (res) {
-                console.log(res.data);
                 _this.sales_revenue = res.data.sales_revenue;
                 _this.transaction = res.data.transaction;
                 _this.profit = res.data.profit;

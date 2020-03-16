@@ -47,9 +47,9 @@
                   Order Detail - {{order.status.name | uppercase}}
               </v-flex>
           </v-layout>
-          <div v-if="order.items.length > 0">
+          <div v-if="order.items.length > 0" fill-height>
           <v-layout  class="font-weight-black" >
-            <v-flex xs4>
+            <v-flex xs3>
                 Product
             </v-flex>
             <v-flex xs2 text-right>
@@ -66,11 +66,14 @@
             <v-flex xs2 text-right>
                 Sub Total
             </v-flex>
+            <v-flex text-center>
+                Action
+            </v-flex>
 
             
         </v-layout>
-        <v-layout v-for = "(item, index) of order.items" :key="index" class="caption text-lighten-2" >
-            <v-flex xs4>
+        <v-layout v-for = "(item, index) of order.items" :key="index" class="caption text-lighten-2 align-center" >
+            <v-flex xs3>
                 {{item.product.name}}
             </v-flex>
             <v-flex xs2 text-right>
@@ -84,6 +87,11 @@
             </v-flex>
             <v-flex xs2 text-right>
                 {{parseFloat(item.quantity * item.unit_price_cny).toFixed(2)}}
+            </v-flex>
+            <v-flex xs1 text-center sm="3">
+                <v-btn icon x-small >
+                    <v-icon color="blue-grey">delete</v-icon>
+                </v-btn>
             </v-flex>
 
             
