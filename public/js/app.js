@@ -68112,6 +68112,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -68170,6 +68174,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$refs.confirm.open(title, message, options).then(function (confirm) {
                 axios.patch('/api/order/' + _this.$route.params.id + '/' + operation).then(function () {
                     _this.requestOrderDetailData();console.log('update status done');
+                }).catch(function () {});
+            }).catch(function () {});
+        },
+        confirmDeleteDialog: function confirmDeleteDialog(title, message, options, itemId) {
+            var _this2 = this;
+
+            this.$refs.confirm.open(title, message, options).then(function (confirm) {
+                axios.delete('/api/orderItem/' + itemId).then(function () {
+                    _this2.requestOrderDetailData();console.log('update status done');
                 }).catch(function () {});
             }).catch(function () {});
         }
@@ -69079,8 +69092,24 @@ var render = function() {
                               [
                                 _c(
                                   "v-icon",
-                                  { attrs: { color: "blue-grey" } },
-                                  [_vm._v("delete")]
+                                  {
+                                    attrs: { color: "blue-grey" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.confirmDeleteDialog(
+                                          "Delete item",
+                                          "Confirm to delete the selected order item?",
+                                          {},
+                                          item.id
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                  delete\n                  "
+                                    )
+                                  ]
                                 )
                               ],
                               1

@@ -90,7 +90,11 @@
             </v-flex>
             <v-flex xs1 text-center sm="3">
                 <v-btn icon x-small >
-                    <v-icon color="blue-grey">delete</v-icon>
+                    <v-icon color="blue-grey" 
+        
+                    @click="confirmDeleteDialog('Delete item', 'Confirm to delete the selected order item?', {}, item.id)">
+                    delete
+                    </v-icon>
                 </v-btn>
             </v-flex>
 
@@ -205,7 +209,20 @@ export default {
             }).catch(()=>{
                 
             })
+        },
+
+        confirmDeleteDialog(title, message, options, itemId)
+        {
+            this.$refs.confirm.open(title, message, options).then((confirm) => {
+                axios.delete('/api/orderItem/' + itemId)
+                .then(()=>{this.requestOrderDetailData();console.log('update status done')})
+                .catch(()=>{})
+            }).catch(()=>{
+                
+            })
         }
+
+
 
 
     },
