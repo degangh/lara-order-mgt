@@ -214,7 +214,7 @@ export default {
         confirmDeleteDialog(title, message, options, itemId)
         {
             this.$refs.confirm.open(title, message, options).then((confirm) => {
-                axios.delete('/api/orderItem/' + itemId)
+                axios.delete('/api/orderItems/' + itemId)
                 .then(()=>{this.requestOrderDetailData();console.log('update status done')})
                 .catch(()=>{})
             }).catch(()=>{
