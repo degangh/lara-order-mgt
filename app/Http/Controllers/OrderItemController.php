@@ -88,6 +88,8 @@ class OrderItemController extends Controller
      */
     public function destroy(OrderItem $orderItem)
     {
+        $this->authorize('modify', $orderItem);
+
         $orderItem->delete();
     }
 }

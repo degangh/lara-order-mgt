@@ -68183,7 +68183,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.$refs.confirm.open(title, message, options).then(function (confirm) {
                 axios.delete('/api/orderItems/' + itemId).then(function () {
                     _this2.requestOrderDetailData();console.log('update status done');
-                }).catch(function () {});
+                }).catch(function () {
+                    alert('oops');
+                });
             }).catch(function () {});
         }
     },

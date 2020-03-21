@@ -216,7 +216,7 @@ export default {
             this.$refs.confirm.open(title, message, options).then((confirm) => {
                 axios.delete('/api/orderItems/' + itemId)
                 .then(()=>{this.requestOrderDetailData();console.log('update status done')})
-                .catch(()=>{})
+                .catch(()=>{alert('oops')})
             }).catch(()=>{
                 
             })
