@@ -67,7 +67,7 @@ export default {
       })
     },
     cancel() {
-      this.reject()
+      //this.reject()
       this.dialog = false
     }
   }

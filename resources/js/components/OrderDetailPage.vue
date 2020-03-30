@@ -199,18 +199,18 @@ export default {
         },
         closeFormDialog (form) {
         this[form] = false
+        this.messageDialog('Success','The item has been added to the order',{})
         this.requestOrderDetailData()
-        
         },
 
         confirmDialog(title, message, options, operation)
         {
             this.$refs.confirm.open(title, message, options).then((confirm) => {
                 axios.patch('/api/order/' + this.$route.params.id + '/' + operation)
-                .then(()=>{this.requestOrderDetailData();console.log('update status done')})
-                .catch(()=>{})
-            }).catch(()=>{
-                
+                .then(()=>{this.requestOrderDetailData();this.messageDialog('Success','The order status is updated',{})})
+                .catch((e)=>{console.log(e)})
+            }).catch((e)=>{
+                console.log(e)
             })
         },
 
@@ -218,10 +218,10 @@ export default {
         {
             this.$refs.confirm.open(title, message, options).then((confirm) => {
                 axios.delete('/api/orderItems/' + itemId)
-                .then(()=>{this.requestOrderDetailData();console.log('update status done')})
-                .catch(()=>{this.messageDialog('Message','The order can not be modified as it is sent or paid',{})})
-            }).catch(()=>{
-                
+                .then(()=>{this.requestOrderDetailData()})
+                .catch((e)=>{console.log(e); this.messageDialog('Error','The order can not be modified as it is sent or paid',{})})
+            }).catch((e)=>{
+                console.log(e)
             })
         }, 
 

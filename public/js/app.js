@@ -68171,6 +68171,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         closeFormDialog: function closeFormDialog(form) {
             this[form] = false;
+            this.messageDialog('Success', 'The item has been added to the order', {});
             this.requestOrderDetailData();
         },
         confirmDialog: function confirmDialog(title, message, options, operation) {
@@ -68178,20 +68179,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.$refs.confirm.open(title, message, options).then(function (confirm) {
                 axios.patch('/api/order/' + _this.$route.params.id + '/' + operation).then(function () {
-                    _this.requestOrderDetailData();console.log('update status done');
-                }).catch(function () {});
-            }).catch(function () {});
+                    _this.requestOrderDetailData();_this.messageDialog('Success', 'The order status is updated', {});
+                }).catch(function (e) {
+                    console.log(e);
+                });
+            }).catch(function (e) {
+                console.log(e);
+            });
         },
         confirmDeleteDialog: function confirmDeleteDialog(title, message, options, itemId) {
             var _this2 = this;
 
             this.$refs.confirm.open(title, message, options).then(function (confirm) {
                 axios.delete('/api/orderItems/' + itemId).then(function () {
-                    _this2.requestOrderDetailData();console.log('update status done');
-                }).catch(function () {
-                    _this2.messageDialog('Message', 'The order can not be modified as it is sent or paid', {});
+                    _this2.requestOrderDetailData();
+                }).catch(function (e) {
+                    console.log(e);_this2.messageDialog('Error', 'The order can not be modified as it is sent or paid', {});
                 });
-            }).catch(function () {});
+            }).catch(function (e) {
+                console.log(e);
+            });
         },
         messageDialog: function messageDialog(title, message, options) {
             this.$refs.message.open(title, message, options);
@@ -68777,7 +68784,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     cancel: function cancel() {
-      this.reject();
+      //this.reject()
       this.dialog = false;
     }
   }
