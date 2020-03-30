@@ -141,16 +141,19 @@
 
         <edit-order-item :dialog="orderDetailDialogue" @closeDialog="closeFormDialog"></edit-order-item>    
         <confirm ref="confirm"></confirm>
+        <message ref="message"></message>
   </v-container>
 </template>
 
 <script>
 import EditOrderItem from './EditOrderItem'
+import Message from './Message'
 import Confirm from './Confirm'
 export default {
     components: {
         EditOrderItem,
-        Confirm
+        Confirm,
+        Message
     },
     data () {
         return {
@@ -216,10 +219,15 @@ export default {
             this.$refs.confirm.open(title, message, options).then((confirm) => {
                 axios.delete('/api/orderItems/' + itemId)
                 .then(()=>{this.requestOrderDetailData();console.log('update status done')})
-                .catch(()=>{alert('oops')})
+                .catch(()=>{this.messageDialog('Message','The order can not be modified as it is sent or paid',{})})
             }).catch(()=>{
                 
             })
+        }, 
+
+        messageDialog(title, message, options)
+        {
+            this.$refs.message.open(title, message, options)
         }
 
 
