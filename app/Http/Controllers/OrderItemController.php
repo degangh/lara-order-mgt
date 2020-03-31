@@ -36,6 +36,8 @@ class OrderItemController extends Controller
      */
     public function store(Request $request, Order $order)
     {
+        $this->authorize('modify', $order);
+        
         return $order->items()->create([
             'order_id' => $order->id,
             'product_id' => $request->product_id,
@@ -88,7 +90,7 @@ class OrderItemController extends Controller
      */
     public function destroy(OrderItem $orderItem)
     {
-        $this->authorize('modify', $orderItem);
+        $this->authorize('modify', $orderItem->order->id);
 
         $orderItem->delete();
     }

@@ -20,11 +20,11 @@ class OrderItemPolicy
         //
     }
 
-    public function modify(User $user, OrderItem $orderItem)
+    public function modify(User $user, Order $order)
     {
         
         
-        if ($orderItem->order->status->id != 1)
+        if ($order->status->id != 1)
         {
             return $this->deny('Order Can NOT be changed after sent or paid');
         }
