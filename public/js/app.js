@@ -68415,7 +68415,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 exchange_rate: this.exchange_rate
 
             }).then(this.handleOrderItemResponse).catch(function (err) {
-                alert(err);
+                alert(err.data.message);console.log(err);
             });
         },
         handleOrderItemResponse: function handleOrderItemResponse() {

@@ -151,7 +151,7 @@ export default {
           })
           .then(this.handleOrderItemResponse)
           .catch(function (err) {
-            alert (err)
+            alert (err.data.message); console.log(err)
           })
         },
 
