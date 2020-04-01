@@ -197,9 +197,10 @@ export default {
             this[form] =  true
         
         },
-        closeFormDialog (form) {
+        closeFormDialog (form, status, message) {
         this[form] = false
-        this.messageDialog('Success','The item has been added to the order',{})
+        if (status == "success") this.messageDialog('Success','The item has been added to the order',{})
+        if (status == "failed") this.messageDialog('Error',message,{})
         this.requestOrderDetailData()
         },
 
@@ -219,7 +220,7 @@ export default {
             this.$refs.confirm.open(title, message, options).then((confirm) => {
                 axios.delete('/api/orderItems/' + itemId)
                 .then(()=>{this.requestOrderDetailData()})
-                .catch((e)=>{console.log(e); this.messageDialog('Error','The order can not be modified as it is sent or paid',{})})
+                .catch((e)=>{console.log(e); this.messageDialog('Error',e.data.message,{})})
             }).catch((e)=>{
                 console.log(e)
             })

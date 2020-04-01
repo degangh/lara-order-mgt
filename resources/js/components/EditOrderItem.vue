@@ -6,7 +6,7 @@
           
           <v-toolbar-title>Add Product</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-btn icon dark @click="emitCloseDialog('orderDetailDialogue')">
+          <v-btn icon dark @click="emitCloseDialog('orderDetailDialogue', null, null)">
             <v-icon>close</v-icon>
           </v-btn>
         </v-toolbar>
@@ -125,14 +125,14 @@ export default {
             this.products = res.data.data
           })
         },
-        emitCloseDialog(form)
+        emitCloseDialog(form, status, message)
         {
             //this.$refs.OrderDetailForm.reset()
             this.selectedProduct = null
             this.ref_price_aud = null
             this.quantity = null
             this.rrp_cny = null
-            this.$emit("closeDialog", form)
+            this.$emit("closeDialog", form, status, message)
         },
         search(v) {
             console.log(v)
@@ -149,9 +149,10 @@ export default {
                   exchange_rate: this.exchange_rate, 
      
           })
-          .then(this.handleOrderItemResponse)
-          .catch(function (err) {
-            alert (err.data.message); console.log(err)
+          .then(() => {this.emitCloseDialog('orderDetailDialogue', 'success', 'The item is added to the order')})
+          .catch( (err) => {
+            console.log(err.data.message)
+            this.emitCloseDialog('orderDetailDialogue', 'failed', err.data.message)
           })
         },
 

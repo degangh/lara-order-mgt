@@ -68169,9 +68169,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this[form] = true;
         },
-        closeFormDialog: function closeFormDialog(form) {
+        closeFormDialog: function closeFormDialog(form, status, message) {
             this[form] = false;
-            this.messageDialog('Success', 'The item has been added to the order', {});
+            if (status == "success") this.messageDialog('Success', 'The item has been added to the order', {});
+            if (status == "failed") this.messageDialog('Error', message, {});
             this.requestOrderDetailData();
         },
         confirmDialog: function confirmDialog(title, message, options, operation) {
@@ -68194,7 +68195,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 axios.delete('/api/orderItems/' + itemId).then(function () {
                     _this2.requestOrderDetailData();
                 }).catch(function (e) {
-                    console.log(e);_this2.messageDialog('Error', 'The order can not be modified as it is sent or paid', {});
+                    console.log(e);_this2.messageDialog('Error', e.data.message, {});
                 });
             }).catch(function (e) {
                 console.log(e);
@@ -68393,18 +68394,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.products = res.data.data;
             });
         },
-        emitCloseDialog: function emitCloseDialog(form) {
+        emitCloseDialog: function emitCloseDialog(form, status, message) {
             //this.$refs.OrderDetailForm.reset()
             this.selectedProduct = null;
             this.ref_price_aud = null;
             this.quantity = null;
             this.rrp_cny = null;
-            this.$emit("closeDialog", form);
+            this.$emit("closeDialog", form, status, message);
         },
         search: function search(v) {
             console.log(v);
         },
         saveOrderItem: function saveOrderItem() {
+            var _this2 = this;
+
             axios.post('/api/order/' + this.$route.params.id + "/items", {
 
                 product_id: this.selectedProduct.id,
@@ -68414,20 +68417,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 exchange_rate: this.exchange_rate
 
-            }).then(this.handleOrderItemResponse).catch(function (err) {
-                alert(err.data.message);console.log(err);
+            }).then(function () {
+                _this2.emitCloseDialog('orderDetailDialogue', 'success', 'The item is added to the order');
+            }).catch(function (err) {
+                console.log(err.data.message);
+                _this2.emitCloseDialog('orderDetailDialogue', 'failed', err.data.message);
             });
         },
         handleOrderItemResponse: function handleOrderItemResponse() {
             this.emitCloseDialog('orderDetailDialogue');
         },
         getCurrencyRate: function getCurrencyRate(base, target) {
-            var _this2 = this;
+            var _this3 = this;
 
             fetch('https://api.exchangeratesapi.io/latest?base=' + base + '&symbols=' + target).then(function (response) {
                 return response.json();
             }).then(function (data) {
-                return _this2.exchange_rate = parseFloat(parseFloat(data.rates[target]).toFixed(2));
+                return _this3.exchange_rate = parseFloat(parseFloat(data.rates[target]).toFixed(2));
             });
         }
     },
@@ -68481,7 +68487,11 @@ var render = function() {
                       attrs: { icon: "", dark: "" },
                       on: {
                         click: function($event) {
-                          return _vm.emitCloseDialog("orderDetailDialogue")
+                          return _vm.emitCloseDialog(
+                            "orderDetailDialogue",
+                            null,
+                            null
+                          )
                         }
                       }
                     },
