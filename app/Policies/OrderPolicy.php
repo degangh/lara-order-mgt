@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\User;
-use App\OrderItem;
+use App\Order;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class OrderItemPolicy
+class OrderPolicy
 {
     use HandlesAuthorization;
 
@@ -22,7 +22,6 @@ class OrderItemPolicy
 
     public function modify(User $user, Order $order)
     {
-        
         
         if ($order->status->id != 1)
         {
