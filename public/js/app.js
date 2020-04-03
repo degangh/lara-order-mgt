@@ -18829,7 +18829,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(151);
-module.exports = __webpack_require__(258);
+module.exports = __webpack_require__(261);
 
 
 /***/ }),
@@ -71200,7 +71200,7 @@ var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(249)
 /* template */
-var __vue_template__ = __webpack_require__(257)
+var __vue_template__ = __webpack_require__(260)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -71246,6 +71246,8 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SalesLineChart__ = __webpack_require__(250);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__SalesLineChart___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__SalesLineChart__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__RevenueSection__ = __webpack_require__(257);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__RevenueSection___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__RevenueSection__);
 //
 //
 //
@@ -71264,97 +71266,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     components: {
-        SalesLineChart: __WEBPACK_IMPORTED_MODULE_0__SalesLineChart___default.a
-    },
-    data: function data() {
-        return {
-            sales_revenue: null,
-            transaction: null,
-            profit: null,
-            profit_rate: null
-        };
-    },
-    mounted: function mounted() {
-        this.requestDashboardData();
-    },
-
-    methods: {
-        requestDashboardData: function requestDashboardData() {
-            var _this = this;
-
-            axios.get('/api/dashboard').then(function (res) {
-                _this.sales_revenue = res.data.sales_revenue;
-                _this.transaction = res.data.transaction;
-                _this.profit = res.data.profit;
-                _this.profit_rate = res.data.sales_revenue > 0 ? res.data.profit / res.data.sales_revenue : 0;
-            });
-        }
+        SalesLineChart: __WEBPACK_IMPORTED_MODULE_0__SalesLineChart___default.a,
+        RevenueSection: __WEBPACK_IMPORTED_MODULE_1__RevenueSection___default.a
     }
+
 });
 
 /***/ }),
@@ -86665,237 +86585,204 @@ webpackContext.id = 256;
 /* 257 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(258)
+/* template */
+var __vue_template__ = __webpack_require__(259)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/RevenueSection.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e54a2c58", Component.options)
+  } else {
+    hotAPI.reload("data-v-e54a2c58", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 258 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            sales_revenue: null,
+            transaction: null,
+            profit: null,
+            profit_rate: null
+        };
+    },
+    mounted: function mounted() {
+        this.requestDashboardData();
+    },
+
+    methods: {
+        requestDashboardData: function requestDashboardData() {
+            var _this = this;
+
+            axios.get('/api/dashboard').then(function (res) {
+                _this.sales_revenue = res.data.sales_revenue;
+                _this.transaction = res.data.transaction;
+                _this.profit = res.data.profit;
+                _this.profit_rate = res.data.sales_revenue > 0 ? res.data.profit / res.data.sales_revenue : 0;
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 259 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-container",
-    { attrs: { fluid: "", "grid-list-md": "" } },
+    "v-layout",
+    { attrs: { row: "", wrap: "" } },
     [
       _c(
-        "v-layout",
-        { attrs: { row: "", wrap: "" } },
+        "v-flex",
+        { attrs: { xs12: "", sm6: "", md3: "" } },
         [
           _c(
-            "v-flex",
-            { attrs: { xs12: "", sm6: "", md3: "" } },
+            "v-card",
+            { staticClass: "white--text", attrs: { color: "green" } },
             [
               _c(
-                "v-card",
-                { staticClass: "white--text", attrs: { color: "green" } },
+                "v-card-text",
                 [
                   _c(
-                    "v-card-text",
+                    "v-layout",
                     [
                       _c(
-                        "v-layout",
+                        "v-flex",
+                        { attrs: { xs5: "" } },
                         [
                           _c(
-                            "v-flex",
-                            { attrs: { xs5: "" } },
-                            [
-                              _c(
-                                "v-icon",
-                                {
-                                  staticClass: "white--text",
-                                  attrs: { size: "65px", dark: "" }
-                                },
-                                [_vm._v("attach_money")]
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs7: "", "text-xs-right": "" } },
-                            [
-                              _c("div", [_vm._v("Sales Revenue")]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "display-1" }, [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm._f("numeral")(
-                                      _vm.sales_revenue,
-                                      "0,0.[00]"
-                                    )
-                                  )
-                                )
-                              ])
-                            ]
+                            "v-icon",
+                            {
+                              staticClass: "white--text",
+                              attrs: { size: "65px", dark: "" }
+                            },
+                            [_vm._v("attach_money")]
                           )
                         ],
                         1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs12: "", sm6: "", md3: "" } },
-            [
-              _c(
-                "v-card",
-                { staticClass: "white--text", attrs: { color: "orange" } },
-                [
-                  _c(
-                    "v-card-text",
-                    [
+                      ),
+                      _vm._v(" "),
                       _c(
-                        "v-layout",
+                        "v-flex",
+                        { attrs: { xs7: "", "text-xs-right": "" } },
                         [
-                          _c(
-                            "v-flex",
-                            { attrs: { xs5: "" } },
-                            [
-                              _c(
-                                "v-icon",
-                                {
-                                  staticClass: "white--text",
-                                  attrs: { size: "65px", dark: "" }
-                                },
-                                [_vm._v("shopping_cart")]
-                              )
-                            ],
-                            1
-                          ),
+                          _c("div", [_vm._v("Sales Revenue")]),
                           _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs7: "", "text-xs-right": "" } },
-                            [
-                              _c("div", [_vm._v("Transactions")]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "display-1" }, [
-                                _vm._v(_vm._s(_vm.transaction))
-                              ])
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs12: "", sm6: "", md3: "" } },
-            [
-              _c(
-                "v-card",
-                { staticClass: "white--text", attrs: { color: "indigo" } },
-                [
-                  _c(
-                    "v-card-text",
-                    [
-                      _c(
-                        "v-layout",
-                        [
-                          _c(
-                            "v-flex",
-                            { attrs: { xs5: "" } },
-                            [
-                              _c(
-                                "v-icon",
-                                {
-                                  staticClass: "white--text",
-                                  attrs: { size: "65px", dark: "" }
-                                },
-                                [_vm._v("check_circle_outline")]
+                          _c("div", { staticClass: "display-1" }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("numeral")(_vm.sales_revenue, "0,0.[00]")
                               )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs7: "", "text-xs-right": "" } },
-                            [
-                              _c("div", [_vm._v("Profit")]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "display-1" }, [
-                                _vm._v(_vm._s(_vm.profit))
-                              ])
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-flex",
-            { attrs: { xs12: "", sm6: "", md3: "" } },
-            [
-              _c(
-                "v-card",
-                { staticClass: "white--text", attrs: { color: "purple" } },
-                [
-                  _c(
-                    "v-card-text",
-                    [
-                      _c(
-                        "v-layout",
-                        [
-                          _c(
-                            "v-flex",
-                            { attrs: { xs5: "" } },
-                            [
-                              _c(
-                                "v-icon",
-                                {
-                                  staticClass: "white--text",
-                                  attrs: { size: "65px", dark: "" }
-                                },
-                                [_vm._v("favorite_border")]
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-flex",
-                            { attrs: { xs7: "", "text-xs-right": "" } },
-                            [
-                              _c("div", [_vm._v("Average Profit Rate")]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "display-1" }, [
-                                _vm._v(
-                                  _vm._s(
-                                    _vm._f("numeral")(
-                                      _vm.profit_rate,
-                                      "0.[00]%"
-                                    )
-                                  )
-                                )
-                              ])
-                            ]
-                          )
-                        ],
-                        1
+                            )
+                          ])
+                        ]
                       )
                     ],
                     1
@@ -86909,6 +86796,199 @@ var render = function() {
         ],
         1
       ),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs12: "", sm6: "", md3: "" } },
+        [
+          _c(
+            "v-card",
+            { staticClass: "white--text", attrs: { color: "orange" } },
+            [
+              _c(
+                "v-card-text",
+                [
+                  _c(
+                    "v-layout",
+                    [
+                      _c(
+                        "v-flex",
+                        { attrs: { xs5: "" } },
+                        [
+                          _c(
+                            "v-icon",
+                            {
+                              staticClass: "white--text",
+                              attrs: { size: "65px", dark: "" }
+                            },
+                            [_vm._v("shopping_cart")]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs7: "", "text-xs-right": "" } },
+                        [
+                          _c("div", [_vm._v("Transactions")]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "display-1" }, [
+                            _vm._v(_vm._s(_vm.transaction))
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs12: "", sm6: "", md3: "" } },
+        [
+          _c(
+            "v-card",
+            { staticClass: "white--text", attrs: { color: "indigo" } },
+            [
+              _c(
+                "v-card-text",
+                [
+                  _c(
+                    "v-layout",
+                    [
+                      _c(
+                        "v-flex",
+                        { attrs: { xs5: "" } },
+                        [
+                          _c(
+                            "v-icon",
+                            {
+                              staticClass: "white--text",
+                              attrs: { size: "65px", dark: "" }
+                            },
+                            [_vm._v("check_circle_outline")]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs7: "", "text-xs-right": "" } },
+                        [
+                          _c("div", [_vm._v("Profit")]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "display-1" }, [
+                            _vm._v(_vm._s(_vm.profit))
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-flex",
+        { attrs: { xs12: "", sm6: "", md3: "" } },
+        [
+          _c(
+            "v-card",
+            { staticClass: "white--text", attrs: { color: "purple" } },
+            [
+              _c(
+                "v-card-text",
+                [
+                  _c(
+                    "v-layout",
+                    [
+                      _c(
+                        "v-flex",
+                        { attrs: { xs5: "" } },
+                        [
+                          _c(
+                            "v-icon",
+                            {
+                              staticClass: "white--text",
+                              attrs: { size: "65px", dark: "" }
+                            },
+                            [_vm._v("favorite_border")]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "v-flex",
+                        { attrs: { xs7: "", "text-xs-right": "" } },
+                        [
+                          _c("div", [_vm._v("Average Profit Rate")]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "display-1" }, [
+                            _vm._v(
+                              _vm._s(
+                                _vm._f("numeral")(_vm.profit_rate, "0.[00]%")
+                              )
+                            )
+                          ])
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e54a2c58", module.exports)
+  }
+}
+
+/***/ }),
+/* 260 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-container",
+    { attrs: { fluid: "", "grid-list-md": "" } },
+    [
+      _c("revenue-section"),
       _vm._v(" "),
       _c(
         "v-layout",
@@ -86947,7 +87027,7 @@ if (false) {
 }
 
 /***/ }),
-/* 258 */
+/* 261 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
