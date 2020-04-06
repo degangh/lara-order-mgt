@@ -23,22 +23,46 @@ class DashboardRepository implements DashboardRepositoryInterface
         return $this->revenue_between($start, $end);
     }
 
+    public function mtd_transactions()
+    {
+        $start = Carbon::now()->startOfMonth();
+        $end = Carbon::now();
+
+        return $this->transactions_between($start, $end);
+    }
+
+    public function mtd_profit()
+    {
+        $start = Carbon::now()->startOfMonth();
+        $end = Carbon::now();
+
+        return $this->profit_between($start, $end);
+    }
+
     public function revenue_between($from, $to)
     {
         return DB::table('orders')
         ->join('order_items','orders.id', '=', 'order_items.order_id')
         ->whereBetween('orders.created_at',[$from, $to])
+        ->where('status_id', '<>', 1)
         ->sum(DB::raw('unit_price_cny * quantity'));
     }
 
-    public function mtd_transaction()
+    public function transactions_between($from, $to)
     {
-        return false;
-    }
+        return DB::table('orders')
+        ->whereBetween('created_at',[$from, $to])
+        ->where('status_id', '<>', 1)
+        ->count();
+    }  
 
-    public function mtd_profit()
+    public function profit_between($from, $to)
     {
-        return false;
+        return DB::table('orders')
+        ->join('order_items','orders.id', '=', 'order_items.order_id')
+        ->whereBetween('orders.created_at',[$from, $to])
+        ->where('status_id', '<>', 1)
+        ->sum(DB::raw('unit_price_cny * quantity-purchase_price_aud*quantity*exchange_rate'));
     }
 
 }

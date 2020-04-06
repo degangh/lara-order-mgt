@@ -18,8 +18,8 @@ class DashboardController extends Controller
     {
         $result = array(
             'sales_revenue' => $this->dashRepo->mtd_revenue(),
-            'transaction' => 23,
-            'profit' => 900,
+            'transaction' => $this->dashRepo->mtd_transactions(),
+            'profit' => round($this->dashRepo->mtd_profit(),2),
         );
 
         return response()->json($result);
@@ -28,6 +28,6 @@ class DashboardController extends Controller
 
     public function mtd()
     {
-       return  $this->dashRepo->mtd_revenue();
+       return  $this->dashRepo->mtd_profit();
     }
 }
