@@ -45,3 +45,5 @@ Route::patch('orders/{order}', 'OrderController@update')->middleware('auth:api')
 Route::delete('orderItems/{orderItem}', 'OrderItemController@destroy')->middleware('auth:api');
 
 Route::get('dashboard', 'DashboardController@index')->middleware('auth:api');
+
+Route::get('dashboard/mtd', 'DashboardController@mtd');
