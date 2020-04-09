@@ -44,7 +44,7 @@
           <v-divider></v-divider>
           <v-layout row >
               <v-flex xs12 class="title">
-                  Order Detail - {{order.status.name | uppercase}}
+                  Order Detail 
               </v-flex>
           </v-layout>
           <div v-if="order.items.length > 0" fill-height>

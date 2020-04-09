@@ -109,4 +109,14 @@ class OrderController extends Controller
     {
         return $this->orderRepository->changeStatus($order, $status);
     }
+
+    public function sent(Order $order)
+    {
+        return $this->orderRepository->sent($order);
+    }
+
+    public function paid(Order $order)
+    {
+        return $this->orderRepository->paid($order);
+    }
 }

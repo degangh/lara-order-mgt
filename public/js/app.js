@@ -67728,6 +67728,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'OrderList',
@@ -67783,7 +67787,9 @@ var render = function() {
               _vm._v(" "),
               _c("td", [_vm._v(_vm._s(order.created_at))]),
               _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(order.status.name))])
+              _c("td", [_vm._v(_vm._s(order.sent == 0 ? "Pending" : "Sent"))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(order.paid == 0 ? "Pending" : "Paid"))])
             ]
           )
         }),
@@ -67812,7 +67818,9 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("th", [_vm._v("\n            Order Date\n            ")]),
       _vm._v(" "),
-      _c("th", [_vm._v("\n            Order Status\n            ")])
+      _c("th", [_vm._v("\n            Delivery Status\n            ")]),
+      _vm._v(" "),
+      _c("th", [_vm._v("\n            Payment Status\n            ")])
     ])
   }
 ]
@@ -69235,11 +69243,7 @@ var render = function() {
             { attrs: { row: "" } },
             [
               _c("v-flex", { staticClass: "title", attrs: { xs12: "" } }, [
-                _vm._v(
-                  "\n                Order Detail - " +
-                    _vm._s(_vm._f("uppercase")(_vm.order.status.name)) +
-                    "\n            "
-                )
+                _vm._v("\n                Order Detail \n            ")
               ])
             ],
             1

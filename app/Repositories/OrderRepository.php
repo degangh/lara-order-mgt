@@ -42,11 +42,19 @@ class OrderRepository implements OrderRepositoryInterface
         });
     }
 
-    public function changeStatus(Order $order , OrderStatus $status)
+    public function paid(Order $order)
     {
-        $order->status_id = $status->id;
+        $order->paid = 1;
         $order->save();
-
         return $order;
     }
+
+    public function sent(Order $order)
+    {   
+        $order->sent = 1;
+        $order->save();
+        return $order;
+    }
+
+      
 }

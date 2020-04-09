@@ -23,7 +23,7 @@ class OrderPolicy
     public function modify(User $user, Order $order)
     {
         
-        if ($order->status->id != 1)
+        if ($order->sent == 1 || $order->paid == 1)
         {
             return $this->deny('Order Can NOT be changed after sent or paid');
         }

@@ -44,7 +44,7 @@ class DashboardRepository implements DashboardRepositoryInterface
         return DB::table('orders')
         ->join('order_items','orders.id', '=', 'order_items.order_id')
         ->whereBetween('orders.created_at',[$from, $to])
-        ->where('status_id', '<>', 1)
+        ->where('paid', '=', 1)
         ->sum(DB::raw('unit_price_cny * quantity'));
     }
 
@@ -52,7 +52,8 @@ class DashboardRepository implements DashboardRepositoryInterface
     {
         return DB::table('orders')
         ->whereBetween('created_at',[$from, $to])
-        ->where('status_id', '<>', 1)
+        ->where('sent', '=', 1)
+        ->orWhere('paid', '=', 1)
         ->count();
     }  
 
@@ -61,7 +62,7 @@ class DashboardRepository implements DashboardRepositoryInterface
         return DB::table('orders')
         ->join('order_items','orders.id', '=', 'order_items.order_id')
         ->whereBetween('orders.created_at',[$from, $to])
-        ->where('status_id', '<>', 1)
+        ->where('paid', '=', 1)
         ->sum(DB::raw('unit_price_cny * quantity-purchase_price_aud*quantity*exchange_rate'));
     }
 

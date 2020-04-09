@@ -18,6 +18,8 @@ interface OrderRepositoryInterface
 
     public function createDetail($order, $orderItems, $exchange_rate);
 
-    public function changeStatus(Order $order , OrderStatus $status);
+    public function paid(Order $order);
+
+    public function sent(Order $order);
 
 }
