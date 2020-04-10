@@ -68127,6 +68127,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -69243,7 +69249,13 @@ var render = function() {
             { attrs: { row: "" } },
             [
               _c("v-flex", { staticClass: "title", attrs: { xs12: "" } }, [
-                _vm._v("\n                Order Detail \n            ")
+                _vm._v(
+                  "\n                Order Detail - " +
+                    _vm._s(_vm.order.sent == 0 ? "Not Delivered" : "Sent") +
+                    " - \n          " +
+                    _vm._s(_vm.order.paid == 0 ? "Not Paid" : "Paid") +
+                    "\n            "
+                )
               ])
             ],
             1
@@ -69438,7 +69450,12 @@ var render = function() {
                   _c(
                     "v-btn",
                     {
-                      attrs: { color: "blue", dark: "", block: "" },
+                      attrs: {
+                        color: "blue",
+                        dark: _vm.order.paid == 0 && _vm.order.sent == 0,
+                        disabled: _vm.order.paid == 1 || _vm.order.sent == 1,
+                        block: ""
+                      },
                       on: {
                         click: function($event) {
                           return _vm.popupFormDialog("orderDetailDialogue")
@@ -69462,7 +69479,12 @@ var render = function() {
                   _c(
                     "v-btn",
                     {
-                      attrs: { color: "blue", dark: "", block: "" },
+                      attrs: {
+                        color: "blue",
+                        dark: _vm.order.sent == 0,
+                        block: "",
+                        disabled: _vm.order.sent == 1
+                      },
                       on: {
                         click: function($event) {
                           return _vm.confirmDialog(
@@ -69493,7 +69515,12 @@ var render = function() {
                   _c(
                     "v-btn",
                     {
-                      attrs: { color: "blue", dark: "", block: "" },
+                      attrs: {
+                        color: "blue",
+                        dark: _vm.order.paid == 0,
+                        block: "",
+                        disabled: _vm.order.paid == 1
+                      },
                       on: {
                         click: function($event) {
                           return _vm.confirmDialog(

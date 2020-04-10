@@ -44,7 +44,8 @@
           <v-divider></v-divider>
           <v-layout row >
               <v-flex xs12 class="title">
-                  Order Detail 
+                  Order Detail - {{(order.sent == 0 ) ? "Not Delivered" : "Sent"}} - 
+            {{(order.paid == 0) ? "Not Paid" : "Paid"}}
               </v-flex>
           </v-layout>
           <div v-if="order.items.length > 0" fill-height>
@@ -119,20 +120,25 @@
         </div>
         <v-layout wrap>
             <v-flex xs12 md4 text-center>
-                <v-btn color="blue" dark @click="popupFormDialog('orderDetailDialogue')" block>
+                <v-btn color="blue" 
+                :dark ="order.paid == 0 && order.sent==0"
+                :disabled="order.paid == 1 || order.sent ==1"
+                @click="popupFormDialog('orderDetailDialogue')" block>
                     <v-icon left>add</v-icon>Add item
                 </v-btn>
             </v-flex>
 
             <v-flex xs12 md4 text-center>
-                <v-btn color="blue" dark  block 
+                <v-btn color="blue" :dark="order.sent == 0"  block 
+                :disabled="order.sent == 1"
                 @click="confirmDialog('Confirm','Confirm to mark the order as `SENT`?', {}, 'sent')">
                     <v-icon left>local_shipping</v-icon>Mark as Sent
                 </v-btn>
             </v-flex>
 
             <v-flex xs12 md4 text-center>
-                <v-btn color="blue" dark block 
+                <v-btn color="blue" :dark="order.paid == 0" block 
+                :disabled="order.paid == 1"
                 @click="confirmDialog('Confirm','Only confirm to the order as `PAID` after the money is collected', {}, 'paid')">
                     <v-icon left>local_atm</v-icon>Mark as Paid
                 </v-btn>
