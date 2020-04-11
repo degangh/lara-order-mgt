@@ -68196,7 +68196,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 axios.patch('/api/order/' + _this.$route.params.id + '/' + operation).then(function () {
                     _this.requestOrderDetailData();_this.messageDialog('Success', 'The order status is updated', {});
                 }).catch(function (e) {
-                    console.log(e);
+                    _this.messageDialog('Error', e.data.message, {});
                 });
             }).catch(function (e) {
                 console.log(e);

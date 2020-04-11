@@ -215,7 +215,9 @@ export default {
             this.$refs.confirm.open(title, message, options).then((confirm) => {
                 axios.patch('/api/order/' + this.$route.params.id + '/' + operation)
                 .then(()=>{this.requestOrderDetailData();this.messageDialog('Success','The order status is updated',{})})
-                .catch((e)=>{console.log(e)})
+                .catch((e)=>{
+                    this.messageDialog('Error',e.data.message,{})
+                })
             }).catch((e)=>{
                 console.log(e)
             })

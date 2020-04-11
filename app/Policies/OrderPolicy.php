@@ -30,4 +30,13 @@ class OrderPolicy
 
         return true;
     }
+
+    public function changeStatus(User $user, Order $order)
+    {
+        if ($order->items->count() < 1)
+        {
+            return $this->deny('There should be as least ONE item in the order');
+        }
+        return true;
+    }
 }

@@ -112,11 +112,13 @@ class OrderController extends Controller
 
     public function sent(Order $order)
     {
+        $this->authorize('changeStatus', $order);
         return $this->orderRepository->sent($order);
     }
 
     public function paid(Order $order)
     {
+        $this->authorize('changeStatus', $order);
         return $this->orderRepository->paid($order);
     }
 }
