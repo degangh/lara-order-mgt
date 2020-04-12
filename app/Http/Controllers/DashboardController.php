@@ -20,6 +20,10 @@ class DashboardController extends Controller
             'sales_revenue' => $this->dashRepo->mtd_revenue(),
             'transaction' => $this->dashRepo->mtd_transactions(),
             'profit' => round($this->dashRepo->mtd_profit(),2),
+            'overdue_amount' => 2330.35,
+            'overdue_orders' => 2,
+            'pending_deliveries' => 7,
+            'pending_orders' => 11
         );
 
         return response()->json($result);

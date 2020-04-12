@@ -86729,6 +86729,71 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -86737,7 +86802,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             sales_revenue: null,
             transaction: null,
             profit: null,
-            profit_rate: null
+            profit_rate: null,
+            overdue_amount: null,
+            overdue_orders: null,
+            pending_deliveries: null,
+            pending_orders: null
         };
     },
     mounted: function mounted() {
@@ -86753,6 +86822,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.transaction = res.data.transaction;
                 _this.profit = res.data.profit;
                 _this.profit_rate = res.data.sales_revenue > 0 ? res.data.profit / res.data.sales_revenue : 0;
+                _this.overdue_amount = res.data.overdue_amount;
+                _this.overdue_orders = res.data.overdue_orders;
+                _this.pending_deliveries = res.data.pending_deliveries;
+                _this.pending_orders = res.data.pending_orders;
             });
         }
     }
@@ -86767,53 +86840,62 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-layout",
-    { attrs: { row: "", wrap: "" } },
+    "div",
     [
       _c(
-        "v-flex",
-        { attrs: { xs12: "", sm6: "", md3: "" } },
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
         [
           _c(
-            "v-card",
-            { staticClass: "white--text", attrs: { color: "green" } },
+            "v-flex",
+            { attrs: { xs12: "", sm6: "", md3: "" } },
             [
               _c(
-                "v-card-text",
+                "v-card",
+                { staticClass: "white--text", attrs: { color: "green" } },
                 [
                   _c(
-                    "v-layout",
+                    "v-card-text",
                     [
                       _c(
-                        "v-flex",
-                        { attrs: { xs5: "" } },
+                        "v-layout",
                         [
                           _c(
-                            "v-icon",
-                            {
-                              staticClass: "white--text",
-                              attrs: { size: "65px", dark: "" }
-                            },
-                            [_vm._v("attach_money")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs7: "", "text-xs-right": "" } },
-                        [
-                          _c("div", [_vm._v("Sales Revenue")]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "display-1" }, [
-                            _vm._v(
-                              _vm._s(
-                                _vm._f("numeral")(_vm.sales_revenue, "0,0.[00]")
+                            "v-flex",
+                            { attrs: { xs5: "" } },
+                            [
+                              _c(
+                                "v-icon",
+                                {
+                                  staticClass: "white--text",
+                                  attrs: { size: "65px", dark: "" }
+                                },
+                                [_vm._v("attach_money")]
                               )
-                            )
-                          ])
-                        ]
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs7: "", "text-xs-right": "" } },
+                            [
+                              _c("div", [_vm._v("Sales Revenue")]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "display-1" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("numeral")(
+                                      _vm.sales_revenue,
+                                      "0,0.[00]"
+                                    )
+                                  )
+                                )
+                              ])
+                            ]
+                          )
+                        ],
+                        1
                       )
                     ],
                     1
@@ -86823,163 +86905,396 @@ var render = function() {
               )
             ],
             1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-flex",
-        { attrs: { xs12: "", sm6: "", md3: "" } },
-        [
+          ),
+          _vm._v(" "),
           _c(
-            "v-card",
-            { staticClass: "white--text", attrs: { color: "orange" } },
+            "v-flex",
+            { attrs: { xs12: "", sm6: "", md3: "" } },
             [
               _c(
-                "v-card-text",
+                "v-card",
+                { staticClass: "white--text", attrs: { color: "orange" } },
                 [
                   _c(
-                    "v-layout",
+                    "v-card-text",
                     [
                       _c(
-                        "v-flex",
-                        { attrs: { xs5: "" } },
+                        "v-layout",
                         [
                           _c(
-                            "v-icon",
-                            {
-                              staticClass: "white--text",
-                              attrs: { size: "65px", dark: "" }
-                            },
-                            [_vm._v("shopping_cart")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs7: "", "text-xs-right": "" } },
-                        [
-                          _c("div", [_vm._v("Transactions")]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "display-1" }, [
-                            _vm._v(_vm._s(_vm.transaction))
-                          ])
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-flex",
-        { attrs: { xs12: "", sm6: "", md3: "" } },
-        [
-          _c(
-            "v-card",
-            { staticClass: "white--text", attrs: { color: "indigo" } },
-            [
-              _c(
-                "v-card-text",
-                [
-                  _c(
-                    "v-layout",
-                    [
-                      _c(
-                        "v-flex",
-                        { attrs: { xs5: "" } },
-                        [
-                          _c(
-                            "v-icon",
-                            {
-                              staticClass: "white--text",
-                              attrs: { size: "65px", dark: "" }
-                            },
-                            [_vm._v("check_circle_outline")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs7: "", "text-xs-right": "" } },
-                        [
-                          _c("div", [_vm._v("Profit")]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "display-1" }, [
-                            _vm._v(_vm._s(_vm.profit))
-                          ])
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-flex",
-        { attrs: { xs12: "", sm6: "", md3: "" } },
-        [
-          _c(
-            "v-card",
-            { staticClass: "white--text", attrs: { color: "purple" } },
-            [
-              _c(
-                "v-card-text",
-                [
-                  _c(
-                    "v-layout",
-                    [
-                      _c(
-                        "v-flex",
-                        { attrs: { xs5: "" } },
-                        [
-                          _c(
-                            "v-icon",
-                            {
-                              staticClass: "white--text",
-                              attrs: { size: "65px", dark: "" }
-                            },
-                            [_vm._v("favorite_border")]
-                          )
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "v-flex",
-                        { attrs: { xs7: "", "text-xs-right": "" } },
-                        [
-                          _c("div", [_vm._v("Average Profit Rate")]),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "display-1" }, [
-                            _vm._v(
-                              _vm._s(
-                                _vm._f("numeral")(_vm.profit_rate, "0.[00]%")
+                            "v-flex",
+                            { attrs: { xs5: "" } },
+                            [
+                              _c(
+                                "v-icon",
+                                {
+                                  staticClass: "white--text",
+                                  attrs: { size: "65px", dark: "" }
+                                },
+                                [_vm._v("shopping_cart")]
                               )
-                            )
-                          ])
-                        ]
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs7: "", "text-xs-right": "" } },
+                            [
+                              _c("div", [_vm._v("Transactions")]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "display-1" }, [
+                                _vm._v(_vm._s(_vm.transaction))
+                              ])
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs12: "", sm6: "", md3: "" } },
+            [
+              _c(
+                "v-card",
+                { staticClass: "white--text", attrs: { color: "indigo" } },
+                [
+                  _c(
+                    "v-card-text",
+                    [
+                      _c(
+                        "v-layout",
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs5: "" } },
+                            [
+                              _c(
+                                "v-icon",
+                                {
+                                  staticClass: "white--text",
+                                  attrs: { size: "65px", dark: "" }
+                                },
+                                [_vm._v("check_circle_outline")]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs7: "", "text-xs-right": "" } },
+                            [
+                              _c("div", [_vm._v("Profit")]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "display-1" }, [
+                                _vm._v(_vm._s(_vm.profit))
+                              ])
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs12: "", sm6: "", md3: "" } },
+            [
+              _c(
+                "v-card",
+                { staticClass: "white--text", attrs: { color: "purple" } },
+                [
+                  _c(
+                    "v-card-text",
+                    [
+                      _c(
+                        "v-layout",
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs5: "" } },
+                            [
+                              _c(
+                                "v-icon",
+                                {
+                                  staticClass: "white--text",
+                                  attrs: { size: "65px", dark: "" }
+                                },
+                                [_vm._v("favorite_border")]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs7: "", "text-xs-right": "" } },
+                            [
+                              _c("div", [_vm._v("Average Profit Rate")]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "display-1" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("numeral")(
+                                      _vm.profit_rate,
+                                      "0.[00]%"
+                                    )
+                                  )
+                                )
+                              ])
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { row: "", wrap: "" } },
+        [
+          _c(
+            "v-flex",
+            { attrs: { xs12: "", sm6: "", md3: "" } },
+            [
+              _c(
+                "v-card",
+                { staticClass: "white--text", attrs: { color: "blue" } },
+                [
+                  _c(
+                    "v-card-text",
+                    [
+                      _c(
+                        "v-layout",
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs5: "" } },
+                            [
+                              _c(
+                                "v-icon",
+                                {
+                                  staticClass: "white--text",
+                                  attrs: { size: "65px", dark: "" }
+                                },
+                                [_vm._v("money_off")]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs7: "", "text-xs-right": "" } },
+                            [
+                              _c("div", [_vm._v("Overdued Amount")]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "display-1" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm._f("numeral")(
+                                      _vm.overdue_amount,
+                                      "0,0.[00]"
+                                    )
+                                  )
+                                )
+                              ])
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs12: "", sm6: "", md3: "" } },
+            [
+              _c(
+                "v-card",
+                { staticClass: "white--text", attrs: { color: "blue" } },
+                [
+                  _c(
+                    "v-card-text",
+                    [
+                      _c(
+                        "v-layout",
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs5: "" } },
+                            [
+                              _c(
+                                "v-icon",
+                                {
+                                  staticClass: "white--text",
+                                  attrs: { size: "65px", dark: "" }
+                                },
+                                [_vm._v("gavel")]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs7: "", "text-xs-right": "" } },
+                            [
+                              _c("div", [_vm._v("Overdued Orders")]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "display-1" }, [
+                                _vm._v(_vm._s(_vm.overdue_orders))
+                              ])
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs12: "", sm6: "", md3: "" } },
+            [
+              _c(
+                "v-card",
+                { staticClass: "white--text", attrs: { color: "blue" } },
+                [
+                  _c(
+                    "v-card-text",
+                    [
+                      _c(
+                        "v-layout",
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs5: "" } },
+                            [
+                              _c(
+                                "v-icon",
+                                {
+                                  staticClass: "white--text",
+                                  attrs: { size: "65px", dark: "" }
+                                },
+                                [_vm._v("flight_takeoff")]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs7: "", "text-xs-right": "" } },
+                            [
+                              _c("div", [_vm._v("To Be Sent")]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "display-1" }, [
+                                _vm._v(_vm._s(_vm.pending_deliveries))
+                              ])
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-flex",
+            { attrs: { xs12: "", sm6: "", md3: "" } },
+            [
+              _c(
+                "v-card",
+                { staticClass: "white--text", attrs: { color: "blue" } },
+                [
+                  _c(
+                    "v-card-text",
+                    [
+                      _c(
+                        "v-layout",
+                        [
+                          _c(
+                            "v-flex",
+                            { attrs: { xs5: "" } },
+                            [
+                              _c(
+                                "v-icon",
+                                {
+                                  staticClass: "white--text",
+                                  attrs: { size: "65px", dark: "" }
+                                },
+                                [_vm._v("schedule")]
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-flex",
+                            { attrs: { xs7: "", "text-xs-right": "" } },
+                            [
+                              _c("div", [_vm._v("Pending Orders")]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "display-1" }, [
+                                _vm._v(_vm._s(_vm.pending_orders))
+                              ])
+                            ]
+                          )
+                        ],
+                        1
                       )
                     ],
                     1
