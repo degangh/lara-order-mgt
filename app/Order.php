@@ -29,8 +29,4 @@ class Order extends Model
         return $this->belongsTo(Address::class, 'address_id');
     }
 
-    public function status()
-    {
-        return $this->belongsTo(OrderStatus::class, 'status_id');
-    }
 }
