@@ -84,7 +84,7 @@
                 <v-card-text>
                     <v-layout>
                     <v-flex xs5>
-                    <v-icon class="white--text" size="65px" dark >gavel</v-icon>
+                    <v-icon class="white--text" size="65px" dark >warning</v-icon>
                     </v-flex>
                     <v-flex xs7 text-xs-right>
                     <div>Overdued Orders</div>

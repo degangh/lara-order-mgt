@@ -87168,7 +87168,7 @@ var render = function() {
                                   staticClass: "white--text",
                                   attrs: { size: "65px", dark: "" }
                                 },
-                                [_vm._v("gavel")]
+                                [_vm._v("warning")]
                               )
                             ],
                             1
