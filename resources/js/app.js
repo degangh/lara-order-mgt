@@ -11,7 +11,6 @@ Vue.use(Vuetify)
 Vue.use(Vuex)
 
 import App from "./components/App";
-import Welcome from "./components/Welcome";
 import Login from "./components/Login";
 import Customer from "./components/Customer";
 import Order from "./components/Order";
@@ -20,6 +19,7 @@ import Product from "./components/Product";
 import CustomerInfo from "./components/CustomerInfo";
 import NotFound from "./components/NotFound";
 import Dashboard from "./components/Dashboard";
+import Playground from "./components/Playground";
 
 
 const router = new VueRouter({
@@ -80,6 +80,11 @@ const router = new VueRouter({
             path: "/products",
             name: "productsPage",
             component: Product
+        },
+        {
+            path: "/test",
+            name: "productsPage",
+            component: Playground
         },
         {
             path: "*",
