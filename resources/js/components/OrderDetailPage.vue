@@ -49,7 +49,7 @@
               </v-flex>
           </v-layout>
           <div v-if="order.items.length > 0" fill-height>
-          <v-layout  class="font-weight-black" >
+          <!--v-layout  class="font-weight-black" >
             <v-flex xs3>
                 Product
             </v-flex>
@@ -72,24 +72,25 @@
             </v-flex>
 
             
-        </v-layout>
-        <v-layout v-for = "(item, index) of order.items" :key="index" class="caption text-lighten-2 align-center" >
-            <v-flex xs3>
+        </v-layout-->
+        <v-layout row wrap v-for = "(item, index) of order.items" :key="index" class="caption text-lighten-2 align-start order-item-row" >
+            <v-flex md5 sm5 xs5 class="product-name">
                 {{item.product.name}}
             </v-flex>
-            <v-flex xs2 text-right>
-                {{item.quantity}}
+            <v-flex md6 sm6 xs6 text-right>
+                <v-layout row wrap>
+                    <v-flex md4 xs12>{{item.quantity}}</v-flex>
+                
+                    <v-flex md4 xs12>AUD{{item.purchase_price_aud}}</v-flex>
+                    <v-flex md4 xs12>CNY{{item.unit_price_cny}}</v-flex>
+                </v-layout>
+                
             </v-flex>
-            <v-flex xs2 text-right>
-                AUD{{item.purchase_price_aud}}
-            </v-flex>
-            <v-flex xs2 text-right>
-                CNY{{item.unit_price_cny}}
-            </v-flex>
-            <v-flex xs2 text-right>
+            
+            <!--v-flex xs2 text-right>
                 {{parseFloat(item.quantity * item.unit_price_cny).toFixed(2)}}
-            </v-flex>
-            <v-flex xs1 text-center sm="3">
+            </v-flex-->
+            <v-flex md1 sm1 xs1 sm="3" align-start>
                 <v-btn icon x-small >
                     <v-icon color="blue-grey" 
         
@@ -253,3 +254,13 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.product-name {
+    font-size: 1.25rem;
+    font-weight: 200
+}
+.order-item-row {
+    margin-bottom: 1.8rem !important
+}
+</style>
