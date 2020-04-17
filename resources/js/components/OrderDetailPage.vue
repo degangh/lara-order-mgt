@@ -74,15 +74,20 @@
             
         </v-layout-->
         <v-layout row wrap v-for = "(item, index) of order.items" :key="index" class="caption text-lighten-2 align-start order-item-row" >
-            <v-flex md5 sm5 xs5 class="product-name">
+            <v-flex md5 sm5 xs6 class="product-name">
                 {{item.product.name}}
             </v-flex>
-            <v-flex md6 sm6 xs6 text-right>
+            <v-flex md6 sm6 xs4 text-right>
                 <v-layout row wrap>
-                    <v-flex md4 xs12>{{item.quantity}}</v-flex>
+                    <v-flex md4 sm4 xs12>{{item.quantity}}</v-flex>
                 
-                    <v-flex md4 xs12>AUD{{item.purchase_price_aud}}</v-flex>
-                    <v-flex md4 xs12>CNY{{item.unit_price_cny}}</v-flex>
+                    <v-flex md4 sm4 xs12>
+                        <span class="currency-symbol">AUD</span>
+                        <span class="currency">{{item.purchase_price_aud}}</span>
+                    </v-flex>
+                    <v-flex md4 sm4 xs12>
+                        <span class="currency-symbol">CNY</span>
+                        <span class="currency">{{item.unit_price_cny}}</span></v-flex>
                 </v-layout>
                 
             </v-flex>
@@ -90,7 +95,7 @@
             <!--v-flex xs2 text-right>
                 {{parseFloat(item.quantity * item.unit_price_cny).toFixed(2)}}
             </v-flex-->
-            <v-flex md1 sm1 xs1 sm="3" align-start>
+            <v-flex md1 sm1 xs2 sm="3" align-start>
                 <v-btn icon x-small >
                     <v-icon color="blue-grey" 
         
@@ -105,7 +110,7 @@
         
         <v-layout>
             
-            <v-flex xs12 text-right class="body-2">
+            <v-flex xs12 text-right class="total-amount">
                 {{orderSum}}
             </v-flex>
         </v-layout>
@@ -120,7 +125,7 @@
             No items in the order
         </div>
         <v-layout wrap>
-            <v-flex xs12 md4 text-center>
+            <v-flex xs12 sm4 text-center>
                 <v-btn color="blue" 
                 :dark ="order.paid == 0 && order.sent==0"
                 :disabled="order.paid == 1 || order.sent ==1"
@@ -129,7 +134,7 @@
                 </v-btn>
             </v-flex>
 
-            <v-flex xs12 md4 text-center>
+            <v-flex xs12 sm4 text-center>
                 <v-btn color="blue" :dark="order.sent == 0"  block 
                 :disabled="order.sent == 1"
                 @click="confirmDialog('Confirm','Confirm to mark the order as `SENT`?', {}, 'sent')">
@@ -137,7 +142,7 @@
                 </v-btn>
             </v-flex>
 
-            <v-flex xs12 md4 text-center>
+            <v-flex xs12 sm4 text-center>
                 <v-btn color="blue" :dark="order.paid == 0" block 
                 :disabled="order.paid == 1"
                 @click="confirmDialog('Confirm','Only confirm to the order as `PAID` after the money is collected', {}, 'paid')">
@@ -257,10 +262,20 @@ export default {
 
 <style scoped>
 .product-name {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 200
 }
 .order-item-row {
-    margin-bottom: 1.8rem !important
+    margin-bottom: 0.4rem !important
+}
+.total-amount {
+    font-weight: 400;
+    font-size: 1.6rem
+}
+.currency-symbol{
+    font-size: 0.6rem
+}
+.currency{
+    font-size: 0.9rem
 }
 </style>

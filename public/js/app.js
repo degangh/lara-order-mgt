@@ -67900,7 +67900,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.product-name[data-v-4086c45a] {\n    font-size: 1.25rem;\n    font-weight: 200\n}\n.order-item-row[data-v-4086c45a] {\n    margin-bottom: 1.8rem !important\n}\n", ""]);
+exports.push([module.i, "\n.product-name[data-v-4086c45a] {\n    font-size: 1.2rem;\n    font-weight: 200\n}\n.order-item-row[data-v-4086c45a] {\n    margin-bottom: 0.4rem !important\n}\n.total-amount[data-v-4086c45a] {\n    font-weight: 400;\n    font-size: 1.6rem\n}\n.currency-symbol[data-v-4086c45a]{\n    font-size: 0.6rem\n}\n.currency[data-v-4086c45a]{\n    font-size: 0.9rem\n}\n", ""]);
 
 // exports
 
@@ -67917,6 +67917,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Message___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Message__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Confirm__ = __webpack_require__(223);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Confirm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Confirm__);
+//
+//
+//
+//
+//
 //
 //
 //
@@ -69218,7 +69223,7 @@ var render = function() {
                           "v-flex",
                           {
                             staticClass: "product-name",
-                            attrs: { md5: "", sm5: "", xs5: "" }
+                            attrs: { md5: "", sm5: "", xs6: "" }
                           },
                           [
                             _vm._v(
@@ -69235,7 +69240,7 @@ var render = function() {
                             attrs: {
                               md6: "",
                               sm6: "",
-                              xs6: "",
+                              xs4: "",
                               "text-right": ""
                             }
                           },
@@ -69244,19 +69249,43 @@ var render = function() {
                               "v-layout",
                               { attrs: { row: "", wrap: "" } },
                               [
-                                _c("v-flex", { attrs: { md4: "", xs12: "" } }, [
-                                  _vm._v(_vm._s(item.quantity))
-                                ]),
+                                _c(
+                                  "v-flex",
+                                  { attrs: { md4: "", sm4: "", xs12: "" } },
+                                  [_vm._v(_vm._s(item.quantity))]
+                                ),
                                 _vm._v(" "),
-                                _c("v-flex", { attrs: { md4: "", xs12: "" } }, [
-                                  _vm._v(
-                                    "AUD" + _vm._s(item.purchase_price_aud)
-                                  )
-                                ]),
+                                _c(
+                                  "v-flex",
+                                  { attrs: { md4: "", sm4: "", xs12: "" } },
+                                  [
+                                    _c(
+                                      "span",
+                                      { staticClass: "currency-symbol" },
+                                      [_vm._v("AUD")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "currency" }, [
+                                      _vm._v(_vm._s(item.purchase_price_aud))
+                                    ])
+                                  ]
+                                ),
                                 _vm._v(" "),
-                                _c("v-flex", { attrs: { md4: "", xs12: "" } }, [
-                                  _vm._v("CNY" + _vm._s(item.unit_price_cny))
-                                ])
+                                _c(
+                                  "v-flex",
+                                  { attrs: { md4: "", sm4: "", xs12: "" } },
+                                  [
+                                    _c(
+                                      "span",
+                                      { staticClass: "currency-symbol" },
+                                      [_vm._v("CNY")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "currency" }, [
+                                      _vm._v(_vm._s(item.unit_price_cny))
+                                    ])
+                                  ]
+                                )
                               ],
                               1
                             )
@@ -69270,7 +69299,7 @@ var render = function() {
                             attrs: {
                               md1: "",
                               sm1: "",
-                              xs1: "",
+                              xs2: "",
                               sm: "3",
                               "align-start": ""
                             }
@@ -69318,7 +69347,7 @@ var render = function() {
                       _c(
                         "v-flex",
                         {
-                          staticClass: "body-2",
+                          staticClass: "total-amount",
                           attrs: { xs12: "", "text-right": "" }
                         },
                         [
@@ -69366,7 +69395,7 @@ var render = function() {
             [
               _c(
                 "v-flex",
-                { attrs: { xs12: "", md4: "", "text-center": "" } },
+                { attrs: { xs12: "", sm4: "", "text-center": "" } },
                 [
                   _c(
                     "v-btn",
@@ -69395,7 +69424,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-flex",
-                { attrs: { xs12: "", md4: "", "text-center": "" } },
+                { attrs: { xs12: "", sm4: "", "text-center": "" } },
                 [
                   _c(
                     "v-btn",
@@ -69431,7 +69460,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-flex",
-                { attrs: { xs12: "", md4: "", "text-center": "" } },
+                { attrs: { xs12: "", sm4: "", "text-center": "" } },
                 [
                   _c(
                     "v-btn",
