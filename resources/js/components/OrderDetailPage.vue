@@ -79,7 +79,9 @@
             </v-flex>
             <v-flex md6 sm6 xs4 text-right>
                 <v-layout row wrap>
-                    <v-flex md4 sm4 xs12>{{item.quantity}}</v-flex>
+                    <v-flex md4 sm4 xs12>
+                        <span class="currency-symbol">x</span>
+                        <span class="currency">{{item.quantity}}</span></v-flex>
                 
                     <v-flex md4 sm4 xs12>
                         <span class="currency-symbol">AUD</span>
@@ -96,7 +98,7 @@
                 {{parseFloat(item.quantity * item.unit_price_cny).toFixed(2)}}
             </v-flex-->
             <v-flex md1 sm1 xs2 sm="3" align-start>
-                <v-btn icon x-small >
+                <v-btn icon x-small class="delete-btn">
                     <v-icon color="blue-grey" 
         
                     @click="confirmDeleteDialog('Delete item', 'Confirm to delete the selected order item?', {}, item.id)">
@@ -273,9 +275,12 @@ export default {
     font-size: 1.6rem
 }
 .currency-symbol{
-    font-size: 0.6rem
+    font-size: 0.7rem
 }
 .currency{
-    font-size: 0.9rem
+    font-size: 1.1rem
+}
+.delete-btn{
+    margin-top: -4px !important
 }
 </style>
