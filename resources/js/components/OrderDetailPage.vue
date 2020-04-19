@@ -42,7 +42,7 @@
 
           </v-layout>
           <v-divider></v-divider>
-          <v-layout row >
+          <v-layout row class="title-row">
               <v-flex xs12 class="title">
                   Order Detail - {{(order.sent == 0 ) ? "Not Delivered" : "Sent"}} - 
             {{(order.paid == 0) ? "Not Paid" : "Paid"}}
@@ -73,7 +73,9 @@
 
             
         </v-layout-->
-        <v-layout row wrap v-for = "(item, index) of order.items" :key="index" class="caption text-lighten-2 align-start order-item-row" >
+        <v-layout row wrap v-for = "(item, index) of order.items" :key="index" 
+        class="caption text-lighten-2 align-start order-item-row" 
+        :class="{'light-grey-row': $index % 2 === 0, '': $index % 2 !== 0 }">
             <v-flex md5 sm5 xs6 class="product-name">
                 {{item.product.name}}
             </v-flex>
@@ -113,7 +115,9 @@
         <v-layout>
             
             <v-flex xs12 text-right class="total-amount">
-                {{orderSum}}
+                <span>Total: </span>
+                <span class="currency-symbol">CNY</span>
+                <span class="total-amount">{{orderSum}}</span>
             </v-flex>
         </v-layout>
 
@@ -268,7 +272,10 @@ export default {
     font-weight: 200
 }
 .order-item-row {
-    margin-bottom: 0.4rem !important
+    margin-bottom: 0.4rem !important;
+}
+.light-grey-row {
+    background-color: rgba(0,0,0,0.05)
 }
 .total-amount {
     font-weight: 400;
@@ -282,5 +289,8 @@ export default {
 }
 .delete-btn{
     margin-top: -4px !important
+}
+.title-row {
+    margin-bottom: 1.8rem !important
 }
 </style>
