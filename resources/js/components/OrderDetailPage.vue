@@ -49,30 +49,28 @@
               </v-flex>
           </v-layout>
           <div v-if="order.items.length > 0" fill-height>
-          <!--v-layout  class="font-weight-black" >
-            <v-flex xs3>
+          <v-layout  class="font-weight-black" v-if="$vuetify.breakpoint.smAndUp">
+            <v-flex sm5>
                 Product
             </v-flex>
-            <v-flex xs2 text-right>
-                Quantity
+            <v-flex sm3 text-right>
+                Unit
             </v-flex>
             
-            <v-flex xs2 text-right>
-                Purchase Price AUD
+            <v-flex sm3 text-right>
+                Purchase AUD
             </v-flex>
-            <v-flex xs2 text-right>
-                Unit Sale Price CNY
+            <v-flex sm3 text-right>
+                Unit Sale CNY
             </v-flex>
             
-            <v-flex xs2 text-right>
-                Sub Total
-            </v-flex>
-            <v-flex text-center>
+            
+            <v-flex sm1 text-center>
                 Action
             </v-flex>
 
             
-        </v-layout-->
+        </v-layout>
         <v-layout row wrap v-for = "(item, index) of order.items" :key="index" 
         class="caption text-lighten-2 align-start order-item-row" 
         :class="{'light-grey-row': $index % 2 === 0, '': $index % 2 !== 0 }">
@@ -274,9 +272,11 @@ export default {
 .order-item-row {
     margin-bottom: 0.4rem !important;
 }
-.light-grey-row {
-    background-color: rgba(0,0,0,0.05)
+.order-item-row:nth-child(even) {
+  background-color: rgba(0,0,0,0.05)
 }
+
+
 .total-amount {
     font-weight: 400;
     font-size: 1.6rem

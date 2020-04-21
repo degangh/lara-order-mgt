@@ -5,15 +5,15 @@
                 <v-card color="green" class="white--text">
                 <v-card-text>
                     <v-layout>
-                    <v-flex xs4 sm5>
+                    <v-flex xs2 sm5>
                     <v-icon
-                    :class="{'large-icon':$vuetify.breakpoint.smAndUp}"
+                    :class="{'large-icon':$vuetify.breakpoint.smAndUp, 'regular-icon':$vuetify.breakpoint.xsOnly }"
                      dark class="white--text">attach_money</v-icon>
                     </v-flex>
-                    <v-flex xs8 sm7 text-xs-right>
-                    <div>Sales Revenue</div>
+                    <v-flex xs10 sm7 text-xs-right>
+                    <div class="widget-title">Sales Revenue</div>
                     <div
-                    :class="{'subtitle-1': $vuetify.breakpoint.xsOnly, 'display-1':$vuetify.breakpoint.smAndUp}"
+                    :class="{'title': $vuetify.breakpoint.xsOnly, 'display-1':$vuetify.breakpoint.smAndUp}"
                     >{{sales_revenue | numeral('0,0.[00]')}}</div>
                     </v-flex>
                     </v-layout>
@@ -24,12 +24,14 @@
                 <v-card color="orange" class="white--text">
                 <v-card-text>
                     <v-layout>
-                    <v-flex xs4 sm5>
-                    <v-icon :class="{'large-icon':$vuetify.breakpoint.smAndUp}" class="white--text"  dark >shopping_cart</v-icon>
+                    <v-flex xs2 sm5>
+                    <v-icon :class="{'large-icon':$vuetify.breakpoint.smAndUp, 'regular-icon':$vuetify.breakpoint.xsOnly}" class="white--text"  dark >shopping_cart</v-icon>
                     </v-flex>
-                    <v-flex xs8 sm7 text-xs-right>
-                    <div>Transactions</div>
-                    <div class="display-1">{{transaction}}</div>
+                    <v-flex xs10 sm7 text-xs-right>
+                    <div class="widget-title">Transactions</div>
+                    <div 
+                    :class="{'title': $vuetify.breakpoint.xsOnly, 'display-1':$vuetify.breakpoint.smAndUp}"
+                    >{{transaction}}</div>
                     </v-flex>
                     </v-layout>
                 </v-card-text>
@@ -39,12 +41,14 @@
                 <v-card color="indigo" class="white--text">
                 <v-card-text>
                     <v-layout>
-                    <v-flex xs5>
-                    <v-icon :class="{'large-icon':$vuetify.breakpoint.smAndUp}" class="white--text"  dark >check_circle_outline</v-icon>
+                    <v-flex xs2 sm5>
+                    <v-icon :class="{'large-icon':$vuetify.breakpoint.smAndUp, 'regular-icon':$vuetify.breakpoint.xsOnly}" class="white--text"  dark >check_circle_outline</v-icon>
                     </v-flex>
-                    <v-flex xs7 text-xs-right>
-                    <div>Profit</div>
-                    <div class="display-1">{{profit}}</div>
+                    <v-flex xs10 sm7 text-xs-right>
+                    <div class="widget-title">Profit</div>
+                    <div 
+                    :class="{'title': $vuetify.breakpoint.xsOnly, 'display-1':$vuetify.breakpoint.smAndUp}"
+                    >{{profit}}</div>
                     </v-flex>
                     </v-layout>
                 </v-card-text>
@@ -54,12 +58,14 @@
                 <v-card color="purple" class="white--text">
                 <v-card-text>
                     <v-layout>
-                    <v-flex xs5>
-                    <v-icon :class="{'large-icon':$vuetify.breakpoint.smAndUp}" class="white--text"  dark >favorite_border</v-icon>
+                    <v-flex xs2 sm5>
+                    <v-icon :class="{'large-icon':$vuetify.breakpoint.smAndUp, 'regular-icon':$vuetify.breakpoint.xsOnly}" class="white--text"  dark >favorite_border</v-icon>
                     </v-flex>
-                    <v-flex xs7 text-xs-right>
-                    <div>Average Profit Rate</div>
-                    <div class="display-1">{{profit_rate | numeral('0.[00]%') }}</div>
+                    <v-flex xs10 sm7 text-xs-right>
+                    <div class="widget-title">Avg. Profit %</div>
+                    <div 
+                    :class="{'title': $vuetify.breakpoint.xsOnly, 'display-1':$vuetify.breakpoint.smAndUp}"
+                    >{{profit_rate | numeral('0.[00]%') }}</div>
                     </v-flex>
                     </v-layout>
                 </v-card-text>
@@ -72,27 +78,14 @@
                 <v-card color="blue" class="white--text">
                 <v-card-text>
                     <v-layout>
-                    <v-flex xs5>
-                    <v-icon :class="{'large-icon':$vuetify.breakpoint.smAndUp}" class="white--text"  dark >money_off</v-icon>
+                    <v-flex xs2 sm5>
+                    <v-icon :class="{'large-icon':$vuetify.breakpoint.smAndUp, 'regular-icon':$vuetify.breakpoint.xsOnly}" class="white--text"  dark >money_off</v-icon>
                     </v-flex>
-                    <v-flex xs7 text-xs-right>
-                    <div>Overdued Amount</div>
-                    <div :class="{'large-icon':$vuetify.breakpoint.smAndUp}" class="display-1">{{overdue_amount | numeral('0,0.[00]')}}</div>
-                    </v-flex>
-                    </v-layout>
-                </v-card-text>
-                </v-card>
-            </v-flex>
-            <v-flex  xs6 sm6 md3>
-                <v-card color="blue" class="white--text">
-                <v-card-text>
-                    <v-layout>
-                    <v-flex xs5>
-                    <v-icon :class="{'large-icon':$vuetify.breakpoint.smAndUp}" class="white--text"  dark >warning</v-icon>
-                    </v-flex>
-                    <v-flex xs7 text-xs-right>
-                    <div>Overdued Orders</div>
-                    <div class="display-1">{{overdue_orders}}</div>
+                    <v-flex xs10 sm7 text-xs-right>
+                    <div class="widget-title">Overdued Amount</div>
+                    <div 
+                    :class="{'title': $vuetify.breakpoint.xsOnly, 'display-1':$vuetify.breakpoint.smAndUp}"
+                    >{{overdue_amount | numeral('0,0.[00]')}}</div>
                     </v-flex>
                     </v-layout>
                 </v-card-text>
@@ -102,12 +95,31 @@
                 <v-card color="blue" class="white--text">
                 <v-card-text>
                     <v-layout>
-                    <v-flex xs5>
-                    <v-icon :class="{'large-icon':$vuetify.breakpoint.smAndUp}" class="white--text"  dark >flight_takeoff</v-icon>
+                    <v-flex xs2 sm5>
+                    <v-icon :class="{'large-icon':$vuetify.breakpoint.smAndUp, 'regular-icon':$vuetify.breakpoint.xsOnly}" class="white--text"  dark >warning</v-icon>
                     </v-flex>
-                    <v-flex xs7 text-xs-right>
-                    <div>To Be Sent</div>
-                    <div class="display-1">{{pending_deliveries}}</div>
+                    <v-flex xs10 sm7 text-xs-right>
+                    <div class="widget-title">Overdued Orders</div>
+                    <div 
+                    :class="{'title': $vuetify.breakpoint.xsOnly, 'display-1':$vuetify.breakpoint.smAndUp}"
+                    >{{overdue_orders}}</div>
+                    </v-flex>
+                    </v-layout>
+                </v-card-text>
+                </v-card>
+            </v-flex>
+            <v-flex  xs6 sm6 md3>
+                <v-card color="blue" class="white--text">
+                <v-card-text>
+                    <v-layout>
+                    <v-flex xs2 sm5>
+                    <v-icon :class="{'large-icon':$vuetify.breakpoint.smAndUp, 'regular-icon':$vuetify.breakpoint.xsOnly}" class="white--text"  dark >flight_takeoff</v-icon>
+                    </v-flex>
+                    <v-flex xs10 sm7 text-xs-right>
+                    <div class="widget-title">To Be Sent</div>
+                    <div 
+                    :class="{'title': $vuetify.breakpoint.xsOnly, 'display-1':$vuetify.breakpoint.smAndUp}"
+                    >{{pending_deliveries}}</div>
                     </v-flex>
                     </v-layout>
                 </v-card-text>
@@ -117,12 +129,14 @@
                 <v-card color="blue" class="white--text">
                 <v-card-text>
                     <v-layout>
-                    <v-flex xs5>
-                    <v-icon :class="{'large-icon':$vuetify.breakpoint.smAndUp}" class="white--text"  dark >schedule</v-icon>
+                    <v-flex xs2 sm5>
+                    <v-icon :class="{'large-icon':$vuetify.breakpoint.smAndUp, 'regular-icon':$vuetify.breakpoint.xsOnly}" class="white--text"  dark >schedule</v-icon>
                     </v-flex>
-                    <v-flex xs7 text-xs-right>
-                    <div>Pending Orders</div>
-                    <div class="display-1">{{pending_orders}}</div>
+                    <v-flex xs10 sm7 text-xs-right>
+                    <div class="widget-title">Pending Orders</div>
+                    <div 
+                    :class="{'title': $vuetify.breakpoint.xsOnly, 'display-1':$vuetify.breakpoint.smAndUp}"
+                    >{{pending_orders}}</div>
                     </v-flex>
                     </v-layout>
                 </v-card-text>
@@ -169,6 +183,12 @@ export default {
 
 <style scoped>
 .large-icon {
-    font-size: 65px !important
+    font-size: 52px !important
+}
+.regular-icon {
+    font-size: 36px !important
+}
+.widget-title{
+    margin-bottom: 0.5rem
 }
 </style>
