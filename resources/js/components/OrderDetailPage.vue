@@ -50,22 +50,26 @@
           </v-layout>
           <div v-if="order.items.length > 0" fill-height>
           <v-layout  class="font-weight-black" v-if="$vuetify.breakpoint.smAndUp">
-            <v-flex sm5>
+            <v-flex md4>
                 Product
             </v-flex>
-            <v-flex sm3 text-right>
-                Unit
+            <v-flex md6>
+                <v-layout row wrap>
+                    <v-flex sm4 text-right>
+                        Unit
+                    </v-flex>
+                    
+                    <v-flex sm4 text-right>
+                        Purchase AUD
+                    </v-flex>
+                    <v-flex sm4 text-right>
+                        Unit Sale CNY
+                    </v-flex>
+                </v-layout>
             </v-flex>
             
-            <v-flex sm3 text-right>
-                Purchase AUD
-            </v-flex>
-            <v-flex sm3 text-right>
-                Unit Sale CNY
-            </v-flex>
             
-            
-            <v-flex sm1 text-center>
+            <v-flex sm2 text-center>
                 Action
             </v-flex>
 
@@ -74,7 +78,7 @@
         <v-layout row wrap v-for = "(item, index) of order.items" :key="index" 
         class="caption text-lighten-2 align-start order-item-row" 
         :class="{'light-grey-row': $index % 2 === 0, '': $index % 2 !== 0 }">
-            <v-flex md5 sm5 xs6 class="product-name">
+            <v-flex md4 sm4 xs6 class="product-name">
                 {{item.product.name}}
             </v-flex>
             <v-flex md6 sm6 xs4 text-right>
@@ -97,13 +101,25 @@
             <!--v-flex xs2 text-right>
                 {{parseFloat(item.quantity * item.unit_price_cny).toFixed(2)}}
             </v-flex-->
-            <v-flex md1 sm1 xs2 sm="3" align-start>
+            <v-flex md2 sm2 xs2 sm="3" align-start text-center>
                 <v-btn icon x-small class="delete-btn">
                     <v-icon color="blue-grey" 
         
                     @click="confirmDeleteDialog('Delete item', 'Confirm to delete the selected order item?', {}, item.id)">
                     delete
                     </v-icon>
+
+                    
+                </v-btn>
+
+                <v-btn icon x-small class="delete-btn">
+                    <v-icon color="blue-grey" 
+        
+                    @click="confirmDeleteDialog('Delete item', 'Confirm to delete the selected order item?', {}, item.id)">
+                    edit
+                    </v-icon>
+
+                    
                 </v-btn>
             </v-flex>
 
