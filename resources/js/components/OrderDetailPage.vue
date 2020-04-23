@@ -115,7 +115,7 @@
                 <v-btn icon x-small class="delete-btn">
                     <v-icon color="blue-grey" 
         
-                    @click="confirmDeleteDialog('Delete item', 'Confirm to delete the selected order item?', {}, item.id)">
+                    @click="popupFormDialog('orderDetailDialogue', item)">
                     edit
                     </v-icon>
 
@@ -171,7 +171,10 @@
             </v-flex>
         </v-layout>
 
-        <edit-order-item :dialog="orderDetailDialogue" @closeDialog="closeFormDialog"></edit-order-item>    
+        <edit-order-item 
+        :dialog="orderDetailDialogue" 
+        @closeDialog="closeFormDialog"
+        :item="selectedItem"></edit-order-item>    
         <confirm ref="confirm"></confirm>
         <message ref="message"></message>
   </v-container>
@@ -191,6 +194,7 @@ export default {
         return {
             order: false,
             orderDetailDialogue: false,
+            selectedItem: null
         }
     },
 
@@ -225,9 +229,9 @@ export default {
             this.ready = true
             this.loading = false
         },
-        popupFormDialog (form, address = null) {
+        popupFormDialog (form, item = null) {
             this[form] =  true
-        
+            this.selectedItem = item
         },
         closeFormDialog (form, status, message) {
         this[form] = false

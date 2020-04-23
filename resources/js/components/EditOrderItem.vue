@@ -112,6 +112,15 @@ export default {
         this.rrp_cny = v.rrp_cny
         this.quantity = 1
 
+      },
+      item(i) {
+        console.log(i.product)
+        this.products = [i.product]
+        this.selectProduct = [i.product]
+        this.ref_price_aud = i.purchase_price_aud
+        this.rrp_cny = i.unit_price_cny
+        this.quantity = i.quantity
+        this.exchange_rate = i.exchange_rate
       }
     },
     methods : {
@@ -167,7 +176,10 @@ export default {
       },
     },
     props: {
-        dialog: Boolean
+        dialog: Boolean,
+        item: {
+          type: [Object, null]
+        }
     },
 }
 </script>
