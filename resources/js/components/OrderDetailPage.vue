@@ -77,7 +77,7 @@
         </v-layout>
         <v-layout row wrap v-for = "(item, index) of order.items" :key="index" 
         class="caption text-lighten-2 align-start order-item-row" 
-        :class="{'light-grey-row': $index % 2 === 0, '': $index % 2 !== 0 }">
+        :class="{'light-grey-row': index % 2 === 0, '': index % 2 !== 0 }">
             <v-flex md4 sm4 xs6 class="product-name">
                 {{item.product.name}}
             </v-flex>
