@@ -113,14 +113,17 @@ export default {
         this.quantity = 1
 
       },
-      item(i) {
-        console.log(i.product)
-        this.products = [i.product]
-        this.selectProduct = [i.product]
-        this.ref_price_aud = i.purchase_price_aud
-        this.rrp_cny = i.unit_price_cny
-        this.quantity = i.quantity
-        this.exchange_rate = i.exchange_rate
+      item(i) { 
+        let initSelectedProduct = new Promise((resolve, reject)=>{
+          this.products = [i.product]
+          this.selectedProduct = i.product
+          resolve()
+        })
+        initSelectedProduct.then(()=>{
+          this.rrp_cny = i.unit_price_cny
+          this.quantity = i.quantity
+          this.exchange_rate = i.exchange_rate
+        })
       }
     },
     methods : {
