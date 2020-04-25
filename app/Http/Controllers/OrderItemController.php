@@ -77,9 +77,11 @@ class OrderItemController extends Controller
      * @param  \App\OrderItemModel  $orderItemModel
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrderItem $orderItem)
+    public function update(Request $request, Order $order, OrderItem $orderItem)
     {
-        //
+        $this->authorize('modify', $order);
+
+        return response()->json(array("status" => "ok"));
     }
 
     /**

@@ -37,6 +37,7 @@ Route::get('orders', 'OrderController@index')->middleware('auth:api');
 Route::get('orders/{order}', 'OrderController@show')->middleware('auth:api');
 Route::post('order', 'OrderController@store')->middleware('auth:api');
 Route::post('order/{order}/items' , 'OrderItemController@store')->middleware('auth:api');
+Route::patch('order/{order}/items/{order_item}' , 'OrderItemController@update')->middleware('auth:api');
 Route::patch('order/{order}/sent' , 'OrderController@sent')->middleware('auth:api');
 Route::patch('order/{order}/paid' , 'OrderController@paid')->middleware('auth:api');
 
