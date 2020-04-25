@@ -68340,7 +68340,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       ref_price_aud: 0,
       quantity: 0,
       rrp_cny: 0,
-      exchange_rate: null
+      exchange_rate: null,
+      form_title: "Add Product",
+      is_edit: false
 
     };
   },
@@ -68366,7 +68368,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     item: function item(i) {
       var _this = this;
 
+      if (i == null) return;
       var initSelectedProduct = new Promise(function (resolve, reject) {
+        _this.form_title = "Edit Product", _this.is_edit = true;
         _this.products = [i.product];
         _this.selectedProduct = i.product;
         resolve();
@@ -68393,10 +68397,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     emitCloseDialog: function emitCloseDialog(form, status, message) {
       //this.$refs.OrderDetailForm.reset()
       this.selectedProduct = null;
+      this.products = [];
       this.ref_price_aud = null;
       this.quantity = null;
       this.rrp_cny = null;
       this.$emit("closeDialog", form, status, message);
+      this.form_title = "Add Product";
+      this.is_edit = false;
     },
     search: function search(v) {
       console.log(v);
@@ -68404,20 +68411,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     saveOrderItem: function saveOrderItem() {
       var _this3 = this;
 
-      axios.post('/api/order/' + this.$route.params.id + "/items", {
-
-        product_id: this.selectedProduct.id,
-        unit_price_cny: this.rrp_cny,
-        purchase_price_aud: this.ref_price_aud,
-        quantity: this.quantity,
-
-        exchange_rate: this.exchange_rate
-
+      var formAction = this.is_edit ? 'patch' : 'post';
+      var url = '/api/order/' + +this.$route.params.id + "/items" + (this.is_edit ? '/' + this.item.id : '');
+      axios({
+        method: formAction,
+        url: url,
+        data: {
+          product_id: this.selectedProduct.id,
+          unit_price_cny: this.rrp_cny,
+          purchase_price_aud: this.ref_price_aud,
+          quantity: this.quantity,
+          exchange_rate: this.exchange_rate
+        }
       }).then(function () {
-        _this3.emitCloseDialog('orderDetailDialogue', 'success', 'The item is added to the order');
+        _this3.emitCloseDialog('orderDetailDialogue', 'success', _this3.is_edit ? 'The item is updated successfully' : 'The item is added to the order');
       }).catch(function (err) {
-        console.log(err.data.message);
-        _this3.emitCloseDialog('orderDetailDialogue', 'failed', err.data.message);
+        _this3.emitCloseDialog('orderDetailDialogue', 'failed', err.data.message ? err.data.message : "Unkown Server Error");
+      }).finally(function () {
+        _this3.form_title = "Add Product";
+        _this3.is_edit = false;
       });
     },
     handleOrderItemResponse: function handleOrderItemResponse() {
@@ -68476,7 +68488,7 @@ var render = function() {
                 "v-toolbar",
                 { attrs: { dark: "", color: "primary" } },
                 [
-                  _c("v-toolbar-title", [_vm._v("Add Product")]),
+                  _c("v-toolbar-title", [_vm._v(_vm._s(_vm.form_title))]),
                   _vm._v(" "),
                   _c("v-spacer"),
                   _vm._v(" "),

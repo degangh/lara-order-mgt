@@ -4,7 +4,7 @@
     <v-card>
         <v-toolbar dark color="primary">
           
-          <v-toolbar-title>Add Product</v-toolbar-title>
+          <v-toolbar-title>{{form_title}}</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-btn icon dark @click="emitCloseDialog('orderDetailDialogue', null, null)">
             <v-icon>close</v-icon>
@@ -90,7 +90,9 @@ export default {
             ref_price_aud: 0,
             quantity: 0,
             rrp_cny: 0,
-            exchange_rate : null
+            exchange_rate : null,
+            form_title: "Add Product",
+            is_edit: false
 
         }
     },
@@ -114,7 +116,10 @@ export default {
 
       },
       item(i) { 
-        let initSelectedProduct = new Promise((resolve, reject)=>{
+          if (i == null) return
+          let initSelectedProduct = new Promise((resolve, reject)=>{
+          this.form_title = "Edit Product",
+          this.is_edit = true
           this.products = [i.product]
           this.selectedProduct = i.product
           resolve()
@@ -141,30 +146,39 @@ export default {
         {
             //this.$refs.OrderDetailForm.reset()
             this.selectedProduct = null
+            this.products = []
             this.ref_price_aud = null
             this.quantity = null
             this.rrp_cny = null
             this.$emit("closeDialog", form, status, message)
+            this.form_title= "Add Product"
+            this.is_edit = false
         },
         search(v) {
             console.log(v)
         },
         saveOrderItem()
         {
-            axios.post('/api/order/' + this.$route.params.id + "/items", {
-
+          let formAction = (this.is_edit) ? 'patch' : 'post'
+          let url = '/api/order/' + + this.$route.params.id + "/items" + ((this.is_edit) ? '/' + this.item.id : '' )
+          axios({
+            method: formAction,
+            url: url,
+            data: {
                   product_id : this.selectedProduct.id,
                   unit_price_cny : this.rrp_cny,
                   purchase_price_aud : this.ref_price_aud,
                   quantity: this.quantity,
-                  
-                  exchange_rate: this.exchange_rate, 
-     
+                  exchange_rate: this.exchange_rate
+            }
           })
-          .then(() => {this.emitCloseDialog('orderDetailDialogue', 'success', 'The item is added to the order')})
+          .then(() => {this.emitCloseDialog('orderDetailDialogue', 'success', (this.is_edit) ? 'The item is updated successfully' : 'The item is added to the order')})
           .catch( (err) => {
-            console.log(err.data.message)
-            this.emitCloseDialog('orderDetailDialogue', 'failed', err.data.message)
+            this.emitCloseDialog('orderDetailDialogue', 'failed', (err.data.message) ? err.data.message : "Unkown Server Error")
+          })
+          .finally(()=>{
+            this.form_title= "Add Product"
+            this.is_edit = false
           })
         },
 
