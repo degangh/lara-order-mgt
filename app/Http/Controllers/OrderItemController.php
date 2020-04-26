@@ -5,9 +5,18 @@ namespace App\Http\Controllers;
 use App\OrderItem;
 use App\Order;
 use Illuminate\Http\Request;
+use App\Repositories\Contract\OrderItemRepositoryInterface;
+
 
 class OrderItemController extends Controller
 {
+    protected $orderItemRepository;
+    
+    public function __construct(OrderItemRepositoryInterface $orderItemRepository)
+    {
+        $this->orderItemRepository = $orderItemRepository;
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -80,8 +89,9 @@ class OrderItemController extends Controller
     public function update(Request $request, Order $order, OrderItem $orderItem)
     {
         $this->authorize('modify', $order);
+        
+        return $this->orderItemRepository->update($request, $orderItem);
 
-        return response()->json(array("status" => "ok"));
     }
 
     /**

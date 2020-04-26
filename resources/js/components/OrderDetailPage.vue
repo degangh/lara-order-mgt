@@ -235,7 +235,7 @@ export default {
         },
         closeFormDialog (form, status, message) {
         this[form] = false
-        if (status == "success") this.messageDialog('Success','The item has been added to the order',{})
+        if (status == "success") this.messageDialog('Success',message,{})
         if (status == "failed") this.messageDialog('Error',message,{})
         this.requestOrderDetailData()
         },

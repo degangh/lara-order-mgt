@@ -68153,7 +68153,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         closeFormDialog: function closeFormDialog(form, status, message) {
             this[form] = false;
-            if (status == "success") this.messageDialog('Success', 'The item has been added to the order', {});
+            if (status == "success") this.messageDialog('Success', message, {});
             if (status == "failed") this.messageDialog('Error', message, {});
             this.requestOrderDetailData();
         },
@@ -68368,7 +68368,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     item: function item(i) {
       var _this = this;
 
-      if (i == null) return;
+      if (i == null) {
+        this.form_title = "Add Product", this.is_edit = false;
+        return;
+      }
       var initSelectedProduct = new Promise(function (resolve, reject) {
         _this.form_title = "Edit Product", _this.is_edit = true;
         _this.products = [i.product];
@@ -68402,8 +68405,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.quantity = null;
       this.rrp_cny = null;
       this.$emit("closeDialog", form, status, message);
-      this.form_title = "Add Product";
-      this.is_edit = false;
     },
     search: function search(v) {
       console.log(v);
@@ -68427,9 +68428,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this3.emitCloseDialog('orderDetailDialogue', 'success', _this3.is_edit ? 'The item is updated successfully' : 'The item is added to the order');
       }).catch(function (err) {
         _this3.emitCloseDialog('orderDetailDialogue', 'failed', err.data.message ? err.data.message : "Unkown Server Error");
-      }).finally(function () {
-        _this3.form_title = "Add Product";
-        _this3.is_edit = false;
       });
     },
     handleOrderItemResponse: function handleOrderItemResponse() {

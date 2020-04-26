@@ -8,7 +8,7 @@ interface OrderItemRepositoryInterface
 {
     public function add(Order $order, OrderItem $item, $exchange_rate);
 
-    public function update(OrderItem $item);
+    public function update($attribute, OrderItem $item);
 
     public function delete(OrderItem $item);
 }

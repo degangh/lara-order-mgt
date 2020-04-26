@@ -19,14 +19,17 @@ class OrderItemRepository implements OrderItemRepositoryInterface
         ]);
     }
 
-    public function update(OrderItem $item)
+    public function update($attribute, OrderItem $item)
     {
         $orderItem = OrderItem::find($item->id);
-        $orderItem->unit_price_cny = $item->unit_price_cny;
-        $orderItem->quantity = $item->quantity;
-        $orderItem->purchase_price_aud = $item->purchase_price_aud;
+        $orderItem->unit_price_cny = $attribute->unit_price_cny;
+        $orderItem->quantity = $attribute->quantity;
+        $orderItem->purchase_price_aud = $attribute->purchase_price_aud;
+        $orderItem->exchange_rate = $attribute->exchange_rate;
         
-        return $orderItem->save();
+        $orderItem->save();
+
+        return $item->unit_price_cny;
     }
 
     public function delete(OrderItem $item)

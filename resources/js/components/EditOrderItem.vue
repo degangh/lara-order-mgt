@@ -116,7 +116,12 @@ export default {
 
       },
       item(i) { 
-          if (i == null) return
+          if (i == null) 
+          {
+            this.form_title = "Add Product",
+            this.is_edit = false
+            return
+          }
           let initSelectedProduct = new Promise((resolve, reject)=>{
           this.form_title = "Edit Product",
           this.is_edit = true
@@ -151,8 +156,6 @@ export default {
             this.quantity = null
             this.rrp_cny = null
             this.$emit("closeDialog", form, status, message)
-            this.form_title= "Add Product"
-            this.is_edit = false
         },
         search(v) {
             console.log(v)
@@ -176,10 +179,7 @@ export default {
           .catch( (err) => {
             this.emitCloseDialog('orderDetailDialogue', 'failed', (err.data.message) ? err.data.message : "Unkown Server Error")
           })
-          .finally(()=>{
-            this.form_title= "Add Product"
-            this.is_edit = false
-          })
+          
         },
 
         handleOrderItemResponse()
