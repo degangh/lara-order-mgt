@@ -68,7 +68,8 @@ $factory->define(App\Order::class, function(Faker $faker){
         },
         'address_id' => function() {
             return factory('App\Address')->create()->id;
-        }
+        },
+        'order_date' => date("Y-m-d")
 
     ];
 
