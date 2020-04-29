@@ -59,6 +59,34 @@
         >
 
         </v-combobox>
+
+        <v-menu
+        ref="menu"
+        v-model="menu"
+        :close-on-content-click="false"
+        :nudge-right="40"
+        :return-value.sync="orderDate"
+        lazy
+        transition="scale-transition"
+        offset-y
+        full-width
+        min-width="290px"
+      >
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="orderDate"
+            label="Date of placing order"
+            prepend-icon="event"
+            readonly
+            v-on="on"
+          ></v-text-field>
+        </template>
+        <v-date-picker :max="new Date().toISOString().substr(0, 10)" v-model="orderDate" no-title scrollable>
+          <v-spacer></v-spacer>
+          <v-btn flat color="primary" @click="menu = false">Cancel</v-btn>
+          <v-btn flat color="primary" @click="$refs.menu.save(orderDate)">OK</v-btn>
+        </v-date-picker>
+      </v-menu>
         
         </v-card>
 
@@ -163,6 +191,8 @@ export default {
           productSearch: null,
           selectedCustomer: null,
           selectedProduct: null,
+          menu: false,
+          orderDate: new Date().toISOString().substr(0, 10),
           customers: [],
           addresses: [],
           products: [],
@@ -361,7 +391,8 @@ export default {
                   customer_id: this.selectedCustomer.id,
                   address_id: this.address.id,
                   orderItems: this.selectedProducts,
-                  exchange_rate: this.exchange_rate
+                  exchange_rate: this.exchange_rate,
+                  order_date: this.orderDate
      
           })
           .then(this.handleOrderCreationResponse)
