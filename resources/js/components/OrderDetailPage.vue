@@ -41,6 +41,17 @@
               </v-flex>
 
           </v-layout>
+
+          <v-layout row>
+
+              <v-flex xs4>
+                  Order Date: 
+              </v-flex>
+              <v-flex xs8 >
+                  {{order.order_date}}
+              </v-flex>
+
+          </v-layout>
           <v-divider></v-divider>
           <v-layout row class="title-row">
               <v-flex xs12 class="title">
