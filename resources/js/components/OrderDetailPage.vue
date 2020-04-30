@@ -52,11 +52,34 @@
               </v-flex>
 
           </v-layout>
+
+          <v-layout row>
+
+              <v-flex xs4>
+                  Delivery Status: 
+              </v-flex>
+              <v-flex xs8 class="font-weight-medium">
+                  <span class="green--text" v-if="order.sent == 1">Sent</span>
+                  <span class="red--text" v-else>Pending</span>
+              </v-flex>
+
+          </v-layout>
+
+          <v-layout row>
+
+              <v-flex xs4>
+                  Payment Status: 
+              </v-flex>
+              <v-flex xs8 class="font-weight-medium">
+                  <span class="green--text" v-if="order.paid == 1">Paid</span>
+                  <span class="red--text" v-else>Pending</span>
+              </v-flex>
+
+          </v-layout>
           <v-divider></v-divider>
           <v-layout row class="title-row">
               <v-flex xs12 class="title">
-                  Order Detail - {{(order.sent == 0 ) ? "Not Delivered" : "Sent"}} - 
-            {{(order.paid == 0) ? "Not Paid" : "Paid"}}
+                  Order Detail
               </v-flex>
           </v-layout>
           <div v-if="order.items.length > 0" fill-height>
