@@ -29,7 +29,7 @@
             <td v-else>N/A</td>
             <td v-if="order.sum" class="text-right">{{order.sum}}</td>
             <td v-else class="text-right">0.00</td>
-            <td>{{order.created_at}}</td>
+            <td>{{order.order_date}}</td>
             <td>{{(order.sent == 0 ) ? "Pending" : "Sent"}}</td>
             <td>{{(order.paid == 0) ? "Pending" : "Paid"}}</td>
         </tr>
