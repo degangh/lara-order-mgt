@@ -43,7 +43,7 @@ class DashboardRepository implements DashboardRepositoryInterface
     {
         return DB::table('orders')
         ->join('order_items','orders.id', '=', 'order_items.order_id')
-        ->whereBetween('orders.created_at',[$from, $to])
+        ->whereBetween('orders.order_date',[$from, $to])
         ->where('paid', '=', 1)
         ->sum(DB::raw('unit_price_cny * quantity'));
     }
@@ -51,7 +51,7 @@ class DashboardRepository implements DashboardRepositoryInterface
     public function transactions_between($from, $to)
     {
         return DB::table('orders')
-        ->whereBetween('created_at',[$from, $to])
+        ->whereBetween('order_date',[$from, $to])
         ->where('sent', '=', 1)
         ->orWhere('paid', '=', 1)
         ->count();
@@ -61,7 +61,7 @@ class DashboardRepository implements DashboardRepositoryInterface
     {
         return DB::table('orders')
         ->join('order_items','orders.id', '=', 'order_items.order_id')
-        ->whereBetween('orders.created_at',[$from, $to])
+        ->whereBetween('orders.order_date',[$from, $to])
         ->where('paid', '=', 1)
         ->sum(DB::raw('unit_price_cny * quantity-purchase_price_aud*quantity*exchange_rate'));
     }
