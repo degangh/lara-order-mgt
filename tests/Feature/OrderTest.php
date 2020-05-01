@@ -22,7 +22,7 @@ class OrderTest extends TestCase
     /** @test */
     public function an_authenticated_user_may_create_order()
     {
-        
+        $order_date = date("Y-m-d");
         //given an authenticated user
         $this->actingAs($this->user, 'api');
         
@@ -30,7 +30,8 @@ class OrderTest extends TestCase
         $order = factory(\App\Order::class)->make([
             'user_id' => $this->user->id,
             'customer_id' => $this->customer->id,
-            'address_id' => $this->address->id
+            'address_id' => $this->address->id,
+            'order_date' => $order_date
             ]
         );
 
@@ -38,7 +39,7 @@ class OrderTest extends TestCase
         $response = $this->json('post', '/api/order', $order->toArray())
         ->assertStatus(200)
         ->assertJsonStructure([
-            'user_id', 'customer_id', 'id', 'updated_at', 'created_at'
+            'user_id', 'customer_id', 'id', 'order_date','updated_at', 'created_at'
             ]);
         
 
@@ -58,7 +59,7 @@ class OrderTest extends TestCase
                 'order_id' => $order->id
             ]
             );
-        $this->json('post' , '/api/order/' . $order->id . '/items', $order_item->toArray())->assertStatus(200);
+        $this->json('post' , '/api/order/' . $order->id . '/items', $order_item->toArray())->assertStatus(201);
         
         $this->assertDatabaseHas('order_items', [
             'order_id'=>$order->id
