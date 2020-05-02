@@ -57,11 +57,18 @@ class OrderRepositoryTest extends TestCase
     {
         //given an existing order 
         $order = $this->orderRepository->create($this->order, $this->user);
-        //and a set of order items
-        $orderItems = factory(\App\OrderItem::class,3)->make([
-            'order_id' => $order->id
-        ]);
+        //generate 3 products to add into the order
+        $products = factory(\App\Product::class,3)->create();
 
+        //and a set of order items
+        $orderItems = $products->map(function ($product ) use (&$order){
+            return array(
+                "id" => $product->id,
+                "rrp_cny" => $product->rrp_cny,
+                "ref_price_aud" => $product->ref_price_aud,
+                "num" => 1
+            );
+        });
         $exchange_rate = 5;
         $this->orderRepository->createDetail($order, $orderItems, $exchange_rate);
         //the order items can be saved into database
