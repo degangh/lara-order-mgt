@@ -83,20 +83,37 @@ class OrderRepositoryTest extends TestCase
     {
         //given an existing order
         $order = $this->orderRepository->create($this->order, $this->user);
-        //and a set of existing order items
-        $orderItems = factory(\App\OrderItem::class,3)->create([
-            'order_id' => $order->id
-        ]);
+        $products = factory(\App\Product::class,3)->create();
+
+        //and a set of order items
+        $orderItems = $products->map(function ($product ) use (&$order){
+            return array(
+                "id" => $product->id,
+                "rrp_cny" => $product->rrp_cny,
+                "ref_price_aud" => $product->ref_price_aud,
+                "num" => 1
+            );
+        });
+        $exchange_rate = 4.7;
+        $this->orderRepository->createDetail($order, $orderItems, $exchange_rate);
         //an existing order items can be updated
-        $item = $orderItems[0];
+        $item = $order->items[0];
         $new_unit_price = $item->unit_price_cny + 15;
         $new_quantity = $item->quantity + 2;
         $new_purchase_price_aud = $item->purchase_price_aud + 1.5;
-        $item->unit_price_cny = $new_unit_price;
-        $item->purchase_price_aud = $new_purchase_price_aud;
-        $item->quantity = $new_quantity;
+        $new_exchange_rate = $item->exchange_rate + 0.2;
+        
+        $newItem = factory(\App\Product::class)->make(
+            [
+            'order_id' => $order->id,
+            'product_id' => $item->product_id,
+            'unit_price_cny' => $new_unit_price,
+            'purchase_price_aud' => $new_purchase_price_aud ,
+            'exchange_rate' => $new_exchange_rate,
+            'quantity' => $new_quantity]
+            );
 
-        $this->orderItemRepository->update($item);
+        $this->orderItemRepository->update($newItem, $item);
 
         $this->assertDatabaseHas('order_items', array(
             'order_id' => $order->id,
@@ -118,23 +135,41 @@ class OrderRepositoryTest extends TestCase
         ]);
         $item = $orderItems[0];
         //one of the order items can be delete from the order
-        $this->orderItemRepository->delete($order,$item);
+        $this->orderItemRepository->delete($item);
+
+        $this->assertDatabaseMissing('order_items', array(
+            'id' => $item->id
+        ));
     }
 
+    /** @test */
     public function it_can_update_order_add_item()
     {
         //give an existing order
         $order = $this->orderRepository->create($this->order, $this->user);
         //and a set of existing order items
-        $orderItems = factory(\App\OrderItem::class,3)->create([
-            'order_id' => $order->id
-        ]);
+        $products = factory(\App\Product::class,3)->create();
+
+        //and a set of order items
+        $orderItems = $products->map(function ($product ) use (&$order){
+            return array(
+                "id" => $product->id,
+                "rrp_cny" => $product->rrp_cny,
+                "ref_price_aud" => $product->ref_price_aud,
+                "num" => 1
+            );
+        });
+        //new product
+        $new_product = factory(\App\Product::class)->create();
         //an new order item can be added
-        $newItem = factory(\App\OrderItem::class,1)->make([
-            'order_id' => $order->id
-        ]);
+        $newItem = array(
+            "id" => $new_product->id,
+            "rrp_cny" => $new_product->rrp_cny,
+            "ref_price_aud" => $new_product->ref_price_aud,
+            "num" => 1
+        );
         
-        $this->orderItemRepository->add($order, $newItem);
+        $this->orderItemRepository->add($order, $newItem, 4.8);
         //the new product can be found 
         $this->assertDatabaseHas('order_items', array(
             'order_id' => $order->id,
