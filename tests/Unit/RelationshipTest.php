@@ -36,6 +36,13 @@ class RelationshipTest extends TestCase
     }
 
     /** @test */
+    public function an_item_belong_to_an_order()
+    {
+        $order_item = factory('App\OrderItem')->create();
+        $this->assertInstanceOf('App\Order', $order_item->order);
+    }
+
+    /** @test */
     public function an_order_has_items()
     {
         $order = factory('App\Order')->create();
@@ -61,6 +68,28 @@ class RelationshipTest extends TestCase
     {
         $customer = factory('App\Customer')->create();
         $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $customer->addresses);
+    }
+
+    /** @test */
+    public function an_address_has_many_orders()
+    {
+        //give an existing address
+        $address = factory('App\Address')->create();
+        //and a set of order
+        $orders = factory('App\Order', 3)->create(
+            [
+                "address_id" => $address->id
+            ]
+        );
+        $this->assertInstanceOf('App\Order', $address->orders[0]);
+    }
+
+    /** @test */
+    public function an_order_has_an_address()
+    {
+        $order = factory('App\Order')->create();
+        $this->assertInstanceOf('App\Address', $order->address);
+
     }
     
 }
