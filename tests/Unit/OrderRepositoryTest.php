@@ -143,6 +143,62 @@ class OrderRepositoryTest extends TestCase
     }
 
     /** @test */
+    public function it_can_update_order_status_paid()
+    {
+        //given an exsiting new order
+
+        ///with order detail items
+
+        //the order status can be changed to paid
+    }
+
+    /** @test */
+    public function it_can_update_order_status_sent()
+    {
+        //given an exsiting new order
+
+        ///with order detail items
+
+        //the order status can be changed to paid
+    }
+
+    /** @test */
+    public function it_cannot_add_product_when_order_is_paid()
+    {
+        //given an exsiting new order
+
+        ///with order detail items
+
+        //when the order is paid
+
+        //the product cannot be added
+    }
+
+    /** @test */
+    public function it_cannot_add_product_when_order_is_sent()
+    {
+        //given an exsiting new order
+
+        ///with order detail items
+
+        //when the order is sent
+
+        //the product cannot be added
+    }
+    
+    /** @test */
+    public function it_cannot_change_status_empty_order()
+    {
+        //given an exsiting new order
+
+        ///with no order detail item
+
+        //when the order is paid
+
+        //the product cannot be added
+    }
+
+    /** @test */
     public function it_can_update_order_add_item()
     {
         //give an existing order
