@@ -107,9 +107,9 @@ class OrderRepositoryTest extends TestCase
             [
             'order_id' => $order->id,
             'product_id' => $item->product_id,
-            'unit_price_cny' => $new_unit_price,
-            'purchase_price_aud' => $new_purchase_price_aud ,
-            'exchange_rate' => $new_exchange_rate,
+            'unit_price_cny' => round($new_unit_price,2),
+            'purchase_price_aud' => round($new_purchase_price_aud,2) ,
+            'exchange_rate' => round($new_exchange_rate,2),
             'quantity' => $new_quantity]
             );
 
