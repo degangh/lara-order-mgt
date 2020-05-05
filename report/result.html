@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>Test Documentation</title>
+        <style>
+            body {
+                text-rendering: optimizeLegibility;
+                font-variant-ligatures: common-ligatures;
+                font-kerning: normal;
+                margin-left: 2em;
+            }
+
+            body > ul > li {
+                font-family: Source Serif Pro, PT Sans, Trebuchet MS, Helvetica, Arial;
+                font-size: 2em;
+            }
+
+            h2 {
+                font-family: Tahoma, Helvetica, Arial;
+                font-size: 3em;
+            }
+
+            ul {
+                list-style: none;
+                margin-bottom: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        <h2 id="Tests\Unit\AddressRepositoryTest">Unit\AddressRepository</h2>
+        <ul>
+            <li style="color: #555753;">✓ A new address can be added</li>
+            <li style="color: #555753;">✓ An address can be updated</li>
+        </ul>
+        <h2 id="Tests\Unit\CustomerRepositoryTest">Unit\CustomerRepository</h2>
+        <ul>
+            <li style="color: #555753;">✓ It can return customer list</li>
+            <li style="color: #555753;">✓ It can store a customer</li>
+        </ul>
+        <h2 id="Tests\Unit\OrderRepositoryTest">Unit\OrderRepository</h2>
+        <ul>
+            <li style="color: #555753;">✓ It can save order info</li>
+            <li style="color: #555753;">✓ It can save order items</li>
+            <li style="color: #555753;">✓ It can update order change item</li>
+            <li style="color: #555753;">✓ It can update order delete item</li>
+            <li style="color: #ef2929;">❌ It can update order status paid</li>
+            <li style="color: #ef2929;">❌ It can update order status sent</li>
+            <li style="color: #ef2929;">❌ It cannot add product when order is paid</li>
+            <li style="color: #ef2929;">❌ It cannot add product when order is sent</li>
+            <li style="color: #ef2929;">❌ It cannot change status empty order</li>
+            <li style="color: #ef2929;">❌ It can update order add item</li>
+        </ul>
+        <h2 id="Tests\Unit\ProductRespositoryTest">Unit\ProductRespository</h2>
+        <ul>
+            <li style="color: #555753;">✓ It can save product info</li>
+            <li style="color: #555753;">✓ It can update product</li>
+        </ul>
+        <h2 id="Tests\Unit\RelationshipTest">Unit\Relationship</h2>
+        <ul>
+            <li style="color: #555753;">✓ An order has one creator</li>
+            <li style="color: #555753;">✓ An order has one customer</li>
+            <li style="color: #555753;">✓ An address has one customer</li>
+            <li style="color: #555753;">✓ An order item has a product</li>
+            <li style="color: #555753;">✓ An item belong to an order</li>
+            <li style="color: #555753;">✓ An order has items</li>
+            <li style="color: #555753;">✓ An user creates many orders</li>
+            <li style="color: #555753;">✓ A customer has many orders</li>
+            <li style="color: #555753;">✓ A customer has many addresses</li>
+            <li style="color: #555753;">✓ An address has many orders</li>
+            <li style="color: #555753;">✓ An order has an address</li>
+        </ul>
+        <h2 id="Tests\Feature\AddressTest">Feature\Address</h2>
+        <ul>
+            <li style="color: #555753;">✓ An login user can add address to existing customer</li>
+            <li style="color: #555753;">✓ A login user can set default address</li>
+            <li style="color: #555753;">✓ A login user can update address</li>
+        </ul>
+        <h2 id="Tests\Feature\CustomerTest">Feature\Customer</h2>
+        <ul>
+            <li style="color: #555753;">✓ A login user can create customer</li>
+            <li style="color: #555753;">✓ An unauthenticated user cannot create customer</li>
+            <li style="color: #555753;">✓ An authenticated user can get customer list</li>
+        </ul>
+        <h2 id="Tests\Feature\OrderTest">Feature\Order</h2>
+        <ul>
+            <li style="color: #555753;">✓ An authenticated user may create order</li>
+            <li style="color: #555753;">✓ An authenticated user may add order item</li>
+            <li style="color: #555753;">✓ An authenticated user may get list of order</li>
+            <li style="color: #ef2929;">❌ An user may list items of an order</li>
+        </ul>
+        <h2 id="Tests\Feature\ProductTest">Feature\Product</h2>
+        <ul>
+            <li style="color: #555753;">✓ An authenticated user can list products</li>
+            <li style="color: #ef2929;">❌ An authenticated user can view a product info</li>
+            <li style="color: #555753;">✓ An authenticated user can add new product</li>
+            <li style="color: #ef2929;">❌ An authenticated user can change product</li>
+        </ul>
+        <h2 id="Tests\Feature\RoutingTest">Feature\Routing</h2>
+        <ul>
+            <li style="color: #555753;">✓ Get order list</li>
+            <li style="color: #555753;">✓ Get product list</li>
+            <li style="color: #555753;">✓ User no login get product list</li>
+            <li style="color: #555753;">✓ User no login get order list</li>
+        </ul>
+    </body>
+</html>
