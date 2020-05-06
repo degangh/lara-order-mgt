@@ -11,11 +11,11 @@ class OrderItemRepository implements OrderItemRepositoryInterface
     {
         return OrderItem::create([
             'order_id' => $order->id,
-            'product_id' => $item['id'],
-            'unit_price_cny' => $item['rrp_cny'],
-            'purchase_price_aud' => $item['ref_price_aud'],
-            'quantity' => $item['num'],
-            'exchange_rate' => $exchange_rate
+            'product_id' => $item->product_id,
+            'unit_price_cny' => $item->unit_price_cny,
+            'purchase_price_aud' => $item->purchase_price_aud,
+            'quantity' => $item->quantity,
+            'exchange_rate' => $item->exchange_rate
         ]);
     }
 

@@ -218,12 +218,24 @@ class OrderRepositoryTest extends TestCase
         //new product
         $new_product = factory(\App\Product::class)->create();
         //an new order item can be added
+        /*
         $newItem = array(
             "id" => $new_product->id,
             "rrp_cny" => $new_product->rrp_cny,
             "ref_price_aud" => $new_product->ref_price_aud,
             "num" => 1
-        );
+        );*/
+        $exchange_rate = 4.51;
+        $newItem = factory(\App\OrderItem::class)->make(
+            array(
+                "order_id" => $order->id,
+                "product_id" => $new_product->id,
+                "unit_price_cny" => $new_product->rrp_cny,
+                "purchase_price_aud" => $new_product->ref_price_aud,
+                "exchange_rate" => $exchange_rate,
+                "quantity" => 3
+            )
+            );
         
         $this->orderItemRepository->add($order, $newItem, 4.8);
         //the new product can be found 
