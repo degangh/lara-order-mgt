@@ -146,57 +146,48 @@ class OrderRepositoryTest extends TestCase
     public function it_can_update_order_status_paid()
     {
         //given an exsiting new order
+        $order = $this->orderRepository->create($this->order, $this->user);
 
-        ///with order detail items
+        //with order details
+        $items = factory(\App\OrderItem::class,3)->create(
+            array(
+                "order_id" => $order->id
+            )
+            );
 
-        //the order status can be changed to paid
+        //try to change the order status
+        $this->orderRepository->paid($order);
+
+        $this->assertDatabaseHas('orders', array(
+            'id' => $order->id,
+            'paid' => 1
+        ));
+
     }
 
     /** @test */
     public function it_can_update_order_status_sent()
     {
         //given an exsiting new order
+        $order = $this->orderRepository->create($this->order, $this->user);
 
-        ///with order detail items
+        //with order details
+        $items = factory(\App\OrderItem::class,3)->create(
+            array(
+                "order_id" => $order->id
+            )
+            );
 
-        //the order status can be changed to paid
+        //try to change the order delivery status to yes
+        $this->orderRepository->sent($order);
+
+        $this->assertDatabaseHas('orders', array(
+            'id' => $order->id,
+            'sent' => 1
+        ));
     }
 
-    /** @test */
-    public function it_cannot_add_product_when_order_is_paid()
-    {
-        //given an exsiting new order
-
-        ///with order detail items
-
-        //when the order is paid
-
-        //the product cannot be added
-    }
-
-    /** @test */
-    public function it_cannot_add_product_when_order_is_sent()
-    {
-        //given an exsiting new order
-
-        ///with order detail items
-
-        //when the order is sent
-
-        //the product cannot be added
-    }
     
-    /** @test */
-    public function it_cannot_change_status_empty_order()
-    {
-        //given an exsiting new order
-
-        ///with no order detail item
-
-        //when the order is paid
-
-        //the product cannot be added
-    }
 
     /** @test */
     public function it_can_update_order_add_item()

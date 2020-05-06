@@ -94,4 +94,35 @@ class OrderTest extends TestCase
 
         //a collection of order items should be returned in json format
     }
+
+    /** @test */
+    public function it_cannot_add_product_when_order_is_paid()
+    {
+        //given an exsiting new order
+
+        ///with order detail items
+
+        //when the order is paid
+
+        //the product cannot be added
+    }
+
+    /** @test */
+    public function it_cannot_add_product_when_order_is_sent()
+    {
+        //given an exsiting new order
+
+        ///with order detail items
+
+        //when the order is sent
+
+        //the product cannot be added
+    }
+    
+    /** @test */
+    public function it_cannot_change_status_empty_order()
+    {
+        
+        
+    }
 }
