@@ -12,11 +12,15 @@ class OrderTest extends TestCase
     public function setup()
     {
         parent::setup();
+        $this->orderRepository = new \App\Repositories\OrderRepository;
+        $this->orderItemRepository = new \App\Repositories\OrderItemRepository;
+
         $this->user = factory(\App\User::class)->create();
         $this->customer = factory(\App\Customer::class)->create();
         $this->address = factory(\App\Address::class)->create([
             'customer_id' => $this->customer->id
         ]);
+        
     }
     
     /** @test */
@@ -98,31 +102,101 @@ class OrderTest extends TestCase
     /** @test */
     public function it_cannot_add_product_when_order_is_paid()
     {
+        //give an authenticated user
+        $this->actingAs($this->user, 'api');
+        
         //given an exsiting new order
-
+        $order = factory(\App\Order::class)->create();
+        
         ///with order detail items
-
+        $orderItems = factory(\App\OrderItem::class)->create([
+            'order_id' => $order->id
+        ]);
         //when the order is paid
+        $this->orderRepository->paid($order);
+        //the new order item cannot be added
+        $newItem = factory(\App\OrderItem::class)->make([
+            'order_id' => $order->id
+        ]);
 
-        //the product cannot be added
+        $this->json('post' , '/api/order/' . $order->id . '/items', $newItem->toArray())
+        ->assertStatus(403)
+        ->assertJson([
+            'message' => 'Order Can NOT be changed after sent or paid'
+        ]);
+    }
+
+    /** @test */
+    public function it_can_change_order_status()
+    {
+        //give an authenticated user
+        $this->actingAs($this->user, 'api');
+        
+        //given an exsiting new order
+        $order = factory(\App\Order::class)->create();
+        
+        ///with order detail items
+        $orderItems = factory(\App\OrderItem::class)->create([
+            'order_id' => $order->id
+        ]);
+
+        //the order status can be changed
+        $this->json('patch' , '/api/order/' . $order->id . '/paid')
+        ->assertSuccessful();
+
+        $this->json('patch' , '/api/order/' . $order->id . '/sent')
+        ->assertSuccessful();
     }
 
     /** @test */
     public function it_cannot_add_product_when_order_is_sent()
     {
+        //give an authenticated user
+        $this->actingAs($this->user, 'api');
+        
         //given an exsiting new order
-
+        $order = factory(\App\Order::class)->create();
+        
         ///with order detail items
+        $orderItems = factory(\App\OrderItem::class)->create([
+            'order_id' => $order->id
+        ]);
+        //when the order is paid
+        $this->orderRepository->sent($order);
+        //the new order item cannot be added
+        $newItem = factory(\App\OrderItem::class)->make([
+            'order_id' => $order->id
+        ]);
 
-        //when the order is sent
-
-        //the product cannot be added
+        $this->json('post' , '/api/order/' . $order->id . '/items', $newItem->toArray())
+        ->assertStatus(403)
+        ->assertJson([
+            'message' => 'Order Can NOT be changed after sent or paid'
+        ]);
     }
     
     /** @test */
     public function it_cannot_change_status_empty_order()
     {
+        //give an authenticated user
+        $this->actingAs($this->user, 'api');
         
+        //given an exsiting new order
+        $order = factory(\App\Order::class)->create();
+        
+        ///with no order detail items
+        
+        //set the order is paid
+        
+        $this->json('patch' , '/api/order/' . $order->id . '/paid')
+        ->assertStatus(403)->assertJson([
+            'message' => 'There should be as least ONE item in the order'
+        ]);
+
+        $this->json('patch' , '/api/order/' . $order->id . '/sent')
+        ->assertStatus(403)->assertJson([
+            'message' => 'There should be as least ONE item in the order'
+        ]);
         
     }
 }
