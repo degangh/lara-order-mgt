@@ -199,4 +199,49 @@ class OrderTest extends TestCase
         ]);
         
     }
+
+    /** @test */
+    public function it_can_delete_order_item()
+    {
+        //give an authenticated user
+        $this->actingAs($this->user, 'api');
+        
+        //given an exsiting new order
+        $order = factory(\App\Order::class)->create();
+        
+        ///with order detail items
+        $orderItems = factory(\App\OrderItem::class)->create([
+            'order_id' => $order->id
+        ]);
+
+        //the item of order can be removed
+        $this->json('delete' , '/api/orderItems/' . $orderItems->id)
+        ->assertSuccessful();
+    }
+
+    /** @test */
+    public function it_cannot_delete_item_when_status_is_sent()
+    {
+        //give an authenticated user
+        $this->actingAs($this->user, 'api');
+        
+        //given an exsiting new order
+        $order = factory(\App\Order::class)->create();
+        
+        ///with order detail items
+        $orderItems = factory(\App\OrderItem::class)->create([
+            'order_id' => $order->id
+        ]);
+
+        //when the order is paid
+        $this->orderRepository->sent($order);
+
+        $this->json('delete' , '/api/orderItems/' . $orderItems->id)
+        ->assertStatus(403)
+        ->assertJson([
+            'message' => 'Order Can NOT be changed after sent or paid'
+        ]);
+    }
+
+
 }
