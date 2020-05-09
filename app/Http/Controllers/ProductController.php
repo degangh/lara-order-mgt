@@ -31,11 +31,12 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    /*
     public function create()
     {
         //
     }
-
+    */
     /**
      * Store a newly created resource in storage.
      *
@@ -55,22 +56,24 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
+    /*
     public function show(Product $product)
     {
         //
     }
-
+    */
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
+    /*
     public function edit(Product $product)
     {
         //
     }
-
+    */
     /**
      * Update the specified resource in storage
      *
@@ -91,8 +94,10 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
+    /*
     public function destroy(Product $product)
     {
         //
     }
+    */
 }

@@ -22,20 +22,23 @@ class OrderItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    /*
+     public function index()
     {
         //
     }
+    */
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+    /*
     public function create()
     {
         //
-    }
+    }*/
 
     /**
      * Store a newly created resource in storage.
@@ -63,21 +66,24 @@ class OrderItemController extends Controller
      * @param  \App\OrderItemModel  $orderItemModel
      * @return \Illuminate\Http\Response
      */
+    /*
     public function show(OrderItem $orderItem)
     {
         //
     }
-
+    */
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\OrderItemModel  $orderItemModel
      * @return \Illuminate\Http\Response
      */
+    /*
     public function edit(OrderItem $orderItem)
     {
         //
     }
+    */
 
     /**
      * Update the specified resource in storage.

@@ -32,11 +32,12 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    /*
     public function create()
     {
         //
     }
-
+    */
     /**
      * Store a newly created resource in storage.
      *
@@ -84,10 +85,12 @@ class CustomerController extends Controller
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
+    /*
     public function edit(Customer $customer)
     {
         //
     }
+    */
 
     /**
      * Update the specified resource in storage.
@@ -107,10 +110,12 @@ class CustomerController extends Controller
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
+    /*
     public function destroy(Customer $customer)
     {
         //
     }
+    */
 
     public function orders(Customer $customer)
     {

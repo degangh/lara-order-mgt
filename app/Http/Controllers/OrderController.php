@@ -39,10 +39,12 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    /*
     public function create()
     {
         //
     }
+    */
 
     /**
      * Store a newly created resource in storage.
@@ -100,11 +102,12 @@ class OrderController extends Controller
      * @param  \App\OrderModel  $orderModel
      * @return \Illuminate\Http\Response
      */
+    /*
     public function destroy(Order $order)
     {
         //
     }
-
+    */
     public function sent(Order $order)
     {
         $this->authorize('changeStatus', $order);
