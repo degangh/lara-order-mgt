@@ -34,4 +34,9 @@ class DashboardController extends Controller
     {
        return  $this->dashRepo->mtd_profit();
     }
+
+    public function monthly_sum()
+    {
+        return $this->dashRepo->sum_by_month();
+    }
 }

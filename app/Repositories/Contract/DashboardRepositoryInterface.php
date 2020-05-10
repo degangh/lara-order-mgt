@@ -10,4 +10,5 @@ interface DashboardRepositoryInterface
     public function revenue_between($start_date, $end_date);
     public function transactions_between($start_date, $end_date);
     public function profit_between($start_date, $end_date);
+    public function sum_by_month();
 }

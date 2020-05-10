@@ -66,4 +66,18 @@ class DashboardRepository implements DashboardRepositoryInterface
         ->sum(DB::raw('unit_price_cny * quantity-purchase_price_aud*quantity*exchange_rate'));
     }
 
+    public function sum_by_month()
+    {
+        return DB::table('orders')
+        ->join('order_items','orders.id', '=', 'order_items.order_id')
+        ->select(
+            DB::raw('sum(unit_price_cny * quantity) as sum'), 
+            DB::raw('MONTH(order_date) as order_month')
+            )
+        ->where('paid', '=', 1)
+        ->groupBy(DB::raw('MONTH(order_date)'))
+        ->get();
+        
+    }
+
 }
