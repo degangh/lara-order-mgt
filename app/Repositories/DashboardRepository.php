@@ -72,11 +72,10 @@ class DashboardRepository implements DashboardRepositoryInterface
         ->join('order_items','orders.id', '=', 'order_items.order_id')
         ->select(
             DB::raw('sum(unit_price_cny * quantity) as sum'), 
-            DB::raw('MONTH(order_date) as order_month')
+            DB::raw('DATE_FORMAT(`order_date`,"%Y-%m") as order_month')
             )
         ->where('paid', '=', 1)
-        ->groupBy(DB::raw('MONTH(order_date)'))
-        ->get();
+        ->groupBy(DB::raw('MONTH(order_date), YEAR(order_date)'))->orderBy('order_month')->get();
         
     }
 
