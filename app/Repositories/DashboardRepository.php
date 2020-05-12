@@ -68,15 +68,28 @@ class DashboardRepository implements DashboardRepositoryInterface
 
     public function sum_by_month()
     {
-        return DB::table('orders')
-        ->join('order_items','orders.id', '=', 'order_items.order_id')
-        ->select(
-            DB::raw('sum(unit_price_cny * quantity) as sum'), 
-            DB::raw('DATE_FORMAT(`order_date`,"%Y-%m") as order_month')
-            )
-        ->where('paid', '=', 1)
-        ->groupBy(DB::raw('MONTH(order_date), YEAR(order_date)'))->orderBy('order_month')->get();
+        return $this->get_term()->map(function($term){
+            
+            $carbon = new Carbon($term);
+            $from = $carbon->startOfMonth()->format('Y-m-d');
+            
+            $to = $carbon->endOfMonth()->format('Y-m-d');
+            return array(
+                'sum' => $this->revenue_between($from , $to),
+                'order_month' => $term
+            );
+        });
         
+           
+    }
+
+    private function get_term($term = 'MONTH')
+    {
+        $terms = array();
+
+        for ($i = 0; $i < 6; $i++) $terms[] = date('F Y', strtotime("-$i month"));
+
+        return collect(array_reverse($terms));
     }
 
 }
