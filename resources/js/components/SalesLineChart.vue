@@ -5,18 +5,18 @@ export default {
   extends: Line,
   data: () => ({
     chartdata: {
-      labels: ['January', 'February', 'March', 'April', 'May'],
+      labels: [],
       datasets: [
         {
           label: 'Sales Revenue',
           borderColor: '#f87979',
-          data: [40, 23, 33, 52, 29],
+          data: [],
           fill: false
         },
         {
           label: 'Monthly Average',
           borderColor: 'navy',
-          data: [35,35,35,35,35],
+          data: [],
           fill: false
         }
       ]
@@ -28,7 +28,15 @@ export default {
   }),
 
   mounted () {
-    this.renderChart(this.chartdata, this.options)
+    axios.get('/api/dashboard/monthly/sum').then((res)=>{
+      res.data.map((i)=>{
+        this.chartdata.datasets[0].data.push(i.sum)
+        this.chartdata.labels.push(i.order_month)    
+      })
+      this.renderChart(this.chartdata, this.options)
+    })
+    
+    
   }
 }
 </script>

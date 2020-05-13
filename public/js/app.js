@@ -71747,11 +71747,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       chartdata: {
-        labels: ['January', 'February', 'March', 'April', 'May'],
+        labels: [],
         datasets: [{
           label: 'Sales Revenue',
           borderColor: '#f87979',
-          data: [40, 23, 33, 52, 29],
+          data: [],
           fill: false
         }, {
           label: 'Monthly Average',
@@ -71768,7 +71768,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   mounted: function mounted() {
-    this.renderChart(this.chartdata, this.options);
+    var _this = this;
+
+    axios.get('/api/dashboard/monthly/sum').then(function (res) {
+      res.data.map(function (i) {
+        _this.chartdata.datasets[0].data.push(i.sum);
+        _this.chartdata.labels.push(i.order_month);
+      });
+      _this.renderChart(_this.chartdata, _this.options);
+    });
   }
 });
 
