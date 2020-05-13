@@ -83,6 +83,23 @@ class DashboardRepository implements DashboardRepositoryInterface
            
     }
 
+    public function profit_by_month()
+    {
+        return $this->get_term()->map(function($term){
+            
+            $carbon = new Carbon($term);
+            $from = $carbon->startOfMonth()->format('Y-m-d');
+            
+            $to = $carbon->endOfMonth()->format('Y-m-d');
+            return array(
+                'sum' => $this->profit_between($from , $to),
+                'order_month' => $term
+            );
+        });
+        
+           
+    }
+
     private function get_term($term = 'MONTH')
     {
         $terms = array();
@@ -91,5 +108,7 @@ class DashboardRepository implements DashboardRepositoryInterface
 
         return collect(array_reverse($terms));
     }
+
+    
 
 }
