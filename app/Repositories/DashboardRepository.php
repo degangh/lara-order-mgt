@@ -109,6 +109,36 @@ class DashboardRepository implements DashboardRepositoryInterface
         return collect(array_reverse($terms));
     }
 
+    public function overdue_amount()
+    {
+        return DB::table('orders')
+        ->join('order_items','orders.id', '=', 'order_items.order_id')
+        ->where('sent', '=', 1)
+        ->where('paid', '=', 0)
+        ->sum(DB::raw('unit_price_cny * quantity'));
+    }
+    public function overdue_trans()
+    {
+        return DB::table('orders')
+        ->where('sent', '=', 1)
+        ->where('paid', '=', 0)
+        ->count();
+    }
+    public function pending_delivery()
+    {
+        return DB::table('orders')
+        ->where('sent', '=', 0)
+        ->where('paid', '=', 1)
+        ->count();
+    }
+    public function pending_orders()
+    {
+        return DB::table('orders')
+        ->where('sent', '=', 0)
+        ->where('paid', '=', 0)
+        ->count();
+    }
+
     
 
 }
