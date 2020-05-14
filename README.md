@@ -2,7 +2,7 @@
 
 # Order Management Tool
 
-An order managemnt system, Restful API
+An order managemnt system, Restful API (PHP Laravel) + SPA (Vue.js)
 
 ## Getting Started
 
