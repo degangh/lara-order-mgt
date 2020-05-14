@@ -71754,9 +71754,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           data: [],
           fill: false
         }, {
-          label: 'Monthly Average',
+          label: 'Monthly Profit',
           borderColor: 'navy',
-          data: [35, 35, 35, 35, 35],
+          data: [],
           fill: false
         }]
       },
@@ -71775,7 +71775,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.chartdata.datasets[0].data.push(i.sum);
         _this.chartdata.labels.push(i.order_month);
       });
-      _this.renderChart(_this.chartdata, _this.options);
+    }).then(function () {
+      axios.get('/api/dashboard/monthly/profit').then(function (res) {
+        res.data.map(function (i) {
+          _this.chartdata.datasets[1].data.push(i.sum);
+        });
+        _this.renderChart(_this.chartdata, _this.options);
+      });
     });
   }
 });
