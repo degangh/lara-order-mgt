@@ -49,3 +49,5 @@ Route::delete('orderItems/{orderItem}', 'OrderItemController@destroy')->middlewa
 Route::get('dashboard', 'DashboardController@index')->middleware('auth:api');
 
 Route::get('dashboard/mtd', 'DashboardController@mtd');
+Route::get('dashboard/monthly/sum', 'DashboardController@monthly_sum');
+Route::get('dashboard/monthly/profit', 'DashboardController@monthly_profit');
