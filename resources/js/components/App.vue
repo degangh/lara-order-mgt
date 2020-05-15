@@ -229,5 +229,13 @@ export default {
 <style>
 .tile-link a {
     text-decoration: none;
-    }
+}
+
+.v-list__tile__title {
+  height: auto
+}
+
+.v-list__tile__sub-title, .v-list__tile__title {
+  white-space: normal
+}
 </style>
