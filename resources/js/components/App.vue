@@ -89,6 +89,8 @@
         label="Search"
         ml-3
         v-if = "isLogin()"
+        v-model = 'keyword'
+        @click:append="search"
       ></v-text-field>
       <v-spacer></v-spacer>
       
@@ -163,6 +165,7 @@ export default {
         orderDialog:false,
         formAction:null,
         drawer: null,
+        keyword: '',
         items: [
           { icon: 'dashboard', text: 'Dashboard' , path: '/dashboard'},
           { icon: 'contacts', text: 'Customers' , path: '/customers'},
@@ -219,6 +222,9 @@ export default {
       closeFormDialog (form) {
         this[form] = false
         this.formAction = null
+      },
+      search (keyword) {
+        this.$router.push("/products" + '?keyword=' + this.keyword);
       }
       
 
@@ -237,5 +243,9 @@ export default {
 
 .v-list__tile__sub-title, .v-list__tile__title {
   white-space: normal
+}
+
+.v-input__slot {
+  margin-bottom: inherit
 }
 </style>
