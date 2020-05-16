@@ -116,7 +116,8 @@ export default {
       requestProductData () {
           axios.get('/api/products', {
               params: {
-                  page: this.page
+                  page: this.page,
+                  keyword: this.$route.query.keyword
               }
           })
           .then(this.handleResponse)
