@@ -104,10 +104,10 @@ export default {
   watch: {
         '$route' (to, from){
 
-            console.log(this.$router.currentRoute.path)
+            //console.log(this.$router.currentRoute.path)
             if (this.$router.currentRoute.path == '/products') this.page =1
             this.loading = true
-            this.$router.push(this.$router.currentRoute.path)
+            this.$router.push(this.$router.currentRoute.path + (this.$route.query.keyword) ? '?keyword=' + this.$route.query.keyword : '')
             this.requestProductData();
         }
     },

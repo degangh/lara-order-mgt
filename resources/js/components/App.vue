@@ -228,7 +228,13 @@ export default {
       }
       
 
-    }
+    },
+    /*watch: {
+      '$route.params.keyword': function (keyword) {
+        this.$router.push("/products" + '?keyword=' + keyword); 
+      }
+    }*/
+    
 };
 </script>
 

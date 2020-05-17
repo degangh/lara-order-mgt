@@ -62641,6 +62641,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.$router.push("/products" + '?keyword=' + this.keyword);
     }
   }
+  /*watch: {
+    '$route.params.keyword': function (keyword) {
+      this.$router.push("/products" + '?keyword=' + keyword); 
+    }
+  }*/
+
 });
 
 /***/ }),
@@ -70167,10 +70173,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     watch: {
         '$route': function $route(to, from) {
 
-            console.log(this.$router.currentRoute.path);
+            //console.log(this.$router.currentRoute.path)
             if (this.$router.currentRoute.path == '/products') this.page = 1;
             this.loading = true;
-            this.$router.push(this.$router.currentRoute.path);
+            this.$router.push(this.$router.currentRoute.path + this.$route.query.keyword ? '?keyword=' + this.$route.query.keyword : '');
             this.requestProductData();
         }
     },
