@@ -48,6 +48,6 @@ Route::delete('orderItems/{orderItem}', 'OrderItemController@destroy')->middlewa
 
 Route::get('dashboard', 'DashboardController@index')->middleware('auth:api');
 
-Route::get('dashboard/mtd', 'DashboardController@mtd');
-Route::get('dashboard/monthly/sum', 'DashboardController@monthly_sum');
-Route::get('dashboard/monthly/profit', 'DashboardController@monthly_profit');
+Route::get('dashboard/mtd', 'DashboardController@mtd')->middleware('auth:api');;
+Route::get('dashboard/monthly/sum', 'DashboardController@monthly_sum')->middleware('auth:api');;
+Route::get('dashboard/monthly/profit', 'DashboardController@monthly_profit')->middleware('auth:api');;
