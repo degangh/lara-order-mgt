@@ -43,6 +43,12 @@
                                         edit 
                                     </v-icon>
                                 </v-btn>
+
+                                <v-btn  text icon small color="primary" @click="deleteProduct(product.id)">
+                                    <v-icon small>
+                                        delete 
+                                    </v-icon>
+                                </v-btn>
                             </td>
                         </tr>
 
@@ -71,13 +77,16 @@
         @closeDialog="closeFormDialog"
         :product = "selectedProduct"
         ></product-form>
+        <confirm ref="confirm"></confirm>
+        <message ref="message"></message>
 
 </div>
 </template>
 
 <script>
 import ProductForm from "./ProductForm"
-
+import Confirm from './Confirm'
+import Message from './Message'
 export default {
   data () {
     return {
@@ -91,7 +100,9 @@ export default {
     }
   },
   components: {
-      ProductForm
+      ProductForm,
+      Confirm,
+      Message
   },
 
 
@@ -143,7 +154,21 @@ export default {
         this[form] = false
         this.formAction = null
         this.requestProductData();
-      }
+      },
+      deleteProduct(productId)
+        {
+            this.$refs.confirm.open('Confirm', 'Delete this product?', {}).then((confirm) => {
+                axios.delete('/api/products/' + productId)
+                .then(()=>{
+                    this.$refs.message.open('Success', 'Product Deleted', {})
+                    this.requestProductData()
+                    }
+                )
+                .catch((e)=>{console.log(e); this.messageDialog('Error',e.data.message,{})})
+            }).catch((e)=>{
+                console.log(e)
+            })
+        },
 
   }
 };
