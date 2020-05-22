@@ -115,21 +115,23 @@ export default {
   watch: {
         '$route' (to, from){
 
-            console.log(this.$route)
+            console.log(this.$route.query.keyword)
             if (this.$router.currentRoute.path == '/products') this.page =1
             this.loading = true
-            this.$router.push(this.$route.currentRoute.path + (this.$route.query.keyword) ? '?keyword=' + this.$route.query.keyword : '')
+            this.$router.push(this.$router.currentRoute.path + (this.$route.query.keyword !="undefined") ? '?keyword=' + this.$route.query.keyword : '')
             this.requestProductData();
         }
     },
 
   methods: {
       requestProductData () {
+          if (this.$route.query.keyword == 'undefined') console.log('axios keyword')
+          console.log('axios: ', this.page)
+
+          let params = {page: this.page}
+          if (this.$route.query.keyword != 'undefined') params.keyword = this.$route.query.keyword
           axios.get('/api/products', {
-              params: {
-                  page: this.page,
-                  keyword: this.$route.query.keyword
-              }
+              params: params
           })
           .then(this.handleResponse)
       },
@@ -143,7 +145,7 @@ export default {
 
       onPageChange () {
           this.loading = true
-          this.$router.push('/products/p' + this.page)
+          this.$router.push('/products/p' + this.page +  '?keyword=' + this.$route.query.keyword )
       },
 
       popupFormDialog (form, product = null) {
