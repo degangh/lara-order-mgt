@@ -82,16 +82,7 @@
         <span class="hidden-sm-and-down">My CRM</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-text-field
-        flat
-        solo-inverted
-        append-icon="search"
-        label="Search"
-        ml-3
-        v-if = "isLogin()"
-        v-model = 'keyword'
-        @click:append="search"
-      ></v-text-field>
+      <search-box :isLogin="isLogin()"></search-box>
       <v-spacer></v-spacer>
       
       <v-btn icon v-if = "isLogin()" class="hidden-sm-and-down">
@@ -157,6 +148,7 @@ import ProductForm from "./ProductForm"
 import AddressForm from "./AddressForm"
 import OrderForm from "./OrderForm"
 import EditOrderForm from "./EditOrderForm"
+import SearchBox from "./SearchBox"
 export default {
      data: () => ({
         contactDialog: false,
@@ -197,7 +189,8 @@ export default {
         ProductForm,
         AddressForm,
         OrderForm,
-        EditOrderForm
+        EditOrderForm,
+        SearchBox
       },
     methods: {
 
@@ -222,9 +215,6 @@ export default {
       closeFormDialog (form) {
         this[form] = false
         this.formAction = null
-      },
-      search (keyword) {
-        this.$router.push("/products" + '?keyword=' + this.keyword);
       }
       
 
