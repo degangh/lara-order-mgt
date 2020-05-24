@@ -66650,7 +66650,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            keyword: ''
+            keyword: '',
+            searchPath: 'products'
         };
     },
 
@@ -66661,7 +66662,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         search: function search(keyword) {
-            this.$router.push("/products" + '?keyword=' + this.keyword);
+            this.$router.push("/" + this.searchPath + '?keyword=' + this.keyword);
         }
     }
 });
@@ -66680,7 +66681,7 @@ var render = function() {
           flat: "",
           "solo-inverted": "",
           "append-icon": "search",
-          label: "Search",
+          label: "Search Product",
           "ml-3": ""
         },
         on: { "click:append": _vm.search },

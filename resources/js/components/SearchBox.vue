@@ -15,7 +15,8 @@
 export default {
       data () {
           return {
-              keyword: ''
+              keyword: '',
+              searchPath: 'products'
           }
       },
 
@@ -25,7 +26,7 @@ export default {
 
       methods: {
           search (keyword) {
-            this.$router.push("/products" + '?keyword=' + this.keyword);
+            this.$router.push("/" + this.searchPath + '?keyword=' + this.keyword);
           }
       }
 }
