@@ -3,7 +3,7 @@
         flat
         solo-inverted
         append-icon="search"
-        label="Search Product"
+        :label="searchLabel"
         ml-3
         v-if = "isLogin"
         v-model = 'keyword'
@@ -16,7 +16,8 @@ export default {
       data () {
           return {
               keyword: '',
-              searchPath: 'products'
+              searchPath: 'products',
+              searchLabel: 'Search Product'
           }
       },
 

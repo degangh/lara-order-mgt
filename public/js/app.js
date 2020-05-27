@@ -66651,7 +66651,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             keyword: '',
-            searchPath: 'products'
+            searchPath: 'products',
+            searchLabel: 'Search Product'
         };
     },
 
@@ -66681,7 +66682,7 @@ var render = function() {
           flat: "",
           "solo-inverted": "",
           "append-icon": "search",
-          label: "Search Product",
+          label: _vm.searchLabel,
           "ml-3": ""
         },
         on: { "click:append": _vm.search },
