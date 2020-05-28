@@ -82,7 +82,10 @@
         <span class="hidden-sm-and-down">My CRM</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <search-box :isLogin="isLogin()"></search-box>
+      <search-box 
+      :isLogin="isLogin()"
+      :searchPath="searchPath"
+      :searchLabel="searchLabel"></search-box>
       <v-spacer></v-spacer>
       
       <v-btn icon v-if = "isLogin()" class="hidden-sm-and-down">
@@ -178,7 +181,9 @@ export default {
         right: true,
         bottom: true,
         left: false,
-        transition: 'slide-y-reverse-transition'
+        transition: 'slide-y-reverse-transition',
+        searchPath: 'products',
+        searchLabel: 'Search Product'
       }),
       props: {
         source: String
@@ -224,6 +229,13 @@ export default {
         this.$router.push("/products" + '?keyword=' + keyword); 
       }
     }*/
+    watch: {
+      //this.$router.currentRoute.path
+      $route (to, from){
+        console.log(this.$router.currentRoute.path)
+      }
+
+    }
     
 };
 </script>

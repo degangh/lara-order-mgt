@@ -62662,6 +62662,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -62691,7 +62694,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       right: true,
       bottom: true,
       left: false,
-      transition: 'slide-y-reverse-transition'
+      transition: 'slide-y-reverse-transition',
+      searchPath: 'products',
+      searchLabel: 'Search Product'
     };
   },
   props: {
@@ -62726,12 +62731,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this[form] = false;
       this.formAction = null;
     }
-  }
+  },
   /*watch: {
     '$route.params.keyword': function (keyword) {
       this.$router.push("/products" + '?keyword=' + keyword); 
     }
   }*/
+  watch: {
+    //this.$router.currentRoute.path
+    $route: function $route(to, from) {
+      console.log(this.$router.currentRoute.path);
+    }
+  }
 
 });
 
@@ -66650,15 +66661,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            keyword: '',
-            searchPath: 'products',
-            searchLabel: 'Search Product'
+            keyword: ''
         };
     },
 
 
     props: {
-        isLogin: Boolean
+        isLogin: Boolean,
+        searchLabel: String,
+        searchPath: String
     },
 
     methods: {
@@ -66957,7 +66968,13 @@ var render = function() {
           _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
-          _c("search-box", { attrs: { isLogin: _vm.isLogin() } }),
+          _c("search-box", {
+            attrs: {
+              isLogin: _vm.isLogin(),
+              searchPath: _vm.searchPath,
+              searchLabel: _vm.searchLabel
+            }
+          }),
           _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),

@@ -16,13 +16,13 @@ export default {
       data () {
           return {
               keyword: '',
-              searchPath: 'products',
-              searchLabel: 'Search Product'
           }
       },
 
       props : {
-          isLogin: Boolean
+          isLogin: Boolean,
+          searchLabel: String,
+          searchPath: String
       },
 
       methods: {
