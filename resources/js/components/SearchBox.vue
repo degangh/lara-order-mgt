@@ -8,6 +8,7 @@
         v-if = "isLogin"
         v-model = 'keyword'
         @click:append="search"
+        @keydown.enter="search"
       ></v-text-field>
 </template>
 

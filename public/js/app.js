@@ -66657,6 +66657,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -66696,7 +66697,18 @@ var render = function() {
           label: _vm.searchLabel,
           "ml-3": ""
         },
-        on: { "click:append": _vm.search },
+        on: {
+          "click:append": _vm.search,
+          keydown: function($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            return _vm.search($event)
+          }
+        },
         model: {
           value: _vm.keyword,
           callback: function($$v) {
