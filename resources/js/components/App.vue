@@ -85,6 +85,7 @@
       <search-box 
       :isLogin="isLogin()"
       :searchPath="searchPath"
+      :currentPath="currentPath"
       :searchLabel="searchLabel"></search-box>
       <v-spacer></v-spacer>
       
@@ -161,6 +162,7 @@ export default {
         formAction:null,
         drawer: null,
         keyword: '',
+        currentPath: '',
         items: [
           { icon: 'dashboard', text: 'Dashboard' , path: '/dashboard'},
           { icon: 'contacts', text: 'Customers' , path: '/customers'},
@@ -229,13 +231,6 @@ export default {
         this.$router.push("/products" + '?keyword=' + keyword); 
       }
     }*/
-    watch: {
-      //this.$router.currentRoute.path
-      $route (to, from){
-        console.log(this.$router.currentRoute.path)
-      }
-
-    }
     
 };
 </script>

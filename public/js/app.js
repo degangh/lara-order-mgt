@@ -62665,6 +62665,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -62683,6 +62684,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       formAction: null,
       drawer: null,
       keyword: '',
+      currentPath: '',
       items: [{ icon: 'dashboard', text: 'Dashboard', path: '/dashboard' }, { icon: 'contacts', text: 'Customers', path: '/customers' }, { icon: 'history', text: 'Orders', path: '/orders' }, { icon: 'shopping_cart', text: 'Products', path: '/products' }],
       userItems: [{ title: 'Logout', func: 'logout' }, { title: 'Help', func: '' }],
       direction: 'top',
@@ -62731,18 +62733,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this[form] = false;
       this.formAction = null;
     }
-  },
+  }
   /*watch: {
     '$route.params.keyword': function (keyword) {
       this.$router.push("/products" + '?keyword=' + keyword); 
     }
   }*/
-  watch: {
-    //this.$router.currentRoute.path
-    $route: function $route(to, from) {
-      console.log(this.$router.currentRoute.path);
-    }
-  }
 
 });
 
@@ -66658,11 +66654,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            keyword: ''
+            keyword: '',
+            textLabel: 'Search Product',
+            resourcePath: 'products'
         };
     },
 
@@ -66670,13 +66692,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: {
         isLogin: Boolean,
         searchLabel: String,
-        searchPath: String
+        searchPath: String,
+        currentPath: String
     },
 
     methods: {
         search: function search(keyword) {
-            this.$router.push("/" + this.searchPath + '?keyword=' + this.keyword);
+            console.log('search: ', this.resourcePath);
+            this.$router.push("/" + this.resourcePath + '?keyword=' + this.keyword);
+        },
+        setupSearchBox: function setupSearchBox(path) {
+            console.log(path);
+            switch (path) {
+                case 'customers':
+                    this.textLabel = 'Search Customer';
+                    this.resourcePath = '/'.$path;
+                    break;
+
+                case 'orders':
+                    this.textLabel = 'Search Order';
+                    this.resourcePath = '/'.$path;
+                    break;
+
+                case 'products':
+                    this.textLabel = 'Search Product';
+                    this.resourcePath = '/'.$path;
+                    break;
+
+                default:
+                    this.textLabel = 'Search Product';
+                    this.resourcePath = '/products';
+                    break;
+
+            }
+            this.resourcePath = '/'.$path;
+
+            console.log("search label", this.textLabel);
+            console.log("search label", this.resourcePath);
         }
+    },
+
+    watch: {
+        $route: function $route(to, from) {
+            console.log('searchbox: ', this.$router.currentRoute.path);
+        }
+    },
+
+    mounted: function mounted() {
+        console.log('searchbox mounted: ', this.$router.currentRoute.path);
     }
 });
 
@@ -66694,7 +66757,7 @@ var render = function() {
           flat: "",
           "solo-inverted": "",
           "append-icon": "search",
-          label: _vm.searchLabel,
+          label: _vm.textLabel,
           "ml-3": ""
         },
         on: {
@@ -66709,6 +66772,112 @@ var render = function() {
             return _vm.search($event)
           }
         },
+        scopedSlots: _vm._u(
+          [
+            {
+              key: "prepend-inner",
+              fn: function() {
+                return [
+                  _c(
+                    "v-menu",
+                    {
+                      staticStyle: { top: "-12px" },
+                      attrs: { "offset-y": "" },
+                      scopedSlots: _vm._u(
+                        [
+                          {
+                            key: "activator",
+                            fn: function(ref) {
+                              var on = ref.on
+                              return [
+                                _c(
+                                  "v-btn",
+                                  _vm._g(
+                                    {
+                                      attrs: { text: "", icon: "", small: "" }
+                                    },
+                                    on
+                                  ),
+                                  [_c("v-icon", [_vm._v("expand_more")])],
+                                  1
+                                )
+                              ]
+                            }
+                          }
+                        ],
+                        null,
+                        false,
+                        164371524
+                      )
+                    },
+                    [
+                      _vm._v(" "),
+                      _c(
+                        "v-list",
+                        [
+                          _c(
+                            "v-list-tile",
+                            {
+                              on: {
+                                click: function($event) {
+                                  return _vm.setupSearchBox("customers")
+                                }
+                              }
+                            },
+                            [
+                              _c("v-list-tile-title", [
+                                _vm._v("Search Customer")
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-list-tile",
+                            {
+                              on: {
+                                click: function($event) {
+                                  return _vm.setupSearchBox("product")
+                                }
+                              }
+                            },
+                            [
+                              _c("v-list-tile-title", [
+                                _vm._v("Search Products")
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-list-tile",
+                            {
+                              on: {
+                                click: function($event) {
+                                  return _vm.setupSearchBox("orders")
+                                }
+                              }
+                            },
+                            [
+                              _c("v-list-tile-title", [_vm._v("Search Orders")])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
+                    1
+                  )
+                ]
+              },
+              proxy: true
+            }
+          ],
+          null,
+          false,
+          3450919013
+        ),
         model: {
           value: _vm.keyword,
           callback: function($$v) {
@@ -66984,6 +67153,7 @@ var render = function() {
             attrs: {
               isLogin: _vm.isLogin(),
               searchPath: _vm.searchPath,
+              currentPath: _vm.currentPath,
               searchLabel: _vm.searchLabel
             }
           }),
