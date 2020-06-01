@@ -24,7 +24,7 @@
                     <v-list-tile @click="setupSearchBox('customers')">
                         <v-list-tile-title >Search Customer</v-list-tile-title>
                     </v-list-tile>
-                    <v-list-tile @click="setupSearchBox('product')">
+                    <v-list-tile @click="setupSearchBox('products')">
                         <v-list-tile-title>Search Products</v-list-tile-title>
                     </v-list-tile>
                     <v-list-tile @click="setupSearchBox('orders')">
@@ -64,30 +64,30 @@ export default {
               switch(path) {
                   case 'customers':
                       this.textLabel = 'Search Customer';
-                      this.resourcePath = '/' . $path;
+                      this.resourcePath =  path;
                   break;
 
                   case 'orders':
                       this.textLabel = 'Search Order';
-                      this.resourcePath = '/' . $path;
+                      this.resourcePath =  path;
                   break;
 
                   case 'products':
                       this.textLabel = 'Search Product';
-                      this.resourcePath = '/' . $path;
+                      this.resourcePath =  path;
                   break;
 
                   default:
                       this.textLabel = 'Search Product';
-                      this.resourcePath = '/products';
+                      this.resourcePath = 'products';
                   break;
 
                   
               }
-              this.resourcePath = '/' . $path;
+              //this.resourcePath =  path;
 
               console.log("search label", this.textLabel)
-              console.log("search label", this.resourcePath)
+              console.log("search path", this.resourcePath, path)
           }
       },
 

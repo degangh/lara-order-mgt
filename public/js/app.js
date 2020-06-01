@@ -66706,29 +66706,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             switch (path) {
                 case 'customers':
                     this.textLabel = 'Search Customer';
-                    this.resourcePath = '/'.$path;
+                    this.resourcePath = path;
                     break;
 
                 case 'orders':
                     this.textLabel = 'Search Order';
-                    this.resourcePath = '/'.$path;
+                    this.resourcePath = path;
                     break;
 
                 case 'products':
                     this.textLabel = 'Search Product';
-                    this.resourcePath = '/'.$path;
+                    this.resourcePath = path;
                     break;
 
                 default:
                     this.textLabel = 'Search Product';
-                    this.resourcePath = '/products';
+                    this.resourcePath = 'products';
                     break;
 
             }
-            this.resourcePath = '/'.$path;
+            //this.resourcePath =  path;
 
             console.log("search label", this.textLabel);
-            console.log("search label", this.resourcePath);
+            console.log("search path", this.resourcePath, path);
         }
     },
 
@@ -66798,7 +66798,13 @@ var render = function() {
                                     },
                                     on
                                   ),
-                                  [_c("v-icon", [_vm._v("expand_more")])],
+                                  [
+                                    _c(
+                                      "v-icon",
+                                      { attrs: { "solo-inverted": "" } },
+                                      [_vm._v("expand_more")]
+                                    )
+                                  ],
                                   1
                                 )
                               ]
@@ -66807,7 +66813,7 @@ var render = function() {
                         ],
                         null,
                         false,
-                        164371524
+                        678200617
                       )
                     },
                     [
@@ -66837,7 +66843,7 @@ var render = function() {
                             {
                               on: {
                                 click: function($event) {
-                                  return _vm.setupSearchBox("product")
+                                  return _vm.setupSearchBox("products")
                                 }
                               }
                             },
@@ -66876,7 +66882,7 @@ var render = function() {
           ],
           null,
           false,
-          3450919013
+          539777077
         ),
         model: {
           value: _vm.keyword,
