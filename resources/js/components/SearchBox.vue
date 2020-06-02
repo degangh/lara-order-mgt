@@ -102,3 +102,10 @@ export default {
       }
 }
 </script>
+
+<style scoped>
+.v-text-field--solo-inverted.v-input--is-focused  .v-icon{
+  color: #1976d2 !important
+}
+
+</style>
