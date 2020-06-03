@@ -68126,17 +68126,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             if (this.$router.currentRoute.path == '/orders') this.page = 1;
             this.loading = true;
-            this.$router.push(this.$router.currentRoute.path);
+            this.$router.push(this.$router.currentRoute.path + (this.$route.query.keyword != "undefined") ? '?keyword=' + this.$route.query.keyword : '');
             this.requestOrderData();
         }
     },
 
     methods: {
         requestOrderData: function requestOrderData() {
+            if (this.$route.query.keyword == 'undefined') console.log('axios keyword');
+
+            var params = { page: this.page };
+            if (this.$route.query.keyword != 'undefined') params.keyword = this.$route.query.keyword;
             axios.get('/api/orders', {
-                params: {
-                    page: this.page
-                }
+                params: params
             }).then(this.handleOrderData);
         },
         handleOrderData: function handleOrderData(res) {
@@ -70542,7 +70544,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         requestProductData: function requestProductData() {
             if (this.$route.query.keyword == 'undefined') console.log('axios keyword');
-            console.log('axios: ', this.page);
 
             var params = { page: this.page };
             if (this.$route.query.keyword != 'undefined') params.keyword = this.$route.query.keyword;

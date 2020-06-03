@@ -55,17 +55,19 @@ export default {
 
             if (this.$router.currentRoute.path == '/orders') this.page =1
             this.loading = true
-            this.$router.push(this.$router.currentRoute.path)
+            this.$router.push(this.$router.currentRoute.path + (this.$route.query.keyword !="undefined") ? '?keyword=' + this.$route.query.keyword : '')
             this.requestOrderData();
         }
     },
 
     methods: {
         requestOrderData () {
-            axios.get('/api/orders',{
-                params: {
-                  page: this.page
-              }
+          if (this.$route.query.keyword == 'undefined') console.log('axios keyword')
+
+          let params = {page: this.page}
+          if (this.$route.query.keyword != 'undefined') params.keyword = this.$route.query.keyword
+          axios.get('/api/orders',{
+                params: params
             })
             .then(this.handleOrderData)
         },
