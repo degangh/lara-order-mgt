@@ -126,7 +126,6 @@ export default {
   methods: {
       requestProductData () {
           if (this.$route.query.keyword == 'undefined') console.log('axios keyword')
-          console.log('axios: ', this.page)
 
           let params = {page: this.page}
           if (this.$route.query.keyword != 'undefined') params.keyword = this.$route.query.keyword
