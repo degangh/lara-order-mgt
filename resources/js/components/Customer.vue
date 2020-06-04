@@ -87,17 +87,17 @@ export default {
             console.log(this.$router.currentRoute.path)
             if (this.$router.currentRoute.path == '/customers') this.page =1
             this.loading = true
-            this.$router.push(this.$router.currentRoute.path)
+            this.$router.push(this.$router.currentRoute.path + (this.$route.query.keyword !="undefined") ? '?keyword=' + this.$route.query.keyword : '')
             this.requestCustomerData();
         }
     },
 
   methods: {
       requestCustomerData () {
+          let params = {page: this.page}
+          if (this.$route.query.keyword != 'undefined') params.keyword = this.$route.query.keyword
           axios.get('/api/customers', {
-              params: {
-                  page: this.page
-              }
+              params: params
           })
           .then(this.handleResponse)
       },
