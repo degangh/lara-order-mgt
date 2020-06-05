@@ -66722,6 +66722,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -66802,7 +66803,8 @@ var render = function() {
           "solo-inverted": "",
           "append-icon": "search",
           label: _vm.textLabel,
-          "ml-3": ""
+          "ml-3": "",
+          clearable: ""
         },
         on: {
           "click:append": _vm.search,

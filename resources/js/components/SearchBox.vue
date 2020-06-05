@@ -9,6 +9,7 @@
         v-model = 'keyword'
         @click:append="search"
         @keydown.enter="search"
+        clearable
       >
         <template v-slot:prepend-inner>
             <v-menu
@@ -84,19 +85,16 @@ export default {
 
                   
               }
-              //this.resourcePath =  path;
 
-              console.log("search label", this.textLabel)
-              console.log("search path", this.resourcePath, path)
           }
       },
-
+/**     
       watch: {
           $route (to, from){
             console.log('searchbox: ', this.$router.currentRoute.path)
         }
       }, 
-
+*/
       mounted() {
           console.log('searchbox mounted: ', this.$router.currentRoute.path)
       }
