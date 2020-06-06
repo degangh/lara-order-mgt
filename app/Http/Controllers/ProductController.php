@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 use App\Repositories\Contract\ProductRepositoryInterface;
+use App\Http\Requests\StoreProduct;
 
 
 class ProductController extends Controller
@@ -43,7 +44,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProduct $request)
     {        
         $product = $this->productRepository->create($request);
 
@@ -81,7 +82,7 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(StoreProduct $request, Product $product)
     {        
         $product = $this->productRepository->update($request, $product);
 
