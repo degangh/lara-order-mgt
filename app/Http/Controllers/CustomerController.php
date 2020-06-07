@@ -6,7 +6,7 @@ use App\Customer;
 use App\Address;
 use Illuminate\Http\Request;
 use App\Repositories\Contract\CustomerRepositoryInterface;
-
+use App\Http\Requests\StoreCustomer;
 
 class CustomerController extends Controller
 {
@@ -44,7 +44,7 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCustomer $request)
     {
         $customer = $this->customerRepository->create($request);
         
