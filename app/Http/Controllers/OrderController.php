@@ -6,7 +6,7 @@ use App\Order;
 use App\OrderStatus;
 use Illuminate\Http\Request;
 use App\Repositories\Contract\OrderRepositoryInterface;
-
+use App\Http\Requests\StoreOrder;
 class OrderController extends Controller
 {
     protected $orderRepository;
@@ -52,7 +52,7 @@ class OrderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreOrder $request)
     {
         $order = $this->orderRepository->create($request, auth()->user());
 
