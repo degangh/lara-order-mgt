@@ -79,9 +79,11 @@ $factory->define(App\OrderItem::class , function (Faker $faker){
     return [
         'order_id' => factory('App\Order')->create()->id,
         'product_id' => factory('App\Product')->create()->id,
-        'unit_price_cny' => mt_rand(30, 300),
-        'purchase_price_aud' => mt_rand(7,50),
+        'sell_price' => mt_rand(30, 300),
+        'purchase_price' => mt_rand(7,50),
         'exchange_rate' => 5,
-        'quantity' => mt_rand(1,10)
+        'quantity' => mt_rand(1,10),
+        'purchase_currency' => 'AUD',
+        'sell_currency' => 'CNY'
     ];
 });
