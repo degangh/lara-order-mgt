@@ -98,18 +98,18 @@ class OrderRepositoryTest extends TestCase
         $this->orderRepository->createDetail($order, $orderItems, $exchange_rate);
         //an existing order items can be updated
         $item = $order->items[0];
-        $new_unit_price = $item->unit_price_cny + 15;
+        $new_unit_price = $item->sell_price + 15;
         $new_quantity = $item->quantity + 2;
-        $new_purchase_price_aud = $item->purchase_price_aud + 1.5;
+        $new_purchase_price_aud = $item->purchase_price + 1.5;
         $new_exchange_rate = $item->exchange_rate + 0.2;
         
         $newItem = factory(\App\Product::class)->make(
             [
             'order_id' => $order->id,
             'product_id' => $item->product_id,
-            'unit_price_cny' => round($new_unit_price,2),
-            'purchase_price_aud' => round($new_purchase_price_aud,2) ,
-            'exchange_rate' => round($new_exchange_rate,2),
+            'unit_price_cny' => round($new_unit_price,4),
+            'purchase_price_aud' => round($new_purchase_price_aud,4) ,
+            'exchange_rate' => round($new_exchange_rate,4),
             'quantity' => $new_quantity]
             );
 
@@ -117,8 +117,8 @@ class OrderRepositoryTest extends TestCase
 
         $this->assertDatabaseHas('order_items', array(
             'order_id' => $order->id,
-            'unit_price_cny' => $new_unit_price,
-            'purchase_price_aud' => $new_purchase_price_aud,
+            'sell_price' => $new_unit_price,
+            'purchase_price' => $new_purchase_price_aud,
             'quantity' => $new_quantity
         ));
         

@@ -22,9 +22,9 @@ class OrderItemRepository implements OrderItemRepositoryInterface
     public function update($attribute, OrderItem $item)
     {
         $orderItem = OrderItem::find($item->id);
-        $orderItem->unit_price_cny = $attribute->unit_price_cny;
+        $orderItem->sell_price = $attribute->unit_price_cny;
         $orderItem->quantity = $attribute->quantity;
-        $orderItem->purchase_price_aud = $attribute->purchase_price_aud;
+        $orderItem->purchase_price = $attribute->purchase_price_aud;
         $orderItem->exchange_rate = $attribute->exchange_rate;
         
         $orderItem->save();

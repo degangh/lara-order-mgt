@@ -35,7 +35,8 @@ class OrderTest extends TestCase
             'user_id' => $this->user->id,
             'customer_id' => $this->customer->id,
             'address_id' => $this->address->id,
-            'order_date' => $order_date
+            'order_date' => $order_date,
+            'exchange_rate' => 4.91
             ]
         );
 

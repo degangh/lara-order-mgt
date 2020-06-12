@@ -10,9 +10,11 @@ class OrderItem extends Model
         'order_id',
         'product_id',
         'quantity',
-        'unit_price_cny',
-        'purchase_price_aud',
-        'exchange_rate'
+        'sell_price',
+        'purchase_price',
+        'exchange_rate',
+        'sell_currency',
+        'purchase_currency'
     ];
     
     //

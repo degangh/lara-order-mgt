@@ -42,10 +42,13 @@ class OrderRepository implements OrderRepositoryInterface
             return OrderItem::create([
                 'order_id' => $order->id,
                 'product_id' => $orderItem['id'],
-                'unit_price_cny' => $orderItem['rrp_cny'],
-                'purchase_price_aud' => $orderItem['ref_price_aud'],
+                'sell_price' => $orderItem['rrp_cny'],
+                'purchase_price' => $orderItem['ref_price_aud'],
                 'quantity' => $orderItem['num'],
-                'exchange_rate' => $exchange_rate
+                'exchange_rate' => $exchange_rate,
+                'sell_currency' => 'CNY',
+                'purchase_currency' => 'AUD'
+
             ]);
         });
     }
