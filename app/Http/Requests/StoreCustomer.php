@@ -26,7 +26,7 @@ class StoreCustomer extends FormRequest
         return [
             'name' => 'required|max:255',
             'address' => 'required',
-            'mobile' => 'required|numeric',
+            'mobile' => 'required',
             'name_py' => 'required'
         ];
     }
