@@ -54,8 +54,8 @@ class OrderItemController extends Controller
             'order_id' => $order->id,
             'product_id' => $request->product_id,
             'quantity' => $request->quantity,
-            'sell_price' => $request->unit_price_cny,
-            'purchase_price' => $request->purchase_price_aud,
+            'sell_price' => $request->sell_price,
+            'purchase_price' => $request->purchase_price,
             'exchange_rate' => $request->exchange_rate,
             'sell_currency' => 'CNY',
             'purchase_currency' => 'AUD'
