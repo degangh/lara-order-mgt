@@ -45,7 +45,7 @@ class DashboardRepository implements DashboardRepositoryInterface
         ->join('order_items','orders.id', '=', 'order_items.order_id')
         ->whereBetween('orders.order_date',[$from, $to])
         ->where('paid', '=', 1)
-        ->sum(DB::raw('unit_price_cny * quantity'));
+        ->sum(DB::raw('sell_price * quantity'));
     }
 
     public function transactions_between($from, $to)
@@ -63,7 +63,7 @@ class DashboardRepository implements DashboardRepositoryInterface
         ->join('order_items','orders.id', '=', 'order_items.order_id')
         ->whereBetween('orders.order_date',[$from, $to])
         ->where('paid', '=', 1)
-        ->sum(DB::raw('unit_price_cny * quantity-purchase_price_aud*quantity*exchange_rate'));
+        ->sum(DB::raw('sell_price * quantity-purchase_price * quantity * exchange_rate'));
     }
 
     public function sum_by_month()
@@ -115,7 +115,7 @@ class DashboardRepository implements DashboardRepositoryInterface
         ->join('order_items','orders.id', '=', 'order_items.order_id')
         ->where('sent', '=', 1)
         ->where('paid', '=', 0)
-        ->sum(DB::raw('unit_price_cny * quantity'));
+        ->sum(DB::raw('sell_price * quantity'));
     }
     public function overdue_trans()
     {
