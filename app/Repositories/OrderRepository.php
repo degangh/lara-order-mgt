@@ -15,7 +15,7 @@ class OrderRepository implements OrderRepositoryInterface
             return $query->where('name', 'like', '%' . $keyword . '%');
         })->*/
         return Order::withCount(['items as sum' => function($query) {
-            $query->select(\DB::raw('sum(quantity*unit_price_cny)'));
+            $query->select(\DB::raw('sum(quantity * sell_price)'));
         }])->with('customer')
         ->whereHas(
             'customer', function($query) use ($keyword) {
