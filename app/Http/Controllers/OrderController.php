@@ -7,6 +7,10 @@ use App\OrderStatus;
 use Illuminate\Http\Request;
 use App\Repositories\Contract\OrderRepositoryInterface;
 use App\Http\Requests\StoreOrder;
+use App\Http\Requests\StoreFile;
+use Illuminate\Support\Facades\Storage;
+
+
 class OrderController extends Controller
 {
     protected $orderRepository;
@@ -128,5 +132,17 @@ class OrderController extends Controller
     {
         $this->authorize('changeStatus', $order);
         return $this->orderRepository->paid($order);
+    }
+
+    public function uploadFile(StoreFile $request, Order $order)
+    {
+        
+        $uploadedFile = $request->file('file');
+        
+        $filename = $uploadedFile->getClientOriginalName();
+        
+        $path = Storage::putFileAs('upload', $request->file('file'), uniqid(). "-" .$filename);
+        
+        return $path;
     }
 }
