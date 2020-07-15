@@ -29,4 +29,9 @@ class Order extends Model
         return $this->belongsTo(Address::class, 'address_id');
     }
 
+    public function file()
+    {
+        return $this->morphMany('App\File','fileable');
+    }
+
 }
