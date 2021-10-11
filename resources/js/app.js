@@ -103,6 +103,7 @@ window.axios.interceptors.response.use(response => {
    if (error.response.status === 401) {
     //place your reentry code
     //router.go("/login");
+    localStorage.removeItem('jwt')
     location.href="/login"
    }
    /*
