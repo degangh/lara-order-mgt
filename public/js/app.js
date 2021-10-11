@@ -19050,6 +19050,7 @@ window.axios.interceptors.response.use(function (response) {
     if (error.response.status === 401) {
         //place your reentry code
         //router.go("/login");
+        localStorage.removeItem('jwt');
         location.href = "/login";
     }
     /*
@@ -62437,7 +62438,7 @@ var content = __webpack_require__(168);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("35658a52", content, false, {});
+var update = __webpack_require__(3)("49045985", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -62975,7 +62976,7 @@ var render = function() {
         },
         [
           _c("v-icon", [
-            _vm._v("\n                        add\n                    ")
+            _vm._v("\r\n                        add\r\n                    ")
           ]),
           _vm._v(" "),
           _c("v-icon", [_vm._v("close")])
@@ -62995,7 +62996,7 @@ var render = function() {
         },
         [
           _c("v-icon", [
-            _vm._v("\n                    account_circle\n                ")
+            _vm._v("\r\n                    account_circle\r\n                ")
           ])
         ],
         1
@@ -63013,7 +63014,7 @@ var render = function() {
         },
         [
           _c("v-icon", [
-            _vm._v("\n                    shopping_cart\n                ")
+            _vm._v("\r\n                    shopping_cart\r\n                ")
           ])
         ],
         1
@@ -63037,7 +63038,7 @@ var render = function() {
             },
             [
               _c("v-icon", [
-                _vm._v("\n                    business\n                ")
+                _vm._v("\r\n                    business\r\n                ")
               ])
             ],
             1
@@ -63062,7 +63063,7 @@ var render = function() {
             },
             [
               _c("v-icon", [
-                _vm._v("\n                    edit\n                ")
+                _vm._v("\r\n                    edit\r\n                ")
               ])
             ],
             1
@@ -63081,7 +63082,7 @@ var render = function() {
         },
         [
           _c("v-icon", [
-            _vm._v("\n                    attach_money\n                ")
+            _vm._v("\r\n                    attach_money\r\n                ")
           ])
         ],
         1
@@ -63162,7 +63163,7 @@ var content = __webpack_require__(176);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("fe5ad530", content, false, {});
+var update = __webpack_require__(3)("1456fcca", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -63614,7 +63615,7 @@ var render = function() {
             expression: "snackbar"
           }
         },
-        [_vm._v("\n      " + _vm._s(_vm.snackbarText) + "\n    ")]
+        [_vm._v("\r\n      " + _vm._s(_vm.snackbarText) + "\r\n    ")]
       )
     ],
     1
@@ -63697,79 +63698,79 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "ProductForm",
+    name: "ProductForm",
 
-  props: {
-    dialog: Boolean,
-    product: {
-      type: [Object, null]
-    }
-  },
-
-  watch: {
-    product: function product(p) {
-      if (p == null) return;
-      this.rrp_cny = p.rrp_cny;
-      this.ref_price_aud = p.ref_price_aud;
-      this.name = p.name;
-      this.form_title = "Edit Product", this.is_edit = true;
-    }
-  },
-
-  data: function data() {
-    return {
-      form_title: 'Create Product',
-      name: '',
-      is_edit: false,
-      ref_price_aud: '',
-      rrp_cny: '',
-      valid: false,
-      snackbar: false,
-      snackbarText: 'Saving Product ...',
-      nameRules: [function (v) {
-        return !!v || 'Product Name is required';
-      }],
-      priceRules: [function (v) {
-        return !isNaN(v) || 'Price must be a number';
-      }, function (v) {
-        return v > 0 || 'Price must be greater than 0';
-      }]
-    };
-  },
-
-  methods: {
-    emitCloseDialog: function emitCloseDialog(form) {
-      this.$refs.ProductForm.reset();
-      this.$emit("closeDialog", form);
-    },
-    saveProduct: function saveProduct() {
-      if (!this.$refs.ProductForm.validate()) return;
-      this.snackbar = true;
-      var formAction = this.is_edit ? 'patch' : 'post';
-      var url = '/api/products' + (this.is_edit ? '/' + this.product.id : '');
-      axios({
-        method: formAction,
-        url: url,
-        data: {
-          name: this.name,
-          ref_price_aud: this.ref_price_aud,
-          rrp_cny: this.rrp_cny
-
+    props: {
+        dialog: Boolean,
+        product: {
+            type: [Object, null]
         }
-      }).then(this.handleResponse).catch(function (err) {
-        alert(err);
-      });
     },
-    handleResponse: function handleResponse() {
-      this.snackbar = false;
-      this.emitCloseDialog('productDialog');
-      this.snackbarText = this.is_edit ? "Product Updated" : "New Product Saved";
-      this.snackbar = true;
-      /*
-      if (res.data.id) this.$router.push("/customer/" + res.data.id);
-      console.log (res.data.id)*/
+
+    watch: {
+        product: function product(p) {
+            if (p == null) return;
+            this.rrp_cny = p.rrp_cny;
+            this.ref_price_aud = p.ref_price_aud;
+            this.name = p.name;
+            this.form_title = "Edit Product", this.is_edit = true;
+        }
+    },
+
+    data: function data() {
+        return {
+            form_title: 'Create Product',
+            name: '',
+            is_edit: false,
+            ref_price_aud: '',
+            rrp_cny: '',
+            valid: false,
+            snackbar: false,
+            snackbarText: 'Saving Product ...',
+            nameRules: [function (v) {
+                return !!v || 'Product Name is required';
+            }],
+            priceRules: [function (v) {
+                return !isNaN(v) || 'Price must be a number';
+            }, function (v) {
+                return v > 0 || 'Price must be greater than 0';
+            }]
+        };
+    },
+
+    methods: {
+        emitCloseDialog: function emitCloseDialog(form) {
+            this.$refs.ProductForm.reset();
+            this.$emit("closeDialog", form);
+        },
+        saveProduct: function saveProduct() {
+            if (!this.$refs.ProductForm.validate()) return;
+            this.snackbar = true;
+            var formAction = this.is_edit ? 'patch' : 'post';
+            var url = '/api/products' + (this.is_edit ? '/' + this.product.id : '');
+            axios({
+                method: formAction,
+                url: url,
+                data: {
+                    name: this.name,
+                    ref_price_aud: this.ref_price_aud,
+                    rrp_cny: this.rrp_cny
+
+                }
+            }).then(this.handleResponse).catch(function (err) {
+                alert(err);
+            });
+        },
+        handleResponse: function handleResponse() {
+            this.snackbar = false;
+            this.emitCloseDialog('productDialog');
+            this.snackbarText = this.is_edit ? "Product Updated" : "New Product Saved";
+            this.snackbar = true;
+            /*
+            if (res.data.id) this.$router.push("/customer/" + res.data.id);
+            console.log (res.data.id)*/
+        }
     }
-  }
 });
 
 /***/ }),
@@ -63963,7 +63964,7 @@ var render = function() {
             expression: "snackbar"
           }
         },
-        [_vm._v("\n      " + _vm._s(_vm.snackbarText) + "\n    ")]
+        [_vm._v("\r\n      " + _vm._s(_vm.snackbarText) + "\r\n    ")]
       )
     ],
     1
@@ -64306,7 +64307,7 @@ var render = function() {
             expression: "snackbar"
           }
         },
-        [_vm._v("\n      " + _vm._s(_vm.snackbarText) + "\n    ")]
+        [_vm._v("\r\n      " + _vm._s(_vm.snackbarText) + "\r\n    ")]
       )
     ],
     1
@@ -64784,7 +64785,7 @@ var content = __webpack_require__(186);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("693a4230", content, false, {});
+var update = __webpack_require__(3)("4387a33a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -64808,7 +64809,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.flex-cell[data-v-30ab9ca4] {\n  margin: 0px;\n}\n.table-cell-input[data-v-30ab9ca4] {\n  font-size: 0.9rem;\n  margin-left: 0.5rem;\n}\n.table-cell-input input[data-v-30ab9ca4] {\n  text-align: center;\n}\n", ""]);
+exports.push([module.i, "\n.flex-cell[data-v-30ab9ca4] {\r\n  margin: 0px;\n}\n.table-cell-input[data-v-30ab9ca4] {\r\n  font-size: 0.9rem;\r\n  margin-left: 0.5rem;\n}\n.table-cell-input input[data-v-30ab9ca4] {\r\n  text-align: center;\n}\r\n", ""]);
 
 // exports
 
@@ -64990,7 +64991,7 @@ var content = __webpack_require__(190);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("4fd319f4", content, false, {});
+var update = __webpack_require__(3)("372ef773", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -65014,7 +65015,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.flex-cell[data-v-2b445ca8] {\n  margin: 0px;\n}\n.table-cell-input[data-v-2b445ca8] {\n  font-size: 0.9rem;\n  margin-left: 0.5rem;\n}\n.table-cell-input input[data-v-2b445ca8] {\n  text-align: center;\n}\n.text-field-footer[data-v-2b445ca8]\n{\n  margin-top: -1rem\n}\n", ""]);
+exports.push([module.i, "\n.flex-cell[data-v-2b445ca8] {\r\n  margin: 0px;\n}\n.table-cell-input[data-v-2b445ca8] {\r\n  font-size: 0.9rem;\r\n  margin-left: 0.5rem;\n}\n.table-cell-input input[data-v-2b445ca8] {\r\n  text-align: center;\n}\n.text-field-footer[data-v-2b445ca8]\r\n{\r\n  margin-top: -1rem\n}\r\n", ""]);
 
 // exports
 
@@ -66370,7 +66371,7 @@ var render = function() {
                                                   [
                                                     _c("v-list-tile-title", [
                                                       _vm._v(
-                                                        "\n              Search for products to add\n            "
+                                                        "\r\n              Search for products to add\r\n            "
                                                       )
                                                     ])
                                                   ],
@@ -66649,7 +66650,7 @@ var content = __webpack_require__(199);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("67f8e8a0", content, false, {});
+var update = __webpack_require__(3)("362e2eba", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -66770,19 +66771,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     break;
 
             }
-            //this.resourcePath =  path;
-
-            console.log("search label", this.textLabel);
-            console.log("search path", this.resourcePath, path);
         }
     },
-
-    watch: {
-        $route: function $route(to, from) {
-            console.log('searchbox: ', this.$router.currentRoute.path);
-        }
-    },
-
+    /**     
+          watch: {
+              $route (to, from){
+                console.log('searchbox: ', this.$router.currentRoute.path)
+            }
+          }, 
+    */
     mounted: function mounted() {
         console.log('searchbox mounted: ', this.$router.currentRoute.path);
     }
@@ -67471,7 +67468,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
     if (localStorage.getItem("jwt")) {
-      return next("customers");
+      return next("products");
     }
 
     next();
@@ -67671,7 +67668,7 @@ var content = __webpack_require__(208);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("0c1e39b0", content, false, {});
+var update = __webpack_require__(3)("1d6ff25d", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -68034,7 +68031,7 @@ var content = __webpack_require__(213);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("acf0cba8", content, false, {});
+var update = __webpack_require__(3)("50af689f", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -68170,7 +68167,7 @@ var content = __webpack_require__(216);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("50905066", content, false, {});
+var update = __webpack_require__(3)("6975ad59", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -68500,7 +68497,7 @@ var content = __webpack_require__(222);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("0264d9dc", content, false, {});
+var update = __webpack_require__(3)("0bc82dc5", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -70376,7 +70373,7 @@ var content = __webpack_require__(234);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("19f95dc1", content, false, {});
+var update = __webpack_require__(3)("d3314918", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -70858,7 +70855,7 @@ var content = __webpack_require__(239);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("2ab7111c", content, false, {});
+var update = __webpack_require__(3)("15e0119f", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -70987,7 +70984,7 @@ var content = __webpack_require__(243);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("069b5390", content, false, {});
+var update = __webpack_require__(3)("1395ee43", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -71011,7 +71008,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.address-wrapper[data-v-d0686a60] {\n  vertical-align: bottom;\n  font-size: 1.3rem;\n  cursor: pointer\n}\n", ""]);
+exports.push([module.i, "\n.address-wrapper[data-v-d0686a60] {\r\n  vertical-align: bottom;\r\n  font-size: 1.3rem;\r\n  cursor: pointer\n}\r\n", ""]);
 
 // exports
 
@@ -71607,7 +71604,7 @@ var render = function() {
                                             { attrs: { small: "" } },
                                             [
                                               _vm._v(
-                                                "\n                      edit\n                    "
+                                                "\r\n                      edit\r\n                    "
                                               )
                                             ]
                                           )
@@ -71665,7 +71662,7 @@ var render = function() {
                                         },
                                         [
                                           _vm._v(
-                                            "\n      There is no address available for this customer.\n    "
+                                            "\r\n      There is no address available for this customer.\r\n    "
                                           )
                                         ]
                                       )
@@ -71711,7 +71708,7 @@ var render = function() {
                             outline: ""
                           }
                         },
-                        [_vm._v("\n      Customer Not Found\n    ")]
+                        [_vm._v("\r\n      Customer Not Found\r\n    ")]
                       )
                     ],
                     1
@@ -71732,7 +71729,7 @@ var render = function() {
                 expression: "snackbar"
               }
             },
-            [_vm._v("\n      " + _vm._s(_vm.snackbarText) + "\n")]
+            [_vm._v("\r\n      " + _vm._s(_vm.snackbarText) + "\r\n")]
           ),
           _vm._v(" "),
           _c("address-form", {
@@ -87492,7 +87489,7 @@ var content = __webpack_require__(263);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(3)("a565cd6c", content, false, {});
+var update = __webpack_require__(3)("0fea4792", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags

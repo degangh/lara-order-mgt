@@ -13561,10 +13561,10 @@ window._ = __webpack_require__(272);
  */
 
 try {
-  window.Popper = __webpack_require__(145).default;
-  window.$ = window.jQuery = __webpack_require__(146);
+    window.Popper = __webpack_require__(145).default;
+    window.$ = window.jQuery = __webpack_require__(146);
 
-  __webpack_require__(273);
+    __webpack_require__(273);
 } catch (e) {}
 
 /**
@@ -13580,8 +13580,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 var jwt_token = localStorage.getItem('jwt');
 
 if (jwt_token) {
-  axios.defaults.headers.common['Content-Type'] = 'application/json';
-  axios.defaults.headers.common['Authorization'] = 'Bearer ' + jwt_token;
+    axios.defaults.headers.common['Content-Type'] = 'application/json';
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + jwt_token;
 }
 
 /**
@@ -13593,9 +13593,9 @@ if (jwt_token) {
 var token = document.head.querySelector('meta[name="csrf-token"]');
 
 if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
 } else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
 
 /**
