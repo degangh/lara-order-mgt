@@ -73,9 +73,9 @@ export default {
       }
     }
   },
-  beforeRouteEnter(to, from, next) {
-    if (localStorage.getItem("jwt")) {
-      return next("customers");
+ beforeRouteEnter(to, from, next) {
+  if (localStorage.getItem("jwt")) {
+      return next("products");
     }
 
     next();
